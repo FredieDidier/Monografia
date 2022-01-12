@@ -1,4 +1,3 @@
-library(extrafont)
 
  ## Fazendo Gráfico - trabalhadores com\sem carteira assinada + escolaridade
 
