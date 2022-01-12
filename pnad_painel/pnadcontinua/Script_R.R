@@ -3,7 +3,7 @@ library(estimatr)
 library(modelsummary)
 library(extrafont)
 
-setwd("C:\\GitHub\\TCC\\pnad_painel\\pnadcontinua")
+setwd("C:\\GitHub\\Monografia\\pnad_painel\\pnadcontinua")
 
 painel = haven::read_dta("Painel_completo.dta")
 
