@@ -419,7 +419,10 @@ f = data %>%
                                         higher_educ_level %in% c(4) ~ "High School Incompleted",
                                         higher_educ_level %in% c(5) ~ "High School Completed",
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
-                                        higher_educ_level %in% c(7) ~ "College Degree Completed"))
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) %>%
+   group_by(higher_educ_level) %>% mutate(labels = n()) %>%
+   mutate(labell = round(labels/nrow(iiii1), digits = 2)) %>%
+   mutate(labelll = scales::percent(labell))
  
  ggplot(iiii1, aes(x = year_quarter, y = social_security_taxpayer,
                   fill = factor(higher_educ_label))) +
