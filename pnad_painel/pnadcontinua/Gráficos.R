@@ -1,3 +1,8 @@
+font_import(path = "C:/Users/Fredie/AppData/Local/Microsoft/Windows/Fonts")
+y
+loadfonts(device = "win")
+
+
 
  ## Fazendo Gráfico - trabalhadores com\sem carteira assinada + escolaridade
 
@@ -24,7 +29,7 @@ f = data %>%
                                 "orange",
                                 "darkgreen")) +
    labs(x =  "Quarter", y = "Formal Employee") +
-   theme_minimal()
+   theme(text = element_text(family = "LM Roman 10"))
  
  
  f1 = data %>%
@@ -50,7 +55,7 @@ f = data %>%
                                 "darkred",
                                 "yellow")) +
    labs(x =  "Quarter", y = "Informal Employee") +
-   theme_minimal()
+   theme(text = element_text(family = "LM Roman 10"))
  
   ## Desempregados durante a pandemia (sem carteira assinada)
  ff = merge_2 %>%
@@ -89,7 +94,7 @@ f = data %>%
                                 "#00c2cb",
                                 "#935c25")) +
    labs(x = "Quarter", y = "Worker") +
-   theme_minimal()
+   theme(text = element_text(family = "LM Roman 10"))
  
  
  g1 = data %>%
@@ -115,7 +120,7 @@ f = data %>%
                                 "slategray",
                                 "darkturquoise")) +
    labs(x = "Quarter", y = "Non-Worker") +
-   theme_minimal()
+   theme(text = element_text(family = "LM Roman 10"))
  
  
  
@@ -158,7 +163,7 @@ f = data %>%
                                 "#a88f79",
                                 "#ff914d")) +
    labs(x = "Quarter", y = "Social Security Contributors") +
-   theme_minimal()
+   theme(text = element_text(family = "LM Roman 10"))
  
  
  h1 = data %>%
@@ -185,7 +190,7 @@ f = data %>%
                                 "wheat",
                                 "gold")) +
    labs(x = "Quarter", y = "Non-Social Security Contributors") +
-   theme_minimal()
+   theme(text = element_text(family = "LM Roman 10"))
  
  ## Desempregados (Não contribuem para o INSS)
  
