@@ -419,7 +419,7 @@ f = data %>%
                                         higher_educ_level %in% c(4) ~ "High School Incompleted",
                                         higher_educ_level %in% c(5) ~ "High School Completed",
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
-                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed"))
  
  ggplot(iiii1, aes(x = year_quarter, y = social_security_taxpayer,
                   fill = factor(higher_educ_label))) +
