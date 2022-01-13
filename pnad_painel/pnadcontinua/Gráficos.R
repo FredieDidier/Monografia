@@ -211,51 +211,228 @@ f = data %>%
    filter(year_quarter %in% c("2019_1")) %>%
    select(social_security_taxpayer, higher_educ_level, year_quarter,
           job_function) %>%
-   filter(job_function == 6)
+   filter(job_function == 6 & social_security_taxpayer == 1)  %>%
+   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
+                                        higher_educ_level %in% c(2) ~ "Primary School Incompleted",
+                                        higher_educ_level %in% c(3) ~ "Primary School Completed",
+                                        higher_educ_level %in% c(4) ~ "High School Incompleted",
+                                        higher_educ_level %in% c(5) ~ "High School Completed",
+                                        higher_educ_level %in% c(6) ~ "College Degree Incompleted",
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+ 
  
  
  ggplot(i, aes(x = year_quarter, y = social_security_taxpayer,
-               fill = factor(higher_educ_level))) +
+               fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
+   scale_fill_manual(name = "Education Level",
+                     values = c("lightseagreen",
+                                "#4B0082", "#FF4500",
+                                "darkmagenta",
+                                "darkcyan","#DC143C",
+                                "#6B8E23")) +
+   labs(x = "Quarter", y = "Self-Employed Taxpayers") +
+   theme(text = element_text(family = "LM Roman 10")) +
    coord_polar("y")
  
+ ## Fazendo Gráfico - Conta Própria que não contribui para INSS
+ 
+ i1 = data %>%
+   filter(year_quarter %in% c("2019_1")) %>%
+   select(social_security_taxpayer, higher_educ_level, year_quarter,
+          job_function) %>%
+   filter(job_function == 6 & social_security_taxpayer == 2)  %>%
+   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
+                                        higher_educ_level %in% c(2) ~ "Primary School Incompleted",
+                                        higher_educ_level %in% c(3) ~ "Primary School Completed",
+                                        higher_educ_level %in% c(4) ~ "High School Incompleted",
+                                        higher_educ_level %in% c(5) ~ "High School Completed",
+                                        higher_educ_level %in% c(6) ~ "College Degree Incompleted",
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+ 
+ 
+ 
+ ggplot(i1, aes(x = year_quarter, y = social_security_taxpayer,
+               fill = factor(higher_educ_label))) +
+   geom_bar(stat="identity") +
+   scale_fill_manual(name = "Education Level",
+                     values = c("navy",
+                                "#808000", "palegreen",
+                                "#663399",
+                                "#008080","lightcoral",
+                                "hotpink")) +
+   labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
+   theme(text = element_text(family = "LM Roman 10")) +
+   coord_polar("y")
+ 
+ #### Fazendo gráfico - Conta Própria que contribuía pro INSS
  
  ii = data %>%
    filter(year_quarter %in% c("2019_2")) %>%
    select(social_security_taxpayer, higher_educ_level, year_quarter,
           job_function) %>%
-   filter(job_function == 6)
+   filter(job_function == 6 & social_security_taxpayer == 1) %>%
+   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
+                                        higher_educ_level %in% c(2) ~ "Primary School Incompleted",
+                                        higher_educ_level %in% c(3) ~ "Primary School Completed",
+                                        higher_educ_level %in% c(4) ~ "High School Incompleted",
+                                        higher_educ_level %in% c(5) ~ "High School Completed",
+                                        higher_educ_level %in% c(6) ~ "College Degree Incompleted",
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
  
  ggplot(ii, aes(x = year_quarter, y = social_security_taxpayer,
-               fill = factor(higher_educ_level))) +
+               fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
+   scale_fill_manual(name = "Education Level",
+                     values = c("#45B39D",
+                                "#DE3163", "#6495ED",
+                                "#F7073A",
+                                "#D3F707","#5307F7",
+                                "#E507F7")) +
+   labs(x = "Quarter", y = "Self-Employed Taxpayers") +
+   theme(text = element_text(family = "LM Roman 10")) +
    coord_polar("y")
  
+ #### Fazendo gráfico - Conta Própria que não contribuía pro INSS
+ 
+ ii1 = data %>%
+   filter(year_quarter %in% c("2019_2")) %>%
+   select(social_security_taxpayer, higher_educ_level, year_quarter,
+          job_function) %>%
+   filter(job_function == 6 & social_security_taxpayer == 2) %>%
+   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
+                                        higher_educ_level %in% c(2) ~ "Primary School Incompleted",
+                                        higher_educ_level %in% c(3) ~ "Primary School Completed",
+                                        higher_educ_level %in% c(4) ~ "High School Incompleted",
+                                        higher_educ_level %in% c(5) ~ "High School Completed",
+                                        higher_educ_level %in% c(6) ~ "College Degree Incompleted",
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+ 
+ ggplot(ii1, aes(x = year_quarter, y = social_security_taxpayer,
+                fill = factor(higher_educ_label))) +
+   geom_bar(stat="identity") +
+   scale_fill_manual(name = "Education Level",
+                     values = c("#0778F7",
+                                "#F74507", "#07F724",
+                                "#CB07F7",
+                                "#DAF707","#F70728",
+                                "#4107F7")) +
+   labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
+   theme(text = element_text(family = "LM Roman 10")) +
+   coord_polar("y")
+ 
+ ### Fazendo gráfico - Conta Própria que contribuía pro INSS
  
  iii = data %>%
    filter(year_quarter %in% c("2019_3")) %>%
    select(social_security_taxpayer, higher_educ_level, year_quarter,
           job_function) %>%
-   filter(job_function == 6)
+   filter(job_function == 6 & social_security_taxpayer == 1) %>%
+   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
+                                        higher_educ_level %in% c(2) ~ "Primary School Incompleted",
+                                        higher_educ_level %in% c(3) ~ "Primary School Completed",
+                                        higher_educ_level %in% c(4) ~ "High School Incompleted",
+                                        higher_educ_level %in% c(5) ~ "High School Completed",
+                                        higher_educ_level %in% c(6) ~ "College Degree Incompleted",
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
  
  ggplot(iii, aes(x = year_quarter, y = social_security_taxpayer,
-                fill = factor(higher_educ_level))) +
+                 fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
+   scale_fill_manual(name = "Education Level",
+                     values = c("#F72B07",
+                                "#F7B907", "#0EF707",
+                                "#1607F7",
+                                "#F707C0","#F70748",
+                                "#07F7B2")) +
+   labs(x = "Quarter", y = "Self-Employed Taxpayers") +
+   theme(text = element_text(family = "LM Roman 10")) +
    coord_polar("y")
  
+ 
+ ### Fazendo Gráfico - Conta Própria que não contribuía pro INSS
+ 
+ iii1 = data %>%
+   filter(year_quarter %in% c("2019_3")) %>%
+   select(social_security_taxpayer, higher_educ_level, year_quarter,
+          job_function) %>%
+   filter(job_function == 6 & social_security_taxpayer == 2) %>%
+   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
+                                        higher_educ_level %in% c(2) ~ "Primary School Incompleted",
+                                        higher_educ_level %in% c(3) ~ "Primary School Completed",
+                                        higher_educ_level %in% c(4) ~ "High School Incompleted",
+                                        higher_educ_level %in% c(5) ~ "High School Completed",
+                                        higher_educ_level %in% c(6) ~ "College Degree Incompleted",
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+ 
+ ggplot(iii1, aes(x = year_quarter, y = social_security_taxpayer,
+                 fill = factor(higher_educ_label))) +
+   geom_bar(stat="identity") +
+   scale_fill_manual(name = "Education Level",
+                     values = c("#A3A3C2",
+                                "#5454A2", "#33C148",
+                                "#C13380",
+                                "#35C133","#C13333",
+                                "#33BDC1")) +
+   labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
+   theme(text = element_text(family = "LM Roman 10")) +
+   coord_polar("y")
+ 
+ ##### Fazendo Gráfico - Conta Própria que contribuía para INSS
  
  iiii = data %>%
    filter(year_quarter %in% c("2019_4")) %>%
    select(social_security_taxpayer, higher_educ_level, year_quarter,
           job_function) %>%
-   filter(job_function == 6)
- 
+   filter(job_function == 6 & social_security_taxpayer == 1) %>%
+   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
+                                        higher_educ_level %in% c(2) ~ "Primary School Incompleted",
+                                        higher_educ_level %in% c(3) ~ "Primary School Completed",
+                                        higher_educ_level %in% c(4) ~ "High School Incompleted",
+                                        higher_educ_level %in% c(5) ~ "High School Completed",
+                                        higher_educ_level %in% c(6) ~ "College Degree Incompleted",
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
  
  ggplot(iiii, aes(x = year_quarter, y = social_security_taxpayer,
-                 fill = factor(higher_educ_level))) +
-   geom_bar(stat="identity") +
+                  fill = factor(higher_educ_label))) +
+   geom_bar(stat = "identity")+
+   scale_fill_manual(name = "Education Level",
+                     values = c("#F2162A",
+                                "#59F216", "#169FF2",
+                                "#F216E5",
+                                "#F21687","#8E16F2",
+                                "#EAEA29")) +
+   labs(x = "Quarter", y = "Self-Employed Taxpayers") +
+   theme(text = element_text(family = "LM Roman 10")) +
    coord_polar("y")
  
+ ### Fazendo Gráfico - Conta Própria que não contribuía pro INSS
+ 
+ iiii1 = data %>%
+   filter(year_quarter %in% c("2019_4")) %>%
+   select(social_security_taxpayer, higher_educ_level, year_quarter,
+          job_function) %>%
+   filter(job_function == 6 & social_security_taxpayer == 2) %>%
+   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
+                                        higher_educ_level %in% c(2) ~ "Primary School Incompleted",
+                                        higher_educ_level %in% c(3) ~ "Primary School Completed",
+                                        higher_educ_level %in% c(4) ~ "High School Incompleted",
+                                        higher_educ_level %in% c(5) ~ "High School Completed",
+                                        higher_educ_level %in% c(6) ~ "College Degree Incompleted",
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+ 
+ ggplot(iiii1, aes(x = year_quarter, y = social_security_taxpayer,
+                  fill = factor(higher_educ_label))) +
+   geom_bar(stat = "identity")+
+   scale_fill_manual(name = "Education Level",
+                     values = c("#29EA81",
+                                "#C129EA", "#3529EA",
+                                "#EA9229",
+                                "#29EA9E","#CF477B",
+                                "#93CF47")) +
+   labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
+   theme(text = element_text(family = "LM Roman 10")) +
+   coord_polar("y")
  
  
    
