@@ -2,6 +2,11 @@ font_import(path = "C:/Users/Fredie/AppData/Local/Microsoft/Windows/Fonts")
 y
 loadfonts(device = "win")
 
+library(ggsci)
+library(RColorBrewer)
+library(ghibli)
+library(dichromat)
+
 
  ## Fazendo Gráfico - trabalhadores com\sem carteira assinada + escolaridade
 
@@ -232,12 +237,7 @@ f = data %>%
  ggplot(dddd, aes(x = year_quarter, y = labell,
                fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
-   scale_fill_manual(name = "Education Level",
-                     values = c("#936D0E",
-                                "#4B0082", "#FF4500",
-                                "#00EA04",
-                                "darkcyan","#DC143C",
-                                "#6B8E23")) +
+   scale_fill_startrek(name = "Education Level") +
    labs(x = "Quarter", y = "Self-Employed Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
@@ -272,12 +272,8 @@ f = data %>%
  ggplot(ddd, aes(x = year_quarter, y = labell,
                fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
-   scale_fill_manual(name = "Education Level",
-                     values = c("#EA0700",
-                                "#808000", "palegreen",
-                                "#663399",
-                                "#008080","lightcoral",
-                                "hotpink")) +
+   scale_fill_brewer(name = "Education Level",
+                     palette = "Dark2") +
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
@@ -310,12 +306,7 @@ f = data %>%
  ggplot(dd, aes(x = year_quarter, y = labell,
                fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
-   scale_fill_manual(name = "Education Level",
-                     values = c("#45B39D",
-                                "#DE3163", "#6495ED",
-                                "#EA8A00",
-                                "#D3F707","#5307F7",
-                                "#E507F7")) +
+   scale_fill_rickandmorty(name = "Education Level")+
    labs(x = "Quarter", y = "Self-Employed Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
@@ -349,11 +340,7 @@ f = data %>%
                 fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_manual(name = "Education Level",
-                     values = c("#0778F7",
-                                "#F74507", "#07F724",
-                                "#CB07F7",
-                                "#DAF707","#F70728",
-                                "#9D620D")) +
+                     values = ghibli_palette("MarnieMedium1"))+
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
@@ -386,12 +373,7 @@ f = data %>%
  ggplot(eee, aes(x = year_quarter, y = labell,
                  fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
-   scale_fill_manual(name = "Education Level",
-                     values = c("#F72B07",
-                                "#F7B907", "#0EF707",
-                                "#1607F7",
-                                "#F707C0","#F70748",
-                                "#07F7B2")) +
+   scale_fill_locuszoom(name = "Education Level") +
    labs(x = "Quarter", y = "Self-Employed Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
@@ -427,12 +409,8 @@ f = data %>%
  ggplot(ee, aes(x = year_quarter, y = labell,
                  fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
-   scale_fill_manual(name = "Education Level",
-                     values = c("#A3A3C2",
-                                "#5454A2", "#33C148",
-                                "#C13380",
-                                "#EAE429","#C13333",
-                                "#33BDC1")) +
+   scale_fill_brewer(name = "Education Level",
+                     palette = "Accent" ) +
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
@@ -466,11 +444,7 @@ f = data %>%
                   fill = factor(higher_educ_label))) +
    geom_bar(stat = "identity")+
    scale_fill_manual(name = "Education Level",
-                     values = c("#F2162A",
-                                "#59F216", "#169FF2",
-                                "#BEBBB6",
-                                "#F21687","#8E16F2",
-                                "#EAEA29")) +
+                     values = carto_pal(name = "Temps")) +
    labs(x = "Quarter", y = "Self-Employed Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.45),
@@ -505,11 +479,7 @@ f = data %>%
                   fill = higher_educ_label)) +
    geom_bar(stat = "identity")+
    scale_fill_manual(name = "Education Level",
-                     values = c("#EAE429",
-                                "#C129EA", "#3529EA",
-                                "#EA9229",
-                                "#29EA9E","#CF477B",
-                                "#93CF47")) +
+                     values = carto_pal(name = "Earth")) +
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.3),
