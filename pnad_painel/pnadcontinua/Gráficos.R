@@ -7,6 +7,8 @@ library(RColorBrewer)
 library(ghibli)
 library(dichromat)
 library(rcartocolor)
+library(grid)
+library(gridExtra)
 
 
  ## Fazendo Gráfico - trabalhadores com\sem carteira assinada + escolaridade
@@ -30,6 +32,7 @@ f = data %>%
                      values = carto_pal(name = "Geyser")) +
    labs(x =  "Quarter", y = "Signed Contract Workers",
         title = "Education Level of Registered Employees in 2019") +
+   theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
@@ -53,6 +56,7 @@ f = data %>%
                      values = carto_pal(name = "Pastel")) +
    labs(x =  "Quarter", y = "Non-Signed Contract Workers",
         title = "Education Level of Non-Registered Employees in 2019") +
+   theme_minimal()+
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
@@ -89,6 +93,7 @@ f = data %>%
                      values = carto_pal(name = "Safe")) +
    labs(x = "Quarter", y = "Workers",
         title = "Education Level of Employees in 2019") +
+   theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
@@ -113,6 +118,7 @@ f = data %>%
    scale_y_continuous(labels = scales::comma) +
    labs(x = "Quarter", y = "Non-Workers",
         title = "Education Level of the Unemployed in 2019") +
+   theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
@@ -153,6 +159,7 @@ f = data %>%
                      values = carto_pal(name = "Bold")) +
    labs(x = "Quarter", y = "Contributors",
         title = "Education Level of Social Security Taxpayers") +
+   theme_minimal()+
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
@@ -177,6 +184,7 @@ f = data %>%
                      values = carto_pal(name = "Vivid")) +
    labs(x = "Quarter", y = "Non-Contributors",
         title = "Education Level of Non-Social Security Taxpayers") +
+   theme_minimal()+
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
@@ -224,9 +232,10 @@ f = data %>%
    scale_fill_startrek(name = "Education Level") +
    labs(x = "Quarter", y = "Self-Employed Taxpayers",
         title = "Education Level of Social Security Contributors in 2019.1") +
+   theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
-   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
  
@@ -262,9 +271,10 @@ f = data %>%
                      palette = "Dark2") +
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers",
         title = "Education Level of Non-Social Security Contributors in 2019.1") +
+   theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
-   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
  
@@ -297,9 +307,10 @@ f = data %>%
    scale_fill_rickandmorty(name = "Education Level")+
    labs(x = "Quarter", y = "Self-Employed Taxpayers",
         title = "Education Level of Social Security Contributors in 2019.2") +
+   theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
-   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
  
@@ -333,9 +344,10 @@ f = data %>%
                      values = ghibli_palette("MarnieMedium1"))+
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers",
         title = "Education Level of Non-Social Security Contributors in 2019.2") +
+   theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
-   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
  
@@ -368,9 +380,10 @@ f = data %>%
    scale_fill_locuszoom(name = "Education Level") +
    labs(x = "Quarter", y = "Self-Employed Taxpayers",
         title = "Education Level of Social Security Contributors in 2019.3") +
+   theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
-   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
  
@@ -407,9 +420,10 @@ f = data %>%
                      palette = "Accent" ) +
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers",
         title = "Education Level of Non-Social Security Contributors in 2019.3") +
+   theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
-   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
  
@@ -443,9 +457,10 @@ f = data %>%
                      values = carto_pal(name = "Temps")) +
    labs(x = "Quarter", y = "Self-Employed Taxpayers",
         title = "Education Level of Social Security Contributors in 2019.4") +
+   theme_minimal()+
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
-   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.45),
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
  
@@ -480,9 +495,10 @@ f = data %>%
                      values = carto_pal(name = "Earth")) +
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers",
         title = "Education Level of Non-Social Security Contributors in 2019.4") +
+   theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
-   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.3),
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
                     show.legend = F)+
    coord_polar("y")
  
