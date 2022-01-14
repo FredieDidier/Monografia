@@ -235,7 +235,7 @@ f = data %>%
    scale_fill_manual(name = "Education Level",
                      values = c("#936D0E",
                                 "#4B0082", "#FF4500",
-                                "#0E1093",
+                                "#00EA04",
                                 "darkcyan","#DC143C",
                                 "#6B8E23")) +
    labs(x = "Quarter", y = "Self-Employed Taxpayers") +
