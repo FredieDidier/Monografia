@@ -245,8 +245,10 @@ f = data %>%
    geom_bar(stat="identity") +
    scale_fill_brewer(name = "Education Level",
                      palette = "Dark2") +
-   labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
-   theme(text = element_text(family = "LM Roman 10")) +
+   labs(x = "Quarter", y = "Self-Employed Non-Taxpayers",
+        title = "Education Level of Non-Social Security Contributors in 2019.1") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
               show.legend = F)+
    coord_polar("y")
@@ -278,8 +280,10 @@ f = data %>%
                fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_rickandmorty(name = "Education Level")+
-   labs(x = "Quarter", y = "Self-Employed Taxpayers") +
-   theme(text = element_text(family = "LM Roman 10")) +
+   labs(x = "Quarter", y = "Self-Employed Taxpayers",
+        title = "Education Level of Social Security Contributors in 2019.2") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
               show.legend = F)+
    coord_polar("y")
