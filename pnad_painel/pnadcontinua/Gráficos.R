@@ -6,6 +6,7 @@ library(ggsci)
 library(RColorBrewer)
 library(ghibli)
 library(dichromat)
+library(rcartocolor)
 
 
  ## Fazendo Gráfico - trabalhadores com\sem carteira assinada + escolaridade
