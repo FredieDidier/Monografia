@@ -26,12 +26,7 @@ f = data %>%
     fill = factor(higher_educ_label))) +
   geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level", 
-                     values = c("skyblue", "tomato3",
-                                "grey50",
-                                "seagreen3",
-                                "darkblue",
-                                "orange",
-                                "darkgreen")) +
+                     values = carto_pal(name = "Geyser")) +
    labs(x =  "Quarter", y = "Formal Employee") +
    theme(text = element_text(family = "LM Roman 10"))
  
@@ -52,12 +47,7 @@ f = data %>%
                fill = factor(higher_educ_label))) +
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level", 
-                     values = c("slateblue", "dodgerblue",
-                                "lightgreen",
-                                "goldenrod",
-                                "palevioletred",
-                                "darkred",
-                                "yellow")) +
+                     values = carto_pal(name = "Pastel")) +
    labs(x =  "Quarter", y = "Informal Employee") +
    theme(text = element_text(family = "LM Roman 10"))
  
@@ -91,12 +81,7 @@ f = data %>%
                fill = factor(higher_educ_label))) +
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level",
-                     values = c("#ff66c4", "#7ed957",
-                                "#5271ff",
-                                "#35564f",
-                                "#cb6ce6",
-                                "#00c2cb",
-                                "#935c25")) +
+                     values = carto_pal(name = "Safe")) +
    labs(x = "Quarter", y = "Worker") +
    theme(text = element_text(family = "LM Roman 10"))
  
@@ -117,12 +102,8 @@ f = data %>%
                fill = factor(higher_educ_label))) +
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level",
-                     values = c("powderblue", "firebrick",
-                                "deeppink",
-                                "sandybrown",
-                                "lawngreen",
-                                "slategray",
-                                "darkturquoise")) +
+                     values = carto_pal(name = "Prism")) +
+   scale_y_continuous(labels = scales::comma) +
    labs(x = "Quarter", y = "Non-Worker") +
    theme(text = element_text(family = "LM Roman 10"))
  
@@ -160,12 +141,7 @@ f = data %>%
                fill = factor(higher_educ_label))) +
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level",
-                     values = c("#004aad", "#7ed957",
-                                "#1e332e",
-                                "#03989e",
-                                "#65121c",
-                                "#a88f79",
-                                "#ff914d")) +
+                     values = carto_pal(name = "Bold")) +
    labs(x = "Quarter", y = "Social Security Contributors") +
    theme(text = element_text(family = "LM Roman 10"))
  
@@ -187,12 +163,7 @@ f = data %>%
                fill = factor(higher_educ_label))) +
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level",
-                     values = c("midnightblue", "springgreen",
-                                "rosybrown",
-                                "darkviolet",
-                                "aquamarine",
-                                "wheat",
-                                "gold")) +
+                     values = carto_pal(name = "Vivid")) +
    labs(x = "Quarter", y = "Non-Social Security Contributors") +
    theme(text = element_text(family = "LM Roman 10"))
  
