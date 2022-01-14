@@ -3,7 +3,6 @@ y
 loadfonts(device = "win")
 
 
-
  ## Fazendo Gráfico - trabalhadores com\sem carteira assinada + escolaridade
 
 f = data %>%
@@ -218,21 +217,31 @@ f = data %>%
                                         higher_educ_level %in% c(4) ~ "High School Incompleted",
                                         higher_educ_level %in% c(5) ~ "High School Completed",
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
-                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed"))  %>%
+   group_by(higher_educ_level) %>% mutate(labels = n()) %>%
+   mutate(labell = round(labels/nrow(i), digits = 2))
+ 
+ i$labell = i$labell * 100 
+ 
+ dddd = i%>%
+   select(year_quarter, higher_educ_label, labell) %>%
+   distinct()
  
  
  
- ggplot(i, aes(x = year_quarter, y = social_security_taxpayer,
+ ggplot(dddd, aes(x = year_quarter, y = labell,
                fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_manual(name = "Education Level",
-                     values = c("lightseagreen",
+                     values = c("#936D0E",
                                 "#4B0082", "#FF4500",
-                                "darkmagenta",
+                                "#0E1093",
                                 "darkcyan","#DC143C",
                                 "#6B8E23")) +
    labs(x = "Quarter", y = "Self-Employed Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
+              show.legend = F)+
    coord_polar("y")
  
  ## Fazendo Gráfico - Conta Própria que não contribui para INSS
@@ -248,21 +257,31 @@ f = data %>%
                                         higher_educ_level %in% c(4) ~ "High School Incompleted",
                                         higher_educ_level %in% c(5) ~ "High School Completed",
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
-                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed"))  %>%
+   group_by(higher_educ_level) %>% mutate(labels = n()) %>%
+   mutate(labell = round(labels/nrow(i1), digits = 2))
+ 
+ i1$labell = i1$labell * 100 
+ 
+ ddd = i1%>%
+   select(year_quarter, higher_educ_label, labell) %>%
+   distinct()
  
  
  
- ggplot(i1, aes(x = year_quarter, y = social_security_taxpayer,
+ ggplot(ddd, aes(x = year_quarter, y = labell,
                fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_manual(name = "Education Level",
-                     values = c("navy",
+                     values = c("#EA0700",
                                 "#808000", "palegreen",
                                 "#663399",
                                 "#008080","lightcoral",
                                 "hotpink")) +
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
+              show.legend = F)+
    coord_polar("y")
  
  #### Fazendo gráfico - Conta Própria que contribuía pro INSS
@@ -278,9 +297,17 @@ f = data %>%
                                         higher_educ_level %in% c(4) ~ "High School Incompleted",
                                         higher_educ_level %in% c(5) ~ "High School Completed",
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
-                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) %>%
+   group_by(higher_educ_level) %>% mutate(labels = n()) %>%
+   mutate(labell = round(labels/nrow(ii), digits = 2))
  
- ggplot(ii, aes(x = year_quarter, y = social_security_taxpayer,
+ ii$labell = ii$labell * 100 
+ 
+ dd = ii %>%
+   select(year_quarter, higher_educ_label, labell) %>%
+   distinct()
+ 
+ ggplot(dd, aes(x = year_quarter, y = labell,
                fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_manual(name = "Education Level",
@@ -291,6 +318,8 @@ f = data %>%
                                 "#E507F7")) +
    labs(x = "Quarter", y = "Self-Employed Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
+              show.legend = F)+
    coord_polar("y")
  
  #### Fazendo gráfico - Conta Própria que não contribuía pro INSS
@@ -306,9 +335,17 @@ f = data %>%
                                         higher_educ_level %in% c(4) ~ "High School Incompleted",
                                         higher_educ_level %in% c(5) ~ "High School Completed",
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
-                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) %>%
+   group_by(higher_educ_level) %>% mutate(labels = n()) %>%
+   mutate(labell = round(labels/nrow(ii1), digits = 2))
  
- ggplot(ii1, aes(x = year_quarter, y = social_security_taxpayer,
+ ii1$labell = ii1$labell * 100 
+ 
+ eeee = ii1 %>%
+   select(year_quarter, higher_educ_label, labell) %>%
+   distinct()
+ 
+ ggplot(eeee, aes(x = year_quarter, y = labell,
                 fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_manual(name = "Education Level",
@@ -319,6 +356,8 @@ f = data %>%
                                 "#4107F7")) +
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
+              show.legend = F)+
    coord_polar("y")
  
  ### Fazendo gráfico - Conta Própria que contribuía pro INSS
@@ -334,9 +373,17 @@ f = data %>%
                                         higher_educ_level %in% c(4) ~ "High School Incompleted",
                                         higher_educ_level %in% c(5) ~ "High School Completed",
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
-                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) %>%
+   group_by(higher_educ_level) %>% mutate(labels = n()) %>%
+   mutate(labell = round(labels/nrow(iii), digits = 2))
+
+ iii$labell = iii$labell * 100 
  
- ggplot(iii, aes(x = year_quarter, y = social_security_taxpayer,
+ eee = iii %>%
+   select(year_quarter, higher_educ_label, labell) %>%
+   distinct()
+ 
+ ggplot(eee, aes(x = year_quarter, y = labell,
                  fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_manual(name = "Education Level",
@@ -347,6 +394,8 @@ f = data %>%
                                 "#07F7B2")) +
    labs(x = "Quarter", y = "Self-Employed Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
+              show.legend = F)+
    coord_polar("y")
  
  
@@ -363,19 +412,31 @@ f = data %>%
                                         higher_educ_level %in% c(4) ~ "High School Incompleted",
                                         higher_educ_level %in% c(5) ~ "High School Completed",
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
-                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed"))%>%
+   group_by(higher_educ_level) %>% mutate(labels = n()) %>%
+   mutate(labell = round(labels/nrow(iii1), digits = 2))
  
- ggplot(iii1, aes(x = year_quarter, y = social_security_taxpayer,
+ iii1$labell = iii1$labell * 100 
+ 
+ ee = iii1 %>%
+   select(year_quarter, higher_educ_label, labell) %>%
+   distinct()
+ 
+ 
+ 
+ ggplot(ee, aes(x = year_quarter, y = labell,
                  fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_manual(name = "Education Level",
                      values = c("#A3A3C2",
                                 "#5454A2", "#33C148",
                                 "#C13380",
-                                "#35C133","#C13333",
+                                "#EAE429","#C13333",
                                 "#33BDC1")) +
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
+              show.legend = F)+
    coord_polar("y")
  
  ##### Fazendo Gráfico - Conta Própria que contribuía para INSS
@@ -391,9 +452,17 @@ f = data %>%
                                         higher_educ_level %in% c(4) ~ "High School Incompleted",
                                         higher_educ_level %in% c(5) ~ "High School Completed",
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
-                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) %>%
+   group_by(higher_educ_level) %>% mutate(labels = n()) %>%
+   mutate(labell = round(labels/nrow(iiii), digits = 2))
  
- ggplot(iiii, aes(x = year_quarter, y = social_security_taxpayer,
+ iiii$labell = iiii$labell * 100
+ 
+ e = iiii1 %>%
+   select(year_quarter, higher_educ_label, labell) %>%
+   distinct()
+ 
+ ggplot(e, aes(x = year_quarter, y = labell,
                   fill = factor(higher_educ_label))) +
    geom_bar(stat = "identity")+
    scale_fill_manual(name = "Education Level",
@@ -404,6 +473,8 @@ f = data %>%
                                 "#EAEA29")) +
    labs(x = "Quarter", y = "Self-Employed Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.45),
+              show.legend = F)+
    coord_polar("y")
  
  ### Fazendo Gráfico - Conta Própria que não contribuía pro INSS
@@ -421,21 +492,30 @@ f = data %>%
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
                                         higher_educ_level %in% c(7) ~ "College Degree Completed")) %>%
    group_by(higher_educ_level) %>% mutate(labels = n()) %>%
-   mutate(labell = round(labels/nrow(iiii1), digits = 2)) %>%
-   mutate(labelll = scales::percent(labell))
+   mutate(labell = round(labels/nrow(iiii1), digits = 2))
  
- ggplot(iiii1, aes(x = year_quarter, y = social_security_taxpayer,
-                  fill = factor(higher_educ_label))) +
+ iiii1$labell = iiii1$labell * 100
+ 
+ 
+ d = iiii1 %>%
+   select(year_quarter, higher_educ_label, labell) %>%
+   distinct()
+ 
+ ggplot(d, aes(x = year_quarter, y = labell,
+                  fill = higher_educ_label)) +
    geom_bar(stat = "identity")+
    scale_fill_manual(name = "Education Level",
-                     values = c("#29EA81",
+                     values = c("#EAE429",
                                 "#C129EA", "#3529EA",
                                 "#EA9229",
                                 "#29EA9E","#CF477B",
                                 "#93CF47")) +
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
+   geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.3),
+                    show.legend = F)+
    coord_polar("y")
+ 
  
  
    
