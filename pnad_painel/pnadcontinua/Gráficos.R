@@ -458,7 +458,7 @@ f = data %>%
  
  iiii$labell = iiii$labell * 100
  
- e = iiii1 %>%
+ e = iiii %>%
    select(year_quarter, higher_educ_label, labell) %>%
    distinct()
  
@@ -468,7 +468,7 @@ f = data %>%
    scale_fill_manual(name = "Education Level",
                      values = c("#F2162A",
                                 "#59F216", "#169FF2",
-                                "#F216E5",
+                                "#BEBBB6",
                                 "#F21687","#8E16F2",
                                 "#EAEA29")) +
    labs(x = "Quarter", y = "Self-Employed Taxpayers") +
