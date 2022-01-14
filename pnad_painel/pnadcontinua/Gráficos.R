@@ -353,7 +353,7 @@ f = data %>%
                                 "#F74507", "#07F724",
                                 "#CB07F7",
                                 "#DAF707","#F70728",
-                                "#4107F7")) +
+                                "#9D620D")) +
    labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
    theme(text = element_text(family = "LM Roman 10")) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
