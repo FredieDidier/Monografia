@@ -27,8 +27,10 @@ f = data %>%
   geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level", 
                      values = carto_pal(name = "Geyser")) +
-   labs(x =  "Quarter", y = "Formal Employee") +
-   theme(text = element_text(family = "LM Roman 10"))
+   labs(x =  "Quarter", y = "Signed Contract Workers",
+        title = "Education Level of Registered Employees in 2019") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
  
  f1 = data %>%
@@ -48,8 +50,10 @@ f = data %>%
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level", 
                      values = carto_pal(name = "Pastel")) +
-   labs(x =  "Quarter", y = "Informal Employee") +
-   theme(text = element_text(family = "LM Roman 10"))
+   labs(x =  "Quarter", y = "Non-Signed Contract Workers",
+        title = "Education Level of Non-Registered Employees in 2019") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
   ## Desempregados durante a pandemia (sem carteira assinada)
  ff = merge_2 %>%
@@ -82,8 +86,10 @@ f = data %>%
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Safe")) +
-   labs(x = "Quarter", y = "Worker") +
-   theme(text = element_text(family = "LM Roman 10"))
+   labs(x = "Quarter", y = "Workers",
+        title = "Education Level of Employees in 2019") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
  
  g1 = data %>%
@@ -104,8 +110,10 @@ f = data %>%
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Prism")) +
    scale_y_continuous(labels = scales::comma) +
-   labs(x = "Quarter", y = "Non-Worker") +
-   theme(text = element_text(family = "LM Roman 10"))
+   labs(x = "Quarter", y = "Non-Workers",
+        title = "Education Level of the Unemployed in 2019") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
  
  
@@ -142,8 +150,10 @@ f = data %>%
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Bold")) +
-   labs(x = "Quarter", y = "Social Security Contributors") +
-   theme(text = element_text(family = "LM Roman 10"))
+   labs(x = "Quarter", y = "Contributors",
+        title = "Education Level of Social Security Taxpayers") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
  
  h1 = data %>%
@@ -164,8 +174,10 @@ f = data %>%
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Vivid")) +
-   labs(x = "Quarter", y = "Non-Social Security Contributors") +
-   theme(text = element_text(family = "LM Roman 10"))
+   labs(x = "Quarter", y = "Non-Contributors",
+        title = "Education Level of Non-Social Security Taxpayers") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
  ## Desempregados (Não contribuem para o INSS)
  
@@ -209,8 +221,10 @@ f = data %>%
                fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_startrek(name = "Education Level") +
-   labs(x = "Quarter", y = "Self-Employed Taxpayers") +
-   theme(text = element_text(family = "LM Roman 10")) +
+   labs(x = "Quarter", y = "Self-Employed Taxpayers",
+        title = "Education Level of Social Security Contributors in 2019.1") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
               show.legend = F)+
    coord_polar("y")
@@ -316,8 +330,10 @@ f = data %>%
    geom_bar(stat="identity") +
    scale_fill_manual(name = "Education Level",
                      values = ghibli_palette("MarnieMedium1"))+
-   labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
-   theme(text = element_text(family = "LM Roman 10")) +
+   labs(x = "Quarter", y = "Self-Employed Non-Taxpayers",
+        title = "Education Level of Non-Social Security Contributors in 2019.2") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
               show.legend = F)+
    coord_polar("y")
@@ -349,8 +365,10 @@ f = data %>%
                  fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_locuszoom(name = "Education Level") +
-   labs(x = "Quarter", y = "Self-Employed Taxpayers") +
-   theme(text = element_text(family = "LM Roman 10")) +
+   labs(x = "Quarter", y = "Self-Employed Taxpayers",
+        title = "Education Level of Social Security Contributors in 2019.3") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
               show.legend = F)+
    coord_polar("y")
@@ -386,8 +404,10 @@ f = data %>%
    geom_bar(stat="identity") +
    scale_fill_brewer(name = "Education Level",
                      palette = "Accent" ) +
-   labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
-   theme(text = element_text(family = "LM Roman 10")) +
+   labs(x = "Quarter", y = "Self-Employed Non-Taxpayers",
+        title = "Education Level of Non-Social Security Contributors in 2019.3") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.35),
               show.legend = F)+
    coord_polar("y")
@@ -420,8 +440,10 @@ f = data %>%
    geom_bar(stat = "identity")+
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Temps")) +
-   labs(x = "Quarter", y = "Self-Employed Taxpayers") +
-   theme(text = element_text(family = "LM Roman 10")) +
+   labs(x = "Quarter", y = "Self-Employed Taxpayers",
+        title = "Education Level of Social Security Contributors in 2019.4") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.45),
               show.legend = F)+
    coord_polar("y")
@@ -455,8 +477,10 @@ f = data %>%
    geom_bar(stat = "identity")+
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Earth")) +
-   labs(x = "Quarter", y = "Self-Employed Non-Taxpayers") +
-   theme(text = element_text(family = "LM Roman 10")) +
+   labs(x = "Quarter", y = "Self-Employed Non-Taxpayers",
+        title = "Education Level of Non-Social Security Contributors in 2019.4") +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
    geom_label(aes(label = paste0(labell, "%")), position = position_stack(vjust = 0.3),
                     show.legend = F)+
    coord_polar("y")
