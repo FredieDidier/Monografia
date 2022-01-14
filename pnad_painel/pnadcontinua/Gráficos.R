@@ -226,7 +226,7 @@ f = data %>%
  
  
  
- ggplot(dddd, aes(x = year_quarter, y = labell,
+ graf_1 = ggplot(dddd, aes(x = year_quarter, y = labell,
                fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_startrek(name = "Education Level") +
@@ -301,7 +301,7 @@ f = data %>%
    select(year_quarter, higher_educ_label, labell) %>%
    distinct()
  
- ggplot(dd, aes(x = year_quarter, y = labell,
+ graf_2 = ggplot(dd, aes(x = year_quarter, y = labell,
                fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_rickandmorty(name = "Education Level")+
@@ -374,7 +374,7 @@ f = data %>%
    select(year_quarter, higher_educ_label, labell) %>%
    distinct()
  
- ggplot(eee, aes(x = year_quarter, y = labell,
+ graf_3 = ggplot(eee, aes(x = year_quarter, y = labell,
                  fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_locuszoom(name = "Education Level") +
@@ -450,7 +450,7 @@ f = data %>%
    select(year_quarter, higher_educ_label, labell) %>%
    distinct()
  
- ggplot(e, aes(x = year_quarter, y = labell,
+ graf_4 = ggplot(e, aes(x = year_quarter, y = labell,
                   fill = factor(higher_educ_label))) +
    geom_bar(stat = "identity")+
    scale_fill_manual(name = "Education Level",
