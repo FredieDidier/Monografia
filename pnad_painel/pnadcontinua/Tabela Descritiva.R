@@ -10,4 +10,4 @@ datasummary(monthly_work_income + years_of_study + age + Male + Female +
               last_week_worker + no_last_week_worker + 
               social_security_contributor + 
               no_social_security_contributor ~ Mean + Sd,
-            data = data_2019, output = "latex")
+            data = data_2019)
