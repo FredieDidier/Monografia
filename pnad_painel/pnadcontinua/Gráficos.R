@@ -86,7 +86,8 @@ f = data %>%
         title = "Education Level of the Unemployed in 2019") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank())
  #########################################################################
  ########## Fazendo Gráfico de trabalhadores sem carteira e que não contribuem pro INSS ###
  
