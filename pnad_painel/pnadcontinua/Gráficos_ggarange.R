@@ -1,6 +1,6 @@
 
 
-library(ggrepel)
+library(ggpubr)
 
 
 ggarrange(graf_1, graf_2, graf_3, graf_4,
@@ -169,3 +169,151 @@ graf_4 = ggplot(e, aes(x = year_quarter, y = labell,
              show.legend = F)+
   coord_polar("y")
 
+###############################
+
+ggarrange(grafico1, grafico2, grafico3, grafico4, 
+          common.legend = T, legend = "bottom")
+
+
+grafico1 = ggplot(ddd, aes(x = year_quarter, y = labell,
+                           fill = factor(higher_educ_label))) +
+  geom_bar(stat="identity") +
+  scale_fill_manual(name = "Education Level",
+                    values = carto_pal(name = "Earth")) +
+  labs(x = "Quarter", y = "Self-Employed Non-Taxpayers",
+       title = "Education Level of Non-Social Security Contributors in 2019.1") +
+  theme_minimal() +
+  theme(text = element_text(family = "LM Roman 10"),
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+        axis.text = element_blank(),
+        legend.title = element_blank()) +
+  geom_label(aes(x = 1.2, label = paste0(labell, "%")),
+             position = position_stack(vjust = 0.5),
+             show.legend = F)+
+  coord_polar("y")
+
+
+grafico2 = ggplot(eeee, aes(x = year_quarter, y = labell,
+                            fill = factor(higher_educ_label))) +
+  geom_bar(stat="identity") +
+  scale_fill_manual(name = "Education Level",
+                    values = carto_pal(name = "Earth"))+
+  labs(x = "Quarter", y = "Self-Employed Non-Taxpayers",
+       title = "Education Level of Non-Social Security Contributors in 2019.2") +
+  theme_minimal() +
+  theme(text = element_text(family = "LM Roman 10"),
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+        axis.text = element_blank(),
+        legend.title = element_blank()) +
+  geom_label(aes(x = 1.3, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
+             show.legend = F)+
+  coord_polar("y")
+
+
+grafico3 = ggplot(ee, aes(x = year_quarter, y = labell,
+                          fill = factor(higher_educ_label))) +
+  geom_bar(stat="identity") +
+  scale_fill_manual(name = "Education Level",
+                    values = carto_pal(name = "Earth")) +
+  labs(x = "Quarter", y = "Self-Employed Non-Taxpayers",
+       title = "Education Level of Non-Social Security Contributors in 2019.3") +
+  theme_minimal() +
+  theme(text = element_text(family = "LM Roman 10"),
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+        axis.text = element_blank(),
+        legend.title = element_blank()) +
+  geom_label(aes(x = 1.3, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
+             show.legend = F)+
+  coord_polar("y")
+
+
+grafico4 = ggplot(d, aes(x = year_quarter, y = labell,
+                         fill = higher_educ_label)) +
+  geom_bar(stat = "identity")+
+  scale_fill_manual(name = "Education Level",
+                    values = carto_pal(name = "Earth")) +
+  labs(x = "Quarter", y = "Self-Employed Non-Taxpayers",
+       title = "Education Level of Non-Social Security Contributors in 2019.4") +
+  theme_minimal() +
+  theme(text = element_text(family = "LM Roman 10"),
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+        axis.text = element_blank(),
+        legend.title = element_blank()) +
+  geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
+             show.legend = F)+
+  coord_polar("y")
+
+########################################################
+
+ggarrange(graf.1, graf.2,
+          common.legend = T,
+          legend = "bottom")
+
+graf.1 = ggplot(f, aes(x = year_quarter, y = signed_work_card,
+                       fill = factor(higher_educ_label))) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(name = "Education Level", 
+                    values = carto_pal(name = "Geyser")) +
+  labs(x =  "Quarter", y = "Signed Contract Workers",
+       title = "Education Level of Registered Employees in 2019") +
+  theme_minimal() +
+  theme(text = element_text(family = "LM Roman 10"),
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+        legend.title = element_blank())
+
+
+graf.2 = ggplot(h, aes(x = year_quarter, y = social_security_taxpayer,
+                       fill = factor(higher_educ_label))) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(name = "Education Level",
+                    values = carto_pal(name = "Geyser")) +
+  labs(x = "Quarter", y = "Contributors",
+       title = "Education Level of Social Security Taxpayers in 2019") +
+  theme_minimal()+
+  theme(text = element_text(family = "LM Roman 10"),
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+        legend.title = element_blank())
+########################################################################
+
+ggarrange(inf1, inf2, inf3,
+          common.legend = T,
+          legend = "bottom")
+
+inf1 = ggplot(gg, aes(x = year_quarter, y = worker,
+                      fill = factor(higher_educ_label))) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(name = "Education Level",
+                    values = carto_pal(name = "Pastel")) +
+  labs(x = "Quarter", y = "Non-Reported",
+       title = "Education Level of Non-Registered Workers in 2019") +
+  theme_minimal() +
+  theme(text = element_text(family = "LM Roman 10"),
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+        legend.title = element_blank())
+
+
+inf2 = ggplot(g2, aes(x = year_quarter, y = worker,
+                      fill = factor(higher_educ_label))) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(name = "Education Level",
+                    values = carto_pal(name = "Pastel")) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "Quarter", y = "Non-Workers",
+       title = "Education Level of Informal Workers in 2019") +
+  theme_minimal() +
+  theme(text = element_text(family = "LM Roman 10"),
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+        legend.title = element_blank())
+
+
+inf3 = ggplot(h1, aes(x = year_quarter, y = social_security_taxpayer,
+                      fill = factor(higher_educ_label))) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(name = "Education Level",
+                    values = carto_pal(name = "Pastel")) +
+  labs(x = "Quarter", y = "Non-Contributors",
+       title = "Education Level of Non-Social Security Taxpayers Workers") +
+  theme_minimal()+
+  theme(text = element_text(family = "LM Roman 10"),
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+        legend.title = element_blank())

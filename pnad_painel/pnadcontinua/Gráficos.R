@@ -11,7 +11,7 @@ library(grid)
 library(gridExtra)
 
 
- ## Fazendo Gráfico - trabalhadores com\sem carteira assinada + escolaridade
+ ## Fazendo Gráfico - trabalhadores com carteira assinada + escolaridade ###
 
 f = data %>%
   filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4") &
@@ -25,7 +25,7 @@ f = data %>%
             higher_educ_level %in% c(6) ~ "College Degree Incompleted",
             higher_educ_level %in% c(7) ~ "College Degree Completed")) 
 
- ggplot(f, aes(x = year_quarter, y = signed_work_card,
+ graf.1 = ggplot(f, aes(x = year_quarter, y = signed_work_card,
     fill = factor(higher_educ_label))) +
   geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level", 
@@ -35,12 +35,13 @@ f = data %>%
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
+ #########################################################################
+ ######### Fazendo Gráfico trabalhadores sem carteira assinada (informais) + escolaridade ###
  
- 
- f1 = data %>%
+ gg = data %>%
    filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4") &
-            signed_work_card == 2) %>%
-   select(signed_work_card, higher_educ_level, year_quarter) %>%
+            worker == 1 & signed_work_card == 2) %>%
+   select(worker, higher_educ_level, year_quarter, signed_work_card) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -49,59 +50,24 @@ f = data %>%
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
                                         higher_educ_level %in% c(7) ~ "College Degree Completed")) 
  
- ggplot(f1, aes(x = year_quarter, y = signed_work_card,
-               fill = factor(higher_educ_label))) +
-   geom_bar(stat = "identity") +
-   scale_fill_manual(name = "Education Level", 
-                     values = carto_pal(name = "Pastel")) +
-   labs(x =  "Quarter", y = "Non-Signed Contract Workers",
-        title = "Education Level of Non-Registered Employees in 2019") +
-   theme_minimal()+
-   theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
- 
-  ## Desempregados durante a pandemia (sem carteira assinada)
- ff = merge_2 %>%
-   filter(year_quarter %in% c("2020_1", "2020_2", "2020_3", "2020_4")) %>%
-   select(unemployed, higher_educ_level, year_quarter) %>%
-   filter(unemployed == 1)
- 
- ggplot(ff, aes(x = year_quarter, y = unemployed,
-                fill = factor(higher_educ_level))) +
-   geom_bar(stat = "identity") +
-   theme_minimal()
- 
- 
- ## Fazendo Gráfico - trabalhadores\não trabalhadores da última semana + escolaridade
-
- g = data %>%
-   filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4") &
-            worker == 1) %>%
-   select(worker, higher_educ_level, year_quarter) %>%
-   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
-                                        higher_educ_level %in% c(2) ~ "Primary School Incompleted",
-                                        higher_educ_level %in% c(3) ~ "Primary School Completed",
-                                        higher_educ_level %in% c(4) ~ "High School Incompleted",
-                                        higher_educ_level %in% c(5) ~ "High School Completed",
-                                        higher_educ_level %in% c(6) ~ "College Degree Incompleted",
-                                        higher_educ_level %in% c(7) ~ "College Degree Completed")) 
- 
- ggplot(g, aes(x = year_quarter, y = worker,
-               fill = factor(higher_educ_label))) +
+ inf1 = ggplot(gg, aes(x = year_quarter, y = worker,
+                        fill = factor(higher_educ_label))) +
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Safe")) +
    labs(x = "Quarter", y = "Workers",
-        title = "Education Level of Employees in 2019") +
+        title = "Education Level of Non-Registered Workers in 2019") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
- 
+ #########################################################################
+ #### Fazendo Gráfico de Desempregados #####
  
  g1 = data %>%
    filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4") &
-            worker == 2) %>%
-   select(worker, higher_educ_level, year_quarter) %>%
+            worker == 2 & signed_work_card == 2 & social_security_taxpayer == 2) %>%
+   select(signed_work_card, social_security_taxpayer,
+          worker, higher_educ_level, year_quarter) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -110,7 +76,7 @@ f = data %>%
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
                                         higher_educ_level %in% c(7) ~ "College Degree Completed")) 
  
- ggplot(g1, aes(x = year_quarter, y = worker,
+ desemp = ggplot(g1, aes(x = year_quarter, y = worker,
                fill = factor(higher_educ_label))) +
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level",
@@ -121,28 +87,14 @@ f = data %>%
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
+ #########################################################################
+ ########## Fazendo Gráfico de trabalhadores sem carteira e que não contribuem pro INSS ###
  
- 
- 
- ## Desempregados última semana da pesquisa PNAD
- 
- gg = merge %>%
-   filter(year_quarter %in% c("2020_1", "2020_2", "2020_3", "2020_4")) %>%
-   select(id_code, unemployed, higher_educ_level, year_quarter) %>%
-   filter(unemployed == 1)
- 
- ggplot(gg, aes(x = year_quarter, y = unemployed,
-                fill = factor(higher_educ_level))) +
-   geom_bar(stat = "identity") +
-   theme_minimal()
- 
- 
- ## Fazendo Gráfico - trabalhadores que contribuem\não contribuem pro INSS + escolaridade
- 
- h = data %>%
+ g2 = data %>%
    filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4") &
-            social_security_taxpayer == 1) %>%
-   select(social_security_taxpayer, higher_educ_level, year_quarter) %>%
+            worker == 1 & signed_work_card == 2 & social_security_taxpayer == 2) %>%
+   select(signed_work_card, social_security_taxpayer,
+          worker, higher_educ_level, year_quarter) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -151,23 +103,49 @@ f = data %>%
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
                                         higher_educ_level %in% c(7) ~ "College Degree Completed")) 
  
+ inf2 = ggplot(g2, aes(x = year_quarter, y = worker,
+                         fill = factor(higher_educ_label))) +
+   geom_bar(stat = "identity") +
+   scale_fill_manual(name = "Education Level",
+                     values = carto_pal(name = "Prism")) +
+   scale_y_continuous(labels = scales::comma) +
+   labs(x = "Quarter", y = "Non-Workers",
+        title = "Education Level of Informal Workers in 2019") +
+   theme_minimal() +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
  
- ggplot(h, aes(x = year_quarter, y = social_security_taxpayer,
+ ## Fazendo Gráfico - trabalhadores que contribuem pro INSS + escolaridade
+ 
+ h = data %>%
+   filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4") &
+            social_security_taxpayer == 1) %>%
+   select(signed_work_card, social_security_taxpayer, higher_educ_level, year_quarter) %>%
+   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
+                                        higher_educ_level %in% c(2) ~ "Primary School Incompleted",
+                                        higher_educ_level %in% c(3) ~ "Primary School Completed",
+                                        higher_educ_level %in% c(4) ~ "High School Incompleted",
+                                        higher_educ_level %in% c(5) ~ "High School Completed",
+                                        higher_educ_level %in% c(6) ~ "College Degree Incompleted",
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed"))
+ 
+ 
+ graf.2 = ggplot(h, aes(x = year_quarter, y = social_security_taxpayer,
                fill = factor(higher_educ_label))) +
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Bold")) +
    labs(x = "Quarter", y = "Contributors",
-        title = "Education Level of Social Security Taxpayers") +
+        title = "Education Level of Social Security Taxpayers in 2019") +
    theme_minimal()+
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
- 
- 
+ ########################################################################
+ ######### Fazendo Gráfico trabalhadores que não contribuem para o INSS (informais) ###
  h1 = data %>%
    filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4") &
-            social_security_taxpayer == 2) %>%
-   select(social_security_taxpayer, higher_educ_level, year_quarter) %>%
+            worker == 1 & social_security_taxpayer == 2) %>%
+   select(worker, social_security_taxpayer, higher_educ_level, year_quarter) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -177,30 +155,18 @@ f = data %>%
                                         higher_educ_level %in% c(7) ~ "College Degree Completed")) 
  
  
- ggplot(h1, aes(x = year_quarter, y = social_security_taxpayer,
+ inf3 = ggplot(h1, aes(x = year_quarter, y = social_security_taxpayer,
                fill = factor(higher_educ_label))) +
    geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Vivid")) +
    labs(x = "Quarter", y = "Non-Contributors",
-        title = "Education Level of Non-Social Security Taxpayers") +
+        title = "Education Level of Non-Social Security Taxpayers Workers") +
    theme_minimal()+
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
- 
- ## Desempregados (Não contribuem para o INSS)
- 
- hh = merge_1 %>%
-   filter(year_quarter %in% c("2020_1", "2020_2", "2020_3", "2020_4")) %>%
-   select(id_code, unemployed, higher_educ_level, year_quarter) %>%
-   filter(unemployed == 1)
- 
- ggplot(hh, aes(x = year_quarter, y = unemployed,
-                fill = factor(higher_educ_level))) +
-   geom_bar(stat = "identity") +
-   theme_minimal()
- 
- 
+ ######################################################################
+
  ## Fazendo Gráfico - Conta Própria que contríbuia INSS
  
  i = data %>%
@@ -264,7 +230,7 @@ f = data %>%
  
  
  
- ggplot(ddd, aes(x = year_quarter, y = labell,
+ grafico1 = ggplot(ddd, aes(x = year_quarter, y = labell,
                fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_brewer(name = "Education Level",
@@ -337,7 +303,7 @@ f = data %>%
    select(year_quarter, higher_educ_label, labell) %>%
    distinct()
  
- ggplot(eeee, aes(x = year_quarter, y = labell,
+ grafico2 = ggplot(eeee, aes(x = year_quarter, y = labell,
                 fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_manual(name = "Education Level",
@@ -413,7 +379,7 @@ f = data %>%
  
  
  
- ggplot(ee, aes(x = year_quarter, y = labell,
+ grafico3 = ggplot(ee, aes(x = year_quarter, y = labell,
                  fill = factor(higher_educ_label))) +
    geom_bar(stat="identity") +
    scale_fill_brewer(name = "Education Level",
@@ -488,7 +454,7 @@ f = data %>%
    select(year_quarter, higher_educ_label, labell) %>%
    distinct()
  
- ggplot(d, aes(x = year_quarter, y = labell,
+ grafico4 = ggplot(d, aes(x = year_quarter, y = labell,
                   fill = higher_educ_label)) +
    geom_bar(stat = "identity")+
    scale_fill_manual(name = "Education Level",
