@@ -10,5 +10,5 @@ datasummary(monthly_work_income + years_of_study + age + Male + Female +
               last_week_worker + no_last_week_worker + 
               social_security_contributor + 
               no_social_security_contributor + hours_worked +
-              time_without_job + job_start ~ Mean + Sd,
+              ~ Mean + Sd,
             data = data_2019)
