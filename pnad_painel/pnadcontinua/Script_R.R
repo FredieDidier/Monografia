@@ -162,7 +162,7 @@ card_holder = card %>%
 variables_2 = data %>%
   select(id_code, race, gender, higher_educ_level, weights,
          job_start, signed_work_card, year_quarter, worker,
-         household_location, job_function)
+         household_location, job_function, sector_code)
 
 merge_2 = left_join(card_holder, variables_2)
 
