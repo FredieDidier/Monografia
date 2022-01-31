@@ -59,13 +59,6 @@ clean_painel = function(df){
 
 data = clean_painel(painel)
 
-## Criando dataframe só filtrado para 2019 para a Tabela Descritiva
-
-data_2019 = data %>%
-  filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4")) %>%
-  group_by(higher_educ_level) %>% mutate(labels = n()) %>%
-  mutate(labell = round(labels/nrow(data_2019), digits = 2))
-
 
 ## Criando 1ª Variável Dependente - Trabalhador empregado
 
@@ -88,7 +81,14 @@ data = unite(data, col = "year_quarter", year:quarter, sep = "_") %>%
   mutate(no_social_security_contributor = case_when(social_security_taxpayer == 1 ~ 0,
                                                  social_security_taxpayer == 2 ~ 1))
 
-  
+## Criando dataframe só filtrado para 2019 para a Tabela Descritiva
+
+data_2019 = data %>%
+  filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4")) %>%
+  group_by(higher_educ_level) %>% mutate(labels = n()) %>%
+  mutate(labell = round(labels/nrow(data_2019), digits = 2))
+###########################################################
+
 worker = data %>%
   pivot_wider(id_cols = c(id_code),
               names_from = year_quarter,
