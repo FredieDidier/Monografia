@@ -60,8 +60,8 @@ clean_painel = function(df){
 data = clean_painel(painel)
 
 
-## Criando 1ª Variável Dependente - Trabalhador empregado
 
+## Criando dummies de trabalhadores para a tabela descritiva
 
 data = unite(data, col = "year_quarter", year:quarter, sep = "_") %>%
   mutate(Male = case_when(gender == 1 ~ 1,
@@ -86,8 +86,10 @@ data = unite(data, col = "year_quarter", year:quarter, sep = "_") %>%
 data_2019 = data %>%
   filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4")) %>%
   group_by(higher_educ_level) %>% mutate(labels = n()) %>%
-  mutate(labell = round(labels/nrow(data_2019), digits = 2))
+  mutate(labell = round(labels/nrow(.), digits = 2))
 ###########################################################
+
+## Criando 1ª Variável Dependente - Trabalhador Conta Própria que contribui pro INSS
 
 worker = data %>%
   pivot_wider(id_cols = c(id_code),
@@ -99,13 +101,16 @@ worker = worker %>%
 
 variables = data %>%
   select(id_code, race, gender, higher_educ_level, weights,
-         job_start, worker, year_quarter, household_location, job_function)
+         job_start, worker, year_quarter, household_location, job_function,
+         social_security_taxpayer)
 
 merge = left_join(worker, variables)
 
 merge = merge %>%
-  mutate(unemployed = case_when(worker == 1 ~ 0,
-                                worker == 2 ~ 1)) %>%
+  mutate(unemployed = case_when(worker == 1 & social_security_taxpayer == 1 &
+                                  job_function == 6 ~ 0,
+                                worker == 2 & social_security_taxpayer == 2 &
+                                  job_function  == 6 ~ 1)) %>%
   filter(year_quarter %in% c("2020_1", "2020_2", "2020_3", "2020_4")) %>%
   mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
                            race == 1 | race == 3 ~ 0))
@@ -113,7 +118,7 @@ merge = merge %>%
 reg = lm_robust(unemployed ~ negro + as.factor(gender) +
                   as.factor(higher_educ_level) +
                   as.factor(job_start) + as.factor(year_quarter) +
-                  as.factor(household_location) + as.factor(job_function),
+                  as.factor(household_location),
                 data = merge, weights = weights)
 
 
