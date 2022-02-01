@@ -102,7 +102,7 @@ worker = worker %>%
 variables = data %>%
   select(id_code, race, gender, higher_educ_level, weights,
          job_start, worker, year_quarter, household_location, job_function,
-         social_security_taxpayer)
+         social_security_taxpayer, sector_code)
 
 merge = left_join(worker, variables)
 
@@ -135,7 +135,7 @@ inss_payer = inss %>%
 variables_1 = data %>%
   select(id_code, race, gender, higher_educ_level, weights,
          job_start, social_security_taxpayer, year_quarter, worker,
-         household_location, job_function) %>%
+         household_location, job_function, sector_code) %>%
   filter(!job_function == 7 & !job_function == 2)
 
 merge_1 = left_join(inss_payer, variables_1)
