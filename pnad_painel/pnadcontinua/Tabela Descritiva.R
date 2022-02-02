@@ -9,6 +9,8 @@ datasummary(monthly_work_income + years_of_study + age + Male + Female +
               signed_card_employee + no_signed_card_employee +
               last_week_worker + no_last_week_worker + 
               social_security_contributor + 
-              no_social_security_contributor + hours_worked
+              no_social_security_contributor + social_security_and_self_employed +
+              non_social_security_and_self_employed +
+              hours_worked
               ~ Mean + Sd,
-            data = data_2019)
+            data = data_2019, output = "latex")
