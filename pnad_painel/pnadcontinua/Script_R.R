@@ -124,7 +124,7 @@ merge = merge %>%
 reg = lm_robust(unemployed ~ negro + as.factor(gender) +
                   as.factor(higher_educ_level) +
                   as.factor(job_start) + as.factor(year_quarter) +
-                  as.factor(household_location),
+                  as.factor(household_location) + as.factor(sector_code),
                 data = merge, weights = weights)
 
 
@@ -156,7 +156,8 @@ merge_1 = merge_1%>%
 reg_1 = lm_robust(unemployed ~ negro + as.factor(gender) +
                   as.factor(higher_educ_level) +
                   as.factor(job_start) + as.factor(year_quarter) +
-                    as.factor(household_location) + as.factor(job_function),
+                    as.factor(household_location) + as.factor(job_function) +
+                    as.factor(sector_code),
                 data = merge_1, weights = weights)
 
 
@@ -187,5 +188,6 @@ merge_2 = merge_2%>%
 reg_2 = lm_robust(unemployed ~ negro + as.factor(gender) +
                     as.factor(higher_educ_level) +
                     as.factor(job_start) + as.factor(year_quarter) +
-                    as.factor(household_location) + as.factor(job_function),
+                    as.factor(household_location) + as.factor(job_function) +
+                    as.factor(sector_code),
                   data = merge_2, weights = weights)
