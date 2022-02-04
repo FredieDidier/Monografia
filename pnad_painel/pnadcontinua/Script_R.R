@@ -68,18 +68,18 @@ data = unite(data, col = "year_quarter", year:quarter, sep = "_") %>%
                             gender == 2 ~ 0)) %>%
   mutate(Female = case_when(gender == 1 ~ 0,
                           gender == 2 ~ 1)) %>%
-  mutate(signed_card_employee = case_when(signed_work_card == 1 ~ 1,
-                                          signed_work_card == 2 ~ 0)) %>%
-  mutate(no_signed_card_employee = case_when(signed_work_card == 1 ~ 0,
-                                          signed_work_card == 2 ~ 1)) %>%
+  mutate(signed_card_employee = case_when(signed_work_card == 1 & worker == 1 ~ 1,
+                                          signed_work_card == 2 & worker == 1 ~ 0)) %>%
+  mutate(no_signed_card_employee = case_when(signed_work_card == 1 & worker == 1 ~ 0,
+                                          signed_work_card == 2 & worker == 1 ~ 1)) %>%
   mutate(last_week_worker = case_when(worker == 1 ~ 1,
                                       worker == 2 ~ 0)) %>%
   mutate(no_last_week_worker = case_when(worker == 1 ~ 0,
                                          worker == 2 ~ 1)) %>%
-  mutate(social_security_contributor = case_when(social_security_taxpayer  == 1 ~ 1,
-                                                 social_security_taxpayer == 2 ~ 0)) %>%
-  mutate(no_social_security_contributor = case_when(social_security_taxpayer == 1 ~ 0,
-                                                 social_security_taxpayer == 2 ~ 1))
+  mutate(social_security_contributor = case_when(social_security_taxpayer  == 1 & worker == 1 ~ 1,
+                                                 social_security_taxpayer == 2 & worker == 1 ~ 0)) %>%
+  mutate(no_social_security_contributor = case_when(social_security_taxpayer == 1 & worker == 1 ~ 0,
+                                                 social_security_taxpayer == 2 & worker == 1 ~ 1))
 
 ## Criando dataframe só filtrado para 2019 para a Tabela Descritiva
 
