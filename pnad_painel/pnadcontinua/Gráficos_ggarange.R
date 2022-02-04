@@ -22,3 +22,7 @@ ggarrange(graf.1, graf.2,
 ggarrange(inf1, inf2,
           common.legend = T,
           legend = "bottom")
+
+############### Desempregados em 2019
+
+ggarrange(desemp)
