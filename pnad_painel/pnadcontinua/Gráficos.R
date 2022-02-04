@@ -15,8 +15,8 @@ library(gridExtra)
 
 trab_carteira_ass = data %>%
   filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4") &
-           signed_work_card == 1) %>%
-  select(signed_work_card, higher_educ_level, year_quarter) %>%
+           signed_work_card == 1 & worker == 1) %>%
+  select(signed_work_card, higher_educ_level, year_quarter, worker) %>%
   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
             higher_educ_level %in% c(2) ~ "Primary School Incompleted",
             higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -120,8 +120,8 @@ trab_carteira_ass = data %>%
  
  trab_contribui_INSS = data %>%
    filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4") &
-            social_security_taxpayer == 1) %>%
-   select(signed_work_card, social_security_taxpayer, higher_educ_level, year_quarter) %>%
+            social_security_taxpayer == 1 & worker == 1) %>%
+   select(signed_work_card, social_security_taxpayer, higher_educ_level, year_quarter, worker) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -149,8 +149,8 @@ trab_carteira_ass = data %>%
  trab_conta_propria_INSS = data %>%
    filter(year_quarter %in% c("2019_1")) %>%
    select(social_security_taxpayer, higher_educ_level, year_quarter,
-          job_function) %>%
-   filter(job_function == 6 & social_security_taxpayer == 1)  %>%
+          job_function, worker) %>%
+   filter(job_function == 6 & social_security_taxpayer == 1 & worker == 1)  %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -188,8 +188,8 @@ trab_carteira_ass = data %>%
  trab_conta_propria_n_INSS = data %>%
    filter(year_quarter %in% c("2019_1")) %>%
    select(social_security_taxpayer, higher_educ_level, year_quarter,
-          job_function) %>%
-   filter(job_function == 6 & social_security_taxpayer == 2)  %>%
+          job_function, worker) %>%
+   filter(job_function == 6 & social_security_taxpayer == 2 & worker == 1)  %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -227,8 +227,8 @@ trab_carteira_ass = data %>%
  trab_conta_propria_INSS_2 = data %>%
    filter(year_quarter %in% c("2019_2")) %>%
    select(social_security_taxpayer, higher_educ_level, year_quarter,
-          job_function) %>%
-   filter(job_function == 6 & social_security_taxpayer == 1) %>%
+          job_function, worker) %>%
+   filter(job_function == 6 & social_security_taxpayer == 1 & worker == 1) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -264,8 +264,8 @@ trab_carteira_ass = data %>%
  trab_conta_propria_n_INSS_2 = data %>%
    filter(year_quarter %in% c("2019_2")) %>%
    select(social_security_taxpayer, higher_educ_level, year_quarter,
-          job_function) %>%
-   filter(job_function == 6 & social_security_taxpayer == 2) %>%
+          job_function, worker) %>%
+   filter(job_function == 6 & social_security_taxpayer == 2 & worker == 1) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -301,8 +301,8 @@ trab_carteira_ass = data %>%
  trab_conta_propria_INSS_3 = data %>%
    filter(year_quarter %in% c("2019_3")) %>%
    select(social_security_taxpayer, higher_educ_level, year_quarter,
-          job_function) %>%
-   filter(job_function == 6 & social_security_taxpayer == 1) %>%
+          job_function, worker) %>%
+   filter(job_function == 6 & social_security_taxpayer == 1 & worker == 1) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -339,8 +339,8 @@ trab_carteira_ass = data %>%
  trab_conta_propria_n_INSS_3 = data %>%
    filter(year_quarter %in% c("2019_3")) %>%
    select(social_security_taxpayer, higher_educ_level, year_quarter,
-          job_function) %>%
-   filter(job_function == 6 & social_security_taxpayer == 2) %>%
+          job_function, worker) %>%
+   filter(job_function == 6 & social_security_taxpayer == 2 & worker == 1) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -378,8 +378,8 @@ trab_carteira_ass = data %>%
  trab_conta_propria_INSS_4 = data %>%
    filter(year_quarter %in% c("2019_4")) %>%
    select(social_security_taxpayer, higher_educ_level, year_quarter,
-          job_function) %>%
-   filter(job_function == 6 & social_security_taxpayer == 1) %>%
+          job_function, worker) %>%
+   filter(job_function == 6 & social_security_taxpayer == 1 & worker == 1) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -415,8 +415,8 @@ trab_carteira_ass = data %>%
  trab_conta_propria_n_INSS_4 = data %>%
    filter(year_quarter %in% c("2019_4")) %>%
    select(social_security_taxpayer, higher_educ_level, year_quarter,
-          job_function) %>%
-   filter(job_function == 6 & social_security_taxpayer == 2) %>%
+          job_function, worker) %>%
+   filter(job_function == 6 & social_security_taxpayer == 2 & worker == 1) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
