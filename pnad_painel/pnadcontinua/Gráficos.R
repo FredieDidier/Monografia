@@ -406,7 +406,7 @@ trab_carteira_ass = data %>%
    theme_minimal()+
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
-   geom_label(aes(x = 1.4, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
+   geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
  
