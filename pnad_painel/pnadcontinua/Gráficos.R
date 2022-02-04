@@ -34,7 +34,8 @@ trab_carteira_ass = data %>%
         title = "Education Level of Registered Employees in 2019") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank())
  #########################################################################
  ######### Fazendo Gráfico trabalhadores sem carteira assinada (informais) + escolaridade ###
  
@@ -59,7 +60,8 @@ trab_carteira_ass = data %>%
         title = "Education Level of Non-Registered Workers in 2019") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank())
  #########################################################################
  #### Fazendo Gráfico de Desempregados #####
  
@@ -114,7 +116,8 @@ trab_carteira_ass = data %>%
         title = "Education Level of Non-Social Security Taxpayers Workers in 2019") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank())
  
  ## Fazendo Gráfico - trabalhadores que contribuem pro INSS + escolaridade
  
@@ -140,7 +143,8 @@ trab_carteira_ass = data %>%
         title = "Education Level of Social Security Taxpayers in 2019") +
    theme_minimal()+
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5))
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank())
  ########################################################################
  ######################################################################
 
@@ -178,7 +182,8 @@ trab_carteira_ass = data %>%
         title = "Education Level of Social Security Contributors in 2019.1") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
    geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -217,7 +222,8 @@ trab_carteira_ass = data %>%
         title = "Education Level of Non-Social Security Contributors in 2019.1") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
    geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -254,7 +260,8 @@ trab_carteira_ass = data %>%
         title = "Education Level of Social Security Contributors in 2019.2") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
    geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -291,7 +298,8 @@ trab_carteira_ass = data %>%
         title = "Education Level of Non-Social Security Contributors in 2019.2") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
    geom_label(aes(x = 1.3, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -328,7 +336,8 @@ trab_carteira_ass = data %>%
         title = "Education Level of Social Security Contributors in 2019.3") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
    geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -368,7 +377,8 @@ trab_carteira_ass = data %>%
         title = "Education Level of Non-Social Security Contributors in 2019.3") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
    geom_label(aes(x = 1.3, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -405,7 +415,8 @@ trab_carteira_ass = data %>%
         title = "Education Level of Social Security Contributors in 2019.4") +
    theme_minimal()+
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
    geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -443,7 +454,8 @@ trab_carteira_ass = data %>%
         title = "Education Level of Non-Social Security Contributors in 2019.4") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
    geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
                     show.legend = F)+
    coord_polar("y")
