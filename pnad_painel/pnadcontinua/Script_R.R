@@ -88,11 +88,11 @@ data_2019 = data %>%
   group_by(higher_educ_level) %>% mutate(labels = n()) %>%
   mutate(labell = round(labels/nrow(.), digits = 2)) %>%
   mutate(social_security_and_self_employed = case_when(job_function == 6 &
-                                                         social_security_taxpayer == 1 ~ 1,
-                                                       job_function == 6 & social_security_taxpayer == 2 ~ 0)) %>%
+                                                         social_security_taxpayer == 1 & worker == 1 ~ 1,
+                                                       job_function == 6 & social_security_taxpayer == 2 & worker == 1 ~ 0)) %>%
   mutate(non_social_security_and_self_employed = case_when(job_function == 6 &
-                                                           social_security_taxpayer == 1 ~ 0,
-                                                         job_function == 6 & social_security_taxpayer == 2 ~ 1))
+                                                           social_security_taxpayer == 1 & worker == 1 ~ 0,
+                                                         job_function == 6 & social_security_taxpayer == 2 & worker == 1 ~ 1))
 ###########################################################
 
 ## Criando 1ª Variável Dependente - Trabalhador Conta Própria que contribui pro INSS
