@@ -123,7 +123,7 @@ trab_carteira_ass = data %>%
  
  trab_contribui_INSS = data %>%
    filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4") &
-            social_security_taxpayer == 1 & worker == 1) %>%
+            social_security_taxpayer == 1 & worker == 1 & signed_work_card == 2) %>%
    select(signed_work_card, social_security_taxpayer, higher_educ_level, year_quarter, worker) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
