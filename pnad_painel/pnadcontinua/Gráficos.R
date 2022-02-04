@@ -183,7 +183,8 @@ trab_carteira_ass = data %>%
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
-         legend.title = element_blank()) +
+         legend.title = element_blank(),
+         axis.text = element_blank()) +
    geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -223,7 +224,8 @@ trab_carteira_ass = data %>%
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
-         legend.title = element_blank()) +
+         legend.title = element_blank(),
+         axis.text = element_blank()) +
    geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -261,7 +263,8 @@ trab_carteira_ass = data %>%
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
-         legend.title = element_blank()) +
+         legend.title = element_blank(),
+         axis.text = element_blank()) +
    geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -299,7 +302,8 @@ trab_carteira_ass = data %>%
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
-         legend.title = element_blank()) +
+         legend.title = element_blank(),
+         axis.text = element_blank()) +
    geom_label(aes(x = 1.3, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -337,7 +341,8 @@ trab_carteira_ass = data %>%
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
-         legend.title = element_blank()) +
+         legend.title = element_blank(),
+         axis.text = element_blank()) +
    geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -378,7 +383,8 @@ trab_carteira_ass = data %>%
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
-         legend.title = element_blank()) +
+         legend.title = element_blank(),
+         axis.text = element_blank()) +
    geom_label(aes(x = 1.3, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -416,7 +422,8 @@ trab_carteira_ass = data %>%
    theme_minimal()+
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
-         legend.title = element_blank()) +
+         legend.title = element_blank(),
+         axis.text = element_blank()) +
    geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
               show.legend = F)+
    coord_polar("y")
@@ -455,7 +462,8 @@ trab_carteira_ass = data %>%
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
-         legend.title = element_blank()) +
+         legend.title = element_blank(),
+         axis.text = element_blank()) +
    geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
                     show.legend = F)+
    coord_polar("y")
