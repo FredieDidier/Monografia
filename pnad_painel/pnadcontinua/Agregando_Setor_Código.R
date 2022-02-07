@@ -1,6 +1,4 @@
 
-### Problemas com código 0, 1999 e iniciados em 48
-
 data = data %>%
   mutate(sector_code = case_when(sector_code %in% c(1101, 1102,
                                                     1103, 1104,
