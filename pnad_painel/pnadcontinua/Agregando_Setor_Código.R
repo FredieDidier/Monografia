@@ -37,4 +37,9 @@ data = data %>%
                                  sector_code %in% c(90000, 91000, 92000, 93011, 93012, 93020) ~ "Artes, Cultura, Esportes e Recreacao",
                                  sector_code %in% c(94010, 94020, 94091, 94099, 95010, 95030, 96010, 96020, 96030, 96090) ~ "Outras Atividades de Servicos",
                                  sector_code == 97000 ~ "Servicos Domesticos",
-                                 sector_code == 99000 ~ "Organismos Internacionais"))
+                                 sector_code == 99000 ~ "Organismos Internacionais",
+                                 sector_code == 0 ~ "Atividades Mal Definidas",
+                                 sector_code == 1999 ~ "Agropecuaria",
+                                 sector_code %in% c(48010, 48020, 48030, 48041, 48042, 48050, 48060,
+                                                    48071, 48072, 48073, 48074, 48075, 48076, 48077, 48078,
+                                                    48079, 48080, 48090, 48100) ~ "Comercio, exceto de Veiculos Automotores e Motocicletas"))
