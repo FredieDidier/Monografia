@@ -168,3 +168,130 @@ ed_years_6 = data_2019 %>%
 
 rt = mean(ed_years_6$years_of_study)
 rtt = sd(ed_years_6$years_of_study)
+
+#############################
+
+df = data_2019 %>%
+select(monthly_work_income, years_of_study, age, hours_worked, job_function, worker, signed_work_card) %>%
+  filter(worker == 1 & job_function == 4, signed_work_card == 1) %>%
+  filter(!is.na(signed_work_card)) %>%
+  filter(!is.na(years_of_study)) %>%
+  filter(!is.na(hours_worked)) %>%
+ mutate(i = case_when(job_function == 4 & worker == 1 & signed_work_card == 1 ~ 1,
+                      job_function == 4 & worker == 1 & signed_work_card == 2 ~ 0))
+
+ui = mean(df$i, na.rm = T)
+uui = sd(df$i, na.rm = T)
+uuui = mean(df$monthly_work_income)
+uuuui = sd(df$monthly_work_income)
+fg = mean(df$years_of_study)
+fgg = sd(df$years_of_study)
+ty = mean(df$age)
+tyy = sd(df$age)
+er = mean(df$hours_worked)
+err = sd(df$hours_worked)
+
+
+df = data_2019 %>%
+  select(monthly_work_income, years_of_study, age, hours_worked, job_function, worker, signed_work_card) %>%
+  filter(worker == 1 & job_function == 4, signed_work_card == 2) %>%
+  filter(!is.na(signed_work_card)) %>%
+  filter(!is.na(years_of_study)) %>%
+  filter(!is.na(hours_worked)) %>%
+  mutate(i = case_when(job_function == 4 & worker == 1 & signed_work_card == 2 ~ 1,
+                       job_function == 4 & worker == 1 & signed_work_card == 1 ~ 0))
+
+ui = mean(df$i, na.rm = T)
+uui = sd(df$i, na.rm = T)
+uuui = mean(df$monthly_work_income)
+uuuui = sd(df$monthly_work_income)
+fg = mean(df$years_of_study)
+fgg = sd(df$years_of_study)
+ty = mean(df$age)
+tyy = sd(df$age)
+er = mean(df$hours_worked)
+err = sd(df$hours_worked)
+
+
+df = data_2019 %>%
+  select(monthly_work_income, years_of_study, age, hours_worked, job_function, worker, signed_work_card,
+         social_security_taxpayer) %>%
+  filter(worker == 1 & job_function == 4, signed_work_card == 2 & social_security_taxpayer == 1) %>%
+  filter(!is.na(signed_work_card)) %>%
+  filter(!is.na(years_of_study)) %>%
+  filter(!is.na(hours_worked)) %>%
+  mutate(i = case_when(job_function == 4 & worker == 1 & signed_work_card == 2 ~ 1,
+                       job_function == 4 & worker == 1 & signed_work_card == 1 ~ 0))
+
+ui = mean(df$i, na.rm = T)
+uui = sd(df$i, na.rm = T)
+uuui = mean(df$monthly_work_income)
+uuuui = sd(df$monthly_work_income)
+fg = mean(df$years_of_study)
+fgg = sd(df$years_of_study)
+ty = mean(df$age)
+tyy = sd(df$age)
+er = mean(df$hours_worked)
+err = sd(df$hours_worked)
+
+
+df = data_2019 %>%
+  select(monthly_work_income, years_of_study, age, hours_worked, job_function, worker, signed_work_card,
+         social_security_taxpayer) %>%
+  filter(worker == 1 & job_function == 4, signed_work_card == 2 & social_security_taxpayer == 2) %>%
+  filter(!is.na(signed_work_card)) %>%
+  filter(!is.na(years_of_study)) %>%
+  filter(!is.na(hours_worked)) %>%
+  mutate(i = case_when(job_function == 4 & worker == 1 & signed_work_card == 2 ~ 1,
+                       job_function == 4 & worker == 1 & signed_work_card == 1 ~ 0))
+
+ui = mean(df$i, na.rm = T)
+uui = sd(df$i, na.rm = T)
+uuui = mean(df$monthly_work_income)
+uuuui = sd(df$monthly_work_income)
+fg = mean(df$years_of_study)
+fgg = sd(df$years_of_study)
+ty = mean(df$age)
+tyy = sd(df$age)
+er = mean(df$hours_worked)
+err = sd(df$hours_worked)
+
+
+df = data_2019 %>%
+  select(monthly_work_income, years_of_study, age, hours_worked, job_function, worker,
+         social_security_taxpayer) %>%
+  filter(worker == 1 & job_function == 5 & social_security_taxpayer == 1) %>%
+  filter(!is.na(years_of_study)) %>%
+  filter(!is.na(hours_worked))
+
+ui = mean(df$i, na.rm = T)
+uui = sd(df$i, na.rm = T)
+uuui = mean(df$monthly_work_income, na.rm = T)
+uuuui = sd(df$monthly_work_income, na.rm = T)
+fg = mean(df$years_of_study)
+fgg = sd(df$years_of_study)
+ty = mean(df$age)
+tyy = sd(df$age)
+er = mean(df$hours_worked)
+err = sd(df$hours_worked)
+
+
+df = data_2019 %>%
+  select(monthly_work_income, years_of_study, age, hours_worked, job_function, worker,
+         social_security_taxpayer) %>%
+  filter(worker == 1 & job_function == 5 & social_security_taxpayer == 2) %>%
+  filter(!is.na(years_of_study)) %>%
+  filter(!is.na(hours_worked))
+
+ui = mean(df$i, na.rm = T)
+uui = sd(df$i, na.rm = T)
+uuui = mean(df$monthly_work_income, na.rm = T)
+uuuui = sd(df$monthly_work_income, na.rm = T)
+fg = mean(df$years_of_study)
+fgg = sd(df$years_of_study)
+ty = mean(df$age)
+tyy = sd(df$age)
+er = mean(df$hours_worked)
+err = sd(df$hours_worked)
+#######################
+
