@@ -305,3 +305,16 @@ m = mean(df$age)
 mm = sd(df$age)
 mmm = mean(df$years_of_study)
 mmmm = sd(df$years_of_study)
+
+###############
+
+df = data_2019 %>%
+  mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
+                           race == 1 | race == 3 ~ 0)) %>%
+  mutate(branco = case_when(race == 2 | race == 4 | race == 5 ~ 0,
+                           race == 1 | race == 3 ~ 1))
+
+p = mean(df$negro, na.rm = T)
+pp = sd(df$negro, na.rm = T)
+ppp = mean(df$branco, na.rm = T)
+pppp = sd(df$branco, na.rm = T)
