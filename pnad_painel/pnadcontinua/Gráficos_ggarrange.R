@@ -62,6 +62,11 @@ ggarrange(nueva_grafico, nueva_grafico_2, nueva_grafico_3, nueva_grafico_4,
           common.legend = T,
           legend = "bottom")
 
+######### Gráfico Inativos em 2019
+
+ggarrange(grafico_inat, grafico_inat2, grafico_inat3, grafico_inat4,
+          common.legend = T,
+          legend = "bottom")
 
 ## INFORMAÇÕES IMPORTANTES:
 ## 1. TRABALHADORES COM CART ASS SÃO TRAB DOMÉSTICO, SETOR PRIVADO E SETOR PÚBLICO
