@@ -295,3 +295,13 @@ er = mean(df$hours_worked)
 err = sd(df$hours_worked)
 #######################
 
+
+df = data_2019 %>%
+  filter(workforce_condition == 2) %>%
+  select(workforce_condition, age, years_of_study)%>%
+  filter(!is.na(years_of_study))
+
+m = mean(df$age)
+mm = sd(df$age)
+mmm = mean(df$years_of_study)
+mmmm = sd(df$years_of_study)
