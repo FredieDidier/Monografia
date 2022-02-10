@@ -318,3 +318,111 @@ p = mean(df$negro, na.rm = T)
 pp = sd(df$negro, na.rm = T)
 ppp = mean(df$branco, na.rm = T)
 pppp = sd(df$branco, na.rm = T)
+
+###############
+
+df = data_2019 %>%
+  mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
+                           race == 1 | race == 3 ~ 0)) %>%
+  filter(worker == 1, signed_work_card == 1, negro == 1) %>%
+  select(monthly_work_income, age, hours_worked, worker, social_security_taxpayer,
+         signed_work_card, negro, years_of_study)
+
+h = mean(df$monthly_work_income)
+hh = sd(df$monthly_work_income)
+hhh = mean(df$years_of_study)
+hhhh = sd(df$years_of_study)
+hhhhh = mean(df$age)
+hhhhhh = sd(df$age)
+s = mean(df$hours_worked)
+ss = sd(df$hours_worked)
+
+
+df = data_2019 %>%
+  mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
+                           race == 1 | race == 3 ~ 0)) %>%
+  filter(worker == 1, signed_work_card == 1, negro == 0) %>%
+  select(monthly_work_income, age, hours_worked, worker, social_security_taxpayer,
+         signed_work_card, negro, years_of_study)
+
+h = mean(df$monthly_work_income)
+hh = sd(df$monthly_work_income)
+hhh = mean(df$years_of_study)
+hhhh = sd(df$years_of_study)
+hhhhh = mean(df$age)
+hhhhhh = sd(df$age)
+s = mean(df$hours_worked)
+ss = sd(df$hours_worked)
+
+
+##############
+
+df = data_2019 %>%
+  select(worker, job_function, social_security_taxpayer,
+         signed_work_card) %>%
+  filter(worker == 1 & job_function == 4) %>%
+  mutate(reg_pub_sec = case_when(job_function == 4 & worker == 1 &
+                                   signed_work_card == 1 ~ 1,
+                                 job_function == 4 & worker == 1 &
+                                   signed_work_card == 2 ~ 0)) %>%
+  mutate(no_reg_pub_sec = case_when(job_function == 4 & worker == 1 &
+                                   signed_work_card == 1 ~ 0,
+                                 job_function == 4 & worker == 1 &
+                                   signed_work_card == 2 ~ 1)) %>%
+  mutate(inss_pub_sec = case_when(job_function == 4 & worker == 1 &
+                                   social_security_taxpayer == 1 ~ 1,
+                                 job_function == 4 & worker == 1 &
+                                   social_security_taxpayer == 2 ~ 0)) %>%
+  mutate(no_inss_pub_sec = case_when(job_function == 4 & worker == 1 &
+                                    social_security_taxpayer == 1 ~ 0,
+                                  job_function == 4 & worker == 1 &
+                                    social_security_taxpayer == 2 ~ 1))
+m = mean(df$reg_pub_sec, na.rm = T)
+mm = sd(df$reg_pub_sec, na.rm = T)
+mmm = mean(df$no_reg_pub_sec, na.rm = T)
+mmmm = sd(df$no_reg_pub_sec, na.rm = T)
+a = mean(df$inss_pub_sec, na.rm = T)
+aa = sd(df$inss_pub_sec, na.rm = T)
+
+########
+df = data_2019 %>%
+  select(worker, job_function, social_security_taxpayer,
+         signed_work_card) %>%
+  filter(worker == 1 & job_function == 5) %>%
+  mutate(inss_empl = case_when(job_function == 5 & worker == 1 &
+                                    social_security_taxpayer == 1 ~ 1,
+                                  job_function == 5 & worker == 1 &
+                                    social_security_taxpayer == 2 ~ 0)) %>%
+  mutate(no_inss_empl = case_when(job_function == 5 & worker == 1 &
+                                       social_security_taxpayer == 1 ~ 0,
+                                     job_function == 5 & worker == 1 &
+                                       social_security_taxpayer == 2 ~ 1))
+
+r = mean(df$inss_empl)
+rr = sd(df$inss_empl)
+
+#########
+df = data_2019 %>%
+  mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
+                           race == 1 | race == 3 ~ 0)) %>%
+  mutate(negro_work = case_when(negro == 1 & worker == 1 ~ 1,
+                                negro == 1 & worker == 2 & workforce_condition == 1 ~ 0)) %>%
+  mutate(negro_no_work = case_when(negro == 1 & worker == 1 ~ 0,
+                                negro == 1 & worker == 2 & workforce_condition == 1 ~ 1)) %>%
+  mutate(white_work = case_when(negro == 0 & worker == 1 ~ 1,
+                                negro == 0 & worker == 2 & workforce_condition == 1 ~ 0)) %>%
+  mutate(white_no_work = case_when(negro == 0 & worker == 1 ~ 0,
+                                negro == 0 & worker == 2 & workforce_condition == 1 ~ 1)) %>%
+  select(white_work, white_no_work,negro,negro_work, negro_no_work, worker, workforce_condition)
+  
+
+
+mi = mean(df$negro_no_work, na.rm = T)
+mii = sd(df$negro_no_work, na.rm = T)
+miii = mean(df$negro_work, na.rm = T)
+miiii = sd(df$negro_work, na.rm = T)
+
+t = mean(df$white_work, na.rm = T)
+tt = sd(df$white_work, na.rm = T)
+ttt = mean(df$white_no_work, na.rm = T)
+ttt = sd(df$white_no_work, na.rm = T)
