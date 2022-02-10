@@ -25,11 +25,12 @@ trab_carteira_ass = data %>%
             higher_educ_level %in% c(6) ~ "College Degree Incompleted",
             higher_educ_level %in% c(7) ~ "College Degree Completed")) 
 
- graf.1 = ggplot(trab_carteira_ass, aes(x = year_quarter, y = signed_work_card,
+ graf.1 = ggplot(trab_carteira_ass, aes(x = "", y = signed_work_card,
     fill = factor(higher_educ_label))) +
   geom_bar(stat = "identity") +
    scale_fill_manual(name = "Education Level", 
                      values = carto_pal(name = "Geyser")) +
+   scale_y_continuous(labels = scales::comma) +
    labs(x =  "Quarter", y = "Signed Contract Workers",
         title = "Education Level of Registered Employees in 2019") +
    theme_minimal() +
@@ -66,8 +67,8 @@ trab_carteira_ass = data %>%
  #### Fazendo Gráfico de Desempregados #####
  
  desempregados = data_2019 %>%
-   filter(!is.na(workforce), !is.na(no_occupation)) %>%
-   select(workforce, no_occupation, higher_educ_level, year_quarter) %>%
+   filter(workforce_condition == 1, occupation_condition == 2 & worker == 2) %>%
+   select(workforce_condition, occupation_condition, worker, higher_educ_level, year_quarter) %>%
    mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
                                         higher_educ_level %in% c(2) ~ "Primary School Incompleted",
                                         higher_educ_level %in% c(3) ~ "Primary School Completed",
@@ -75,7 +76,7 @@ trab_carteira_ass = data %>%
                                         higher_educ_level %in% c(5) ~ "High School Completed",
                                         higher_educ_level %in% c(6) ~ "College Degree Incompleted",
                                         higher_educ_level %in% c(7) ~ "College Degree Completed")) %>%
-   mutate(total = 118185/1048715)
+   mutate(total = worker)
  
  desemp = ggplot(desempregados, aes(x = year_quarter, y = total,
                fill = factor(higher_educ_label))) +
