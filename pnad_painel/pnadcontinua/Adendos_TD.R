@@ -406,14 +406,14 @@ df = data_2019 %>%
   mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
                            race == 1 | race == 3 ~ 0)) %>%
   mutate(negro_work = case_when(negro == 1 & worker == 1 ~ 1,
-                                negro == 1 & worker == 2 & workforce_condition == 1 ~ 0)) %>%
+                                negro == 1 & worker == 2 & workforce_condition == 1 & occupation_condition == 2 ~ 0)) %>%
   mutate(negro_no_work = case_when(negro == 1 & worker == 1 ~ 0,
-                                negro == 1 & worker == 2 & workforce_condition == 1 ~ 1)) %>%
+                                negro == 1 & worker == 2 & workforce_condition == 1 & occupation_condition == 2 ~ 1)) %>%
   mutate(white_work = case_when(negro == 0 & worker == 1 ~ 1,
-                                negro == 0 & worker == 2 & workforce_condition == 1 ~ 0)) %>%
+                                negro == 0 & worker == 2 & workforce_condition == 1 & occupation_condition == 2 ~ 0)) %>%
   mutate(white_no_work = case_when(negro == 0 & worker == 1 ~ 0,
-                                negro == 0 & worker == 2 & workforce_condition == 1 ~ 1)) %>%
-  select(white_work, white_no_work,negro,negro_work, negro_no_work, worker, workforce_condition)
+                                negro == 0 & worker == 2 & workforce_condition == 1 & occupation_condition == 2 ~ 1)) %>%
+  select(occupation_condition, white_work, white_no_work,negro,negro_work, negro_no_work, worker, workforce_condition)
   
 
 
@@ -425,4 +425,4 @@ miiii = sd(df$negro_work, na.rm = T)
 t = mean(df$white_work, na.rm = T)
 tt = sd(df$white_work, na.rm = T)
 ttt = mean(df$white_no_work, na.rm = T)
-ttt = sd(df$white_no_work, na.rm = T)
+tttt = sd(df$white_no_work, na.rm = T)
