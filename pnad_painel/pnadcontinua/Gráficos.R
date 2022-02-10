@@ -1550,3 +1550,45 @@ serv_n_inss_2 = data %>%
               show.legend = F)+
    coord_polar("y") 
  
+ 
+ ###############
+ #### Talvez Utilize
+ sal_ocup = data_2019 %>%
+   filter(worker == 1) %>%
+   select(worker, monthly_work_income, job_function, higher_educ_level,
+          year_quarter) %>%
+   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
+                                        higher_educ_level %in% c(2) ~ "Primary School Incompleted",
+                                        higher_educ_level %in% c(3) ~ "Primary School Completed",
+                                        higher_educ_level %in% c(4) ~ "High School Incompleted",
+                                        higher_educ_level %in% c(5) ~ "High School Completed",
+                                        higher_educ_level %in% c(6) ~ "College Degree Incompleted",
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed"))  %>%
+   group_by(higher_educ_level) %>% mutate(labels = n()) %>%
+   mutate(labell = round(labels/nrow(.), digits = 2))
+ 
+ sal_ocup$labell = sal_ocup$labell * 100
+ 
+ base_sal = sal_ocup %>%
+   select(year_quarter, higher_educ_label, labell, worker) %>%
+   distinct()
+
+ grafico_sal = ggplot(base_sal, aes(x = year_quarter, y = labell,
+                                        fill = higher_educ_label)) +
+   geom_bar(stat = "identity")+
+   scale_fill_manual(name = "Education Level",
+                     values = carto_pal(name = "Bold")) +
+   labs(x = "Quarter", y = "Occupations",
+        title = "Education Level of Different Occupations in 2019") +
+   theme_minimal() +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank(),
+         axis.text = element_blank()) +
+   geom_label(aes(x = 1.4, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
+              show.legend = F)+
+   coord_polar("y") 
+ 
+ 
+ 
+ 
