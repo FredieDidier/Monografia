@@ -324,12 +324,12 @@ pppp = sd(df$branco, na.rm = T)
 df = data_2019 %>%
   mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
                            race == 1 | race == 3 ~ 0)) %>%
-  filter(worker == 1, signed_work_card == 1, negro == 1) %>%
+  filter(worker == 1, negro == 1) %>%
   select(monthly_work_income, age, hours_worked, worker, social_security_taxpayer,
          signed_work_card, negro, years_of_study)
 
-h = mean(df$monthly_work_income)
-hh = sd(df$monthly_work_income)
+h = mean(df$monthly_work_income, na.rm = T)
+hh = sd(df$monthly_work_income, na.rm = T)
 hhh = mean(df$years_of_study)
 hhhh = sd(df$years_of_study)
 hhhhh = mean(df$age)
@@ -341,12 +341,12 @@ ss = sd(df$hours_worked)
 df = data_2019 %>%
   mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
                            race == 1 | race == 3 ~ 0)) %>%
-  filter(worker == 1, signed_work_card == 1, negro == 0) %>%
+  filter(worker == 1, negro == 0) %>%
   select(monthly_work_income, age, hours_worked, worker, social_security_taxpayer,
          signed_work_card, negro, years_of_study)
 
-h = mean(df$monthly_work_income)
-hh = sd(df$monthly_work_income)
+h = mean(df$monthly_work_income, na.rm = T)
+hh = sd(df$monthly_work_income, na.rm = T)
 hhh = mean(df$years_of_study)
 hhhh = sd(df$years_of_study)
 hhhhh = mean(df$age)
@@ -413,7 +413,17 @@ df = data_2019 %>%
                                 negro == 0 & worker == 2 & workforce_condition == 1 & occupation_condition == 2 ~ 0)) %>%
   mutate(white_no_work = case_when(negro == 0 & worker == 1 ~ 0,
                                 negro == 0 & worker == 2 & workforce_condition == 1 & occupation_condition == 2 ~ 1)) %>%
-  select(occupation_condition, white_work, white_no_work,negro,negro_work, negro_no_work, worker, workforce_condition)
+  mutate(mulher_work = case_when(gender == 2 & worker == 1 ~ 1,
+                                 gender == 2 & worker == 2 & workforce_condition == 1 & occupation_condition == 2 ~ 0)) %>%
+  mutate(mulher_no_work = case_when(gender == 2 & worker == 1 ~ 0,
+                                 gender == 2 & worker == 2 & workforce_condition == 1 & occupation_condition == 2 ~ 1)) %>%
+  mutate(homem_work = case_when(gender == 1 & worker == 1 ~ 1,
+                                 gender == 1 & worker == 2 & workforce_condition == 1 & occupation_condition == 2 ~ 0)) %>%
+  mutate(homem_no_work = case_when(gender == 1 & worker == 1 ~ 0,
+                                    gender == 1 & worker == 2 & workforce_condition == 1 & occupation_condition == 2 ~ 1)) %>%
+  select(gender,occupation_condition, white_work, white_no_work,negro,
+         negro_work, negro_no_work, worker, workforce_condition, mulher_no_work,
+         mulher_work, homem_work, homem_no_work)
   
 
 
@@ -426,3 +436,43 @@ t = mean(df$white_work, na.rm = T)
 tt = sd(df$white_work, na.rm = T)
 ttt = mean(df$white_no_work, na.rm = T)
 tttt = sd(df$white_no_work, na.rm = T)
+
+g = mean(df$mulher_work, na.rm = T)
+gg = sd(df$mulher_work, na.rm = T)
+ggg = mean(df$mulher_no_work, na.rm = T)
+
+d = mean(df$homem_work, na.rm = T)
+dd = sd(df$homem_work, na.rm = T)
+ddd = mean(df$homem_no_work, na.rm = T)
+
+
+###################
+
+df = data_2019 %>%
+  filter(worker == 1, gender == 2) %>%
+  select(monthly_work_income, age, hours_worked, worker, social_security_taxpayer,
+         signed_work_card, gender, years_of_study)
+
+h = mean(df$monthly_work_income, na.rm = T)
+hh = sd(df$monthly_work_income, na.rm = T)
+hhh = mean(df$years_of_study)
+hhhh = sd(df$years_of_study)
+hhhhh = mean(df$age)
+hhhhhh = sd(df$age)
+s = mean(df$hours_worked)
+ss = sd(df$hours_worked)
+
+
+df = data_2019 %>%
+  filter(worker == 1, gender == 1) %>%
+  select(monthly_work_income, age, hours_worked, worker, social_security_taxpayer,
+         signed_work_card, gender, years_of_study)
+
+h = mean(df$monthly_work_income, na.rm = T)
+hh = sd(df$monthly_work_income, na.rm = T)
+hhh = mean(df$years_of_study)
+hhhh = sd(df$years_of_study)
+hhhhh = mean(df$age)
+hhhhhh = sd(df$age)
+s = mean(df$hours_worked)
+ss = sd(df$hours_worked)
