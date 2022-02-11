@@ -721,7 +721,7 @@ desempregados = desempregados %>%
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Antique")) +
    labs(x = "", y = "",
-        title = "Education Level and Average Monthly Labor Earnings in 2019") +
+        title = "Average Monthly Labor Earnings by Education Level in 2019") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
