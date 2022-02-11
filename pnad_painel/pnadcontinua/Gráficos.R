@@ -699,7 +699,7 @@ desempregados = desempregados %>%
  sal_ocup$labell = sal_ocup$labell * 100
  
  sal_ocup = sal_ocup %>%
-   select(year_quarter, higher_educ_label, monthly_work_income, labell) %>%
+   select(year_quarter, higher_educ_label, monthly_work_income, higher_educ_level, labell) %>%
    mutate(media = mean(monthly_work_income, na.rm = T)) %>%
    mutate(media = round(media, digits = 2)) %>%
    distinct() %>%
@@ -711,26 +711,81 @@ desempregados = desempregados %>%
                               higher_educ_label == "College Degree Incompleted" & year_quarter == "2019_1" ~ 2076.44,
                               higher_educ_label == "College Degree Completed" & year_quarter == "2019_1" ~ 4421.48)) %>%
    filter(!is.na(labelll)) %>%
-   select(higher_educ_label, labelll) %>%
+   select(higher_educ_level, higher_educ_label, labelll) %>%
    distinct()
  
 
- grafico_sal = ggplot(sal_ocup, aes(x = "", y = labelll,
+ grafico_sal = ggplot(sal_ocup, aes(x = higher_educ_level, y = labelll,
                                         fill = higher_educ_label)) +
    geom_bar(stat = "identity")+
    scale_fill_manual(name = "Education Level",
-                     values = carto_pal(name = "Antique")) +
+                     values = carto_pal(name = "Vivid")) +
    labs(x = "", y = "",
         title = "Average Monthly Labor Earnings by Education Level in 2019") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
-         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         plot.title = element_text(size = 15, face = "bold", hjust = 0.5),
          legend.title = element_blank(),
          axis.text = element_blank()) +
-   geom_label(aes(x = 1.2 ,label = paste("R$",labelll)), position = position_stack(vjust = 0.5),
-              show.legend = F)+
-   coord_polar("y") 
+   geom_label(aes(label = paste("R$",labelll)), position = position_dodge(width = 0.9), vjust = -0.25,
+              show.legend = F)
+
  
+ #####
+ 
+ sal_ocupacoes = data_2019 %>%
+   filter(worker == 1) %>%
+   select(worker, monthly_work_income, job_function, higher_educ_level,
+          year_quarter) %>%
+   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
+                                        higher_educ_level %in% c(2) ~ "Primary School Incompleted",
+                                        higher_educ_level %in% c(3) ~ "Primary School Completed",
+                                        higher_educ_level %in% c(4) ~ "High School Incompleted",
+                                        higher_educ_level %in% c(5) ~ "High School Completed",
+                                        higher_educ_level %in% c(6) ~ "College Degree Incompleted",
+                                        higher_educ_level %in% c(7) ~ "College Degree Completed"))  %>%
+   group_by(higher_educ_level) %>% mutate(labels = n()) %>%
+   mutate(labell = round(labels/nrow(.), digits = 2))
+ 
+ sal_ocupacoes$labell = sal_ocupacoes$labell * 100
+ 
+ sal_ocupacoes = sal_ocupacoes %>%
+   select(year_quarter, job_function, higher_educ_label, monthly_work_income, labell) %>%
+   group_by(job_function) %>% mutate(labelss = n())%>%
+   mutate(media = mean(monthly_work_income, na.rm = T)) %>%
+   mutate(media = round(media, digits = 2)) %>%
+   mutate(position = case_when(job_function %in% c(1) ~ "Domestic",
+                               job_function %in% c(2) ~ "Military",
+                               job_function %in% c(3) ~ "Private Sector",
+                               job_function %in% c(4) ~ "Public Sector",
+                               job_function %in% c(5) ~ "Employers",
+                               job_function %in% c(6) ~ "Self-Employed")) %>%
+   mutate(position_money = case_when(position == "Domestic" ~ 876.26,
+                                     position == "Military" ~ 5017.31,
+                                     position == "Private Sector" ~ 1777.25,
+                                     position == "Public Sector" ~ 3329.98,
+                                     position == "Employers" ~ 5165.38,
+                                     position == "Self-Employed" ~ 1543.77))
+ 
+ sal_ocupacoes = sal_ocupacoes %>%
+   select(position, position_money) %>%
+   distinct()
+ 
+ 
+ grafico_sal_ocupacoes = ggplot(sal_ocupacoes, aes(x = job_function, y = position_money,
+                                                   fill = position)) +
+   geom_bar(stat = "identity")+
+   scale_fill_manual(name = "Education Level",
+                     values = carto_pal(name = "Pastel")) +
+   labs(x = "", y = "",
+        title = "Average Monthly Labor Earnings by Job Occupation in 2019") +
+   theme_minimal() +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 15, face = "bold", hjust = 0.5),
+         legend.title = element_blank(),
+         axis.text = element_blank()) +
+   geom_label(aes(label = paste("R$",position_money)), position = position_dodge(width = 0.9), vjust = -0.25
+              ,show.legend = F)
  
  
  
