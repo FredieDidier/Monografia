@@ -92,7 +92,7 @@ inf1 = ggplot(trab_sem_carteira_ass, aes(x = "", y = labelll,
   scale_fill_manual(name = "Education Level",
                     values = carto_pal(name = "Safe")) +
   labs(x = "", y = "",
-       title = "Education Level of Non-Registered Workers in 2019") +
+       title = "Education Level of Non-Registered Employees in 2019") +
   theme_minimal() +
   theme(text = element_text(family = "LM Roman 10"),
         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
@@ -186,7 +186,7 @@ desempregados = desempregados %>%
                      values = carto_pal(name = "Safe")) +
    scale_y_continuous(labels = scales::comma) +
    labs(x = "", y = "",
-        title = "Education Level of Non-Social Security Taxpayers Workers in 2019") +
+        title = "Education Level of Non-Social Security Taxpayers Employees in 2019") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
@@ -233,7 +233,7 @@ desempregados = desempregados %>%
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Geyser")) +
    labs(x = "", y = "",
-        title = "Education Level of Social Security Taxpayers in 2019") +
+        title = "Education Level of Social Security Taxpayers Employees in 2019") +
    theme_minimal()+
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
@@ -571,7 +571,7 @@ desempregados = desempregados %>%
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Earth")) +
    labs(x = "", y = "",
-        title = "Education Level of Employers Social Security Taxpayers in 2019.") +
+        title = "Education Level of Employers Social Security Taxpayers in 2019") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
