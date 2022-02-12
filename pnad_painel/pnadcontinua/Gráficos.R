@@ -282,7 +282,7 @@ desempregados = desempregados %>%
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Temps")) +
    labs(x = "", y = "",
-        title = "Education Level of Social Security Contributors in 2019") +
+        title = "Education Level of Self-Employed Social Security Contributors in 2019") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
@@ -329,7 +329,7 @@ desempregados = desempregados %>%
    scale_fill_manual(name = "Education Level",
                      values = carto_pal(name = "Temps")) +
    labs(x = "", y = "",
-        title = "Education Level of Non-Social Security Contributors in 2019") +
+        title = "Education Level of Self-Employed Non-Social Security Contributors in 2019") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
