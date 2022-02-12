@@ -727,7 +727,7 @@ desempregados = desempregados %>%
          plot.title = element_text(size = 15, face = "bold", hjust = 0.5),
          legend.title = element_blank(),
          axis.text = element_blank()) +
-   geom_label(aes(label = paste("R$",labelll)), position = position_dodge(width = 0.9), vjust = -0.25,
+   geom_label(aes(label = paste0("R$",labelll)), position = position_dodge(width = 0.9), vjust = -0.25,
               show.legend = F)
 
  
@@ -784,7 +784,7 @@ desempregados = desempregados %>%
          plot.title = element_text(size = 15, face = "bold", hjust = 0.5),
          legend.title = element_blank(),
          axis.text = element_blank()) +
-   geom_label(aes(label = paste("R$",position_money)), position = position_dodge(width = 0.9), vjust = -0.25
+   geom_label(aes(label = paste0("R$",position_money)), position = position_dodge(width = 0.9), vjust = -0.25
               ,show.legend = F)
  
  
