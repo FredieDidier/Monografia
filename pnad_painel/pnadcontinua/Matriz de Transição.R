@@ -31,8 +31,38 @@ funcao = function(df, initial_quarter, final_quarter, initial_position,
   final_number/initial_number
 }
 
-funcao(df, "2019_3", "2019_4", 7, 7)
+ funcao(df, "2019_3", "2019_4", 7, 6)
 
+
+####
+
+cria_matriz_transicao = function(initial_quarter, final_quarter){
+  
+  matriz = matrix(nrow = 7, ncol = 7)
+  
+  for(i in 1:7){
+  for(j in 1:7){
+    
+  matriz[i,j] = funcao(df = df,initial_quarter = initial_quarter,
+                       final_quarter = final_quarter, initial_position = i,
+                       final_position = j)
+  matriz
+  
+  }
+  }
+}
+ 
+matriz1 = cria_matriz_transicao("2019_1", "2019_2")
+
+
+######### Linhas/Colunas da Matriz ####
+# Linha 1: 63%, 5,4%, 1,8%, 1,3%, 2,3%, 0,1%, 0,07%
+# Linha 2: 18%, 31%, 7,5%, 5,3%, 8%, 0,4%, 1,2%
+# Linha 3: 7%, 7,5%, 42%, 7%, 6,3%, 0,63%, 1,5%
+# Linha 4: 2%, 3,2%, 3%, 61%, 1,2%, 0,3%, 1%
+# Linha 5: 7,3%, 6,2%, 4,8%, 1,6%, 52%, 2,2%, 0,1%
+# Linha 6: 2,2%, 2%, 2,8%, 2,2%, 14%, 50%, 0,2%
+# Linha 7: 1,2%, 2,7%, 3,8%, 4,5%, 0,4%, 0,12%, 61%   
 
 ################
 ### Diagonais da Matriz ####
