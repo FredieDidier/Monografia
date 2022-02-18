@@ -11,8 +11,12 @@ df = data_2019 %>%
                          worker == 1 & job_function == 6 ~ 5,
                          worker == 1 & job_function == 5 ~ 6,
                          worker == 1 & job_function == 4 ~ 7)) %>%
+  filter(!is.na(position)) %>%
+  group_by(id_code) %>%
+  mutate(new_id = n()) %>%
+  filter(new_id == 4) %>%
   select(id_code, year_quarter, workforce_condition, worker, signed_work_card,
-         job_function, occupation_condition, position, id)
+         job_function, occupation_condition, position, id, new_id)
 
 funcao = function(df, initial_quarter, final_quarter, initial_position,
                   final_position){
