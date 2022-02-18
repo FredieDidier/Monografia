@@ -1,6 +1,9 @@
 
 
 df = data_2019 %>%
+  group_by(id_code) %>%
+  mutate(id = n()) %>%
+  filter(id == 4) %>%
   mutate(position = case_when(workforce_condition == 2 ~ 1,
                          worker == 2 & occupation_condition == 2 & workforce_condition == 1 ~ 2,
                          worker == 1 & signed_work_card == 2 ~ 3,
@@ -9,7 +12,7 @@ df = data_2019 %>%
                          worker == 1 & job_function == 5 ~ 6,
                          worker == 1 & job_function == 4 ~ 7)) %>%
   select(id_code, year_quarter, workforce_condition, worker, signed_work_card,
-         job_function, occupation_condition, position)
+         job_function, occupation_condition, position, id)
 
 funcao = function(df, initial_quarter, final_quarter, initial_position,
                   final_position){
@@ -35,7 +38,7 @@ funcao = function(df, initial_quarter, final_quarter, initial_position,
 
 ####
 
-cria_matriz_transicao = function(initial_quarter, final_quarter){
+cria_matriz_transicao = function(df, initial_quarter, final_quarter){
   
   matriz = matrix(nrow = 7, ncol = 7)
   
