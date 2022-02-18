@@ -21,20 +21,24 @@ funcao = function(df, initial_quarter, final_quarter, initial_position,
     filter(year_quarter == initial_quarter &
              position == initial_position)
   
+  
   initial_number = nrow(df_aux)
   
   initial_list = df_aux$id_code
   
   df_2 = df %>%
     filter(year_quarter == final_quarter &
-             position == final_position & id_code %in% initial_list)
+             position == final_position)
+  
+  df_2 = df_2 %>%
+    filter(id_code %in% initial_list)
   
   final_number = nrow(df_2)
   
   final_number/initial_number
 }
 
- funcao(df, "2019_3", "2019_4", 7, 2)
+ funcao(df, "2019_3", "2019_4", 1, 1)
 
 ####
 
