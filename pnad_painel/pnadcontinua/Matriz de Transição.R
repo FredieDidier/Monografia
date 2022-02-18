@@ -42,7 +42,7 @@ funcao = function(df, initial_quarter, final_quarter, initial_position,
   final_number/initial_number
 }
 
- funcao(df, "2019_3", "2019_4", 1, 1)
+ funcao(df, "2019_3", "2019_4", 4, 5)
 
 ####
 
