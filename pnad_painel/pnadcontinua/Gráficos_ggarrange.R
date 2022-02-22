@@ -8,13 +8,8 @@ ggarrange(graf_1, grafico1,
           legend = "bottom")
 
 ########################################################
-#### Gráfico Trabalhadores Formais em 2019 ######
-ggarrange(graf.1, graf.2,
-          common.legend = T,
-          legend = "bottom")
-########################################################################
-###### Trabalhadores Informais em 2019 ######
-ggarrange(inf1, inf2,
+#### Gráfico Setor Privado Formal e Informal em 2019 ######
+ggarrange(priv_graf, priv_inf_graf,
           common.legend = T,
           legend = "bottom")
 
@@ -28,13 +23,8 @@ ggarrange(n_grafico, nov_grafico,
          common.legend = T,
          legend = "bottom")
 
-############ Gráfico Servidores Públicos Contribuintes/Não Contribuintes em 2019
 
-ggarrange(novo_grafico, new_grafico,
-          common.legend = T,
-          legend = "bottom")
-
-################# Gráfico Empregadores Contribuintes/Não Contribuintes em 2019
+################# Gráfico Empregadores Formal/Informal em 2019
 
 ggarrange(nuevo_grafico, nueva_grafico,
           common.legend = T,
