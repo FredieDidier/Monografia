@@ -52,7 +52,7 @@ clean_painel = function(df){
            work_position = VD4007,
            work_category = VD4009,
            social_security_taxpayer_ref_week = VD4012,
-           monthly_work_income = V403312,
+           monthly_work_income = VD4017,
            household_location = V1022)
 }
 

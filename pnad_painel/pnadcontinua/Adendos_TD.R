@@ -1,18 +1,42 @@
 
-## Checando número de mulheres
+## Checando número de pessoas na força de trabalho e inativos
 
 dat = data_2019 %>%
-  filter(gender == 2) %>%
-  select(id_code, gender, weights) 
+  mutate(laborforce = case_when(workforce_condition == 1 ~ 1,
+                                workforce_condition == 2 ~ 0)) %>%
+  mutate(inactive = case_when(workforce_condition == 2 ~ 1,
+                              workforce_condition == 1 ~ 0)) %>%
+  filter(year_quarter == "2019_4") %>%
+  mutate(peso_l = laborforce * weights, peso_i = inactive * weights)  %>%
+  filter(!is.na(peso_l)) %>%
+  filter(!is.na(peso_i)) %>%
+  summarise(across(c(peso_l, peso_i), sum))
+
+
+## Checando número de mulheres e homens
+
+dat = data_2019 %>%
+  mutate(male = case_when(gender == 1 ~ 1,
+                          gender == 2 ~ 0)) %>%
+  mutate(female = case_when(gender == 1 ~ 0,
+                            gender == 2 ~ 1)) %>%
+  filter(year_quarter == "2019_4") %>%
+  mutate(peso_m = male * weights, peso_f = female * weights) %>%
+  summarise(across(c(peso_m, peso_f), sum))
 #########################################
 
-## Checando número de negros
+## Checando número de negros e brancos
 
 dat = data_2019 %>%
   mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
                            race == 1 | race == 3 ~ 0)) %>%
-  filter(negro == 1) %>%
-  select(negro)
+  mutate(branco = case_when(race == 2 | race == 4 | race == 5 ~ 0,
+                            race == 1 | race == 3 ~ 1)) %>%
+  filter(year_quarter == "2019_4") %>%
+  mutate(peso_n = negro * weights, peso_b = branco * weights) %>%
+  filter(!is.na(peso_n)) %>%
+  filter(!is.na(peso_b)) %>%
+  summarise(across(c(peso_n, peso_b), sum))
 #########################
 
 ## Descobrindo o número de trabalhadores formais pela ocupação
