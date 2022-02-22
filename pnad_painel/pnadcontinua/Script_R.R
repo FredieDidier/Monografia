@@ -13,7 +13,7 @@ clean_painel = function(df){
     select(idind, Ano, Trimestre,
            UF, UPA, V1022, V1028, V2007, V2009, V1022,
            V1023, V2010, V3003A, V3009A,
-           V4001, V4009, V4012, V40121, V4014,
+           V4009, V4012, V4014, V4019,
            V4001, V4028, V4029,
            V4032, V403312, V4034, V4040, V4013,
            V4071, V4076, VD2003, 
@@ -31,10 +31,9 @@ clean_painel = function(df){
            educ_level = V3003A, 
            higher_educ_course_attended = V3009A,
            sector_code = V4013,
-           worked_on_the_week = V4001,
            number_of_jobs = V4009,
+           cnpj = V4019,
            job_function = V4012,
-           unpaid_worker = V40121,
            job_area = V4014,
            worker = V4001,
            public_server = V4028,
@@ -136,66 +135,3 @@ reg = lm_robust(unemployed ~ negro + as.factor(gender) +
                 data = merge, weights = weights)
 
 
-## Criando 2ª variável dependente - Trabalhador que contribui para o INSS
-
-inss = data %>%
-  pivot_wider(id_cols = c(id_code),
-              names_from = year_quarter,
-              values_from = social_security_taxpayer)
-
-inss_payer = inss %>%
-  filter(`2020_1` == 1)
-
-variables_1 = data %>%
-  select(id_code, race, gender, higher_educ_level, weights,
-         job_start, social_security_taxpayer, year_quarter, worker,
-         household_location, job_function, sector_code) %>%
-  filter(!job_function == 7 & !job_function == 2)
-
-merge_1 = left_join(inss_payer, variables_1)
-
-merge_1 = merge_1%>%
-  mutate(unemployed = case_when(social_security_taxpayer == 1 ~ 0,
-                                social_security_taxpayer == 2 | worker == 2 ~ 1)) %>%
-  filter(year_quarter %in% c("2020_1", "2020_2", "2020_3", "2020_4")) %>%
-  mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
-                           race == 1 | race == 3 ~ 0))
-
-reg_1 = lm_robust(unemployed ~ negro + as.factor(gender) +
-                  as.factor(higher_educ_level) +
-                  as.factor(job_start) + as.factor(year_quarter) +
-                    as.factor(household_location) + as.factor(job_function) +
-                    as.factor(sector_code),
-                data = merge_1, weights = weights)
-
-
-## Criando 3ª Variável Dependente - Trabalhador com carteira assinada
-
-card = data %>%
-  pivot_wider(id_cols = c(id_code),
-              names_from = year_quarter,
-              values_from = signed_work_card)
-
-card_holder = card %>%
-  filter(`2020_1` == 1)
-
-variables_2 = data %>%
-  select(id_code, race, gender, higher_educ_level, weights,
-         job_start, signed_work_card, year_quarter, worker,
-         household_location, job_function, sector_code)
-
-merge_2 = left_join(card_holder, variables_2)
-
-merge_2 = merge_2%>%
-  mutate(unemployed = case_when(signed_work_card == 1 ~ 0,
-                                signed_work_card == 2 | worker == 2 ~ 1)) %>%
-  filter(year_quarter %in% c("2020_1", "2020_2", "2020_3", "2020_4")) %>%
-  mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
-                           race == 1 | race == 3 ~ 0))
-
-reg_2 = lm_robust(unemployed ~ negro + as.factor(gender) +
-                    as.factor(higher_educ_level) +
-                    as.factor(job_start) + as.factor(year_quarter) +
-                    as.factor(household_location) + as.factor(job_function) +
-                    as.factor(sector_code),
-                  data = merge_2, weights = weights)
