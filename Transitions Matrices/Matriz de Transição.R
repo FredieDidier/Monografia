@@ -1,4 +1,4 @@
-### Matriz de Transição Geral ###
+### Matriz de Transi??o Geral ###
 
 df = data_2019 %>%
   group_by(id_code) %>%
@@ -72,7 +72,7 @@ matriz3 = cria_matriz_transicao(df, "2019_3", "2019_4")
 matriz_final = (matriz1 + matriz2 + matriz3)/3
 
 
-# Matriz de Transição por Educação (Sem educ e fund incompleto)
+# Matriz de Transi??o por Educa??o (Sem educ e fund incompleto)
 
 df = data_2019 %>%
   group_by(id_code) %>%
@@ -108,7 +108,7 @@ matriz_final2 = (matriz4 + matriz5 + matriz6)/3
 
 
 
-# Matriz de Transição por Educação (fund completo e ensino médio incompleto)
+# Matriz de Transi??o por Educa??o (fund completo e ensino m?dio incompleto)
 
 df = data_2019 %>%
   group_by(id_code) %>%
@@ -143,7 +143,7 @@ matriz9 = cria_matriz_transicao(df, "2019_3", "2019_4")
 matriz_final3 = (matriz7 + matriz8 + matriz9)/3
 
 
-# Matriz de transição por educação (ensino médio completo e superior incompleto)
+# Matriz de transi??o por educa??o (ensino m?dio completo e superior incompleto)
 
 df = data_2019 %>%
   group_by(id_code) %>%
@@ -178,7 +178,7 @@ matriz12 = cria_matriz_transicao(df, "2019_3", "2019_4")
 matriz_final4 = (matriz10 + matriz11 + matriz12)/3
 
 
-# Matriz de transição por educação (Superior completo e mais)
+# Matriz de transi??o por educa??o (Superior completo e mais)
 
 df = data_2019 %>%
   group_by(id_code) %>%
@@ -210,4 +210,4 @@ df = data_2019 %>%
 matriz13 = cria_matriz_transicao(df, "2019_1", "2019_2")
 matriz14 = cria_matriz_transicao(df, "2019_2", "2019_3")
 matriz15 = cria_matriz_transicao(df, "2019_3", "2019_4")
-matriz_final4 = (matriz13 + matriz14 + matriz15)/3
+matriz_final5 = (matriz13 + matriz14 + matriz15)/3

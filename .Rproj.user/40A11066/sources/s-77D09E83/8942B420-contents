@@ -210,4 +210,4 @@ df = data_2019 %>%
 matriz13 = cria_matriz_transicao(df, "2019_1", "2019_2")
 matriz14 = cria_matriz_transicao(df, "2019_2", "2019_3")
 matriz15 = cria_matriz_transicao(df, "2019_3", "2019_4")
-matriz_final4 = (matriz13 + matriz14 + matriz15)/3
+matriz_final5 = (matriz13 + matriz14 + matriz15)/3
