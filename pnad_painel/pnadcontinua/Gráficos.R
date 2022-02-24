@@ -495,6 +495,10 @@ privado_formal = privado_formal %>%
  
  ###############
  #### Talvez Utilize #######
+ 
+ ### Gráfico Salário por educação
+ 
+ 
  sal_ocup = data_2019 %>%
    filter(worker == 1) %>%
    select(worker, monthly_work_income, job_function, higher_educ_level,
@@ -544,7 +548,7 @@ privado_formal = privado_formal %>%
               show.legend = F)
 
  
- #####
+ ##### Gráfico salário por ocupação
  
  sal_ocupacoes = data_2019 %>%
    filter(worker == 1) %>%
@@ -599,6 +603,5 @@ privado_formal = privado_formal %>%
          axis.text = element_blank()) +
    geom_label(aes(label = paste0("R$",position_money)), position = position_dodge(width = 0.9), vjust = -0.25
               ,show.legend = F)
- 
  
  
