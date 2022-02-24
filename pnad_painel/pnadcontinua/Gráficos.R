@@ -520,13 +520,13 @@ privado_formal = privado_formal %>%
    mutate(media = mean(monthly_work_income, na.rm = T)) %>%
    mutate(media = round(media, digits = 2)) %>%
    distinct() %>%
-   mutate(labelll = case_when(higher_educ_label == "Uneducated" & year_quarter == "2019_1" ~ 852.15,
-                              higher_educ_label == "Primary School Incompleted" & year_quarter == "2019_1" ~ 1191.23,
-                              higher_educ_label == "Primary School Completed" & year_quarter == "2019_1" ~ 1311.58,
-                              higher_educ_label == "High School Incompleted" & year_quarter == "2019_1" ~ 1450.06,
-                              higher_educ_label == "High School Completed" & year_quarter == "2019_1" ~ 1708.93,
-                              higher_educ_label == "College Degree Incompleted" & year_quarter == "2019_1" ~ 2076.44,
-                              higher_educ_label == "College Degree Completed" & year_quarter == "2019_1" ~ 4421.48)) %>%
+   mutate(labelll = case_when(higher_educ_label == "Uneducated" & year_quarter == "2019_1" ~ 830.65,
+                              higher_educ_label == "Primary School Incompleted" & year_quarter == "2019_1" ~ 1185.57,
+                              higher_educ_label == "Primary School Completed" & year_quarter == "2019_1" ~ 1319.31,
+                              higher_educ_label == "High School Incompleted" & year_quarter == "2019_1" ~ 1463.82,
+                              higher_educ_label == "High School Completed" & year_quarter == "2019_1" ~ 1755.71,
+                              higher_educ_label == "College Degree Incompleted" & year_quarter == "2019_1" ~ 2140.51,
+                              higher_educ_label == "College Degree Completed" & year_quarter == "2019_1" ~ 4609.40)) %>%
    filter(!is.na(labelll)) %>%
    select(higher_educ_level, higher_educ_label, labelll) %>%
    distinct()
@@ -577,12 +577,12 @@ privado_formal = privado_formal %>%
                                job_function %in% c(4) ~ "Public Sector",
                                job_function %in% c(5) ~ "Employers",
                                job_function %in% c(6) ~ "Self-Employed")) %>%
-   mutate(position_money = case_when(position == "Domestic" ~ 876.26,
-                                     position == "Military" ~ 5017.31,
-                                     position == "Private Sector" ~ 1777.25,
-                                     position == "Public Sector" ~ 3329.98,
-                                     position == "Employers" ~ 5165.38,
-                                     position == "Self-Employed" ~ 1543.77))
+   mutate(position_money = case_when(position == "Domestic" ~ 894.41,
+                                     position == "Military" ~ 5304.32,
+                                     position == "Private Sector" ~ 1872.02,
+                                     position == "Public Sector" ~ 3525.95,
+                                     position == "Employers" ~ 5093.79,
+                                     position == "Self-Employed" ~ 1489.25))
  
  sal_ocupacoes = sal_ocupacoes %>%
    select(position, position_money) %>%
