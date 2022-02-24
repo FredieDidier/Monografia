@@ -1,4 +1,7 @@
- ## Fazendo Tabela Descritiva
+ ## Esse script foi criado apenas para capturar o códido da tabela descritiva em
+## formato latex. Pode esquecer essas variáveis abaixo (já que alteramos o formato
+## da TD). O script que usei com as variáveis para a tabela descritiva é o
+## "Tabela Descritiva"
 
 library(modelsummary)
 

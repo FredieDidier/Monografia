@@ -1,4 +1,4 @@
-## Script designado a variáveis que vão conpor a tabela descritiva ##
+## Script designado a variáveis que vão compor a tabela descritiva ##
 
 ## Checando número de pessoas na força de trabalho e inativos
 
