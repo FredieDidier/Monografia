@@ -60,49 +60,19 @@ data = clean_painel(painel)
 
 
 
-## Criando dummies de trabalhadores para a tabela descritiva
+## Criando coluna de trimestre
 
-data = unite(data, col = "year_quarter", year:quarter, sep = "_") %>%
-  mutate(Male = case_when(gender == 1 ~ 1,
-                            gender == 2 ~ 0)) %>%
-  mutate(Female = case_when(gender == 1 ~ 0,
-                          gender == 2 ~ 1)) %>%
-  mutate(signed_card_employee = case_when(signed_work_card == 1 & worker == 1 ~ 1,
-                                          signed_work_card == 2 & worker == 1 ~ 0)) %>%
-  mutate(no_signed_card_employee = case_when(signed_work_card == 1 & worker == 1 ~ 0,
-                                          signed_work_card == 2 & worker == 1 ~ 1)) %>%
-  mutate(last_week_worker = case_when(worker == 1 ~ 1,
-                                      worker == 2 ~ 0)) %>%
-  mutate(no_last_week_worker = case_when(worker == 1 ~ 0,
-                                         worker == 2 ~ 1)) %>%
-  mutate(social_security_contributor = case_when(social_security_taxpayer  == 1 & worker == 1 ~ 1,
-                                                 social_security_taxpayer == 2 & worker == 1 ~ 0)) %>%
-  mutate(no_social_security_contributor = case_when(social_security_taxpayer == 1 & worker == 1 ~ 0,
-                                                 social_security_taxpayer == 2 & worker == 1 ~ 1))
+data = unite(data, col = "year_quarter", year:quarter, sep = "_") 
 
 ## Criando dataframe só filtrado para 2019 para a Tabela Descritiva
 
 data_2019 = data %>%
-  filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4")) %>%
-  group_by(higher_educ_level) %>% mutate(labels = n()) %>%
-  mutate(labell = round(labels/nrow(.), digits = 2)) %>%
-  mutate(social_security_and_self_employed = case_when(job_function == 6 &
-                                                         social_security_taxpayer == 1 & worker == 1 ~ 1,
-                                                       job_function == 6 & social_security_taxpayer == 2 & worker == 1 ~ 0)) %>%
-  mutate(non_social_security_and_self_employed = case_when(job_function == 6 &
-                                                           social_security_taxpayer == 1 & worker == 1 ~ 0,
-                                                         job_function == 6 & social_security_taxpayer == 2 & worker == 1 ~ 1)) %>%
-  mutate(workforce = case_when(workforce_condition == 1 ~ 1,
-                               workforce_condition == 2 ~ 0)) %>%
-  mutate(no_workforce = case_when(workforce_condition == 2 ~ 1,
-                                  workforce_condition == 1 ~ 0)) %>%
-  mutate(occupation = case_when(occupation_condition == 1 ~ 1,
-                                occupation_condition == 2 ~ 0)) %>%
-  mutate(no_occupation = case_when(occupation_condition == 2 ~ 1,
-                                   occupation_condition == 1 ~ 0))
+  filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4"))
 ###########################################################
 
 ## Criando 1ª Variável Dependente - Trabalhador Conta Própria que contribui pro INSS
+
+## Isso aqui foi uma regressão teste que eu fiz (apenas pra brincar)!
 
 worker = data %>%
   pivot_wider(id_cols = c(id_code),
