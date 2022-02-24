@@ -3,8 +3,6 @@ library(estimatr)
 library(modelsummary)
 library(extrafont)
 
-setwd("C:\\GitHub\\Monografia\\pnad_painel\\pnadcontinua")
-
 painel = haven::read_dta("Painel_completo.dta")
 
 clean_painel = function(df){
@@ -64,15 +62,15 @@ data = clean_painel(painel)
 
 data = unite(data, col = "year_quarter", year:quarter, sep = "_") 
 
-## Criando dataframe só filtrado para 2019 para a Tabela Descritiva
+## Criando dataframe s? filtrado para 2019 para a Tabela Descritiva
 
 data_2019 = data %>%
   filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4"))
 ###########################################################
 
-## Criando 1ª Variável Dependente - Trabalhador Conta Própria que contribui pro INSS
+## Criando 1? Vari?vel Dependente - Trabalhador Conta Pr?pria que contribui pro INSS
 
-## Isso aqui foi uma regressão teste que eu fiz (apenas pra brincar)!
+## Isso aqui foi uma regress?o teste que eu fiz (apenas pra brincar)!
 
 worker = data %>%
   pivot_wider(id_cols = c(id_code),
