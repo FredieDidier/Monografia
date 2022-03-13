@@ -1,4 +1,0 @@
-
-df = data_2019 %>%
-  select(worker, job_function, work_category) %>%
-  filter(worker == 1 & job_function == 4 & work_category %in% c(5,7))
