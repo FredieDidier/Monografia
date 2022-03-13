@@ -43,15 +43,17 @@ dat = data_2019 %>%
 ## Descobrindo o n?mero de trabalhadores formais pela ocupa??o
 
 dat = data_2019 %>%
-  filter(job_function %in% c(3) & worker == 1 & signed_work_card == 1) %>%
-  select(job_function, worker, signed_work_card, year_quarter, weights) %>%
+  filter(job_function %in% c(3) & worker == 1 & work_category == 1) %>%
+  select(job_function, worker, signed_work_card, year_quarter, weights,
+         work_category) %>%
   filter(year_quarter == "2019_4") %>%
   mutate(peso = worker * weights) %>%
   summarise(across(c(peso), sum))
 
 dat = data_2019 %>%
-  filter(job_function %in% c(4) & worker == 1 & signed_work_card == 1) %>%
-  select(job_function, worker, signed_work_card, year_quarter, weights)  %>%
+  filter(job_function %in% c(4) & worker == 1 & work_category %in% c(5,7)) %>%
+  select(job_function, worker, signed_work_card, year_quarter, weights,
+         work_category)  %>%
   filter(year_quarter == "2019_4") %>%
   mutate(peso = worker * weights) %>%
   summarise(across(c(peso), sum))
@@ -75,15 +77,17 @@ dat = data_2019 %>%
 ## Descobrindo o n?mero de trabalhadores informais pela ocupa??o
 
 dat = data_2019 %>%
-  filter(job_function %in% c(3) & worker == 1 & signed_work_card == 2) %>%
-  select(job_function, worker, signed_work_card, year_quarter, weights) %>%
+  filter(job_function %in% c(3) & worker == 1 & work_category == 2) %>%
+  select(job_function, worker, signed_work_card, year_quarter, weights,
+         work_category) %>%
   filter(year_quarter == "2019_4") %>%
   mutate(peso = worker * weights) %>%
   summarise(across(c(peso), sum))
 
 dat = data_2019 %>%
-  filter(job_function %in% c(4) & worker == 1 & signed_work_card == 2) %>%
-  select(job_function, worker, signed_work_card, year_quarter, weights) %>%
+  filter(job_function %in% c(4) & worker == 1 & work_category == 6) %>%
+  select(job_function, worker, signed_work_card, year_quarter, weights,
+         work_category) %>%
   filter(year_quarter == "2019_4") %>%
   mutate(peso = worker * weights) %>%
   summarise(across(c(peso), sum))
@@ -123,16 +127,16 @@ aa = sd(dat$age)
 
 # Setor Privado
 dat = data_2019 %>%
-  filter(job_function %in% c(3) & worker == 1 & signed_work_card == 1) %>%
-  select(job_function, worker, signed_work_card, age)
+  filter(job_function %in% c(3) & worker == 1 & work_category == 1) %>%
+  select(job_function, worker, work_category, age)
 
 b = mean(dat$age)
 bb = sd(dat$age)
 
 # Setor P?blico
 dat = data_2019 %>%
-  filter(job_function %in% c(4) & worker == 1 & signed_work_card == 1) %>%
-  select(job_function, worker, signed_work_card, age)
+  filter(job_function %in% c(4) & worker == 1 & work_category %in% c(5,7)) %>%
+  select(job_function, worker, work_category, age)
 
 c = mean(dat$age)
 cc = sd(dat$age)
@@ -158,15 +162,15 @@ ee = sd(dat$age)
 # Descobrindo idade m?dia de todos os grupos informais
 
 dat = data_2019 %>%
-  filter(job_function %in% c(3) & worker == 1 & signed_work_card == 2) %>%
-  select(job_function, worker, signed_work_card, age)
+  filter(job_function %in% c(3) & worker == 1 & work_category == 2) %>%
+  select(job_function, worker, work_category, age)
 
 f = mean(dat$age)
 ff = sd(dat$age)
 
 dat = data_2019 %>%
-  filter(job_function %in% c(4) & worker == 1 & signed_work_card == 2) %>%
-  select(job_function, worker, signed_work_card, age)
+  filter(job_function %in% c(4) & worker == 1 & work_category == 6) %>%
+  select(job_function, worker, work_category, age)
 
 g = mean(dat$age)
 gg = sd(dat$age)
@@ -199,31 +203,31 @@ jj = sd(dat$years_of_study)
 # Setor Privado Formal e Informal
 
 dat = data_2019 %>%
-  filter(job_function %in% c(3) & worker == 1 & signed_work_card == 1) %>%
-  select(job_function, worker, signed_work_card, years_of_study)
+  filter(job_function %in% c(3) & worker == 1 & work_category == 1) %>%
+  select(job_function, worker, work_category, years_of_study)
 
 k = mean(dat$years_of_study)
 kk = sd(dat$years_of_study)
 
 dat = data_2019 %>%
-  filter(job_function %in% c(3) & worker == 1 & signed_work_card == 1 &
+  filter(job_function %in% c(3) & worker == 1 & work_category == 2 &
            !is.na(monthly_work_income)) %>%
-  select(job_function, worker, signed_work_card, monthly_work_income)
+  select(job_function, worker, work_category, monthly_work_income)
 
 kkk = mean(dat$monthly_work_income)
 kkkk = sd(dat$monthly_work_income)
 
 dat = data_2019 %>%
-  filter(job_function %in% c(3) & worker == 1 & signed_work_card == 2) %>%
-  select(job_function, worker, signed_work_card, years_of_study)
+  filter(job_function %in% c(3) & worker == 1 & work_category == 2) %>%
+  select(job_function, worker, work_category, years_of_study)
 
 l = mean(dat$years_of_study)
 ll = sd(dat$years_of_study)
 
 dat = data_2019 %>%
-  filter(job_function %in% c(3) & worker == 1 & signed_work_card == 2 &
+  filter(job_function %in% c(3) & worker == 1 & work_category == 2 &
            !is.na(monthly_work_income)) %>%
-  select(job_function, worker, signed_work_card, monthly_work_income)
+  select(job_function, worker, work_category, monthly_work_income)
 
 lll = mean(dat$monthly_work_income)
 llll = sd(dat$monthly_work_income)
@@ -231,31 +235,31 @@ llll = sd(dat$monthly_work_income)
 # Setor P?blico Formal e Informal
 
 dat = data_2019 %>%
-  filter(job_function %in% c(4) & worker == 1 & signed_work_card == 1) %>%
-  select(job_function, worker, signed_work_card, years_of_study)
+  filter(job_function %in% c(4) & worker == 1 & work_category %in% c(5,7)) %>%
+  select(job_function, worker, work_category, years_of_study)
 
 m = mean(dat$years_of_study)
 mm = sd(dat$years_of_study)
 
 dat = data_2019 %>%
-  filter(job_function %in% c(4) & worker == 1 & signed_work_card == 1 &
+  filter(job_function %in% c(4) & worker == 1 & work_category %in% c(5,7) &
            !is.na(monthly_work_income)) %>%
-  select(job_function, worker, signed_work_card, monthly_work_income)
+  select(job_function, worker, work_category, monthly_work_income)
 
 mmm = mean(dat$monthly_work_income)
 mmmm = sd(dat$monthly_work_income)
 
 dat = data_2019 %>%
-  filter(job_function %in% c(4) & worker == 1 & signed_work_card == 2) %>%
-  select(job_function, worker, signed_work_card, years_of_study)
+  filter(job_function %in% c(4) & worker == 1 & work_category == 6) %>%
+  select(job_function, worker, work_category, years_of_study)
 
 n = mean(dat$years_of_study)
 nn = sd(dat$years_of_study)
 
 dat = data_2019 %>%
-  filter(job_function %in% c(4) & worker == 1 & signed_work_card == 2 &
+  filter(job_function %in% c(4) & worker == 1 & work_category == 6 &
            !is.na(monthly_work_income)) %>%
-  select(job_function, worker, signed_work_card, monthly_work_income)
+  select(job_function, worker, work_category, monthly_work_income)
 
 nnn = mean(dat$monthly_work_income)
 nnnn = sd(dat$monthly_work_income)

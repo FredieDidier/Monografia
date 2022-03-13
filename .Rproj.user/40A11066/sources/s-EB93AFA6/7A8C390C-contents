@@ -6,21 +6,20 @@ df = data_2019 %>%
   filter(id == 4) %>%
   mutate(position = case_when(workforce_condition == 2 ~ 1,
                          worker == 2 & occupation_condition == 2 & workforce_condition == 1 ~ 2,
-                         worker == 1 & work_category == 1 & job_function == 3 ~ 3,
-                         worker == 1 & work_category == 2 & job_function == 3 ~ 4,
+                         worker == 1 & signed_work_card == 1 & job_function == 3 ~ 3,
+                         worker == 1 & signed_work_card == 2 & job_function == 3 ~ 4,
                          worker == 1 & job_function == 6 & social_security_taxpayer == 1 ~ 5,
                          worker == 1 & job_function == 6 & social_security_taxpayer == 2 ~ 6,
                          worker == 1 & job_function == 5 & cnpj == 1 ~ 7,
                          worker == 1 & job_function == 5 & cnpj == 2 ~ 8,
-                         worker == 1 & job_function == 4 & work_category %in% c(5,7) ~ 9,
-                         worker == 1 & job_function == 4 & work_category == 6 ~ 10)) %>%
+                         worker == 1 & job_function == 4 & signed_work_card == 1 ~ 9,
+                         worker == 1 & job_function == 4 & signed_work_card == 2 ~ 10)) %>%
   filter(!is.na(position)) %>%
   group_by(id_code) %>%
   mutate(new_id = n()) %>%
   filter(new_id == 4) %>%
   select(id_code, year_quarter, workforce_condition, worker, signed_work_card, cnpj,
-         job_function, occupation_condition, position, social_security_taxpayer, id, new_id,
-         work_category)
+         job_function, occupation_condition, position, social_security_taxpayer, id, new_id)
 
 funcao = function(df, initial_quarter, final_quarter, initial_position,
                   final_position){
@@ -81,14 +80,14 @@ df = data_2019 %>%
   filter(id == 4) %>%
   mutate(position = case_when(workforce_condition == 2 ~ 1,
                               worker == 2 & occupation_condition == 2 & workforce_condition == 1 ~ 2,
-                              worker == 1 & work_category == 1 & job_function == 3 ~ 3,
-                              worker == 1 & work_category == 2 & job_function == 3 ~ 4,
+                              worker == 1 & signed_work_card == 1 & job_function == 3 ~ 3,
+                              worker == 1 & signed_work_card == 2 & job_function == 3 ~ 4,
                               worker == 1 & job_function == 6 & social_security_taxpayer == 1 ~ 5,
                               worker == 1 & job_function == 6 & social_security_taxpayer == 2 ~ 6,
                               worker == 1 & job_function == 5 & cnpj == 1 ~ 7,
                               worker == 1 & job_function == 5 & cnpj == 2 ~ 8,
-                              worker == 1 & job_function == 4 & work_category %in% c(5,7) ~ 9,
-                              worker == 1 & job_function == 4 & work_category == 6 ~ 10)) %>%
+                              worker == 1 & job_function == 4 & signed_work_card == 1 ~ 9,
+                              worker == 1 & job_function == 4 & signed_work_card == 2 ~ 10)) %>%
   filter(!is.na(position)) %>%
   group_by(id_code) %>%
   mutate(new_id = n()) %>%
@@ -99,7 +98,7 @@ df = data_2019 %>%
   filter(nova_id == 4) %>%
   select(id_code, year_quarter, workforce_condition, worker, signed_work_card, cnpj,
          job_function, occupation_condition, position, social_security_taxpayer, nova_id,
-         higher_educ_level, work_category)
+         higher_educ_level)
 
 
 matriz4 = cria_matriz_transicao(df, "2019_1", "2019_2")
@@ -117,14 +116,14 @@ df = data_2019 %>%
   filter(id == 4) %>%
   mutate(position = case_when(workforce_condition == 2 ~ 1,
                               worker == 2 & occupation_condition == 2 & workforce_condition == 1 ~ 2,
-                              worker == 1 & work_category == 1 & job_function == 3 ~ 3,
-                              worker == 1 & work_category == 2 & job_function == 3 ~ 4,
+                              worker == 1 & signed_work_card == 1 & job_function == 3 ~ 3,
+                              worker == 1 & signed_work_card == 2 & job_function == 3 ~ 4,
                               worker == 1 & job_function == 6 & social_security_taxpayer == 1 ~ 5,
                               worker == 1 & job_function == 6 & social_security_taxpayer == 2 ~ 6,
                               worker == 1 & job_function == 5 & cnpj == 1 ~ 7,
                               worker == 1 & job_function == 5 & cnpj == 2 ~ 8,
-                              worker == 1 & job_function == 4 & work_category %in% c(5,7) == 1 ~ 9,
-                              worker == 1 & job_function == 4 & work_category == 6 ~ 10)) %>%
+                              worker == 1 & job_function == 4 & signed_work_card == 1 ~ 9,
+                              worker == 1 & job_function == 4 & signed_work_card == 2 ~ 10)) %>%
   filter(!is.na(position)) %>%
   group_by(id_code) %>%
   mutate(new_id = n()) %>%
@@ -135,7 +134,7 @@ df = data_2019 %>%
   filter(nova_id == 4) %>%
   select(id_code, year_quarter, workforce_condition, worker, signed_work_card, cnpj,
          job_function, occupation_condition, position, social_security_taxpayer, nova_id,
-         higher_educ_level, work_category)
+         higher_educ_level)
 
 
 matriz7 = cria_matriz_transicao(df, "2019_1", "2019_2")
@@ -152,14 +151,14 @@ df = data_2019 %>%
   filter(id == 4) %>%
   mutate(position = case_when(workforce_condition == 2 ~ 1,
                               worker == 2 & occupation_condition == 2 & workforce_condition == 1 ~ 2,
-                              worker == 1 & work_category == 1 & job_function == 3 ~ 3,
-                              worker == 1 & work_category == 2 & job_function == 3 ~ 4,
+                              worker == 1 & signed_work_card == 1 & job_function == 3 ~ 3,
+                              worker == 1 & signed_work_card == 2 & job_function == 3 ~ 4,
                               worker == 1 & job_function == 6 & social_security_taxpayer == 1 ~ 5,
                               worker == 1 & job_function == 6 & social_security_taxpayer == 2 ~ 6,
                               worker == 1 & job_function == 5 & cnpj == 1 ~ 7,
                               worker == 1 & job_function == 5 & cnpj == 2 ~ 8,
-                              worker == 1 & job_function == 4 & work_category %in% c(5,7) ~ 9,
-                              worker == 1 & job_function == 4 & work_category == 6 ~ 10)) %>%
+                              worker == 1 & job_function == 4 & signed_work_card == 1 ~ 9,
+                              worker == 1 & job_function == 4 & signed_work_card == 2 ~ 10)) %>%
   filter(!is.na(position)) %>%
   group_by(id_code) %>%
   mutate(new_id = n()) %>%
@@ -170,7 +169,7 @@ df = data_2019 %>%
   filter(nova_id == 4) %>%
   select(id_code, year_quarter, workforce_condition, worker, signed_work_card, cnpj,
          job_function, occupation_condition, position, social_security_taxpayer, nova_id,
-         higher_educ_level, work_category)
+         higher_educ_level)
 
 
 matriz10 = cria_matriz_transicao(df, "2019_1", "2019_2")
@@ -187,14 +186,14 @@ df = data_2019 %>%
   filter(id == 4) %>%
   mutate(position = case_when(workforce_condition == 2 ~ 1,
                               worker == 2 & occupation_condition == 2 & workforce_condition == 1 ~ 2,
-                              worker == 1 & work_category == 1 & job_function == 3 ~ 3,
-                              worker == 1 & work_category == 2 & job_function == 3 ~ 4,
+                              worker == 1 & signed_work_card == 1 & job_function == 3 ~ 3,
+                              worker == 1 & signed_work_card == 2 & job_function == 3 ~ 4,
                               worker == 1 & job_function == 6 & social_security_taxpayer == 1 ~ 5,
                               worker == 1 & job_function == 6 & social_security_taxpayer == 2 ~ 6,
                               worker == 1 & job_function == 5 & cnpj == 1 ~ 7,
                               worker == 1 & job_function == 5 & cnpj == 2 ~ 8,
-                              worker == 1 & job_function == 4 & work_category %in% c(5,7) ~ 9,
-                              worker == 1 & job_function == 4 & work_category == 6 ~ 10)) %>%
+                              worker == 1 & job_function == 4 & signed_work_card == 1 ~ 9,
+                              worker == 1 & job_function == 4 & signed_work_card == 2 ~ 10)) %>%
   filter(!is.na(position)) %>%
   group_by(id_code) %>%
   mutate(new_id = n()) %>%
@@ -205,7 +204,7 @@ df = data_2019 %>%
   filter(nova_id == 4) %>%
   select(id_code, year_quarter, workforce_condition, worker, signed_work_card, cnpj,
          job_function, occupation_condition, position, social_security_taxpayer, nova_id,
-         higher_educ_level, work_category)
+         higher_educ_level)
 
 
 matriz13 = cria_matriz_transicao(df, "2019_1", "2019_2")

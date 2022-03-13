@@ -3,7 +3,7 @@
     "path": "C:/GitHub/Monografia/Descriptive Statistics/Tabela Descritiva.R",
     "project_path": "Descriptive Statistics/Tabela Descritiva.R",
     "type": "r_source",
-    "hash": "4067830775",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1646251176407.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "104,0",
-        "scrollLine": "89"
+        "cursorPosition": "85,0",
+        "scrollLine": "80"
     },
     "folds": "",
-    "lastKnownWriteTime": 1646260513,
+    "lastKnownWriteTime": 1647203760,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1646260513545,
+    "last_content_update": 1647203760474,
     "read_only": false,
     "read_only_alternatives": []
 }
