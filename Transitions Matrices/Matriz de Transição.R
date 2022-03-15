@@ -1,3 +1,12 @@
+
+## Achando o peso de cada trimestre e consequentemente a sua soma total
+
+df_peso = data_2019 %>%
+  group_by(year_quarter) %>%
+  summarise(weights = sum(weights))
+
+df_peso = df_peso[-4,]
+
 ### Matriz de Transi??o Geral ###
 
 df = data_2019 %>%
@@ -70,7 +79,8 @@ cria_matriz_transicao = function(df, initial_quarter, final_quarter){
 matriz1 = cria_matriz_transicao(df, "2019_1", "2019_2")
 matriz2 = cria_matriz_transicao(df, "2019_2", "2019_3")
 matriz3 = cria_matriz_transicao(df, "2019_3", "2019_4")
-matriz_final = (matriz1 + matriz2 + matriz3)/3
+matriz_final = (matriz1*df_peso$weights[1] + matriz2 *df_peso$weights[2]
+                + matriz3 * df_peso$weights[3])/(sum(df_peso$weights))
 
 
 # Matriz de Transi??o por Educa??o (Sem educ e fund incompleto)
@@ -105,7 +115,8 @@ df = data_2019 %>%
 matriz4 = cria_matriz_transicao(df, "2019_1", "2019_2")
 matriz5 = cria_matriz_transicao(df, "2019_2", "2019_3")
 matriz6 = cria_matriz_transicao(df, "2019_3", "2019_4")
-matriz_final2 = (matriz4 + matriz5 + matriz6)/3
+matriz_final2 = (matriz4*df_peso$weights[1] + matriz5 *df_peso$weights[2]
+                 + matriz6 * df_peso$weights[3])/(sum(df_peso$weights))
 
 
 
@@ -141,7 +152,8 @@ df = data_2019 %>%
 matriz7 = cria_matriz_transicao(df, "2019_1", "2019_2")
 matriz8 = cria_matriz_transicao(df, "2019_2", "2019_3")
 matriz9 = cria_matriz_transicao(df, "2019_3", "2019_4")
-matriz_final3 = (matriz7 + matriz8 + matriz9)/3
+matriz_final3 = (matriz7*df_peso$weights[1] + matriz8 *df_peso$weights[2]
+                 + matriz9 * df_peso$weights[3])/(sum(df_peso$weights))
 
 
 # Matriz de transi??o por educa??o (ensino m?dio completo e superior incompleto)
@@ -176,8 +188,8 @@ df = data_2019 %>%
 matriz10 = cria_matriz_transicao(df, "2019_1", "2019_2")
 matriz11 = cria_matriz_transicao(df, "2019_2", "2019_3")
 matriz12 = cria_matriz_transicao(df, "2019_3", "2019_4")
-matriz_final4 = (matriz10 + matriz11 + matriz12)/3
-
+matriz_final4 = (matriz10*df_peso$weights[1] + matriz11 *df_peso$weights[2]
+                 + matriz12 * df_peso$weights[3])/(sum(df_peso$weights))
 
 # Matriz de transi??o por educa??o (Superior completo e mais)
 
@@ -211,4 +223,5 @@ df = data_2019 %>%
 matriz13 = cria_matriz_transicao(df, "2019_1", "2019_2")
 matriz14 = cria_matriz_transicao(df, "2019_2", "2019_3")
 matriz15 = cria_matriz_transicao(df, "2019_3", "2019_4")
-matriz_final5 = (matriz13 + matriz14 + matriz15)/3
+matriz_final5 = (matriz13*df_peso$weights[1] + matriz14 *df_peso$weights[2]
+                 + matriz15 * df_peso$weights[3])/(sum(df_peso$weights))
