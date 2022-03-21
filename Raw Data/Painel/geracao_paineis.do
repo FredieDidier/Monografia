@@ -9,25 +9,35 @@ datazoom_pnadcontinua, years(2012/2021) ///
 					
 * Gerando arquivos separados por pares de trimestres
 
+cd C:\GitHub\Monografia
+
 local files : dir "Raw Data/Painel/pnadcontinua" files "*.dta"
+
+* Montando um arquivo único
+
+clear
+
+append using `files'
+
+tempfile base_completa
+
+save `base_completa', replace
+
+* Loop que  cria as bases
 
 local ano1 2012 2012 2012 2012 2013 2013 2013 2013 2014 2014 2014 2014 2015 2015 2015 2015 2016 2016 2016 2016 2017 2017 2017 2017 2018 2018 2018 2018 2019 2019 2019 2019 2020 2020 2020 2020 2021 2021 2021
 local tri1 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3
 local ano2 2012 2012 2012 2013 2013 2013 2013 2014 2014 2014 2014 2015 2015 2015 2015 2016 2016 2016 2016 2017 2017 2017 2017 2018 2018 2018 2018 2019 2019 2019 2019 2020 2020 2020 2020 2021 2021 2021 2021
 local tri2 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 
 
-forvalues i = 1/10{
+forvalues i = 1/`: word count `ano1''{
 
-	local ano1: word `i' of `ano1'
-	local tri1: word `i' of `tri1'
-	local ano2: word `i' of `ano2'
-	local tri2: word `i' of `tri2'
+	local ano_inic: word `i' of `ano1'
+	local tri_inic: word `i' of `tri1'
+	local ano_fin: word `i' of `ano2'
+	local tri_fin: word `i' of `tri2'
 	
-		foreach file in `files'{
-	
-			use `file' if (Ano == `ano1' & Trimestre == `tri1') | (Ano == `ano2' & Trimestre == `tri2'), clear
+	use `base_completa' if (Ano == `ano_inic' & Trimestre == `tri_inic') | (Ano == `ano_fin' & Trimestre == `tri_fin'), clear
 			
-			save "C:\GitHub\Monografia\Raw Data\Trimestres\painel_`ano1'_`tri1'", replace
-		
-		}
-	}
+	save "C:\GitHub\Monografia\Raw Data\Trimestres\painel_`ano_inic'_`tri_inic'", replace
+}
