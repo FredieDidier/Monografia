@@ -7,7 +7,7 @@ df_peso = data_2019 %>%
 
 df_peso = df_peso[-4,]
 
-### Matriz de Transi??o Geral ###
+### Matriz de Transicao Geral ###
 
 df = data_2019 %>%
   group_by(id_code) %>%
@@ -83,7 +83,7 @@ matriz_final = (matriz1*df_peso$weights[1] + matriz2 *df_peso$weights[2]
                 + matriz3 * df_peso$weights[3])/(sum(df_peso$weights))
 
 
-# Matriz de Transi??o por Educa??o (Sem educ e fund incompleto)
+# Matriz de Transicao por Educacao (Sem educ e fund incompleto)
 
 df = data_2019 %>%
   group_by(id_code) %>%
@@ -120,7 +120,7 @@ matriz_final2 = (matriz4*df_peso$weights[1] + matriz5 *df_peso$weights[2]
 
 
 
-# Matriz de Transi??o por Educa??o (fund completo e ensino m?dio incompleto)
+# Matriz de Transicao por Educacao (fund completo e ensino medio incompleto)
 
 df = data_2019 %>%
   group_by(id_code) %>%
@@ -156,7 +156,7 @@ matriz_final3 = (matriz7*df_peso$weights[1] + matriz8 *df_peso$weights[2]
                  + matriz9 * df_peso$weights[3])/(sum(df_peso$weights))
 
 
-# Matriz de transi??o por educa??o (ensino m?dio completo e superior incompleto)
+# Matriz de transicaoo por educacao (ensino medio completo e superior incompleto)
 
 df = data_2019 %>%
   group_by(id_code) %>%
@@ -191,7 +191,7 @@ matriz12 = cria_matriz_transicao(df, "2019_3", "2019_4")
 matriz_final4 = (matriz10*df_peso$weights[1] + matriz11 *df_peso$weights[2]
                  + matriz12 * df_peso$weights[3])/(sum(df_peso$weights))
 
-# Matriz de transi??o por educa??o (Superior completo e mais)
+# Matriz de transicao por educacao (Superior completo e mais)
 
 df = data_2019 %>%
   group_by(id_code) %>%
