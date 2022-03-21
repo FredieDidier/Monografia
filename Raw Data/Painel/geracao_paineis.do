@@ -14,6 +14,7 @@ cd C:\GitHub\Monografia
 local files : dir "Raw Data/Painel/pnadcontinua" files "*.dta"
 
 * Montando um arquivo único
+cd "C:\GitHub\Monografia\Raw Data\Painel\pnadcontinua"
 
 clear
 
