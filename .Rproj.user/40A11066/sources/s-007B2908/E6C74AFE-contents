@@ -62,7 +62,7 @@ data = clean_painel(painel)
 
 data = unite(data, col = "year_quarter", year:quarter, sep = "_") 
 
-## Criando dataframe s? filtrado para 2019 para a Tabela Descritiva
+## Criando dataframe filtrado para 2019 para a Tabela Descritiva
 
 data_2019 = data %>%
   filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4"))
