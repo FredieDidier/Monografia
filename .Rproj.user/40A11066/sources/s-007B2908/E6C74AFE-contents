@@ -68,9 +68,9 @@ data_2019 = data %>%
   filter(year_quarter %in% c("2019_1", "2019_2", "2019_3", "2019_4"))
 ###########################################################
 
-## Criando 1? Vari?vel Dependente - Trabalhador Conta Pr?pria que contribui pro INSS
+## CriandoVariavel Dependente - Trabalhador Conta Propria que contribui pro INSS
 
-## Isso aqui foi uma regress?o teste que eu fiz (apenas pra brincar)!
+## Isso aqui foi uma regressao teste que eu fiz (apenas pra brincar)!
 
 worker = data %>%
   pivot_wider(id_cols = c(id_code),

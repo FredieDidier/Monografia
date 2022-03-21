@@ -3,7 +3,7 @@
     "path": "C:/GitHub/Monografia/Cleaning Data/Script_R.R",
     "project_path": "Cleaning Data/Script_R.R",
     "type": "r_source",
-    "hash": "2358584839",
+    "hash": "46059003",
     "contents": "",
     "dirty": false,
     "created": 1645725852069.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "68,0",
-        "scrollLine": "0"
+        "cursorPosition": "72,29",
+        "scrollLine": "65"
     },
     "folds": "",
-    "lastKnownWriteTime": 1645726032,
+    "lastKnownWriteTime": 1647874586,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1645726032440,
+    "last_content_update": 1647874586847,
     "read_only": false,
     "read_only_alternatives": []
 }
