@@ -2,7 +2,7 @@ cd C:\GitHub\Monografia
 
 * Gerando painel
 
-datazoom_pnadcontinua, years(2012/2021) ///
+datazoom_pnadcontinua, years(2012) ///
 					original("C:\GitHub\Monografia\Raw Data") ///
 					saving("C:\GitHub\Monografia\Raw Data\Painel") ///
 					idrs
@@ -11,7 +11,8 @@ datazoom_pnadcontinua, years(2012/2021) ///
 
 cd C:\GitHub\Monografia
 
-local files : dir "Raw Data/Painel/pnadcontinua" files "*.dta"
+local files pnad_painel_1_rs pnad_painel_2_rs pnad_painel_3_rs pnad_painel_4_rs ///
+		pnad_painel_5_rs pnad_painel_6_rs pnad_painel_7_rs pnad_painel_8_rs
 
 * Montando um arquivo único
 cd "C:\GitHub\Monografia\Raw Data\Painel\pnadcontinua"
