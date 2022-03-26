@@ -3,7 +3,7 @@ library(tidyverse)
 clean_painel = function(df){
   
   df <- df %>%
-    select(ind_id, Ano, Trimestre,
+    select(indid, Ano, Trimestre,
            UF, UPA, V1022, V1028, V2007, V2009, V1022,
            V1023, V2010, V3003A, V3009A,
            V4009, V4012, V4014, V4019,
@@ -14,7 +14,7 @@ clean_painel = function(df){
            VD4005, VD4007, VD4009,
            V4013, V4039C,
            VD4012, VD4017) %>%
-    rename(id_code = ind_id, year = Ano, quarter = Trimestre,
+    rename(id_code = indid, year = Ano, quarter = Trimestre,
            primary_sampling_unit = UPA,
            area_type = V1023,
            weights = V1028,
@@ -84,9 +84,9 @@ trimestres <- list("2012_1", "2012_2", "2012_3", "2012_4",
 trimestres %>%
   map(function(trim){
     
-    df <- haven::read_dta(paste0("Raw Data/Trimestres/painel_", trim, ".dta") %>%
+    df <- haven::read_dta(paste0("Raw Data/Trimestres/painel_", trim, ".dta")) %>%
                             clean_painel()
                           
-    readr::write_rds(paste0("Cleaning Data/Paineis/painel_", trim, ".rds"))                      
+    readr::write_rds(paste0("Cleaning Data/Paineis/painel_", trim, ".rds"))                     
     
   })
