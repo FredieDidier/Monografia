@@ -1,24 +1,27 @@
 {
-    "id": "EE4ACCD8",
-    "path": "~/GitHub/Monitoria_Econometria_I/2021.2/Listas Práticas/Lista Prática 1/LP1.1.Rmd",
+    "id": "6015539D",
+    "path": "~/GitHub/Monitoria_Econometria_I/2021.2/Listas Práticas/Lista Prática 1/Res_LP1.1.Rmd",
     "project_path": null,
     "type": "r_markdown",
-    "hash": "2624015349",
+    "hash": "2327091908",
     "contents": "",
     "dirty": false,
-    "created": 1647886296908.0,
+    "created": 1648135248752.0,
     "source_on_save": false,
-    "relative_order": 1,
+    "relative_order": 3,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "85,0",
+        "scrollLine": "0",
+        "last_setup_crc32": ""
     },
     "folds": "",
     "lastKnownWriteTime": 1642024342,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1642024342,
+    "last_content_update": 1648135518496,
     "read_only": false,
     "read_only_alternatives": []
 }
