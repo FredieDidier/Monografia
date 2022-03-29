@@ -3,7 +3,7 @@
     "path": "C:/GitHub/Monografia/Transitions Matrices/Matrizes de Transição_grafico_educ.R",
     "project_path": "Transitions Matrices/Matrizes de Transição_grafico_educ.R",
     "type": "r_source",
-    "hash": "2824886229",
+    "hash": "155239049",
     "contents": "",
     "dirty": false,
     "created": 1647972450067.0,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "34,49",
-        "scrollLine": "19"
+        "cursorPosition": "28,0",
+        "scrollLine": "14"
     },
     "folds": "",
-    "lastKnownWriteTime": 1647976928,
+    "lastKnownWriteTime": 1648581706,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1647976928350,
+    "last_content_update": 1648581706472,
     "read_only": false,
     "read_only_alternatives": []
 }

@@ -3,7 +3,7 @@ library(tidyverse)
 clean_painel = function(df){
   
   df <- df %>%
-    select(indid, Ano, Trimestre,
+    select(idind, Ano, Trimestre,
            UF, UPA, V1022, V1028, V2007, V2009, V1022,
            V1023, V2010, V3003A, V3009A,
            V4009, V4012, V4014, V4019,
@@ -14,7 +14,7 @@ clean_painel = function(df){
            VD4005, VD4007, VD4009,
            V4013, V4039C,
            VD4012, VD4017) %>%
-    rename(id_code = indid, year = Ano, quarter = Trimestre,
+    rename(id_code = idind, year = Ano, quarter = Trimestre,
            primary_sampling_unit = UPA,
            area_type = V1023,
            weights = V1028,
@@ -46,12 +46,10 @@ clean_painel = function(df){
            work_category = VD4009,
            social_security_taxpayer_ref_week = VD4012,
            monthly_work_income = VD4017,
-           household_location = V1022)
+           household_location = V1022) %>%
+    unite(col = "year_quarter", year:quarter, sep = "_")
   
   df = df %>%
-    group_by(id_code) %>%
-    mutate(id = n()) %>%
-    filter(id == 2) %>%
     mutate(position = case_when(workforce_condition == 2 ~ 1,
                                 worker == 2 & occupation_condition == 2 & workforce_condition == 1 ~ 2,
                                 worker == 1 & work_category == 1 & job_function == 3 ~ 3,
@@ -65,12 +63,21 @@ clean_painel = function(df){
     filter(!is.na(position)) %>%
     group_by(id_code) %>%
     mutate(new_id = n()) %>%
-    filter(new_id == 2)
+    filter(new_id == 2) %>%
+    select(id_code, year_quarter, workforce_condition, worker, signed_work_card, cnpj,
+           job_function, occupation_condition, position, social_security_taxpayer,
+           higher_educ_level, work_category) %>%
+    mutate(educ = case_when(
+      higher_educ_level %in% c(1,2) ~ 1,
+      higher_educ_level %in% c(3,4) ~ 2,
+      higher_educ_level %in% c(5,6) ~ 3,
+      higher_educ_level %in% c(7) ~ 4
+    )) %>%
+    select(-higher_educ_level)
+  
 }
 
-data = haven::read_dta("Raw Data/Trimestres/painel_2012_1.dta")
-
-trimestres <- list("2012_1", "2012_2", "2012_3", "2012_4",
+list_trimestres <- c("2012_1", "2012_2", "2012_3", "2012_4",
                    "2013_1", "2013_2", "2013_3", "2013_4",
                    "2014_1", "2014_2", "2014_3", "2014_4",
                    "2015_1", "2015_2", "2015_3", "2015_4",
@@ -81,12 +88,34 @@ trimestres <- list("2012_1", "2012_2", "2012_3", "2012_4",
                    "2020_1", "2020_2", "2020_3", "2020_4",
                    "2021_1", "2021_2", "2021_3")
 
-trimestres %>%
-  map(function(trim){
-    
-    df <- haven::read_dta(paste0("Raw Data/Trimestres/painel_", trim, ".dta")) %>%
-                            clean_painel()
-                          
-    readr::write_rds(paste0("Cleaning Data/Paineis/painel_", trim, ".rds"))                     
-    
-  })
+list_trimestres <- rep(list_trimestres, 4)
+
+list_educ <- c(
+  rep(1, 39),
+  rep(2, 39),
+  rep(3, 39),
+  rep(4, 39)
+)
+
+map2(list_trimestres, list_educ,
+     
+     function(trim, educ_level){
+       df <- haven::read_dta(paste0("Raw Data/Trimestres/painel_", trim, ".dta")) %>%
+         clean_painel()
+         
+       
+       df <- df %>%
+         filter(educ == educ_level) %>%
+         group_by(id_code) %>%
+         mutate(new_id = n()) %>%
+         filter(new_id == 2)
+         
+       df %>%
+         readr::write_rds(paste0("Cleaning Data/Paineis/painel_",
+                                 trim,
+                                 "_",
+                                 educ_level,
+                                 ".rds")
+                          )   
+     }
+)
