@@ -114,7 +114,7 @@ graf_i_d = ggplot(matriz2, aes(x = trim, y = transition,
   
 matriz3 = matrizes %>%
   filter(posicao_inicial %in% c(3,5,7,9) &
-           posicao_final %in% c(4,6,10)) %>%
+           posicao_final %in% c(4,6,8,10)) %>%
   group_by(trim, educ) %>%
   summarise(transition = sum(transition)) %>%
   mutate(educ = as.character(educ))
