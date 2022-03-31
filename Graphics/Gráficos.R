@@ -707,7 +707,7 @@ privado_formal = privado_formal %>%
                                  "Completed College Degree"), values = carto_pal(name = "Vivid")) +
    geom_line(size = 2) +
    geom_point(size = 2) +
-   labs(x = "", y = "", title = "Formal to Inactive") +
+   labs(x = "", y = "", title = "Formal to Inactive (%)") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
@@ -733,7 +733,7 @@ privado_formal = privado_formal %>%
                                  "Completed College Degree"), values = carto_pal(name = "Vivid")) +
    geom_line(size = 2) +
    geom_point(size = 2) +
-   labs(x = "", y = "", title = "Informal to Inactive") +
+   labs(x = "", y = "", title = "Informal to Inactive (%)") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
