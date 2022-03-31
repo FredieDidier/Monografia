@@ -1,0 +1,9 @@
+
+library(tidyverse)
+i = it %>%
+  filter(VD4002 == 2)
+
+t = it %>%
+  filter(VD4001 == 1,
+         VD4002 == 2,
+         V4001 == 2)
