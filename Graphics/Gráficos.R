@@ -1,3 +1,5 @@
+library(extrafont)
+
 font_import(path = "C:/Users/Fredie/AppData/Local/Microsoft/Windows/Fonts")
 y
 loadfonts(device = "win")
@@ -602,5 +604,142 @@ privado_formal = privado_formal %>%
          axis.text = element_blank()) +
    geom_label(aes(label = paste0("R$",position_money)), position = position_dodge(width = 0.9), vjust = -0.25
               ,show.legend = F)
+ 
+ 
+ 
+ ## Gráfico Matrizes
+ 
+ matrizes = read.csv("./Transitions Matrices/transicoes_por_educ.csv")
+ 
+ ## Formal - Desempregado
+ 
+ matriz1 = matrizes %>%
+   filter(posicao_inicial %in% c(3,5,7,9) &
+            posicao_final == 2) %>%
+   group_by(trim, educ) %>%
+   summarise(transition = sum(transition)) %>%
+   mutate(educ = as.character(educ))
+ 
+ graf_f_d = ggplot(matriz1, aes(x = trim, y = transition, 
+                                color = educ, group = educ)) +
+   scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
+                                 "Completed Primary School and Incompleted High School",
+                                 "Completed High School and Incompleted College Degree",
+                                 "Completed College Degree"), values = carto_pal(name = "Vivid")) +
+   geom_line(size = 2) +
+   geom_point(size = 2) +
+   labs(x = "", y = "", title = "Formal to Unemployed") +
+   theme_minimal() +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
+   scale_x_discrete(breaks = paste0(2012:2021, "_1"),
+                    labels = 2012:2021)
+ 
+ 
+ 
+ ## Informal - Desempregado
+ 
+ matriz2 = matrizes %>%
+   filter(posicao_inicial %in% c(4,6,8,10) &
+            posicao_final == 2) %>%
+   group_by(trim, educ) %>%
+   summarise(transition = sum(transition)) %>%
+   mutate(educ = as.character(educ))
+ 
+ graf_i_d = ggplot(matriz2, aes(x = trim, y = transition, 
+                                color = educ, group = educ)) +
+   scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
+                                 "Completed Primary School and Incompleted High School",
+                                 "Completed High School and Incompleted College Degree",
+                                 "Completed College Degree"), values = carto_pal(name = "Vivid")) +
+   geom_line(size = 2) +
+   geom_point(size = 2) +
+   labs(x = "", y = "", title = "Informal to Unemployed") +
+   theme_minimal() +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
+   scale_x_discrete(breaks = paste0(2012:2021, "_1"),
+                    labels = 2012:2021)
+ 
+ 
+ 
+ ## Formal - Informal
+ 
+ matriz3 = matrizes %>%
+   filter(posicao_inicial %in% c(3,5,7,9) &
+            posicao_final %in% c(4,6,8,10)) %>%
+   group_by(trim, educ) %>%
+   summarise(transition = sum(transition)) %>%
+   mutate(educ = as.character(educ))
+ 
+ graf_f_i = ggplot(matriz3, aes(x = trim, y = transition, 
+                                color = educ, group = educ)) +
+   scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
+                                 "Completed Primary School and Incompleted High School",
+                                 "Completed High School and Incompleted College Degree",
+                                 "Completed College Degree"), values = carto_pal(name = "Vivid")) +
+   geom_line(size = 2) +
+   geom_point(size = 2) +
+   labs(x = "", y = "", title = "Formal to Informal") +
+   theme_minimal() +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
+   scale_x_discrete(breaks = paste0(2015:2021, "_1"),
+                    labels = 2015:2021)
+ 
+ 
+ ## Formal - Inativo
+ 
+ matriz4 = matrizes %>%
+   filter(posicao_inicial %in% c(3,5,7,9) &
+            posicao_final %in% c(1)) %>%
+   group_by(trim, educ) %>%
+   summarise(transition = sum(transition)) %>%
+   mutate(educ = as.character(educ))
+ 
+ graf_f_inat = ggplot(matriz4, aes(x = trim, y = transition, 
+                                   color = educ, group = educ)) +
+   scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
+                                 "Completed Primary School and Incompleted High School",
+                                 "Completed High School and Incompleted College Degree",
+                                 "Completed College Degree"), values = carto_pal(name = "Vivid")) +
+   geom_line(size = 2) +
+   geom_point(size = 2) +
+   labs(x = "", y = "", title = "Formal to Inactive") +
+   theme_minimal() +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
+   scale_x_discrete(breaks = paste0(2012:2021, "_1"),
+                    labels = 2012:2021)
+ 
+ 
+ ## Informal - Inativo
+ 
+ matriz5 = matrizes %>%
+   filter(posicao_inicial %in% c(4,6,8,10) &
+            posicao_final %in% c(1)) %>%
+   group_by(trim, educ) %>%
+   summarise(transition = sum(transition)) %>%
+   mutate(educ = as.character(educ))
+ 
+ graf_i_inat = ggplot(matriz5, aes(x = trim, y = transition, 
+                                   color = educ, group = educ)) +
+   scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
+                                 "Completed Primary School and Incompleted High School",
+                                 "Completed High School and Incompleted College Degree",
+                                 "Completed College Degree"), values = carto_pal(name = "Vivid")) +
+   geom_line(size = 2) +
+   geom_point(size = 2) +
+   labs(x = "", y = "", title = "Informal to Inactive") +
+   theme_minimal() +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank()) +
+   scale_x_discrete(breaks = paste0(2012:2021, "_1"),
+                    labels = 2012:2021)
  
  
