@@ -614,8 +614,8 @@ privado_formal = privado_formal %>%
  ## Formal - Desempregado
  
  matriz1 = matrizes %>%
-   filter(posicao_inicial %in% c(3,5,7,9) &
-            posicao_final == 2) %>%
+   filter(posicao_inicial == 1 &
+            posicao_final == 4) %>%
    group_by(trim, educ) %>%
    summarise(transition = sum(transition)) %>%
    mutate(educ = as.character(educ))
@@ -634,15 +634,16 @@ privado_formal = privado_formal %>%
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
          legend.title = element_blank()) +
    scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                    labels = 2012:2021)
+                    labels = 2012:2021) +
+   scale_y_continuous(labels = scales::percent)
  
  
  
  ## Informal - Desempregado
  
  matriz2 = matrizes %>%
-   filter(posicao_inicial %in% c(4,6,8,10) &
-            posicao_final == 2) %>%
+   filter(posicao_inicial == 2 &
+            posicao_final == 4) %>%
    group_by(trim, educ) %>%
    summarise(transition = sum(transition)) %>%
    mutate(educ = as.character(educ))
@@ -661,15 +662,16 @@ privado_formal = privado_formal %>%
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
          legend.title = element_blank()) +
    scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                    labels = 2012:2021)
+                    labels = 2012:2021) +
+   scale_y_continuous(labels = scales::percent)
  
  
  
  ## Formal - Informal
  
  matriz3 = matrizes %>%
-   filter(posicao_inicial %in% c(3,5,7,9) &
-            posicao_final %in% c(4,6,8,10)) %>%
+   filter(posicao_inicial == 1 &
+            posicao_final == 2) %>%
    group_by(trim, educ) %>%
    summarise(transition = sum(transition)) %>%
    mutate(educ = as.character(educ))
@@ -687,15 +689,16 @@ privado_formal = privado_formal %>%
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
          legend.title = element_blank()) +
-   scale_x_discrete(breaks = paste0(2015:2021, "_1"),
-                    labels = 2015:2021)
+   scale_x_discrete(breaks = paste0(2012:2021, "_1"),
+                    labels = 2012:2021) +
+   scale_y_continuous(labels = scales::percent)
  
  
  ## Formal - Inativo
  
  matriz4 = matrizes %>%
-   filter(posicao_inicial %in% c(3,5,7,9) &
-            posicao_final %in% c(1)) %>%
+   filter(posicao_inicial == 1 &
+            posicao_final == 3) %>%
    group_by(trim, educ) %>%
    summarise(transition = sum(transition)) %>%
    mutate(educ = as.character(educ))
@@ -714,14 +717,15 @@ privado_formal = privado_formal %>%
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
          legend.title = element_blank()) +
    scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                    labels = 2012:2021)
+                    labels = 2012:2021) +
+   scale_y_continuous(labels = scales::percent)
  
  
  ## Informal - Inativo
  
  matriz5 = matrizes %>%
-   filter(posicao_inicial %in% c(4,6,8,10) &
-            posicao_final %in% c(1)) %>%
+   filter(posicao_inicial == 2 &
+            posicao_final == 3) %>%
    group_by(trim, educ) %>%
    summarise(transition = sum(transition)) %>%
    mutate(educ = as.character(educ))
@@ -740,6 +744,7 @@ privado_formal = privado_formal %>%
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
          legend.title = element_blank()) +
    scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                    labels = 2012:2021)
+                    labels = 2012:2021) +
+   scale_y_continuous(labels = scales::percent)
  
  

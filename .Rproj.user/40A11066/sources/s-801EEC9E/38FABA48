@@ -3,7 +3,7 @@
     "path": "C:/GitHub/Monografia/Graphics/Gráficos.R",
     "project_path": "Graphics/Gráficos.R",
     "type": "r_source",
-    "hash": "1850491202",
+    "hash": "242436643",
     "contents": "",
     "dirty": false,
     "created": 1648685632726.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "743,1",
-        "scrollLine": "725"
+        "cursorPosition": "641,1",
+        "scrollLine": "626"
     },
     "folds": "",
-    "lastKnownWriteTime": 1648733682,
+    "lastKnownWriteTime": 1648757665,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1648733682794,
+    "last_content_update": 1648757665541,
     "read_only": false,
     "read_only_alternatives": []
 }
