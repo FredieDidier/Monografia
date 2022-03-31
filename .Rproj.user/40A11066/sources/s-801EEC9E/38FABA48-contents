@@ -620,7 +620,7 @@ privado_formal = privado_formal %>%
    summarise(transition = sum(transition)) %>%
    mutate(educ = as.character(educ))
  
- graf_f_d = ggplot(matriz1, aes(x = trim, y = transition, 
+ graf_f_d = ggplot(matriz1, aes(x = trim, y = 100*transition, 
                                 color = educ, group = educ)) +
    scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
                                  "Completed Primary School and Incompleted High School",
@@ -628,15 +628,13 @@ privado_formal = privado_formal %>%
                                  "Completed College Degree"), values = carto_pal(name = "Vivid")) +
    geom_line(size = 2) +
    geom_point(size = 2) +
-   labs(x = "", y = "", title = "Formal to Unemployed") +
+   labs(x = "", y = "", title = "Formal to Unemployed (%)") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
          legend.title = element_blank()) +
    scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                    labels = 2012:2021) +
-   scale_y_continuous(labels = scales::percent)
- 
+                    labels = 2012:2021) 
  
  
  ## Informal - Desempregado
@@ -648,7 +646,7 @@ privado_formal = privado_formal %>%
    summarise(transition = sum(transition)) %>%
    mutate(educ = as.character(educ))
  
- graf_i_d = ggplot(matriz2, aes(x = trim, y = transition, 
+ graf_i_d = ggplot(matriz2, aes(x = trim, y = 100*transition, 
                                 color = educ, group = educ)) +
    scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
                                  "Completed Primary School and Incompleted High School",
@@ -656,14 +654,13 @@ privado_formal = privado_formal %>%
                                  "Completed College Degree"), values = carto_pal(name = "Vivid")) +
    geom_line(size = 2) +
    geom_point(size = 2) +
-   labs(x = "", y = "", title = "Informal to Unemployed") +
+   labs(x = "", y = "", title = "Informal to Unemployed (%)") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
          legend.title = element_blank()) +
    scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                    labels = 2012:2021) +
-   scale_y_continuous(labels = scales::percent)
+                    labels = 2012:2021)
  
  
  
@@ -676,7 +673,7 @@ privado_formal = privado_formal %>%
    summarise(transition = sum(transition)) %>%
    mutate(educ = as.character(educ))
  
- graf_f_i = ggplot(matriz3, aes(x = trim, y = transition, 
+ graf_f_i = ggplot(matriz3, aes(x = trim, y = 100*transition, 
                                 color = educ, group = educ)) +
    scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
                                  "Completed Primary School and Incompleted High School",
@@ -684,14 +681,13 @@ privado_formal = privado_formal %>%
                                  "Completed College Degree"), values = carto_pal(name = "Vivid")) +
    geom_line(size = 2) +
    geom_point(size = 2) +
-   labs(x = "", y = "", title = "Formal to Informal") +
+   labs(x = "", y = "", title = "Formal to Informal (%)") +
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
          legend.title = element_blank()) +
    scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                    labels = 2012:2021) +
-   scale_y_continuous(labels = scales::percent)
+                    labels = 2012:2021)
  
  
  ## Formal - Inativo
@@ -703,7 +699,7 @@ privado_formal = privado_formal %>%
    summarise(transition = sum(transition)) %>%
    mutate(educ = as.character(educ))
  
- graf_f_inat = ggplot(matriz4, aes(x = trim, y = transition, 
+ graf_f_inat = ggplot(matriz4, aes(x = trim, y = 100*transition, 
                                    color = educ, group = educ)) +
    scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
                                  "Completed Primary School and Incompleted High School",
@@ -717,8 +713,7 @@ privado_formal = privado_formal %>%
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
          legend.title = element_blank()) +
    scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                    labels = 2012:2021) +
-   scale_y_continuous(labels = scales::percent)
+                    labels = 2012:2021)
  
  
  ## Informal - Inativo
@@ -730,7 +725,7 @@ privado_formal = privado_formal %>%
    summarise(transition = sum(transition)) %>%
    mutate(educ = as.character(educ))
  
- graf_i_inat = ggplot(matriz5, aes(x = trim, y = transition, 
+ graf_i_inat = ggplot(matriz5, aes(x = trim, y = 100*transition, 
                                    color = educ, group = educ)) +
    scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
                                  "Completed Primary School and Incompleted High School",
@@ -744,7 +739,6 @@ privado_formal = privado_formal %>%
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
          legend.title = element_blank()) +
    scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                    labels = 2012:2021) +
-   scale_y_continuous(labels = scales::percent)
+                    labels = 2012:2021)
  
  
