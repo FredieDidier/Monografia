@@ -9,7 +9,7 @@ df_peso = df_peso[-4,]
 
 ### Matriz de Transicao Geral ###
 
-df = data_2019 %>%
+df = df %>%
   group_by(id_code) %>%
   mutate(id = n()) %>%
   filter(id == 4) %>%

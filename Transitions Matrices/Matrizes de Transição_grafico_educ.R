@@ -1,5 +1,10 @@
 library(tidyverse)
 
+### filtrar pra pessoas de determinada educação
+### Multiplicar pela soma total do peso amostral
+### Identificar esses mesmos indivíduos no trimestre seguinte
+### E utilizar o peso amostral desse indivíduo no trimestre anterior
+
 trimestres <- c("2012_1", "2012_2", "2012_3", "2012_4",
                    "2013_1", "2013_2", "2013_3", "2013_4",
                    "2014_1", "2014_2", "2014_3", "2014_4",
