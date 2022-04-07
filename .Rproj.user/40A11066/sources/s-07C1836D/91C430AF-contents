@@ -1,3 +1,0 @@
-
-
-df = haven::read_dta("./Raw Data/Painel/pnadcontinua/PNADC2012.dta")
