@@ -26,7 +26,7 @@ library(estimatr)
 library(rcartocolor)
 library(grid)
 library(gridExtra)
-library(Hmisc)
+library(modi)
 
 ###########################################
 #                                         #

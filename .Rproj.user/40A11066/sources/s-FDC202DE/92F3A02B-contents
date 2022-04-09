@@ -1,0 +1,20 @@
+
+dat = df %>%
+  filter(job_function %in% c(3) & worker == 1 & work_category == 1) %>%
+  select(job_function, worker, work_category, age, year_quarter, weights) %>%
+  group_by(year_quarter) %>%
+  mutate(age_peso = (age * weights)/sum(weights)) %>%
+  mutate(var = weighted.var(age)) %>%
+  mutate(sd = sqrt(var)) %>%
+  summarise(across(c(age_peso, sd), sum))
+
+
+dat_1 = df %>%
+  filter(job_function %in% c(3) & worker == 1 & work_category == 1) %>%
+  select(job_function, worker, work_category, years_of_study, year_quarter, 
+         weights) %>%
+  mutate(study_peso = (years_of_study * weights)/sum(weights)) %>%
+  summarise(across(c(study_peso), sum))
+
+m = mean(dat_1$study_peso)
+mm = sd(dat_1$study_peso)

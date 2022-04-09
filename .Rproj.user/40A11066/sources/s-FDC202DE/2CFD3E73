@@ -3,7 +3,7 @@
     "path": "C:/GitHub/Monografia/analysis/_descriptive_table.R",
     "project_path": "analysis/_descriptive_table.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "4138109496",
     "contents": "",
     "dirty": false,
     "created": 1649512232879.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "213,0",
-        "scrollLine": "60"
+        "cursorPosition": "360,0",
+        "scrollLine": "342"
     },
     "folds": "",
-    "lastKnownWriteTime": 1649508150,
+    "lastKnownWriteTime": 1649541092,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1649508150,
+    "last_content_update": 1649541092116,
     "read_only": false,
     "read_only_alternatives": []
 }
