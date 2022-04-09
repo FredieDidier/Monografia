@@ -1,0 +1,8 @@
+library(extrafont)
+library(rcartocolor)
+
+font_import(path = "C:/Users/Fredie/AppData/Local/Microsoft/Windows/Fonts")
+y
+loadfonts(device = "win")
+
+

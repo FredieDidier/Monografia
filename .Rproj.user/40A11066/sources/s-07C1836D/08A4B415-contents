@@ -1,9 +1,12 @@
 # Script para rodar os códigos que geram as bases prontas para produzir resultados
 # Estrutura:
 #
-# 1. Gerar matriz de transicao 2019
+# 1. Gerar matriz de transicao 2019 Geral
+# 2. Gerar matriz de transicao 2019 por nivel educ
 # 2. Gerar matriz de transicao 2012 - 2021 por educacao
-# 3. Gerar gráficos sobre elementos da matriz
+# 3. Gerar graficos sobre elementos da matriz 2012-2021
+# 4. Gerar graficos relacionados ao mercado de trabalho e nivel educ em 2019
+# 5. Gerar informacoes sobre tabela descritiva
 
 
 ###########
@@ -21,12 +24,14 @@ library(extrafont)
 library(modelsummary)
 library(estimatr)
 library(rcartocolor)
+library(grid)
+library(gridExtra)
 
-########################################
-#                                      #
-# 1) Gerar matriz de transicao 2019    #
-#                                      #
-########################################
+###########################################
+#                                         #
+# 1) Gerar matriz de transicao 2019 Geral # 
+#                                         #
+###########################################
 
 ############################
 #  1.1) Lendo paineis      #
@@ -68,40 +73,36 @@ paineis = list(
   
 )
 
-##############################
-#  1.2) Gerando matriz 2019  #
-#############################
+###################################
+#  1.2) Gerando matriz 2019 Geral #
+###################################
 
 source("./analysis/_transition_matrix_function.R")
 
-pesos = c(
-  paineis["2019_1"] %>%
-    filter(year_quarter == "2019_1") %>%
-    {.$weights} %>%
-    sum(),
-  
-  paineis["2019_2"] %>%
-    filter(year_quarter == "2019_2") %>%
-    {.$weights} %>%
-    sum(),
-  
-  paineis["2019_3"] %>%
-    filter(year_quarter == "2019_3") %>%
-    {.$weights} %>%
-    sum()
-)
+matriz1 = cria_matriz_transicao(paineis["2019_1"], "2019_1", "2019_2", prop = FALSE)
+matriz2 = cria_matriz_transicao(paineis["2019_2"], "2019_2", "2019_3", prop = FALSE)
+matriz3 = cria_matriz_transicao(paineis["2019_3"], "2019_3", "2019_4", prop = FALSE)
+matriz_soma = matriz1 + matriz2 + matriz3
 
-matriz1 = cria_matriz_transicao(paineis["2019_1"], "2019_1", "2019_2")
-matriz2 = cria_matriz_transicao(paineis["2019_2"], "2019_2", "2019_3")
-matriz3 = cria_matriz_transicao(paineis["2019_3"], "2019_3", "2019_4")
-matriz_final = (matriz1*pesos[1] + matriz2*pesos[2]
-                + matriz3 * pesos[3])/(sum(pesos))
+matriz_final = scale(matriz_soma, center = F, scale = rowSums(matriz_soma))
+
 
 
 ###########################################
 #                                         #
-# 2) Gerar matriz de transicao 2012-2021  #
+# 3) Gerar matriz de transicao 2012-2021  #
 #                                         #
 ###########################################
 
 source("./analysis/_transition_matrices_by_educ.R")
+
+
+#############################################################################
+#                                                                           #
+# 4) Gerar graficos relacionados ao mercado de trabalho e nivel educ em 2019#                #
+#                                                                           #
+#############################################################################
+
+source("./analysis/_graph_unemployed_2019.R")
+
+ggsave("desemp.png", path = "./output")

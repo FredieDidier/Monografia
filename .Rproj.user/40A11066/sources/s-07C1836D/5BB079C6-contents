@@ -1,0 +1,56 @@
+funcao = function(df, initial_quarter, final_quarter, initial_position,
+                  final_position, prop = TRUE){
+  df = df %>%
+    filter(year_quarter %in% c(initial_quarter, final_quarter)) %>%
+    group_by(id_code) %>%
+    mutate(new_id = n()) %>%
+    filter(new_id == 2) 
+  
+  df_aux = df %>%
+    filter(year_quarter == initial_quarter &
+             position == initial_position)
+  
+  
+  initial_number = sum(df_aux$weights)
+  
+  initial_list = df_aux$id_code
+  
+  df_2 = df %>%
+    group_by(id_code) %>%
+    mutate(year_quarter_num = as.numeric(year_quarter %>%
+                                           str_remove("_"))) %>%
+    mutate(weights = first(weights, order_by = year_quarter_num)) %>%
+    filter(year_quarter == final_quarter &
+             position == final_position)
+  
+  df_2 = df_2 %>%
+    filter(id_code %in% initial_list)
+  
+  final_number = sum(df_2$weights)
+  
+  if(prop){
+    final_number/initial_number
+  }
+  else{
+    final_number
+  }
+  }
+
+####
+
+cria_matriz_transicao = function(df, initial_quarter, final_quarter, n, prop = TRUE){
+  
+  matriz = matrix(nrow = n, ncol = n)
+  
+  for(i in 1:n){
+    for(j in 1:n){
+      
+      matriz[i,j] = funcao(df = df,initial_quarter = initial_quarter,
+                           final_quarter = final_quarter, initial_position = i,
+                           final_position = j, prop = prop)
+      
+    }
+  }
+  
+  matriz
+}

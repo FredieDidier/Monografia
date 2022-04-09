@@ -108,5 +108,5 @@ df = map(list_trimestres,
 # 2.2) Agregando codigo setor    #                             
 ##################################
 
-source("./build/_aggregating_sector_codes")
+source("./build/_aggregating_sector_codes.R")
 
