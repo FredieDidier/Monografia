@@ -55,6 +55,15 @@ matriz_final = scale(matriz_soma, center = F, scale = rowSums(matriz_soma))
 
 
 
+##############################################
+#                                            #
+# 2) Gerar matriz de transicao 2019 por educ #  
+#                                            #
+##############################################
+
+source("./analysis/_transition_matrices_by_educ.R")
+
+
 ###########################################
 #                                         #
 # 3) Gerar matriz de transicao 2012-2021  #
