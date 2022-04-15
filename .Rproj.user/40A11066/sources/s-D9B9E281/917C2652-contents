@@ -1,0 +1,2 @@
+df = painel_2019 %>%
+  filter()

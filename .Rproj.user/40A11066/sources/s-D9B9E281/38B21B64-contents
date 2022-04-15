@@ -1,0 +1,50 @@
+library(rcartocolor)
+library(extrafont)
+
+df = read_rds("./input/painel_2019.rds")
+
+# Grafico de Desempregados em 2019
+
+desempregados = df %>%
+  filter(workforce_condition == 1, occupation_condition == 2 & worker == 2) %>%
+  select(workforce_condition, occupation_condition, worker, higher_educ_level, year_quarter) %>%
+  mutate(higher_educ_label = case_when(higher_educ_level %in% c(1) ~"Uneducated",
+                                       higher_educ_level %in% c(2) ~ "Primary School Incompleted",
+                                       higher_educ_level %in% c(3) ~ "Primary School Completed",
+                                       higher_educ_level %in% c(4) ~ "High School Incompleted",
+                                       higher_educ_level %in% c(5) ~ "High School Completed",
+                                       higher_educ_level %in% c(6) ~ "College Degree Incompleted",
+                                       higher_educ_level %in% c(7) ~ "College Degree Completed")) %>%
+  group_by(higher_educ_level) %>% mutate(labels = sum(weights)) %>%
+  ungroup() %>%
+  mutate(labell = round(labels/sum(weights), digits = 2))
+
+desempregados$labell = desempregados$labell * 100
+
+desempregados = desempregados %>%
+  select(year_quarter, higher_educ_label, higher_educ_level, labell) %>%
+  distinct() %>%
+  mutate(labelll = case_when(higher_educ_label == "Uneducated" & year_quarter == "2019_1" ~ 2,
+                             higher_educ_label == "Primary School Incompleted" & year_quarter == "2019_1" ~ 23,
+                             higher_educ_label == "Primary School Completed" & year_quarter == "2019_1" ~ 9,
+                             higher_educ_label == "High School Incompleted" & year_quarter == "2019_1" ~ 12,
+                             higher_educ_label == "High School Completed" & year_quarter == "2019_1" ~ 37,
+                             higher_educ_label == "College Degree Incompleted" & year_quarter == "2019_1" ~ 7,
+                             higher_educ_label == "College Degree Completed" & year_quarter == "2019_1" ~ 9)) %>%
+  filter(!is.na(labelll))
+
+desemp = ggplot(desempregados, aes(x = "", y = labelll,
+                                   fill = factor(higher_educ_label))) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(name = "Education Level",
+                    values = carto_pal(name = "Prism")) +
+  labs(x = "", y = "",
+       title = "Education Level of the Unemployed in 2019") +
+  theme_minimal() +
+  theme(text = element_text(family = "LM Roman 10"),
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+        legend.title = element_blank(),
+        axis.text = element_blank()) +
+  geom_label(aes(x = 1.2, label = paste0(labelll, "%")), position = position_stack(vjust = 0.5),
+             show.legend = F)+
+  coord_polar("y")

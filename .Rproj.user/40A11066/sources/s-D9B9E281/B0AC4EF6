@@ -1,0 +1,26 @@
+{
+    "id": "B0AC4EF6",
+    "path": "C:/GitHub/Monografia/analysis/_transition_matrices_by_educ.R",
+    "project_path": "analysis/_transition_matrices_by_educ.R",
+    "type": "r_source",
+    "hash": "2300866662",
+    "contents": "",
+    "dirty": false,
+    "created": 1649765289548.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "177,0",
+        "scrollLine": "158"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1650056193,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1650056193421,
+    "read_only": false,
+    "read_only_alternatives": []
+}
