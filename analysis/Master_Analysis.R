@@ -96,6 +96,9 @@ ggsave("transicao_formal_inativo.png", path = "./output",
 ggsave("transicao_informal_inativo.png", path = "./output",
        width = 11.19, height = 6.64)
 
+ggsave("transicao_informal_formal.png", path = "./output",
+       width = 11.19, height = 6.64)
+
 
 #############################################################################
 #                                                                           #
