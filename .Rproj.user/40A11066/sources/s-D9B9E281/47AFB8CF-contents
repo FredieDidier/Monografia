@@ -51,9 +51,9 @@ matriz2 = cria_matriz_transicao(painel_2019, "2019_2", "2019_3", 10, prop = FALS
 matriz3 = cria_matriz_transicao(painel_2019, "2019_3", "2019_4", 10, prop = FALSE)
 matriz_soma = matriz1 + matriz2 + matriz3
 
-matriz_final = scale(matriz_soma, center = F, scale = rowSums(matriz_soma))
+matriz_final = scale(matriz_soma, center = F, scale = colSums(matriz_soma))
 
-
+saveRDS(matriz_final, "./input/transition_matrix_2019.rds")
 
 ##############################################
 #                                            #
