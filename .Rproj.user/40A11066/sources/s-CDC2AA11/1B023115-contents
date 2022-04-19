@@ -160,11 +160,6 @@ source("./analysis/_graph_private_sector_informal_2019.R")
 ggsave("informal_private_sector_2019.png", path = "./output", width = 11.19,
        height = 6.64)
 
-source("./analysis/_graph_wages_by_educ_2019.R")
-
-ggsave("wages_by_educ_2019.png", path = "./output")
-
-
 ################################################
 #                                              #
 # 6) Gerar informacoes sobre tabela descritiva # 
