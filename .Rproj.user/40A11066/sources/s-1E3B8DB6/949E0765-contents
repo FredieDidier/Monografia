@@ -1,0 +1,13 @@
+
+## Próximos passos - Monografia
+
+
+# Colapsar inativos e desempregados
+# Fazer gráficos de 2012-2021
+# Davis/Haltiwanger
+# Job Displacement and Job Flows - Literatura
+# OECD Employment Outlook
+# Gabriel Ulyseea
+# OCUPADO - NÃO EMPREGO
+# FORMAL - NÃO EMPREGO
+# INFORMAL - NÃO EMPREGO

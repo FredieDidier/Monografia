@@ -1,0 +1,175 @@
+# Script para rodar os códigos que geram as bases prontas para produzir resultados
+# Estrutura:
+#
+# 1. Gerar matriz de transicao 2019 Geral
+# 2. Gerar matriz de transicao 2019 por nivel educ
+# 3. Gerar matriz de transicao 2012 - 2021 por educacao
+# 4. Gerar graficos sobre elementos da matriz 2012-2021
+# 5. Gerar graficos relacionados ao mercado de trabalho e nivel educ em 2019
+# 6. Gerar informacoes sobre tabela descritiva
+
+
+###########
+#  Setup  #
+###########
+
+# Limpeza do environnment
+
+rm(list = ls())
+
+# Pacotes utilizados
+
+library(tidyverse)
+library(extrafont)
+library(modelsummary)
+library(estimatr)
+library(rcartocolor)
+library(grid)
+library(gridExtra)
+library(Hmisc)
+
+###########################################
+#                                         #
+# 1) Gerar matriz de transicao 2019 Geral # 
+#                                         #
+###########################################
+
+############################
+#  1.1) Lendo painel     #
+############################
+
+painel_2019 = readr::read_rds("./input/painel_2019.rds")
+
+###################################
+#  1.2) Gerando matriz 2019 Geral #
+###################################
+
+source("./analysis/_transition_matrix_function.R")
+
+matriz1 = cria_matriz_transicao(painel_2019, "2019_1", "2019_2", 10, prop = FALSE)
+matriz2 = cria_matriz_transicao(painel_2019, "2019_2", "2019_3", 10, prop = FALSE)
+matriz3 = cria_matriz_transicao(painel_2019, "2019_3", "2019_4", 10, prop = FALSE)
+matriz_soma = matriz1 + matriz2 + matriz3
+
+matriz_final = scale(matriz_soma, center = F, scale = colSums(matriz_soma))
+
+saveRDS(matriz_final, "./input/transition_matrix_2019.rds")
+
+##############################################
+#                                            #
+# 2) Gerar matriz de transicao 2019 por educ #  
+#                                            #
+##############################################
+
+source("./analysis/_transition_matrices_by_educ.R")
+
+
+###########################################
+#                                         #
+# 3) Gerar matriz de transicao 2012-2021  #
+#                                         #
+###########################################
+
+source("./analysis/_transition_matrices_by_educ.R")
+
+
+####################################################
+#                                                  #
+# 4) Gerar graficos de transicao e outros 2012-2021#
+#                                                  #
+####################################################
+
+source("./analysis/_graphs.R")
+
+ggsave("transicao_formal_nao_empregado.png", path = "./output",
+       width = 11.19, height = 6.64)
+
+ggsave("transicao_informal_nao_empregado.png", path = "./output",
+       width = 11.19, height = 6.64)
+
+ggsave("transicao_ocupado_nao_empregado.png", path = "./output",
+       width = 11.19, height = 6.64)
+
+ggsave("ocupados_priv_and_pub_cart_ass.png", path = "./output",
+       width = 11.19, height = 6.64)
+
+ggsave("ocupados_priv_and_pub__s_cart_ass.png", path = "./output",
+       width = 11.19, height = 6.64)
+
+ggsave("ocupados_conta_propria_inss.png", path = "./output",
+       width = 11.19, height = 6.64)
+
+ggsave("ocupados_conta_propria_s_inss.png", path = "./output",
+       width = 11.19, height = 6.64)
+
+
+#############################################################################
+#                                                                           #
+# 5) Gerar graficos relacionados ao mercado de trabalho e nivel educ em 2019#                #
+#                                                                           #
+#############################################################################
+
+font_import(path = "C:/Users/Fredie/AppData/Local/Microsoft/Windows/Fonts")
+y
+loadfonts(device = "win")
+
+source("./analysis/_graph_unemployed_2019.R")
+
+ggsave("unemployed_2019.png", path = "./output", width = 11.19,
+       height = 6.64)
+
+source("./analysis/_graph_self_employed_formal_2019.R")
+
+ggsave("formal_self_employed_2019.png", path = "./output", width = 11.19,
+       height = 6.64)
+
+source("./analysis/_graph_self_employed_informal_2019.R")
+
+ggsave("informal_self_employed.png", path = "./output", width = 11.19,
+       height = 6.64)
+
+source("./analysis/_graph_public_sector_formal_2019.R")
+
+ggsave("formal_public_sector_2019.png", path = "./output", width = 11.19,
+       height = 6.64)
+
+source("./analysis/_graph_public_sector_informal_2019.R")
+
+ggsave("informal_public_sector_2019.png", path = "./output", width = 11.19,
+       height = 6.64)
+
+source("./analysis/_graph_employers_formal_2019.R")
+
+ggsave("formal_employers_2019.png", path = "./output", width = 11.19,
+       height = 6.64)
+
+source("./analysis/_graph_employers_informal_2019.R")
+
+ggsave("informal_employers_2019.png", path = "./output", width = 11.19,
+       height = 6.64)
+
+source("./analysis/_graph_inactives_2019.R")
+
+ggsave("inactives_2019.png", path = "./output", width = 11.19,
+       height = 6.64)
+
+source("./analysis/_graph_private_sector_formal_2019.R")
+
+ggsave("formal_private_sector_2019.png", path = "./output", width = 11.19,
+       height = 6.64)
+
+source("./analysis/_graph_private_sector_informal_2019.R")
+
+ggsave("informal_private_sector_2019.png", path = "./output", width = 11.19,
+       height = 6.64)
+
+################################################
+#                                              #
+# 6) Gerar informacoes sobre tabela descritiva # 
+#                                              #
+################################################
+
+source("./analysis/_descriptive_table.R")
+
+
+

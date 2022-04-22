@@ -1,0 +1,18 @@
+base = read.csv("./input/prop_self_employed_inss_ocupados_por_educ.csv")
+
+base = base %>%
+  mutate(educ_level = case_when(educ == 1 ~ 1,
+                                educ == 2 ~ 2,
+                                educ == 3 ~ 3,
+                                educ == 4 ~ 4))
+
+base2 = read.csv("./input/prop_self_employed_s_inss_ocupados_por_educ.csv")
+
+base2 = base2 %>%
+  mutate(educ_level = case_when(educ == 1 ~ 5,
+                                educ == 2 ~ 6,
+                                educ == 3 ~ 7,
+                                educ == 4 ~ 8))
+
+
+base_final = bind_rows(base, base2)
