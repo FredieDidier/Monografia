@@ -64,7 +64,7 @@ clean_painel = function(df){
            job_function, occupation_condition, position, social_security_taxpayer,
            higher_educ_level, work_category, gender, race, age,
            years_of_study, monthly_work_income, weights, job_start, sector_code,
-           household_location) %>%
+           household_location, higher_educ_course_attended) %>%
     mutate(educ = case_when(
       higher_educ_level %in% c(1,2) ~ 1,
       higher_educ_level %in% c(3,4) ~ 2,

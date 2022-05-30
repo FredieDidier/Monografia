@@ -24,15 +24,16 @@ worker = worker %>%
 variables = data %>%
   select(id_code, race, gender, higher_educ_level, weights,
          job_start, worker, year_quarter, household_location, job_function,
-         social_security_taxpayer, sector_code)
+         social_security_taxpayer, sector_code, higher_educ_course_attended,
+         work_category)
 
 merge = left_join(worker, variables)
 
 merge = merge %>%
-  mutate(unemployed = case_when(worker == 1 & social_security_taxpayer == 1 &
-                                  job_function == 6 ~ 0,
-                                worker == 2 & social_security_taxpayer == 2 &
-                                  job_function  == 6 ~ 1)) %>%
+  mutate(unemployed = case_when(worker == 1 & work_category == 1 &
+                                  job_function == 3 ~ 0,
+                                worker == 2 & work_category == 2 &
+                                  job_function  == 3 ~ 1)) %>%
   filter(year_quarter %in% c("2020_1", "2020_2", "2020_3", "2020_4")) %>%
   mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
                            race == 1 | race == 3 ~ 0))

@@ -1,0 +1,17 @@
+---
+title: "Trabalho G1 DSE"
+author: "Fredie Didier"
+date: "19/05/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("C:\\Fredinho\\Dados")
+library(tidyverse)
+```
+
+```{r}
+base = readxl::read_xlsx("C:\\Fredinho\\Dados\\Data_Extract_From_World_Development.xlsx")
+```
+
