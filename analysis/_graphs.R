@@ -14,7 +14,7 @@ library(gridExtra)
 
  ## Gráfico Matrizes
  
- matrizes = read.csv("./input/transicoes_por_educ_3_3.csv")
+ matrizes = read.csv("./input/transicoes_por_educ_3_x_3.csv")
  
  ## Formal - Não empregado
  

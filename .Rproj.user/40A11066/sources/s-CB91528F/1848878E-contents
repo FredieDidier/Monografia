@@ -23,7 +23,7 @@ priv_public_reg_workers = map2_dfr(trimestres, educ,
                                    purrr::insistently(function(trim, educ){
                                      
                                      df <- readr::read_rds(
-                                       paste0("input/painel_",
+                                       paste0("input/trimestre_",
                                               trim,
                                               "_",
                                               educ,
@@ -52,7 +52,7 @@ priv_public_unreg_workers = map2_dfr(trimestres, educ,
                                      purrr::insistently(function(trim, educ){
                                        
                                        df <- readr::read_rds(
-                                         paste0("input/painel_",
+                                         paste0("input/trimestre_",
                                                 trim,
                                                 "_",
                                                 educ,
@@ -81,7 +81,7 @@ self_employed_inss_taxpayer = map2_dfr(trimestres, educ,
                                        purrr::insistently(function(trim, educ){
                                          
                                          df <- readr::read_rds(
-                                           paste0("input/painel_",
+                                           paste0("input/trimestre_",
                                                   trim,
                                                   "_",
                                                   educ,
@@ -109,7 +109,7 @@ self_employed__s_inss_taxpayer = map2_dfr(trimestres, educ,
                                        purrr::insistently(function(trim, educ){
                                          
                                          df <- readr::read_rds(
-                                           paste0("input/painel_",
+                                           paste0("input/trimestre_",
                                                   trim,
                                                   "_",
                                                   educ,

@@ -90,19 +90,7 @@ ggsave("transicao_informal_nao_empregado.png", path = "./output",
 ggsave("transicao_ocupado_nao_empregado.png", path = "./output",
        width = 11.19, height = 6.64)
 
-ggsave("ocupados_priv_and_pub_cart_ass.png", path = "./output",
-       width = 11.19, height = 6.64)
-
-ggsave("ocupados_priv_and_pub__s_cart_ass.png", path = "./output",
-       width = 11.19, height = 6.64)
-
 ggsave("ocupados_priv_and_pub_2012-2021.png", path = "./output",
-       width = 11.19, height = 6.64)
-
-ggsave("ocupados_conta_propria_inss.png", path = "./output",
-       width = 11.19, height = 6.64)
-
-ggsave("ocupados_conta_propria_s_inss.png", path = "./output",
        width = 11.19, height = 6.64)
 
 ggsave("ocupados_conta_propria_2012-2021.png", path = "./output",

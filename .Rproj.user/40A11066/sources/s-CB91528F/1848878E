@@ -3,7 +3,7 @@
     "path": "C:/GitHub/Monografia/analysis/_prop_occupied.R",
     "project_path": "analysis/_prop_occupied.R",
     "type": "r_source",
-    "hash": "640200295",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1653993654142.0,
@@ -11,14 +11,16 @@
     "relative_order": 4,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "131,0",
+        "scrollLine": "113"
     },
     "folds": "",
-    "lastKnownWriteTime": 1650650650,
+    "lastKnownWriteTime": 1654022555,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1650650650,
+    "last_content_update": 1654022555627,
     "read_only": false,
     "read_only_alternatives": []
 }
