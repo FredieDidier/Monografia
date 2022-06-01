@@ -67,6 +67,8 @@ library(gridExtra)
  
  ## Ocupado - Não empregado
  
+ matrizes = read.csv("./input/transicoes_por_educ_2_x_2.csv")
+ 
  matriz_ocupado_n_empreg = matrizes %>%
    filter(posicao_inicial == 1 &
             posicao_final == 2) %>%
