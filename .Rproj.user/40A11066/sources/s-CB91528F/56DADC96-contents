@@ -153,6 +153,31 @@ source("./analysis/_graph_private_sector_informal_2019.R")
 ggsave("informal_private_sector_2019.png", path = "./output", width = 11.19,
        height = 6.64)
 
+source("./analysis/_graphs_ggarrange.R")
+
+ggsave("self_employed.png", path = "./output", width = 13.66,
+       height = 7.05)
+
+source("./analysis/_graphs_ggarrange.R")
+
+ggsave("private_sector.png", path = "./output", width = 13.66,
+       height = 7.05)
+
+source("./analysis/_graphs_ggarrange.R")
+
+ggsave("public_sector.png", path = "./output", width = 13.66,
+       height = 7.05)
+
+source("./analysis/_graphs_ggarrange.R")
+
+ggsave("employers.png", path = "./output", width = 13.66,
+       height = 7.05)
+
+source("./analysis/_graph_wages_by_educ.R")
+
+ggsave("salario_educ.png", path = "./output", width = 13.66,
+       height = 7.05)
+
 ################################################
 #                                              #
 # 6) Gerar informacoes sobre tabela descritiva # 

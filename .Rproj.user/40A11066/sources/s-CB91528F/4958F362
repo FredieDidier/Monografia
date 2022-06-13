@@ -1,26 +1,26 @@
 {
-    "id": "1848878E",
+    "id": "4958F362",
     "path": "C:/GitHub/Monografia/analysis/_prop_occupied.R",
     "project_path": "analysis/_prop_occupied.R",
     "type": "r_source",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1653993654142.0,
+    "created": 1655155164846.0,
     "source_on_save": false,
-    "relative_order": 4,
+    "relative_order": 2,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "131,0",
-        "scrollLine": "113"
+        "cursorPosition": "80,75",
+        "scrollLine": "0"
     },
     "folds": "",
     "lastKnownWriteTime": 1654022555,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1654022555627,
+    "last_content_update": 1654022555,
     "read_only": false,
     "read_only_alternatives": []
 }

@@ -8,10 +8,10 @@ trab_conta_propria_n_INSS = df %>%
   select(social_security_taxpayer, higher_educ_level, year_quarter,
          job_function, worker, weights) %>%
   filter(job_function == 6 & social_security_taxpayer == 2 & worker == 1)  %>%
-  mutate(higher_educ_label = case_when(higher_educ_level %in% c(1,2) ~"Uneducated and Primary School Incompleted",
-                                       higher_educ_level %in% c(3,4) ~ "Primary School Completed and Incompleted High School",
-                                       higher_educ_level %in% c(5,6) ~ "Completed High School and Incompleted College Degree",
-                                       higher_educ_level %in% c(7) ~ "Completed College Degree"))   %>%
+  mutate(higher_educ_label = case_when(higher_educ_level %in% c(1,2) ~"Uneducated and Primary School Incomplete",
+                                       higher_educ_level %in% c(3,4) ~ "Primary School Complete and Incomplete High School",
+                                       higher_educ_level %in% c(5,6) ~ "Complete High School and Incomplete College Degree",
+                                       higher_educ_level %in% c(7) ~ "Complete College Degree"))   %>%
   group_by(higher_educ_level) %>% mutate(labels = sum(weights)) %>%
   ungroup() %>%
   mutate(labell = round(labels/sum(weights), digits = 2))
@@ -21,10 +21,10 @@ trab_conta_propria_n_INSS$labell = trab_conta_propria_n_INSS$labell * 100
 trab_conta_propria_n_INSS = trab_conta_propria_n_INSS %>%
   select(year_quarter, higher_educ_label, higher_educ_level, labell) %>%
   distinct() %>%
-  mutate(labelll = case_when(higher_educ_label == "Uneducated and Primary School Incompleted" & year_quarter == "2019_1" ~ 39,
-                             higher_educ_label == "Primary School Completed and Incompleted High School" & year_quarter == "2019_1" ~ 18,
-                             higher_educ_label == "Completed High School and Incompleted College Degree" & year_quarter == "2019_1" ~ 33,
-                             higher_educ_label == "Completed College Degree" & year_quarter == "2019_1" ~ 10)) %>%
+  mutate(labelll = case_when(higher_educ_label == "Uneducated and Primary School Incomplete" & year_quarter == "2019_1" ~ 39,
+                             higher_educ_label == "Primary School Complete and Incomplete High School" & year_quarter == "2019_1" ~ 18,
+                             higher_educ_label == "Complete High School and Incomplete College Degree" & year_quarter == "2019_1" ~ 33,
+                             higher_educ_label == "Complete College Degree" & year_quarter == "2019_1" ~ 10)) %>%
   filter(!is.na(labelll))
 
 trab_conta_propria_n_INSS = trab_conta_propria_n_INSS[c(2,3,4,6),]
@@ -34,10 +34,10 @@ grafico1 = ggplot(trab_conta_propria_n_INSS, aes(x = year_quarter, y = labelll,
   geom_bar(stat="identity") +
   scale_fill_manual(name = "Education Level",
                     values = carto_pal(name = "Prism"), 
-                    labels = c("Uneducated and Incompleted Primary School",
-                               "Completed Primary School and Incompleted High School",
-                               "Completed High School and Incompleted College Degree",
-                               "Completed College Degree")) +
+                    labels = c("Uneducated and Incomplete Primary School",
+                               "Complete Primary School and Incomplete High School",
+                               "Complete High School and Incomplete College Degree",
+                               "Complete College Degree")) +
   labs(x = "", y = "",
        title = "Education Level of Self-Employed Non-Social Security Contributors in 2019") +
   theme_minimal() +

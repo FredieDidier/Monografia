@@ -25,10 +25,10 @@ library(gridExtra)
  
  graf_f_n_empreg = ggplot(matriz_formal_n_empreg, aes(x = trim, y = 100*transition, 
                                 color = educ, group = educ)) +
-   scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
-                                 "Completed Primary School and Incompleted High School",
-                                 "Completed High School and Incompleted College Degree",
-                                 "Completed College Degree"), values = carto_pal(name = "Vivid")) +
+   scale_color_manual(labels = c("Uneducated and Incomplete Primary School",
+                                 "Complete Primary School and Incomplete High School",
+                                 "Complete High School and Incomplete College Degree",
+                                 "Complete College Degree"), values = carto_pal(name = "Vivid")) +
    geom_line(size = 2) +
    geom_point(size = 2) +
    labs(x = "", y = "", title = "Formal to Non-Employee (%)") +
@@ -49,10 +49,10 @@ library(gridExtra)
  
  graf_i_n_empreg = ggplot(matriz_informal_n_empreg, aes(x = trim, y = 100*transition, 
                                 color = educ, group = educ)) +
-   scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
-                                 "Completed Primary School and Incompleted High School",
-                                 "Completed High School and Incompleted College Degree",
-                                 "Completed College Degree"), values = carto_pal(name = "Vivid")) +
+   scale_color_manual(labels = c("Uneducated and Incomplete Primary School",
+                                 "Complete Primary School and Incomplete High School",
+                                 "Complete High School and Incomplete College Degree",
+                                 "Complete College Degree"), values = carto_pal(name = "Vivid")) +
    geom_line(size = 2) +
    geom_point(size = 2) +
    labs(x = "", y = "", title = "Informal to Non-Employee (%)") +
@@ -76,10 +76,10 @@ library(gridExtra)
  
  graf_occupied_n_empreg = ggplot(matriz_ocupado_n_empreg, aes(x = trim, y = 100*transition, 
                                 color = educ, group = educ)) +
-   scale_color_manual(labels = c("Uneducated and Incompleted Primary School",
-                                 "Completed Primary School and Incompleted High School",
-                                 "Completed High School and Incompleted College Degree",
-                                 "Completed College Degree"), values = carto_pal(name = "Vivid")) +
+   scale_color_manual(labels = c("Uneducated and Incomplete Primary School",
+                                 "Complete Primary School and Incomplete High School",
+                                 "Complete High School and Incomplete College Degree",
+                                 "Complete College Degree"), values = carto_pal(name = "Vivid")) +
    geom_line(size = 2) +
    geom_point(size = 2) +
    labs(x = "", y = "", title = "Occupied to Non-Employee (%)") +
@@ -119,14 +119,14 @@ library(gridExtra)
  
  graf_occupied_self_employed = ggplot(ocup_self_employed, aes(x = year_quarter, y = 100*proporcao, 
                                                                                      color = educ_level, group = educ_level)) +
-   scale_color_manual(labels = c("(Formal) Uneducated and Incompleted Primary School",
-                                 "(Formal) Completed Primary School and Incompleted High School",
-                                 "(Formal) Completed High School and Incompleted College Degree",
-                                 "(Formal) Completed College Degree",
-                                 "(Informal) Uneducated and Incompleted Primary School",
-                                 "(Informal) Completed Primary School and Incompleted High School",
-                                 "(Informal) Completed High School and Incompleted College Degree",
-                                 "(Informal) Completed College Degree"), values = c(scales::seq_gradient_pal("#8AC5FF", "#0661BB")(seq(0,1, length.out = 4)),
+   scale_color_manual(labels = c("(Formal) Uneducated and Incomplete Primary School",
+                                 "(Formal) Complete Primary School and Incomplete High School",
+                                 "(Formal) Complete High School and Incomplete College Degree",
+                                 "(Formal) Complete College Degree",
+                                 "(Informal) Uneducated and Incomplete Primary School",
+                                 "(Informal) Complete Primary School and Incomplete High School",
+                                 "(Informal) Complete High School and Incomplete College Degree",
+                                 "(Informal) Complete College Degree"), values = c(scales::seq_gradient_pal("#8AC5FF", "#0661BB")(seq(0,1, length.out = 4)),
                                                                          scales::seq_gradient_pal("#FE7070", "#BC0404")(seq(0,1, length.out = 4)))) +
    geom_line(size = 2) +
    geom_point(size = 2) +
@@ -169,14 +169,14 @@ library(gridExtra)
  
  graf_occupied_private_public_workers = ggplot(ocup_private_public_workers, aes(x = year_quarter, y = 100*proporcao, 
                                                               color = educ_level, group = educ_level)) +
-   scale_color_manual(labels = c("(Formal) Uneducated and Incompleted Primary School",
-                                 "(Formal) Completed Primary School and Incompleted High School",
-                                 "(Formal) Completed High School and Incompleted College Degree",
-                                 "(Formal) Completed College Degree",
-                                 "(Informal) Uneducated and Incompleted Primary School",
-                                 "(Informal) Completed Primary School and Incompleted High School",
-                                 "(Informal) Completed High School and Incompleted College Degree",
-                                 "(Informal) Completed College Degree"), values = c(scales::seq_gradient_pal("#8AC5FF", "#0661BB")(seq(0,1, length.out = 4)),
+   scale_color_manual(labels = c("(Formal) Uneducated and Incomplete Primary School",
+                                 "(Formal) Complete Primary School and Incomplete High School",
+                                 "(Formal) Complete High School and Incomplete College Degree",
+                                 "(Formal) Complete College Degree",
+                                 "(Informal) Uneducated and Incomplete Primary School",
+                                 "(Informal) Complete Primary School and Incomplete High School",
+                                 "(Informal) Complete High School and Incomplete College Degree",
+                                 "(Informal) Complete College Degree"), values = c(scales::seq_gradient_pal("#8AC5FF", "#0661BB")(seq(0,1, length.out = 4)),
                                                                                     scales::seq_gradient_pal("#FE7070", "#BC0404")(seq(0,1, length.out = 4)))) +
    geom_line(size = 2) +
    geom_point(size = 2) +

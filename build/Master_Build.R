@@ -2,8 +2,9 @@
 # Estrutura:
 #
 # 1. Gerar paineis limpos
-# 2. Gerar painel de 2019 e painel 2019-2021
+# 2. Gerar painel de 2019 e painel 2012-2021
 # 3. Criar uma base adequada para regressao
+# 4. Criar base para grafico de proporcao de ocupados 2012-2021
 
 ###########
 #  Setup  #
@@ -102,10 +103,19 @@ df %>%
 
 
 ##################################
-# 2.2 Gerar painel 2019 - 2021   #                        
+# 2.2 Gerar painel 2012 - 2021   #                        
 ##################################
 
-list_trimestres = c("2019_1", "2019_3", "2020_1", "2020_3", "2021_1", "2021_3")
+list_trimestres = c("2012_1", "2012_3",
+                    "2013_1", "2013_3",
+                    "2014_1", "2014_3",
+                    "2015_1", "2015_3",
+                    "2016_1", "2016_3",
+                    "2017_1", "2017_3",
+                    "2018_1", "2018_3",
+                    "2019_1", "2019_3",
+                    "2020_1", "2020_3",
+                    "2021_1", "2021_3")
 
 df = map(list_trimestres,
          
@@ -119,7 +129,7 @@ df = map(list_trimestres,
 ) %>% bind_rows()
 
 df %>%
-  readr::write_rds(paste0("input/painel_2019-2021.rds"))
+  readr::write_rds(paste0("input/painel_2012-2021.rds"))
 
 ##################################
 #                                #
@@ -127,4 +137,13 @@ df %>%
 #                                #
 ##################################
 
-df = readr::read_rds("./input/painel_2019-2021.rds")
+df = readr::read_rds("./input/painel_2012-2021.rds")
+
+
+############################################################
+#                                                          #
+#   4) Base para grafico de proporcao de ocupados 2012-2021#    
+#                                                          #
+############################################################
+
+source("./build/_cleaning_trimestres.R")
