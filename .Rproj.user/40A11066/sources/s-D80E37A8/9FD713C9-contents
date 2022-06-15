@@ -56,9 +56,13 @@ map2(list_trimestres, list_educ,
        df <- haven::read_dta(paste0("data-raw/Trimestres/painel_", trim, ".dta")) %>%
          clean_painel()
        
+       df_aux <- df %>%
+         filter(educ == educ_level, year_quarter == trim) %>%
+         select(id_code) %>%
+         unlist()
        
        df <- df %>%
-         filter(educ == educ_level) %>%
+         filter(id_code %in% df_aux) %>%
          group_by(id_code) %>%
          mutate(new_id = n()) %>%
          filter(new_id == 2)

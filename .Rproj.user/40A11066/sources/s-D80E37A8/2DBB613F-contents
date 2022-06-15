@@ -34,19 +34,21 @@ desemp = ggplot(desempregados, aes(x = "", y = labelll,
                                    fill = factor(higher_educ_level))) +
   geom_bar(stat = "identity") +
   scale_fill_manual(name = "Education Level",
-                    values = carto_pal(name = "Prism"), 
-                    labels = c("Uneducated and Incomplete Primary School",
-                               "Complete Primary School and Incomplete High School",
-                               "Complete High School and Incomplete College Degree",
-                               "Complete College Degree")) +
+                    values = carto_pal(name = "Safe"), 
+                    labels = c("Incomplete Primary School",
+                               "Incomplete High School",
+                               "Incomplete College",
+                               "Complete College")) +
   labs(x = "", y = "",
-       title = "Education Level of the Unemployed in 2019") +
+       title = "Unemployed in 2019") +
   
   theme_minimal() +
   theme(text = element_text(family = "LM Roman 10"),
         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
         legend.title = element_blank(),
-        axis.text = element_blank()) +
+        axis.text = element_blank(),
+        legend.text = element_text(size = 20)) +
   geom_label(aes(x = 1.2, label = paste0(labelll, "%")), position = position_stack(vjust = 0.5),
              show.legend = F)+
-  coord_polar("y")
+  coord_polar("y") +
+  guides(fill=guide_legend(nrow=4,byrow=TRUE))

@@ -3,8 +3,8 @@ cd C:\GitHub\Monografia
 * Gerando painel
 
 datazoom_pnadcontinua, years(2012/2021) ///
-					original("C:\GitHub\Monografia\Raw Data") ///
-					saving("C:\GitHub\Monografia\Raw Data\Painel") ///
+					original("C:\GitHub\Monografia\data-raw") ///
+					saving("C:\GitHub\Monografia\data-raw\Painel") ///
 					idrs
 					
 * Gerando arquivos separados por pares de trimestres
@@ -12,10 +12,10 @@ datazoom_pnadcontinua, years(2012/2021) ///
 cd C:\GitHub\Monografia
 
 local files PNAD_painel_1_rs PNAD_painel_2_rs PNAD_painel_3_rs PNAD_painel_4_rs ///
-		PNAD_painel_5_rs PNAD_painel_6_rs PNAD_painel_7_rs PNAD_painel_8_rs
+		PNAD_painel_5_rs PNAD_painel_6_rs PNAD_painel_7_rs PNAD_painel_8_rs PNAD_painel_9_rs
 
 * Montando um arquivo único
-cd "C:\GitHub\Monografia\Raw Data\Painel\pnadcontinua"
+cd "C:\GitHub\Monografia\data-raw\Painel\pnadcontinua"
 
 clear
 
@@ -41,5 +41,5 @@ forvalues i = 1/`: word count `ano1''{
 	
 	use `base_completa' if (Ano == `ano_inic' & Trimestre == `tri_inic') | (Ano == `ano_fin' & Trimestre == `tri_fin'), clear
 			
-	save "C:\GitHub\Monografia\Raw Data\Trimestres\painel_`ano_inic'_`tri_inic'", replace
+	save "C:\GitHub\Monografia\data-raw\Trimestres\painel_`ano_inic'_`tri_inic'", replace
 }
