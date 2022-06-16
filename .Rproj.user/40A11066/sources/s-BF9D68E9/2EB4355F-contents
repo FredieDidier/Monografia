@@ -1,0 +1,126 @@
+library(tidyverse)
+library(modelsummary)
+
+
+base = haven::read_dta("C:\\Fredinho\\Dados\\pnad2015_cleandata.dta")
+
+setwd("C:\\Fredinho\\Dados")
+
+# Criando variavel de raca
+
+base = base %>%
+  mutate(negro = case_when(v0404 %in% c(4, 8) ~ 1,
+                           v0404 %in% c(2, 6) ~ 0)) %>%
+  mutate(sexo = case_when(
+    v0302 == 2 ~ 1,
+    v0302 == 4 ~ 0
+  )) %>%
+  mutate(exper_meses = v9611*12 + v9612) %>%
+  mutate(salario = v9532) %>%
+  mutate(salario = case_when(salario < 10^9 ~ salario)) %>%
+  mutate(horas_trab = v9058) %>%
+  mutate(horas_afaz = v9921) %>%
+  mutate(educ = v4745) %>%
+  mutate(peso = v4729) %>%
+  mutate(educ = case_when(educ == 7 ~ 1,
+                          TRUE ~ 0)) %>%
+  mutate(trab_formal_ens_sup = case_when(v4706 %in% c(1,2,3,6) & educ == 1
+                                         & v9906 %in% c(1210, 1220, 1230,
+                                                        1310, 1320) ~ 1,
+                                         TRUE ~ 0))
+
+# Calculando m?dias por g?nero e ra?a
+
+medias = base %>%
+  drop_na(sexo, negro) %>%
+  group_by(sexo, negro) %>%
+  summarise(across(c(exper_meses, salario, horas_trab, trab_formal_ens_sup,
+                     horas_afaz),
+            ~ sum(.*peso, na.rm = TRUE)/sum(peso, na.rm = TRUE))
+  )
+
+medias = medias %>%
+  mutate(sexo = case_when(
+    sexo == 0 ~ "Mulher",
+    sexo == 1 ~ "Homem"
+  ),
+  negro = case_when(
+    negro == 0 ~ "N?o-negro",
+    negro == 1 ~ "Negro"
+  ))
+
+# 1a
+
+datasummary(exper_meses + salario + horas_trab + trab_formal_ens_sup + horas_afaz ~ mean * as.factor(sexo) * as.factor(negro),
+            data = medias, output = "./report4_tabela_descritiva.tex")
+
+# 1b
+
+base = base %>%
+  mutate(mulher = case_when(v0302 == 4 ~ 1,
+                            v0302 == 2 ~ 0))
+
+reg = lm(log(salario) ~ mulher, data = base)
+reg2 = lm(log(salario) ~ negro, data = base)
+
+modelos = list()
+
+modelos[["Mulher"]] = reg
+modelos[["Negro"]] = reg2            
+
+modelsummary(modelos, stars = T, gof_omit = 'se_type|Adj|statistic|R2|Std.Errors|AIC|BIC|Log.Lik.|F',
+             output = "./report4_tabela_regs_letra_b.tex")
+
+
+# 1c
+
+reg3 =  lm(log(salario) ~ mulher + horas_trab, data = base)
+reg4 = lm(log(salario) ~ negro + horas_trab, data = base)
+
+modelos1 = list()
+
+modelos1[["Mulher"]] = reg3
+modelos1[["Negro"]] = reg4
+
+modelsummary(modelos1, stars = T, gof_omit = 'se_type|Adj|statistic|R2|Std.Errors|AIC|BIC|Log.Lik.|F',
+             output = "./report4_tabela_regs_letra_c.tex")
+
+
+# 1d
+
+base = base %>%
+  mutate(educacao = v4745)
+
+reg5 =  lm(log(salario) ~ mulher + horas_trab + as.factor(educacao), data = base)
+reg6 = lm(log(salario) ~ negro + horas_trab + as.factor(educacao), data = base)
+
+modelos2 = list()
+
+modelos2[["Mulher"]] = reg5
+modelos2[["Negro"]] = reg6
+
+modelsummary(modelos2, stars = T, gof_omit = 'se_type|Adj|statistic|R2|Std.Errors|AIC|BIC|Log.Lik.|F',
+             output = "./report4_tabela_regs_letra_d.tex")
+
+
+# 1e
+
+reg7 = lm(log(salario) ~ mulher + horas_trab + as.factor(educacao) +
+             as.factor(v4706), data = base)
+reg8 = lm(log(salario) ~ mulher + horas_trab + as.factor(educacao) +
+            as.factor(v4706) + as.factor(v4111), data = base)
+reg9 = lm(log(salario) ~ negro + horas_trab + as.factor(educacao) +
+            as.factor(v4706), data = base)
+reg10 = lm(log(salario) ~ negro + horas_trab + as.factor(educacao) +
+            as.factor(v4706) + as.factor(v4111), data = base)
+
+modelos3 = list()
+
+modelos3[["Mulher"]] = reg7
+modelos3[["Mulher"]] = reg8
+modelos3[["Negro"]] = reg9
+modelos3[["Negro"]] = reg10
+
+modelsummary(modelos3, stars = T, gof_omit = 'se_type|Adj|statistic|R2|Std.Errors|AIC|BIC|Log.Lik.|F',
+             output = "./report4_tabela_regs_letra_e.tex")
+
