@@ -150,4 +150,4 @@ df = readr::read_rds("./input/painel_2012-2021.rds")
 #                                                          #
 ############################################################
 
-source("./build/_cleaning_trimestres.R")
+source("./build/_cleaning_trimesters.R")
