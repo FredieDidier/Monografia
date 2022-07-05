@@ -106,7 +106,8 @@ library(gridExtra)
    mutate(educ_level = case_when(educ == 1 ~ 1,
                                  educ == 2 ~ 2,
                                  educ == 3 ~ 3,
-                                 educ == 4 ~ 4))
+                                 educ == 4 ~ 4)) %>%
+   select(-c(X))
  
  base2 = read.csv("./input/prop_self_employed_s_inss_ocupados_por_educ.csv")
  
@@ -114,11 +115,13 @@ library(gridExtra)
    mutate(educ_level = case_when(educ == 1 ~ 5,
                                  educ == 2 ~ 6,
                                  educ == 3 ~ 7,
-                                 educ == 4 ~ 8))
+                                 educ == 4 ~ 8)) %>%
+   select(-c(X))
  
  
- base_final = bind_rows(base, base2)
+ base_final = bind_rows(base, base2) 
  
+ base_final = base_final %>% distinct()
  
  
  ocup_self_employed = base_final %>%
@@ -128,12 +131,12 @@ library(gridExtra)
                                                                                      color = educ_level, group = educ_level)) +
    scale_color_manual(labels = c("(Formal) Incomplete Primary School",
                                  "(Formal) Incomplete High School",
-                                 "(Formal) Incomplete College Degree",
-                                 "(Formal) Complete College Degree",
+                                 "(Formal) Incomplete College",
+                                 "(Formal) Complete College",
                                  "(Informal) Incomplete Primary School",
                                  "(Informal) Incomplete High School",
-                                 "(Informal) Incomplete College Degree",
-                                 "(Informal) Complete College Degree"), values = c(scales::seq_gradient_pal("#8AC5FF", "#0661BB")(seq(0,1, length.out = 4)),
+                                 "(Informal) Incomplete College",
+                                 "(Informal) Complete College"), values = c(scales::seq_gradient_pal("#8AC5FF", "#0661BB")(seq(0,1, length.out = 4)),
                                                                          scales::seq_gradient_pal("#FE7070", "#BC0404")(seq(0,1, length.out = 4)))) +
    geom_line(size = 2) +
    geom_point(size = 2) +
@@ -141,9 +144,12 @@ library(gridExtra)
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
-         legend.title = element_blank()) +
+         legend.title = element_blank(),
+         axis.text = element_blank(), 
+         legend.text = element_text(size = 15)) +
    scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                    labels = 2012:2021)
+                    labels = 2012:2021) +
+   guides(fill=guide_legend(nrow=2,byrow=TRUE))
  
  
  source("./analysis/_prop_occupied.R")
@@ -169,6 +175,8 @@ library(gridExtra)
  
  
  base_final = bind_rows(base, base2)
+ 
+ base_final = base_final %>% distinct()
 
  
  ocup_private_public_workers = base_final %>%
@@ -178,12 +186,12 @@ library(gridExtra)
                                                               color = educ_level, group = educ_level)) +
    scale_color_manual(labels = c("(Formal) Incomplete Primary School",
                                  "(Formal) Incomplete High School",
-                                 "(Formal) Incomplete College Degree",
-                                 "(Formal) Complete College Degree",
+                                 "(Formal) Incomplete College",
+                                 "(Formal) Complete College",
                                  "(Informal) Incomplete Primary School",
                                  "(Informal) Incomplete High School",
-                                 "(Informal) Incomplete College Degree",
-                                 "(Informal) Complete College Degree"), values = c(scales::seq_gradient_pal("#8AC5FF", "#0661BB")(seq(0,1, length.out = 4)),
+                                 "(Informal) Incomplete College",
+                                 "(Informal) Complete College"), values = c(scales::seq_gradient_pal("#8AC5FF", "#0661BB")(seq(0,1, length.out = 4)),
                                                                                     scales::seq_gradient_pal("#FE7070", "#BC0404")(seq(0,1, length.out = 4)))) +
    geom_line(size = 2) +
    geom_point(size = 2) +
@@ -191,7 +199,9 @@ library(gridExtra)
    theme_minimal() +
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
-         legend.title = element_blank()) +
+         legend.title = element_blank(), 
+         legend.text = element_text(size = 15)) +
    scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                    labels = 2012:2021)
+                    labels = 2012:2021) +
+   guides(fill=guide_legend(nrow=2,byrow=TRUE))
  

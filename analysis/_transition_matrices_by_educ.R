@@ -207,6 +207,6 @@ matrizes <- pmap_dfr(
   
 )
 
-write_csv(matrizes, "./input/transicoes_por_educ_10_x_10_prop_F.csv")
+ write_csv(matrizes, "./input/transicoes_por_educ_10_x_10_prop_F.csv")
 
 

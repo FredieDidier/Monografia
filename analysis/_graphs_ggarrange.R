@@ -13,9 +13,11 @@ ggarrange(priv_graf, priv_inf_graf,
           common.legend = T,
           legend = "bottom")
 
-############### Desempregados em 2019
+############### Desempregados e inativos em 2019
 
-ggarrange(desemp)
+ggarrange(desemp, grafico_inat,
+          common.legend = T,
+          legend = "bottom")
 
 ################## Grafico Servidores Publicos com/sem Carteira em 2019
 

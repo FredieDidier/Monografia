@@ -173,6 +173,11 @@ source("./analysis/_graphs_ggarrange.R")
 ggsave("employers.png", path = "./output", width = 13.66,
        height = 7.05)
 
+source("./analysis/_graphs_ggarrange.R")
+
+ggsave("unemployed_inactive.png", path = "./output", width = 13.66,
+       height = 7.05)
+
 source("./analysis/_graph_wages_by_educ.R")
 
 ggsave("salario_educ.png", path = "./output", width = 13.66,

@@ -51,4 +51,4 @@ desemp = ggplot(desempregados, aes(x = "", y = labelll,
   geom_label(aes(x = 1.2, label = paste0(labelll, "%")), position = position_stack(vjust = 0.5),
              show.legend = F)+
   coord_polar("y") +
-  guides(fill=guide_legend(nrow=4,byrow=TRUE))
+  guides(fill=guide_legend(nrow=2,byrow=TRUE))
