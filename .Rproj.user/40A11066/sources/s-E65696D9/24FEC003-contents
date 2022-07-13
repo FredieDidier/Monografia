@@ -68,6 +68,58 @@ library(gridExtra)
    guides(fill=guide_legend(nrow=4,byrow=TRUE))
  
  
+ ## Formal - Informal
+ 
+ matriz_formal_informal = matrizes %>%
+   filter(posicao_inicial == 1 &
+            posicao_final == 2) %>%
+   mutate(educ = as.character(educ))
+ 
+ graf_f_i = ggplot(matriz_formal_informal, aes(x = trim, y = 100*transition, 
+                                                        color = educ, group = educ)) +
+   scale_color_manual(labels = c("Incomplete Primary School",
+                                 "Incomplete High School",
+                                 "Incomplete College",
+                                 "Complete College"), values = carto_pal(name = "Safe")) +
+   geom_line(size = 2) +
+   geom_point(size = 2) +
+   labs(x = "", y = "", title = "Formal to Informal (%)") +
+   theme_minimal() +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank(),
+         legend.text = element_text(size = 20)) +
+   scale_x_discrete(breaks = paste0(2012:2021, "_1"),
+                    labels = 2012:2021)+
+   guides(fill=guide_legend(nrow=4,byrow=TRUE))
+ 
+ 
+ ## Informal - Formal
+ 
+ matriz_informal_formal = matrizes %>%
+   filter(posicao_inicial == 2 &
+            posicao_final == 1) %>%
+   mutate(educ = as.character(educ))
+ 
+ graf_i_f = ggplot(matriz_informal_formal, aes(x = trim, y = 100*transition, 
+                                               color = educ, group = educ)) +
+   scale_color_manual(labels = c("Incomplete Primary School",
+                                 "Incomplete High School",
+                                 "Incomplete College",
+                                 "Complete College"), values = carto_pal(name = "Safe")) +
+   geom_line(size = 2) +
+   geom_point(size = 2) +
+   labs(x = "", y = "", title = "Informal to Formal (%)") +
+   theme_minimal() +
+   theme(text = element_text(family = "LM Roman 10"),
+         plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+         legend.title = element_blank(),
+         legend.text = element_text(size = 20)) +
+   scale_x_discrete(breaks = paste0(2012:2021, "_1"),
+                    labels = 2012:2021)+
+   guides(fill=guide_legend(nrow=4,byrow=TRUE))
+ 
+ 
  
  ## Ocupado - Não empregado
  
@@ -145,11 +197,9 @@ library(gridExtra)
    theme(text = element_text(family = "LM Roman 10"),
          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
          legend.title = element_blank(),
-         axis.text = element_blank(), 
          legend.text = element_text(size = 15)) +
    scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                    labels = 2012:2021) +
-   guides(fill=guide_legend(nrow=2,byrow=TRUE))
+                    labels = 2012:2021)
  
  
  source("./analysis/_prop_occupied.R")
