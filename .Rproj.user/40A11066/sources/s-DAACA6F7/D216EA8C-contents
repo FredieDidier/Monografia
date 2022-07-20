@@ -93,6 +93,9 @@ ggsave("transicao_ocupado_nao_empregado.png", path = "./output",
 ggsave("transicao_informal_formal.png", path = "./output",
        width = 11.19, height = 6.64)
 
+ggsave("transicao_formal_informal.png", path = "./output",
+       width = 11.19, height = 6.64)
+
 ggsave("ocupados_priv_and_pub_2012-2021.png", path = "./output",
        width = 11.19, height = 6.64)
 
