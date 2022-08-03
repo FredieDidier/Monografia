@@ -1,43 +1,39 @@
-df = read_rds("./input/painel_2019.rds")
+df = bind_rows(df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,
+               df11,df12,df13,df14,df15)
 
 # Numero de Inativos e da força de trabalho
 
 dat_num_inat = df %>%
   mutate(laborforce = case_when(workforce_condition == 1 ~ 1,
-                                workforce_condition == 2 ~ 0)) %>%
+                                TRUE ~ 0)) %>%
   mutate(inactive = case_when(workforce_condition == 2 ~ 1,
-                              workforce_condition == 1 ~ 0)) %>%
-  filter(year_quarter == "2019_4") %>%
-  mutate(peso_l = laborforce * weights, peso_i = inactive * weights)  %>%
-  filter(!is.na(peso_l)) %>%
-  filter(!is.na(peso_i)) %>%
-  summarise(across(c(peso_l, peso_i), sum))
-
+                              TRUE ~ 0)) %>%
+  group_by(year_quarter) %>%
+  summarise(laborforce = sum(laborforce * weights), inactive = sum(inactive * weights), weights = sum(weights)) %>%
+  summarise(across(c(laborforce, inactive), ~ sum(. * weights)/sum(weights)))
 
 ## Checando numero de mulheres e homens
 
 dat_num_m_f = df %>%
   mutate(male = case_when(gender == 1 ~ 1,
-                          gender == 2 ~ 0)) %>%
-  mutate(female = case_when(gender == 1 ~ 0,
-                            gender == 2 ~ 1)) %>%
-  filter(year_quarter == "2019_4") %>%
-  mutate(peso_m = male * weights, peso_f = female * weights) %>%
-  summarise(across(c(peso_m, peso_f), sum))
+                          TRUE ~ 0)) %>%
+  mutate(female = case_when(gender == 2 ~ 1,
+                            TRUE ~ 0)) %>%
+  group_by(year_quarter) %>%
+  summarise(male = sum(male * weights), female = sum(female * weights), weights = sum(weights)) %>%
+  summarise(across(c(male, female), ~ sum(. * weights)/sum(weights)))
 #########################################
 
 ## Checando numero de negros e brancos
 
 dat_num_b_n = df %>%
   mutate(negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
-                           race == 1 | race == 3 ~ 0)) %>%
+                           TRUE ~ 0)) %>%
   mutate(branco = case_when(race == 2 | race == 4 | race == 5 ~ 0,
-                            race == 1 | race == 3 ~ 1)) %>%
-  filter(year_quarter == "2019_4") %>%
-  mutate(peso_n = negro * weights, peso_b = branco * weights) %>%
-  filter(!is.na(peso_n)) %>%
-  filter(!is.na(peso_b)) %>%
-  summarise(across(c(peso_n, peso_b), sum))
+                            TRUE ~ 1)) %>%
+  group_by(year_quarter) %>%
+  summarise(negro = sum(negro * weights), branco = sum(branco * weights), weights = sum(weights)) %>%
+  summarise(across(c(negro, branco), ~ sum(. * weights)/sum(weights)))
 #########################
 
 ## Descobrindo o numero de trabalhadores formais pela ocupacao
@@ -107,97 +103,6 @@ dat_num_informal_self_employed = df %>%
   summarise(across(c(peso), sum))
 
 #################################
-
-
-## Descobrindo idade m?dia de todos os grupos formais + inativos
-
-# Inativos
-dat_age_inat = df %>%
-  filter(workforce_condition == 2) %>%
-  select(workforce_condition, age, weights) %>%
-  mutate(peso_age = wtd.mean(age, weights = weights)) %>%
-  mutate(var = wtd.var(age, weights = weights)) %>%
-  mutate(sd = sqrt(var)) %>%
-  summarise(peso_age, sd)
-
-
-# Setor Privado
-dat_age_formal_priv = df %>%
-  filter(job_function %in% c(3) & worker == 1 & work_category == 1) %>%
-  select(job_function, worker, work_category, age, weights) %>%
-  mutate(peso_age = wtd.mean(age, weights = weights)) %>%
-  mutate(var = wtd.var(age, weights = weights)) %>%
-  mutate(sd = sqrt(var)) %>%
-  summarise(peso_age, sd)
-  
-
-# Setor Publico
-dat_age_formal_publuc = df %>%
-  filter(job_function %in% c(4) & worker == 1 & work_category %in% c(5,7)) %>%
-  select(job_function, worker, work_category, age, weights) %>%
-  mutate(peso_age = wtd.mean(age, weights = weights)) %>%
-  mutate(var = wtd.var(age, weights = weights)) %>%
-  mutate(sd = sqrt(var)) %>%
-  summarise(peso_age, sd)
-
-# Empregadores 
-
-dat_age_formal_employer = df %>%
-  filter(job_function %in% c(5) & worker == 1 & cnpj == 1) %>%
-  select(job_function, worker, cnpj, age, weights) %>%
-  mutate(peso_age = wtd.mean(age, weights = weights)) %>%
-  mutate(var = wtd.var(age, weights = weights)) %>%
-  mutate(sd = sqrt(var)) %>%
-  summarise(peso_age, sd)
-
-# Conta Propria
-dat_age_formal_self_employed = df %>%
-  filter(job_function %in% c(6) & worker == 1 & social_security_taxpayer == 1) %>%
-  select(job_function, worker, social_security_taxpayer, age, weights) %>%
-  mutate(peso_age = wtd.mean(age, weights = weights)) %>%
-  mutate(var = wtd.var(age, weights = weights)) %>%
-  mutate(sd = sqrt(var)) %>%
-  summarise(peso_age, sd)
-
-########################################
-
-# Descobrindo idade media de todos os grupos informais
-
-dat_age_informal_priv = df %>%
-  filter(job_function %in% c(3) & worker == 1 & work_category == 2) %>%
-  select(job_function, worker, work_category, age, weights) %>%
-  mutate(peso_age = wtd.mean(age, weights = weights)) %>%
-  mutate(var = wtd.var(age, weights = weights)) %>%
-  mutate(sd = sqrt(var)) %>%
-  summarise(peso_age, sd)
-
-
-dat_age_informal_public = df %>%
-  filter(job_function %in% c(4) & worker == 1 & work_category == 6) %>%
-  select(job_function, worker, work_category, age, weights) %>%
-  mutate(peso_age = wtd.mean(age, weights = weights)) %>%
-  mutate(var = wtd.var(age, weights = weights)) %>%
-  mutate(sd = sqrt(var)) %>%
-  summarise(peso_age, sd)
-
-
-dat_age_informal_employer = df %>%
-  filter(job_function %in% c(5) & worker == 1 & cnpj == 2) %>%
-  select(job_function, worker, cnpj, age, weights) %>%
-  mutate(peso_age = wtd.mean(age, weights = weights)) %>%
-  mutate(var = wtd.var(age, weights = weights)) %>%
-  mutate(sd = sqrt(var)) %>%
-  summarise(peso_age, sd)
-
-dat_age_informal_self_employed = df %>%
-  filter(job_function %in% c(6) & worker == 1 & social_security_taxpayer == 2) %>%
-  select(job_function, worker, social_security_taxpayer, age, weights) %>%
-  mutate(peso_age = wtd.mean(age, weights = weights)) %>%
-  mutate(var = wtd.var(age, weights = weights)) %>%
-  mutate(sd = sqrt(var)) %>%
-  summarise(peso_age, sd)
-
-##########################
 
 ## Descobrindo anos de estudo medio dos inativos e das ocupacoes e salario medio
 

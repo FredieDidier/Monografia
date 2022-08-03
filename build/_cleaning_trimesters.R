@@ -37,7 +37,7 @@ map(trimestres,
            base::message(paste0("    ", "Education level ", educ_level))
            
            df %>%
-           filter(educ == educ_level) %>%
+           filter(educ == educ_level, year_quarter == trim) %>%
            write_rds(paste0("input/trimestre_", trim, "_", educ_level, ".rds"))
          }
          )

@@ -2,7 +2,6 @@ library(rcartocolor)
 library(tidyverse)
 library(extrafont)
 
-
  df1 = read_rds("./input/trimestre_2019_1_1.rds")
  df2 = read_rds("./input/trimestre_2019_1_2.rds")
  df3 = read_rds("./input/trimestre_2019_1_3.rds")
@@ -53,49 +52,60 @@ library(extrafont)
                                   df21,df22,df23,df24,df25,df26,df27,df28,df29,df30,
                                   df31,df32,df33,df34,df35,df36,df37,df38,df39,df40,
                                   df41,df42,df43,df44)
-
  df = df %>%
    select(position, social_security_taxpayer, higher_educ_level, year_quarter,
-          job_function, worker, weights) %>%
-   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1,2) ~"Uneducated and Primary School Incomplete",
-                                        higher_educ_level %in% c(3,4) ~ "Primary School Complete and Incomplete High School",
-                                        higher_educ_level %in% c(5,6) ~ "Complete High School and Incomplete College Degree",
-                                        higher_educ_level %in% c(7) ~ "Complete College Degree"))   %>%
-   group_by(year_quarter,higher_educ_level, position) %>% mutate(labels = sum(weights)) %>%
-   ungroup() %>%
-   mutate(labell = round(labels/sum(weights), digits = 2))
+          job_function, worker, weights, monthly_work_income) %>%
+   mutate(higher_educ_label = case_when(higher_educ_level %in% c(1,2) ~"Incomplete Primary School",
+                                        higher_educ_level %in% c(3,4) ~ "Incomplete High School",
+                                        higher_educ_level %in% c(5,6) ~ "Incomplete College",
+                                        higher_educ_level %in% c(7) ~ "Complete College"))   %>%
+   mutate(higher_educ_label = factor(higher_educ_label, ordered = TRUE, levels = c("Incomplete Primary School",
+                                                                                  "Incomplete High School",
+                                                                                  "Incomplete College",
+                                                                                  "Complete College"))) %>%
+   group_by(year_quarter,higher_educ_label, position) %>% 
+   summarise(labels = sum(weights), wage = sum(monthly_work_income*weights, na.rm = TRUE)/sum(weights)) %>%
+   mutate(labels = 100 * labels/sum(labels)) %>%
+   rename(proportion = labels)
 
-df$labell = df$labell * 100 
+position_labels <- c(
+  "1" = "Inactive",
+  "2" = "Unemployed",
+  "3" = "Formal Private Sector",
+  "4" = "Informal Private Sector",
+  "5" = "Formal Self-Employed",
+  "6" = "Informal Self-Employed",
+  "7" = "Formal Employers",
+  "8" = "Informal Employers",
+  "9" = "Formal Public Sector",
+  "10" = "Informal Public Sector"
+) 
 
-trab_conta_propria_n_INSS = trab_conta_propria_n_INSS %%
-  select(year_quarter, higher_educ_label, higher_educ_level, labell) %%
-  distinct() %%
-  mutate(labelll = case_when(higher_educ_label == "Uneducated and Primary School Incomplete" & year_quarter == "2019_1" ~ 39,
-                             higher_educ_label == "Primary School Complete and Incomplete High School" & year_quarter == "2019_1" ~ 18,
-                             higher_educ_label == "Complete High School and Incomplete College Degree" & year_quarter == "2019_1" ~ 33,
-                             higher_educ_label == "Complete College Degree" & year_quarter == "2019_1" ~ 10)) %%
-  filter(!is.na(labelll))
-
-trab_conta_propria_n_INSS = trab_conta_propria_n_INSS[c(2,3,4,6),]
-
-grafico1 = ggplot(trab_conta_propria_n_INSS, aes(x = year_quarter, y = labelll,
-                                                 fill = factor(higher_educ_level))) +
-  geom_bar(stat="identity") +
-  scale_fill_manual(name = "Education Level",
-                    values = carto_pal(name = "Safe"), 
-                    labels = c("Incomplete Primary School",
-                               "Incomplete High School",
-                               "Incomplete College",
-                               "Complete College")) +
-  labs(x = "", y = "",
-       title = "Self-Employed Non-Social Security Contributors") +
-  theme_minimal() +
-  theme(text = element_text(family = "LM Roman 10"),
-        plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
-        legend.title = element_blank(),
-        axis.text = element_blank(), 
-        legend.text = element_text(size = 20)) +
-  geom_label(aes(x = 1.2, label = paste0(labell, "%")), position = position_stack(vjust = 0.5),
-             show.legend = F)+
-  coord_polar("y") +
-  guides(fill=guide_legend(nrow=2,byrow=TRUE))
+compare_positions <- function(pos1, pos2, var){
+  
+  df %>%
+    filter(position %in% c(pos1, pos2)) %>%
+    mutate(position = as.character(position)) %>%
+    ggplot(aes(x = year_quarter, y = get(var), group = higher_educ_label, color = higher_educ_label)) +
+    geom_point(size = 2) +
+    geom_line(size = 2) +
+    
+    scale_color_manual(name = "Education Level",
+                       values = carto_pal(name = "Safe")) +
+    
+    labs(x = "", y = "") +
+    
+    theme_minimal() +
+    theme(text = element_text(family = "LM Roman 10"),
+          plot.title = element_text(size = 13, face = "bold", hjust = 0.5),
+          legend.title = element_blank(), 
+          legend.text = element_text(size = 20),
+          legend.position = "bottom",
+          strip.text = element_text(size = 13, face = "bold", hjust = 0.5)) +
+    
+    scale_x_discrete(breaks = paste0(2019:2021, "_1"),
+                     labels = 2019:2021) +
+    
+    facet_wrap(~ position, labeller = as_labeller(position_labels))
+  
+}
