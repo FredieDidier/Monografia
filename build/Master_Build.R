@@ -2,9 +2,9 @@
 # Estrutura:
 #
 # 1. Gerar paineis limpos
-# 2. Gerar painel de 2019 e painel 2012-2021
+# 2. Gerar painel de 2019
 # 3. Criar uma base adequada para regressao
-# 4. Criar base para grafico de proporcao de ocupados 2012-2021
+# 4. 4) Base para grafico de proporcao de ocupados por educ 2012-2022
 
 ###########
 #  Setup  #
@@ -39,22 +39,23 @@ list_trimestres <- c("2012_1", "2012_2", "2012_3", "2012_4",
                      "2018_1", "2018_2", "2018_3", "2018_4",
                      "2019_1", "2019_2", "2019_3", "2019_4",
                      "2020_1", "2020_2", "2020_3", "2020_4",
-                     "2021_1", "2021_2", "2021_3")
+                     "2021_1", "2021_2", "2021_3", "2021_4")
 
 list_trimestres <- rep(list_trimestres, 4)
 
 list_educ <- c(
-  rep(1, 39),
-  rep(2, 39),
-  rep(3, 39),
-  rep(4, 39)
+  rep(1, 40),
+  rep(2, 40),
+  rep(3, 40),
+  rep(4, 40)
 )
 
 map2(list_trimestres, list_educ,
      
      function(trim, educ_level){
        df <- haven::read_dta(paste0("data-raw/Trimestres/painel_", trim, ".dta")) %>%
-         clean_painel()
+         clean_painel() %>%
+         aggregate_sectors()
        
        df_aux <- df %>%
          filter(educ == educ_level, year_quarter == trim) %>%
@@ -78,16 +79,11 @@ map2(list_trimestres, list_educ,
 )
 
 
+##########################################
+#                                        #
+#   2) Gerar painel de 2019              #     
+#                                        #
 #########################################
-#                                       #
-#   2) Gerar painel de 2019 e 2012-2021 #     
-#                                       #
-#########################################
-
-
-###########################
-# 2.1 Gerar painel 2019   #                        
-###########################
 
 list_trimestres = c("2019_1", "2019_3")
 
@@ -105,49 +101,48 @@ df = map(list_trimestres,
 df %>%
   readr::write_rds(paste0("input/painel_2019.rds"))
 
-
-##################################
-# 2.2 Gerar painel 2012 - 2021   #                        
-##################################
-
-list_trimestres = c("2012_1", "2012_3",
-                    "2013_1", "2013_3",
-                    "2014_1", "2014_3",
-                    "2015_1", "2015_3",
-                    "2016_1", "2016_3",
-                    "2017_1", "2017_3",
-                    "2018_1", "2018_3",
-                    "2019_1", "2019_3",
-                    "2020_1", "2020_3",
-                    "2021_1", "2021_3")
-
-df = map(list_trimestres,
-         
-         function(trim){
-           df <- haven::read_dta(paste0("data-raw/Trimestres/painel_", trim, ".dta")) %>%
-             clean_painel() %>%
-             aggregate_sectors()
-           
-           
-         }
-) %>% bind_rows()
-
-df %>%
-  readr::write_rds(paste0("input/painel_2012-2021.rds"))
-
 ##################################
 #                                #
 #   3) Base para regressao       #
 #                                #
 ##################################
 
-df = readr::read_rds("./input/painel_2012-2021.rds")
+trimestres <- c("2012_1", "2012_2", "2012_3", "2012_4",
+                "2013_1", "2013_2", "2013_3", "2013_4",
+                "2014_1", "2014_2", "2014_3", "2014_4",
+                "2015_1", "2015_2", "2015_3", "2015_4",
+                "2016_1", "2016_2", "2016_3", "2016_4",
+                "2017_1", "2017_2", "2017_3", "2017_4",
+                "2018_1", "2018_2", "2018_3", "2018_4",
+                "2019_1", "2019_2", "2019_3", "2019_4",
+                "2020_1", "2020_2", "2020_3", "2020_4",
+                "2021_1", "2021_2", "2021_3", "2021_4")
 
 
-############################################################
-#                                                          #
-#   4) Base para grafico de proporcao de ocupados 2012-2021#    
-#                                                          #
-############################################################
+map(trimestres,
+    function(trim){
+      
+      base::message(paste0("Trimester ", trim))
+      
+      df <- haven::read_dta(
+        paste0("data-raw/Trimestres/painel_",
+               trim,
+               ".dta")) %>%
+        clean_painel() %>%
+        aggregate_sectors() %>%
+        filter(year_quarter == trim)
+      
+      df %>%
+        readr::write_rds(paste0("input/trimestre_", trim, ".rds"))
+    }
+)
+    
+
+
+#####################################################################
+#                                                          
+#   4) Base para grafico de proporcao de ocupados por educ 2012-2022    
+#                                                         
+####################################################################
 
 source("./build/_cleaning_trimesters.R")

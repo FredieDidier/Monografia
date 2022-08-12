@@ -5,7 +5,7 @@
 # 2. Gerar matriz de transicao 2019 por nivel educ
 # 3. Gerar matriz de transicao 2012 - 2021 por educacao
 # 4. Gerar graficos sobre elementos da matriz 2012-2021
-# 5. Gerar graficos relacionados ao mercado de trabalho e nivel educ em 2019
+# 5. Gerar graficos de mercado de trabalho/nivel educ de 2019 a 2022        
 # 6. Gerar informacoes sobre tabela descritiva
 
 
@@ -105,89 +105,26 @@ ggsave("ocupados_conta_propria_2012-2021.png", path = "./output",
 
 #############################################################################
 #                                                                           #
-# 5) Gerar graficos relacionados ao mercado de trabalho e nivel educ em 2019#                #
+# 5) Gerar graficos de mercado de trabalho/nivel educ de 2019 a 2022        #                
 #                                                                           #
 #############################################################################
 
-source("./analysis/_graph_unemployed_2019.R")
+source("./analysis/_graph_2019_2020_2021_2022_prop.R")
 
-ggsave("unemployed_2019.png", path = "./output", width = 11.19,
-       height = 6.64)
+ggsave("prop_inativos_desempregados_2019_2022.png", path = "./output",
+       width = 11.19, height = 6.64)
 
-source("./analysis/_graph_self_employed_formal_2019.R")
+ggsave("prop_formal_informal_priv_2019_2022.png", path = "./output",
+       width = 11.19, height = 6.64)
 
-ggsave("formal_self_employed_2019.png", path = "./output", width = 11.19,
-       height = 6.64)
+ggsave("prop_formal_informal_conta_propria_2019_2022.png", path = "./output",
+       width = 11.19, height = 6.64)
 
-source("./analysis/_graph_self_employed_informal_2019.R")
+ggsave("prop_formal_informal_empreg_2019_2022.png", path = "./output",
+       width = 11.19, height = 6.64)
 
-ggsave("informal_self_employed.png", path = "./output", width = 11.19,
-       height = 6.64)
-
-source("./analysis/_graph_public_sector_formal_2019.R")
-
-ggsave("formal_public_sector_2019.png", path = "./output", width = 11.19,
-       height = 6.64)
-
-source("./analysis/_graph_public_sector_informal_2019.R")
-
-ggsave("informal_public_sector_2019.png", path = "./output", width = 11.19,
-       height = 6.64)
-
-source("./analysis/_graph_employers_formal_2019.R")
-
-ggsave("formal_employers_2019.png", path = "./output", width = 11.19,
-       height = 6.64)
-
-source("./analysis/_graph_employers_informal_2019.R")
-
-ggsave("informal_employers_2019.png", path = "./output", width = 11.19,
-       height = 6.64)
-
-source("./analysis/_graph_inactives_2019.R")
-
-ggsave("inactives_2019.png", path = "./output", width = 11.19,
-       height = 6.64)
-
-source("./analysis/_graph_private_sector_formal_2019.R")
-
-ggsave("formal_private_sector_2019.png", path = "./output", width = 11.19,
-       height = 6.64)
-
-source("./analysis/_graph_private_sector_informal_2019.R")
-
-ggsave("informal_private_sector_2019.png", path = "./output", width = 11.19,
-       height = 6.64)
-
-source("./analysis/_graphs_ggarrange.R")
-
-ggsave("self_employed.png", path = "./output", width = 13.66,
-       height = 7.05)
-
-source("./analysis/_graphs_ggarrange.R")
-
-ggsave("private_sector.png", path = "./output", width = 13.66,
-       height = 7.05)
-
-source("./analysis/_graphs_ggarrange.R")
-
-ggsave("public_sector.png", path = "./output", width = 13.66,
-       height = 7.05)
-
-source("./analysis/_graphs_ggarrange.R")
-
-ggsave("employers.png", path = "./output", width = 13.66,
-       height = 7.05)
-
-source("./analysis/_graphs_ggarrange.R")
-
-ggsave("unemployed_inactive.png", path = "./output", width = 13.66,
-       height = 7.05)
-
-source("./analysis/_graph_wages_by_educ.R")
-
-ggsave("salario_educ.png", path = "./output", width = 13.66,
-       height = 7.05)
+ggsave("prop_formal_informal_pub_2019_2022.png", path = "./output",
+       width = 11.19, height = 6.64)
 
 ################################################
 #                                              #

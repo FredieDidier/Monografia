@@ -1,5 +1,11 @@
-df = bind_rows(df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,
-               df11,df12,df13,df14,df15)
+library(tidyverse)
+
+df1 = readr::read_rds("./input/trimestre_2019_1.rds")
+df2 = readr::read_rds("./input/trimestre_2019_2.rds")
+df3 = readr::read_rds("./input/trimestre_2019_3.rds")
+df4 = readr::read_rds("./input/trimestre_2019_4.rds")
+
+df = bind_rows(df1, df2, df3, df4)
 
 # Numero de Inativos e da força de trabalho
 
@@ -42,31 +48,31 @@ dat_num_formal_priv = df %>%
   filter(job_function %in% c(3) & worker == 1 & work_category == 1) %>%
   select(job_function, worker, signed_work_card, year_quarter, weights,
          work_category) %>%
-  filter(year_quarter == "2019_4") %>%
-  mutate(peso = worker * weights) %>%
-  summarise(across(c(peso), sum))
+  group_by(year_quarter) %>%
+  summarise(peso = sum(worker * weights), weights = sum(weights)) %>%
+  summarise(across(c(peso), ~ sum(. * weights)/sum(weights)))
 
 dat_num_formal_public = df %>%
   filter(job_function %in% c(4) & worker == 1 & work_category %in% c(5,7)) %>%
   select(job_function, worker, signed_work_card, year_quarter, weights,
          work_category)  %>%
-  filter(year_quarter == "2019_4") %>%
-  mutate(peso = worker * weights) %>%
-  summarise(across(c(peso), sum))
+  group_by(year_quarter) %>%
+  summarise(peso = sum(worker * weights), weights = sum(weights)) %>%
+  summarise(across(c(peso), ~ sum(. * weights)/sum(weights)))
 
 dat_num_formal_employer = df %>%
   filter(job_function %in% c(5) & worker == 1 & cnpj == 1) %>%
   select(job_function, worker, social_security_taxpayer, year_quarter, weights) %>%
-  filter(year_quarter == "2019_4") %>%
-  mutate(peso = worker * weights) %>%
-  summarise(across(c(peso), sum))
+  group_by(year_quarter) %>%
+  summarise(peso = sum(worker * weights), weights = sum(weights)) %>%
+  summarise(across(c(peso), ~ sum(. * weights)/sum(weights)))
 
 dat_num_formal_self_employed = df %>%
   filter(job_function %in% c(6) & worker == 1 & social_security_taxpayer == 1) %>%
   select(job_function, worker, social_security_taxpayer, year_quarter, weights) %>%
-  filter(year_quarter == "2019_4") %>%
-  mutate(peso = worker * weights) %>%
-  summarise(across(c(peso), sum))
+  group_by(year_quarter) %>%
+  summarise(peso = sum(worker * weights), weights = sum(weights)) %>%
+  summarise(across(c(peso), ~ sum(. * weights)/sum(weights)))
 
 ###################################
 
@@ -76,31 +82,31 @@ dat_num_informal_priv = df %>%
   filter(job_function %in% c(3) & worker == 1 & work_category == 2) %>%
   select(job_function, worker, signed_work_card, year_quarter, weights,
          work_category) %>%
-  filter(year_quarter == "2019_4") %>%
-  mutate(peso = worker * weights) %>%
-  summarise(across(c(peso), sum))
+  group_by(year_quarter) %>%
+  summarise(peso = sum(worker * weights), weights = sum(weights)) %>%
+  summarise(across(c(peso), ~ sum(. * weights)/sum(weights)))
 
 dat_num_informal_public = df %>%
   filter(job_function %in% c(4) & worker == 1 & work_category == 6) %>%
   select(job_function, worker, signed_work_card, year_quarter, weights,
          work_category) %>%
-  filter(year_quarter == "2019_4") %>%
-  mutate(peso = worker * weights) %>%
-  summarise(across(c(peso), sum))
+  group_by(year_quarter) %>%
+  summarise(peso = sum(worker * weights), weights = sum(weights)) %>%
+  summarise(across(c(peso), ~ sum(. * weights)/sum(weights)))
 
 dat_num_informal_employer = df %>%
   filter(job_function %in% c(5) & worker == 1 & cnpj == 2) %>%
   select(job_function, worker, social_security_taxpayer, year_quarter, weights) %>%
-  filter(year_quarter == "2019_4") %>%
-  mutate(peso = worker * weights) %>%
-  summarise(across(c(peso), sum))
+  group_by(year_quarter) %>%
+  summarise(peso = sum(worker * weights), weights = sum(weights)) %>%
+  summarise(across(c(peso), ~ sum(. * weights)/sum(weights)))
 
 dat_num_informal_self_employed = df %>%
   filter(job_function %in% c(6) & worker == 1 & social_security_taxpayer == 2) %>%
   select(job_function, worker, social_security_taxpayer, year_quarter, weights) %>%
-  filter(year_quarter == "2019_4") %>%
-  mutate(peso = worker * weights) %>%
-  summarise(across(c(peso), sum))
+  group_by(year_quarter) %>%
+  summarise(peso = sum(worker * weights), weights = sum(weights)) %>%
+  summarise(across(c(peso), ~ sum(. * weights)/sum(weights)))
 
 #################################
 
