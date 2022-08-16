@@ -112,19 +112,19 @@ ggsave("ocupados_conta_propria_2012-2021.png", path = "./output",
 source("./analysis/_graph_2019_2020_2021_2022_prop.R")
 
 ggsave("prop_inativos_desempregados_2019_2022.png", path = "./output",
-       width = 11.19, height = 6.64)
+       width = 13.66, height = 7.05)
 
 ggsave("prop_formal_informal_priv_2019_2022.png", path = "./output",
-       width = 11.19, height = 6.64)
+       width = 13.66, height = 7.05)
 
 ggsave("prop_formal_informal_conta_propria_2019_2022.png", path = "./output",
-       width = 11.19, height = 6.64)
+       width = 13.66, height = 7.05)
 
 ggsave("prop_formal_informal_empreg_2019_2022.png", path = "./output",
-       width = 11.19, height = 6.64)
+       width = 13.66, height = 7.05)
 
 ggsave("prop_formal_informal_pub_2019_2022.png", path = "./output",
-       width = 11.19, height = 6.64)
+       width = 13.66, height = 7.05)
 
 ################################################
 #                                              #
