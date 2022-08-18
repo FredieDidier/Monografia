@@ -209,4 +209,15 @@ matrizes <- pmap_dfr(
 
  write_csv(matrizes, "./input/transicoes_por_educ_10_x_10_prop_F.csv")
 
+ 
+ ### Para fazer a matriz de transição de 2019 por educ
+ 
+ matrizes = read_csv("./input/transicoes_por_educ_10_x_10_prop_F.csv")
+ 
+ matrizes = matrizes %>%
+   filter(trim %in% c("2019_1", "2019_2", "2019_3", "2019_4")) %>%
+   group_by(educ, posicao_inicial, posicao_final) %>%
+   summarise(transition = sum(transition)) %>%
+   mutate(transition = transition/sum(transition)) %>%
+   mutate(transition = transition * 100)
 
