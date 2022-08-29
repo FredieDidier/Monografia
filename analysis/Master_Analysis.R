@@ -126,6 +126,18 @@ ggsave("prop_formal_informal_empreg_2019_2022.png", path = "./output",
 ggsave("prop_formal_informal_pub_2019_2022.png", path = "./output",
        width = 13.66, height = 7.05)
 
+ggsave("wage_formal_informal_priv_2019_2022.png", path = "./output",
+       width = 13.66, height = 7.05)
+
+ggsave("wage_formal_informal_self_employed_2019_2022.png", path = "./output",
+       width = 13.66, height = 7.05)
+
+ggsave("wage_formal_informal_empreg_2019_2022.png", path = "./output",
+       width = 13.66, height = 7.05)
+
+ggsave("wage_formal_informal_pub_2019_2022.png", path = "./output",
+       width = 13.66, height = 7.05)
+
 ################################################
 #                                              #
 # 6) Gerar informacoes sobre tabela descritiva # 
