@@ -1,4 +1,5 @@
 library(extrafont)
+library(tidyverse)
 
 font_import(path = "C:/Users/Fredie/AppData/Local/Microsoft/Windows/Fonts")
 y
@@ -38,7 +39,6 @@ df = df %>%
 matrizes = changing_df(matrizes)
 matrizes1 = changing_df(matrizes1)
 
- 
 compare_transitions = function(df, pos1, pos2, var){
    
    df %>%
@@ -69,7 +69,8 @@ compare_transitions = function(df, pos1, pos2, var){
            )) +
      
      scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                      labels = 2012:2021)
+                      labels = 2012:2021) +
+    guides(fill = guide_legend(nrow = 4, byrow = TRUE))
    
  }
  

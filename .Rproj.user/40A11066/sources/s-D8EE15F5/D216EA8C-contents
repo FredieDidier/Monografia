@@ -82,19 +82,19 @@ source("./analysis/_transition_matrices_by_educ.R")
 source("./analysis/_graphs.R")
 
 ggsave("transicao_formal_nao_empregado.png", path = "./output",
-       width = 11.19, height = 6.64)
+       width = 13.66, height = 7.05)
 
 ggsave("transicao_informal_nao_empregado.png", path = "./output",
-       width = 11.19, height = 6.64)
+       width = 13.66, height = 7.05)
 
 ggsave("transicao_ocupado_nao_empregado.png", path = "./output",
-       width = 11.19, height = 6.64)
+       width = 13.66, height = 7.05)
 
 ggsave("transicao_informal_formal.png", path = "./output",
-       width = 11.19, height = 6.64)
+       width = 13.66, height = 7.05)
 
 ggsave("transicao_formal_informal.png", path = "./output",
-       width = 11.19, height = 6.64)
+       width = 13.66, height = 7.05)
 
 ggsave("ocupados_priv_and_pub_2012-2021.png", path = "./output",
        width = 11.19, height = 6.64)
