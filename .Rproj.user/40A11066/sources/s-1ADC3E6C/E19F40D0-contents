@@ -1,0 +1,14 @@
+
+
+df = readr::read_rds("./input/regression.rds")
+
+library(mlogit)
+
+df = df %>%
+  group_by(id_code) %>%
+  slice_sample(prop = 0.25)
+
+df = df %>%
+  mlogit.data(choice = "position_transition", shape = "wide")
+
+reg = mlogit(formula = position_transition ~ 1 | as.factor(educ), data = df, weights = weights)
