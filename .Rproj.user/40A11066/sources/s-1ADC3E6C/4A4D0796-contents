@@ -1,4 +1,0 @@
-base_reg = base_reg %>%
-  group_by(id_code) %>%
-  arrange(year_quarter) %>%
-  mutate(lag_position = dplyr::lag(position_names))
