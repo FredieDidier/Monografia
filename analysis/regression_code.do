@@ -3,20 +3,22 @@ cd "C:/GitHub/Monografia"
 use "input/regression.dta", clear
 
 *** amostra aleatória pequena
-sample 5
 ***
 
 * labels educ
 
-label define educ_levels 1 "Incomplete Primary School" 2 "Incomplete High School" 3 "Incomplete College" 4 "Complete College"
+label define educ_levels 1 "\makecell[l]{Incomplete\\ Primary School}" 2 "\makecell[l]{Incomplete\\ High School}" 3 "\makecell[l]{Incomplete\\ College}" 4 "\makecell[l]{Complete\\ College}"
 
 label values educ educ_levels
 
-* tranformando em números
+* transformando em números
 
 labmask year_quarter, values(year_quarter)
 
 encode occupation_code, gen(occupation)
+encode sector_code, gen(sector)
+destring id_code, replace
+egen ind = group(id_code)
 
 gen transition = .
 
@@ -34,31 +36,57 @@ labmask transition, values(position_transition)
 
 drop if transition >= 6
 
-*** Lista de variáveis nas tabelas
-
-local varlist _cons 2.educ 3.educ 4.educ 20191.year_quarter 20192.year_quarter 20193.year_quarter 20194.year_quarter 20201.year_quarter 20202.year_quarter 20203.year_quarter 20204.year_quarter 20211.year_quarter 20212.year_quarter 20213.year_quarter 20214.year_quarter 20221.year_quarter
+replace occupation = 10 if position_names == "Non-Employed"
+replace work_category = 10 if position_names == "Non-Employed"
+replace job_start = 5 if position_names == "Non-Employed"
 
 ///////////////////
 // Sem controles //
 ///////////////////
 
-qui mlogit transition i.educ i.year_quarter [aweight = weights], vce(robust)
+qui mlogit transition i.educ [aweight = weights], vce(robust)
+estimates store model1
 
-esttab using "output/regression_1.tex", se label unstack noomitted stats(r2_p N, labels("Pseudo R-Squared" "N")) keep(`varlist') collab(none) mlabels(none) /*
-	*/ eqlabels("Formal to Informal" "Formal to Non-Employed" "Informal to Formal" "Informal to Informal" "Informal to Non-Employed") /*
+forvalues i = 0/5{
+	di as input "Regressão `i'/5"
+
+	estimates restore model1
+	qui eststo m`i': margins i.educ, predict(outcome(`i')) post
+}
+
+esttab m0 m1 m2 m3 m4 m5 using "output/regression_1.tex", b(3) se(3) label noomitted stats(N, labels("N") fmt(%9.0fc)) collab(none) /*
+	*/ mtitle("\makecell[c]{Formal\\to\\Formal}" /*
+	*/ "\makecell[c]{Formal\\to\\Informal}" /*
+	*/ "\makecell[c]{Formal\\to\\Non-Employed}" /*
+	*/ "\makecell[c]{Informal\\to\\Formal}" /*
+	*/ "\makecell[c]{Informal\\to\\Informal}" /*
+	*/ "\makecell[c]{Informal\\to\\Non-Employed}") /*
 	*/ replace
 	
 ///////////////////
 // Controles 1   //
 ///////////////////
 
-* genero, raça, idade, setor, exp, localização do domicilio, categoria de emprego, occ codes
+* genero, raça, idade, setor, localização do domicilio, trimestre
 
-qui mlogit transition i.educ homem negro urbana age i.job_start i.work_category i.occupation i.year_quarter [aweight = weights], vce(robust)
+qui mlogit transition i.educ homem negro urbana age i.year_quarter [aweight = weights], vce(robust)
+estimates store model2
 
-estout using "output/regression_2.tex", stats(r2_p N, labels("Pseudo R-Squared" "N")) cells(b(star fmt(3)) se(par fmt(3))) ///
-	label unstack eqlabels("Formal to Formal" "Formal to Informal" "Formal to Non-Employed" "Informal to Formal" "Informal to Informal" "Informal to Non-Employed") ///
-	drop(Formal_to_Formal:) keep(`varlist') collab(none) mlabels(none) replace
+forvalues i = 0/5{
+	di as input "Regressão `i'/5"
+
+	estimates restore model2
+	qui eststo m`i': margins i.educ, predict(outcome(`i')) post
+}
+
+esttab m0 m1 m2 m3 m4 m5 using "output/regression_2.tex", b(3) se(3) label noomitted stats(N, labels("N") fmt(%9.0fc)) collab(none) /*
+	*/ mtitle("\makecell[c]{Formal\\to\\Formal}" /*
+	*/ "\makecell[c]{Formal\\to\\Informal}" /*
+	*/ "\makecell[c]{Formal\\to\\Non-Employed}" /*
+	*/ "\makecell[c]{Informal\\to\\Formal}" /*
+	*/ "\makecell[c]{Informal\\to\\Informal}" /*
+	*/ "\makecell[c]{Informal\\to\\Non-Employed}") /*
+	*/ replace
 
 ///////////////////
 // Controles 2   //
@@ -66,8 +94,27 @@ estout using "output/regression_2.tex", stats(r2_p N, labels("Pseudo R-Squared" 
 
 * + efeitos fixos de individuo
 
-qui mlogit transition i.educ homem negro urbana age i.job_start i.work_category i.occupation i.year_quarter i.id_code [aweight = weights], vce(robust)
+qui mlogit transition i.educ homem negro urbana age i.year_quarter ind [aweight = weights], vce(robust)
+estimates store model3
 
-estout using "output/regression_3.tex", stats(r2_p N, labels("Pseudo R-Squared" "N")) cells(b(star fmt(3)) se(par fmt(3))) ///
-	label unstack eqlabels("Formal to Formal" "Formal to Informal" "Formal to Non-Employed" "Informal to Formal" "Informal to Informal" "Informal to Non-Employed") ///
-	drop(Formal_to_Formal:) keep(`varlist') collab(none) mlabels(none) replace
+forvalues i = 0/5{
+	di as input "Regressão `i'/5"
+
+	estimates restore model3
+	qui eststo m`i': margins i.educ, predict(outcome(`i')) post
+}
+
+esttab m0 m1 m2 m3 m4 m5 using "output/regression_3.tex", b(3) se(3) label noomitted stats(N, labels("N") fmt(%9.0fc)) collab(none) /*
+	*/ mtitle("\makecell[c]{Formal\\to\\Formal}" /*
+	*/ "\makecell[c]{Formal\\to\\Informal}" /*
+	*/ "\makecell[c]{Formal\\to\\Non-Employed}" /*
+	*/ "\makecell[c]{Informal\\to\\Formal}" /*
+	*/ "\makecell[c]{Informal\\to\\Informal}" /*
+	*/ "\makecell[c]{Informal\\to\\Non-Employed}") /*
+	*/ replace
+
+************************
+* Gráfico por ano      *
+************************
+
+qui mlogit transition i.educ i.year_quarter i.educ#i.year_quarter homem negro urbana age ind [aweight = weights], vce(robust)
