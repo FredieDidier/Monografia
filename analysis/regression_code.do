@@ -117,4 +117,44 @@ esttab m0 m1 m2 m3 m4 m5 using "output/regression_3.tex", b(3) se(3) label noomi
 * Gráfico por ano      *
 ************************
 
-qui mlogit transition i.educ i.year_quarter i.educ#i.year_quarter homem negro urbana age ind [aweight = weights], vce(robust)
+* criando arquivo para armazenar os resultados
+tempfile results_file
+
+tempname results
+
+postfile `results' year_quarter transition educ coef se using `results_file' // dataframe com essas colunas
+
+foreach trim of numlist 20122/20124 20131/20134 20141/20144 20151/20154 20161/20164 20171/20174 20181/20184 20191/20194 20201/20204 20211/20214 20221{
+
+	preserve
+	
+	keep if year_quarter == `trim'
+	
+	di as input "Regressão de `trim'"
+	
+	qui mlogit transition i.educ homem negro urbana age ind [aweight = weights], vce(robust)
+	
+	estimates store model_`trim'
+	
+	forvalues i = 0/5{
+		estimates restore model_`trim'
+		margins educ, predict(outcome(`i')) post
+		
+		matrix B = r(b) // armazenando matriz de coeficientes
+		matrix V = r(V) // matriz de variâncias
+		
+		forvalues educ = 1/4{
+			post `results' (`trim') (`i') (`educ') (B[1,`educ']) (V[`educ',`educ'])
+		}
+	}
+	
+	restore
+}
+
+postclose `results'
+
+use `results_file', clear
+
+replace se = sqrt(se)
+
+save "input/reg_grafico.dta"

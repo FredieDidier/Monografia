@@ -1,27 +1,27 @@
 {
-    "id": "570885D1",
-    "path": "C:/GitHub/Monografia/build/_regression.R",
-    "project_path": "build/_regression.R",
+    "id": "A009D37C",
+    "path": "C:/GitHub/Monografia/analysis/_graphs_regression.R",
+    "project_path": "analysis/_graphs_regression.R",
     "type": "r_source",
-    "hash": "3928775606",
+    "hash": "1699943674",
     "contents": "",
     "dirty": false,
-    "created": 1662395532420.0,
+    "created": 1667347382004.0,
     "source_on_save": false,
     "relative_order": 2,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "65,0",
-        "scrollLine": "0"
+        "cursorPosition": "71,43",
+        "scrollLine": "56"
     },
     "folds": "",
-    "lastKnownWriteTime": 1662645303,
+    "lastKnownWriteTime": 1667415199,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1662645305633,
+    "last_content_update": 1667415199757,
     "read_only": false,
     "read_only_alternatives": []
 }

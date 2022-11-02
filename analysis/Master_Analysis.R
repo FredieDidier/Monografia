@@ -5,8 +5,9 @@
 # 2. Gerar matriz de transicao 2019 por nivel educ
 # 3. Gerar matriz de transicao 2012 - 2021 por educacao
 # 4. Gerar graficos sobre elementos da matriz 2012-2021
-# 5. Gerar graficos de mercado de trabalho/nivel educ de 2019 a 2022        
-# 6. Gerar informacoes sobre tabela descritiva
+# 5. Gerar graficos de mercado de trabalho/nivel educ de 2019 a 2022 
+# 6. 6) Gerar graficos de regressão de 2012 a 2022
+# 7. Gerar informacoes sobre tabela descritiva
 
 
 ###########
@@ -138,9 +139,22 @@ ggsave("wage_formal_informal_empreg_2019_2022.png", path = "./output",
 ggsave("wage_formal_informal_pub_2019_2022.png", path = "./output",
        width = 13.66, height = 7.05)
 
+
+#####################################################
+#                                                   #                       
+# 6) Gerar graficos de regressão de 2012 a 2022     #                                       
+#                                                   #                        
+#####################################################
+
+ggsave("formal_transitions.png", path = "./output",
+       width = 13.66, height = 7.05)
+
+ggsave("informal_transitions.png", path = "./output",
+       width = 13.66, height = 7.05)
+
 ################################################
 #                                              #
-# 6) Gerar informacoes sobre tabela descritiva # 
+# 7) Gerar informacoes sobre tabela descritiva # 
 #                                              #
 ################################################
 
