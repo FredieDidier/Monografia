@@ -67,7 +67,7 @@ esttab m0 m1 m2 m3 m4 m5 using "output/regression_1.tex", b(3) se(3) label noomi
 // Controles 1   //
 ///////////////////
 
-* genero, raça, idade, setor, localização do domicilio, trimestre
+* genero, raça, idade, localização do domicilio, trimestre
 
 qui mlogit transition i.educ homem negro urbana age i.year_quarter [aweight = weights], vce(robust)
 estimates store model2
