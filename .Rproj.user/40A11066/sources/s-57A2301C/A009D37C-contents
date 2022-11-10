@@ -43,7 +43,7 @@ df %>%
   scale_color_manual(name = "Education Level",
                      values = carto_pal(name = "Safe")) +
   
-  labs(x = "Year", y = "Coefficient") +
+  labs(x = "Year", y = "Coefficient", title = transition_labels) +
   
   theme_minimal() +
   theme(text = element_text(family = "LM Roman 10"),
@@ -61,15 +61,13 @@ df %>%
         )) +
   
     scale_x_discrete(breaks = paste0(seq(2013, 2021, 2), "1"),
-                    labels = seq(2013,2021, 2)) +
-  
-  facet_wrap(~ transition, labeller = as_labeller(transition_labels))
+                    labels = seq(2013,2021, 2))
 
 }
 
 
-compare_transitions(df, 0, 1, 2) # Formal
-compare_transitions(df, 3, 4, 5) # Informal
+compare_transitions(df, 0) # Formal - 0:2
+compare_transitions(df, 3) # Informal - 3:5
 
 
 

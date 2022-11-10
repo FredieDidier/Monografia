@@ -1,6 +1,6 @@
 cd "C:/GitHub/Monografia"
 
-use "input/regression.dta", clear
+use "input/regression_df.dta", clear
 
 *** amostra aleatória pequena
 ***
@@ -36,10 +36,6 @@ labmask transition, values(position_transition)
 
 drop if transition >= 6
 
-replace occupation = 10 if position_names == "Non-Employed"
-replace work_category = 10 if position_names == "Non-Employed"
-replace job_start = 5 if position_names == "Non-Employed"
-
 ///////////////////
 // Sem controles //
 ///////////////////
@@ -67,9 +63,9 @@ esttab m0 m1 m2 m3 m4 m5 using "output/regression_1.tex", b(3) se(3) label noomi
 // Controles 1   //
 ///////////////////
 
-* genero, raça, idade, localização do domicilio, trimestre
+* genero, raça, idade, localização do domicilio, setor, ocupação, experiência, trimestre
 
-qui mlogit transition i.educ homem negro urbana age i.year_quarter [aweight = weights], vce(robust)
+qui mlogit transition i.educ homem negro urbana age i.sector i.occupation i.job_start i.year_quarter [aweight = weights], vce(robust)
 estimates store model2
 
 forvalues i = 0/5{
@@ -94,7 +90,8 @@ esttab m0 m1 m2 m3 m4 m5 using "output/regression_2.tex", b(3) se(3) label noomi
 
 * + efeitos fixos de individuo
 
-qui mlogit transition i.educ homem negro urbana age i.year_quarter ind [aweight = weights], vce(robust)
+
+qui mlogit transition i.educ homem negro urbana age i.sector i.occupation i.job_start i.ind i.year_quarter [aweight = weights], vce(robust)
 estimates store model3
 
 forvalues i = 0/5{
@@ -124,7 +121,7 @@ tempname results
 
 postfile `results' year_quarter transition educ coef se using `results_file' // dataframe com essas colunas
 
-foreach trim of numlist 20122/20124 20131/20134 20141/20144 20151/20154 20161/20164 20171/20174 20181/20184 20191/20194 20201/20204 20211/20214 20221{
+foreach trim of numlist 20121/20124 20131/20134 20141/20144 20151/20154 20161/20164 20171/20174 20181/20184 20191/20194 20201/20204 20211/20214{
 
 	preserve
 	
@@ -132,7 +129,7 @@ foreach trim of numlist 20122/20124 20131/20134 20141/20144 20151/20154 20161/20
 	
 	di as input "Regressão de `trim'"
 	
-	qui mlogit transition i.educ homem negro urbana age ind [aweight = weights], vce(robust)
+qui mlogit transition i.educ homem negro urbana age i.sector i.occupation i.job_start [aweight = weights], vce(robust)
 	
 	estimates store model_`trim'
 	
