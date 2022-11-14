@@ -31,10 +31,10 @@ df = df %>%
   mutate(year_quarter = as.character(year_quarter))
 
 
-compare_transitions = function(df, t1, t2, t3){
+compare_transitions = function(df, t1){
 
 df %>%
-  filter(transition %in% c(t1,t2,t3)) %>%
+  filter(transition %in% c(t1)) %>%
   mutate(transition = as.ordered(transition)) %>%
   ggplot(aes(x = year_quarter, y = coef, group = educ, color = educ))  +
   geom_point(size = 2) +
@@ -43,7 +43,7 @@ df %>%
   scale_color_manual(name = "Education Level",
                      values = carto_pal(name = "Safe")) +
   
-  labs(x = "Year", y = "Coefficient", title = transition_labels) +
+  labs(x = "Year", y = "Coefficient", title = transition_labels[t1 + 1]) +
   
   theme_minimal() +
   theme(text = element_text(family = "LM Roman 10"),
@@ -60,14 +60,14 @@ df %>%
           size = rel(1.2)
         )) +
   
-    scale_x_discrete(breaks = paste0(seq(2013, 2021, 2), "1"),
-                    labels = seq(2013,2021, 2))
+    scale_x_discrete(breaks = paste0(seq(2012, 2021, 1), "1"),
+                    labels = seq(2012,2021, 1))
 
 }
 
 
-compare_transitions(df, 0) # Formal - 0:2
-compare_transitions(df, 3) # Informal - 3:5
+compare_transitions(df, 2) # Formal - 0:2
+compare_transitions(df, 5) # Informal - 3:5
 
 
 
