@@ -2,64 +2,44 @@ library(rcartocolor)
 library(tidyverse)
 library(extrafont)
 
-df1 = read_rds("./input/trimestre_2019_1_1.rds")
-df2 = read_rds("./input/trimestre_2019_1_2.rds")
-df3 = read_rds("./input/trimestre_2019_1_3.rds")
-df4 = read_rds("./input/trimestre_2019_1_4.rds")
-df5 = read_rds("./input/trimestre_2019_2_1.rds")
-df6 = read_rds("./input/trimestre_2019_2_2.rds")
-df7 = read_rds("./input/trimestre_2019_2_3.rds")
-df8 = read_rds("./input/trimestre_2019_2_4.rds")
-df9 = read_rds("./input/trimestre_2019_3_1.rds")
-df10 = read_rds("./input/trimestre_2019_3_2.rds")
-df11 = read_rds("./input/trimestre_2019_3_3.rds")
-df12 = read_rds("./input/trimestre_2019_3_4.rds")
-df13 = read_rds("./input/trimestre_2019_4_1.rds")
-df14 = read_rds("./input/trimestre_2019_4_2.rds")
-df15 = read_rds("./input/trimestre_2019_4_3.rds")
-df16 = read_rds("./input/trimestre_2019_4_4.rds")
-df17 = read_rds("./input/trimestre_2020_1_1.rds")
-df18 = read_rds("./input/trimestre_2020_1_2.rds")
-df19 = read_rds("./input/trimestre_2020_1_3.rds")
-df20 = read_rds("./input/trimestre_2020_1_4.rds")
-df21 = read_rds("./input/trimestre_2020_2_1.rds")
-df22 = read_rds("./input/trimestre_2020_2_2.rds")
-df23 = read_rds("./input/trimestre_2020_2_3.rds")
-df24 = read_rds("./input/trimestre_2020_2_4.rds")
-df25 = read_rds("./input/trimestre_2020_3_1.rds")
-df26 = read_rds("./input/trimestre_2020_3_2.rds")
-df27 = read_rds("./input/trimestre_2020_3_3.rds")
-df28 = read_rds("./input/trimestre_2020_3_4.rds")
-df29 = read_rds("./input/trimestre_2020_4_1.rds")
-df30 = read_rds("./input/trimestre_2020_4_2.rds")
-df31 = read_rds("./input/trimestre_2020_4_3.rds")
-df32 = read_rds("./input/trimestre_2020_4_4.rds")
-df33 = read_rds("./input/trimestre_2021_1_1.rds")
-df34 = read_rds("./input/trimestre_2021_1_2.rds")
-df35 = read_rds("./input/trimestre_2021_1_3.rds")
-df36 = read_rds("./input/trimestre_2021_1_4.rds")
-df37 = read_rds("./input/trimestre_2021_2_1.rds")
-df38 = read_rds("./input/trimestre_2021_2_2.rds")
-df39 = read_rds("./input/trimestre_2021_2_3.rds")
-df40 = read_rds("./input/trimestre_2021_2_4.rds")
-df41 = read_rds("./input/trimestre_2021_3_1.rds")
-df42 = read_rds("./input/trimestre_2021_3_2.rds")
-df43 = read_rds("./input/trimestre_2021_3_3.rds")
-df44 = read_rds("./input/trimestre_2021_3_4.rds")
-df45 = read_rds("./input/trimestre_2021_4_1.rds")
-df46 = read_rds("./input/trimestre_2021_4_2.rds")
-df47 = read_rds("./input/trimestre_2021_4_3.rds")
-df48 = read_rds("./input/trimestre_2021_4_4.rds")
-df49 = read_rds("./input/trimestre_2022_1_1.rds")
-df50 = read_rds("./input/trimestre_2022_1_2.rds")
-df51 = read_rds("./input/trimestre_2022_1_3.rds")
-df52 = read_rds("./input/trimestre_2022_1_4.rds")
-df = bind_rows(df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,
-               df11,df12,df13,df14,df15,df16,df17,df18,df19,df20,
-               df21,df22,df23,df24,df25,df26,df27,df28,df29,df30,
-               df31,df32,df33,df34,df35,df36,df37,df38,df39,df40,
-               df41,df42,df43,df44, df45, df46, df47, df48,
-               df49, df50, df51, df52)
+
+
+
+
+trimestres = c("2019_1", "2019_2", "2019_3", "2019_4",
+               "2020_1", "2020_2", "2020_3", "2020_4",
+               "2021_1", "2021_2", "2021_3", "2021_4", "2022_1")
+
+trimestres <- rep(trimestres, 4)
+
+educ <- c(
+  rep(1, 13),
+  rep(2, 13),
+  rep(3, 13),
+  rep(4, 13)
+)
+
+df = map2_dfr(trimestres, educ,
+              
+              function(trim, educ){
+                
+                message(paste0("Downloading", trim, "\n educ ", educ))
+                
+                df <- readr::read_rds(
+                  paste0("input/trimestre_",
+                         trim,
+                         "_",
+                         educ,
+                         ".rds")
+                  
+                  
+                  
+                )
+                df
+              }
+)
+                  
+                  
 df = df %>%
   select(position, social_security_taxpayer, higher_educ_level, year_quarter,
          job_function, worker, weights, monthly_work_income) %>%

@@ -1,0 +1,34 @@
+
+
+trimestres = c("2019_1", "2019_2", "2019_3", "2019_4",
+               "2020_1", "2020_2", "2020_3", "2020_4",
+               "2021_1", "2021_2", "2021_3", "2021_4", "2022_1")
+
+trimestres <- rep(trimestres, 4)
+
+educ <- c(
+  rep(1, 13),
+  rep(2, 13),
+  rep(3, 13),
+  rep(4, 13)
+)
+
+df = map2_dfr(trimestres, educ,
+                    
+                    function(trim, educ){
+                      
+                      message(paste0("Downloading", trim, "\n educ ", educ))
+                      
+                      df <- readr::read_rds(
+                        paste0("input/trimestre_",
+                               trim,
+                               "_",
+                               educ,
+                               ".rds")
+                        
+                        
+                        
+                      )
+                      df
+                    }
+)
