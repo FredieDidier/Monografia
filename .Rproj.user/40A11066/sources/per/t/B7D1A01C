@@ -1,27 +1,26 @@
 {
-    "id": "2B874198",
-    "path": "C:/GitHub/Monografia/build/_regression.R",
-    "project_path": "build/_regression.R",
+    "id": "B7D1A01C",
+    "path": "C:/GitHub/Monografia/analysis/_descriptive_table.R",
+    "project_path": "analysis/_descriptive_table.R",
     "type": "r_source",
-    "hash": "980014825",
+    "hash": "4222112845",
     "contents": "",
     "dirty": false,
-    "created": 1668552861178.0,
+    "created": 1668773314663.0,
     "source_on_save": false,
     "relative_order": 3,
     "properties": {
-        "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "26,58",
-        "scrollLine": "0"
+        "cursorPosition": "16,28",
+        "scrollLine": "5"
     },
     "folds": "",
-    "lastKnownWriteTime": 1667503979,
+    "lastKnownWriteTime": 1660247964,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1667503979,
+    "last_content_update": 1660247964,
     "read_only": false,
     "read_only_alternatives": []
 }
