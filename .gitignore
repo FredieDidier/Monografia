@@ -37,3 +37,5 @@ input/painel_2019-2021.rds
 *.rds
 *.rds
 input/regression.csv
+*.Rhistory
+*.Rproj
