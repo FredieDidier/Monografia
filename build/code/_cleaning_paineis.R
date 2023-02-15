@@ -1,3 +1,11 @@
+# The code defines a function called clean_painel which takes a dataframe as input and processes it to create a cleaned version of the original data. The cleaned data includes selected variables and renamed columns for easier identification. Additionally, a new variable called position is created based on the values of other variables. Finally, a new variable educ is created based on the value of the higher_educ_level variable.
+# The function uses the tidyverse package, which is a collection of R packages for data manipulation and visualization.
+# The mutate() function is used to create new variables, and the select() function is used to select a subset of columns from the original data.
+# The unite() function is used to combine the year, quarter columns into a new year_quarter column.
+# The case_when() function is used to create a new variable position based on the value of several other variables. The variable takes on one of ten possible values based on a series of logical conditions that test the values of worker, job_function, work_category, occupation_condition, social_security_taxpayer, and cnpj.
+# The educ variable is created using case_when() to categorize the value of higher_educ_level into one of four categories.
+# Note that the function does not return the cleaned dataframe; it only modifies the input dataframe in place. To get the cleaned dataframe, you would need to call the function with a dataframe as input and then save the modified dataframe.
+
 library(tidyverse)
 
 clean_painel = function(df){

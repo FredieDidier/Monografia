@@ -30,14 +30,9 @@ cap mkdir "$ROOT\build\input"
 cap mkdir "$ROOT\build\output"
 
 *****
-
 * Rodar painel
-do "$ROOT\build\code\_geracao_paineis"
-
-* Gerar painel
-
 *****
-
+do "$ROOT\build\code\_geracao_paineis"
 
 ********************************************************
 **	delete temporary files

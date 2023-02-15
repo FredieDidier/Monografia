@@ -1,3 +1,24 @@
+# The following function takes a data frame as input and modifies it by adding a column called "sector_code". The column is assigned a new value depending on the value of the existing "sector_code" column. The new value is a text description of the economic sector associated with the numeric code. Here are some comments on the specific sectors that are defined:
+  
+## Agriculture, Livestock, Forestry and Fishing: codes between 1101 and 1119, 1201 and 1209, 1401 and 1402, 1500, 2000, 3001 and 3002.
+## Extractive industries: codes 5000, 6000, 7001, 7002, 8001, 8002, 8009, and 9000.
+## Manufacturing industries: numerous codes.
+## Electricity and Gas: codes 35010, 35021, and 35022.
+## Water, Sewage, Waste Management, and Decontamination: codes 36000, 37000, 38000, and 39000.
+## Construction: codes 41000, 42000, and 43000.
+## Commerce and repair of motor vehicles: codes 45010, 45020, 45030, and 45040.
+## Transport, Warehousing, and Mail: numerous codes.
+## Accommodation and Food: numerous codes.
+## Information and Communication: numerous codes.
+## Financial and Insurance Activities: codes 64000, 65000, 66001, and 66002.
+## Real Estate Activities: code 68000.
+## Professional, Scientific, and Technical Activities: numerous codes.
+## Administrative and Complementary Services: numerous codes.
+## Public Administration, Defense, and Social Security: numerous codes.
+## Education: numerous codes.
+## Human Health and Social Services: numerous codes.
+## Arts, Culture, Sports, and Recreation: numerous codes.
+## Other Services: numerous codes.
 
 aggregate_sectors = function(df){
 

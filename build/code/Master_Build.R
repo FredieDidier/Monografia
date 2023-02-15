@@ -27,7 +27,7 @@ user <- Sys.info()[["user"]]
 print(paste("user name:", user))
 
 if (user == "Fredie") {
-  wd <- "C:\GitHub\Monografia"
+  wd <- "C:/GitHub/Monografia"
 } else if (user == "Francisco") {
   wd <- "C:/Users/Francisco/Dropbox/Research/Monografia-Fredie"
 } else if (user == "DELL") {
