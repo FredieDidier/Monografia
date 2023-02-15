@@ -34,8 +34,10 @@ Raw Data/PNADC_012013.txt
 input/painel_2019.rds
 input/painel_2019-2021.rds
 *.rds
-*.rds
-*.rds
 input/regression.csv
 *.Rhistory
 *.Rproj
+*.Rproj.user
+.Rproj.user
+build/input
+build/output

@@ -23,7 +23,9 @@ else if "`c(username)'" == "Fredie"   {
 cd $ROOT
 
 * generate temporary folder
-cap mkdir "$ROOT\build\tmp"
+capture mkdir "$ROOT\build\tmp"
+cap mkdir "$ROOT\build\input"
+cap mkdir "$ROOT\build\output"
 
 *****
 
