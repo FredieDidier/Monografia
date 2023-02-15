@@ -1,11 +1,15 @@
 
 * generate folder
+cap rm "$ROOT/build/output/painel/pnadcontinua"
+cap erase  "$ROOT\build\output\painel\pnadcontinua"
+cap erase  "$ROOT\build\output\painel\pnadcontinua_1"
+cap erase  "$ROOT\build\output\painel\pnadcontinua_2"
 cap mkdir "$ROOT\build\output\painel"
 
 * Gerando painel
 
 datazoom_pnadcontinua, years(2012/2022) ///
-					original("$ROOT\build\input\pnadc_trimestral") ///
+					original("$ROOT_DATA") ///
 					saving("$ROOT\build\output\painel") ///
 					idrs
 					

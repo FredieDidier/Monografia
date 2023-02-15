@@ -10,6 +10,7 @@ if "`c(username)'" == "Francisco"   {
 else if "`c(username)'" == "DELL"   {
 	version 16.1
 	global ROOT "C:\Users\DELL\Documents\GitHub\Monografia-Fredie"
+	global ROOT_DATA "D:\Dropbox\DataZoom\BasesIBGE\datazoom_rar\PNAD_CONTINUA\pnadcontinua_trimestral_2022024"
 }
 else if "`c(username)'" == "f.cavalcanti"   {
 	version 16.1
@@ -18,6 +19,7 @@ else if "`c(username)'" == "f.cavalcanti"   {
 else if "`c(username)'" == "Fredie"   {
 	version 14.1
 	global ROOT "C:\GitHub\Monografia"
+	global ROOT_DATA "C:\GitHub\Monografia\build\input"
 }
 
 cd $ROOT
