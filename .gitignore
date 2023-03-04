@@ -41,3 +41,4 @@ input/regression.csv
 .Rproj.user
 build/input
 build/output
+.DS_Store
