@@ -53,8 +53,7 @@ map2(list_trimestres, list_educ,
          mutate(new_id = n()) %>%
          filter(new_id == 2)
        
-       df %>%
-         save(., file = paste0("build/output/panel_by_education_level/painel_",
+         save(df, file = paste0("build/output/panel_by_education_level/painel_",
 
                                  trim,
                                  "_",
