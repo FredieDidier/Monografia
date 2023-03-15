@@ -55,7 +55,7 @@ source("./build/code/_aggregating_sector_codes.R")
 #       Cria paineis por nivel educacional  #
 #############################################
 
-source("./build/code/_panel_by_education_level")
+source("./build/code/_panel_by_education_level.R")
 
 
 
@@ -87,7 +87,7 @@ source("./build/code/_panel_by_education_level")
 #                                #
 ##################################
 
-source("./build/code/regression.R")
+source("./build/code/_regression.R")
 
 
 #####################################################################

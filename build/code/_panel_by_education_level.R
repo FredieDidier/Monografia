@@ -18,16 +18,21 @@ list_trimestres <- c("2012_1", "2012_2", "2012_3", "2012_4",
                      "2018_1", "2018_2", "2018_3", "2018_4",
                      "2019_1", "2019_2", "2019_3", "2019_4",
                      "2020_1", "2020_2", "2020_3", "2020_4",
-                     "2021_1", "2021_2", "2021_3", "2021_4")
+                     "2021_1", "2021_2", "2021_3", "2021_4",
+                     "2022_1", "2022_2", "2022_3", "2022_4")
 
 list_trimestres <- rep(list_trimestres, 4)
 
 list_educ <- c(
-  rep(1, 40),
-  rep(2, 40),
-  rep(3, 40),
-  rep(4, 40)
+  rep(1, 44),
+  rep(2, 44),
+  rep(3, 44),
+  rep(4, 44)
 )
+
+
+# generate folder for output
+dir.create("build/output/panel_by_education_level")
 
 map2(list_trimestres, list_educ,
      
@@ -49,7 +54,7 @@ map2(list_trimestres, list_educ,
          filter(new_id == 2)
        
        df %>%
-         load(., file = paste0("build/output/painel_",
+         save(., file = paste0("build/output/panel_by_education_level/painel_",
 
                                  trim,
                                  "_",
