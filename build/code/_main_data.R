@@ -26,12 +26,12 @@ base_reg = map2_dfr(trimestres, educ,
   
     message(paste0("Downloading", trim, "\n educ ", educ))
     
-    df <- readr::read_rds(
-      paste0("input/trimestre_",
+    df <- load(
+      paste0("build/output/panel_by_education_level/painel_",
              trim,
              "_",
              educ,
-             ".rds")
+             ".RData")
       
   
       
@@ -62,5 +62,6 @@ base_reg = base_reg %>%
 
 
 library(foreign)
-write.dta(base_reg, "./input/regression_df.dta")
+
+write.dta(base_reg, "./output/_main_data.dta")
 

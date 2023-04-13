@@ -37,6 +37,9 @@ dir.create("build/output/panel_by_education_level")
 map2(list_trimestres, list_educ,
      
      function(trim, educ_level){
+       
+       message(paste0("Downloading", trim, "\n educ_level ", educ_level))
+       
        df <- haven::read_dta(paste0("build/output/painel_", trim, ".dta")) %>%
          clean_painel() %>%
          aggregate_sectors()
