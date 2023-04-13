@@ -18,8 +18,8 @@ else if "`c(username)'" == "f.cavalcanti"   {
 }
 else if "`c(username)'" == "Fredie"   {
 	version 14.1
-	global ROOT "C:\GitHub\Monografia"
-	global ROOT_DATA "C:\GitHub\Monografia\build\input"
+	global ROOT "/Users/Fredie/Documents/GitHub/Monografia"
+	global ROOT_DATA "/Users/Fredie/Documents/GitHub/Monografia/build/input"
 }
 
 cd $ROOT
@@ -32,8 +32,7 @@ cap mkdir "$ROOT\build\output"
 *****
 * Rodar painel
 *****
-do "$ROOT\build\code\_geracao_paineis"
-
+do "$ROOT/build/code/_geracao_paineis"
 ********************************************************
 **	delete temporary files
 ********************************************************
