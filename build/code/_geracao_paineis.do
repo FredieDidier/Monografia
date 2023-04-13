@@ -1,16 +1,16 @@
 
 * generate folder
 cap rm "$ROOT/build/output/painel/pnadcontinua"
-cap erase  "$ROOT\build\output\painel\pnadcontinua"
-cap erase  "$ROOT\build\output\painel\pnadcontinua_1"
-cap erase  "$ROOT\build\output\painel\pnadcontinua_2"
-cap mkdir "$ROOT\build\output\painel"
+cap erase  "$ROOT/build/output/painel/pnadcontinua"
+cap erase  "$ROOT/build/output/painel/pnadcontinua_1"
+cap erase  "$ROOT/build/output/painel/pnadcontinua_2"
+cap mkdir "$ROOT/build/output/painel"
 
 * Gerando painel
 
 datazoom_pnadcontinua, years(2012/2022) ///
 					original("$ROOT_DATA") ///
-					saving("$ROOT\build\output\painel") ///
+					saving("$ROOT/build/output/painel") ///
 					idrs
 					
 * Gerando arquivos separados por pares de trimestres
@@ -23,7 +23,7 @@ local files PNAD_painel_1_rs PNAD_painel_2_rs PNAD_painel_3_rs PNAD_painel_4_rs 
 
 
 * Montando um arquivo único
-cd "$ROOT\build\output\painel"
+cd "$ROOT/build/output/painel"
 
 clear
 
@@ -49,6 +49,6 @@ forvalues i = 1/`: word count `ano1''{
 	
 	use `base_completa' if (Ano == `ano_inic' & Trimestre == `tri_inic') | (Ano == `ano_fin' & Trimestre == `tri_fin'), clear
 			
-	save "$ROOT\build\output\painel_`ano_inic'_`tri_inic'", replace
+	save "$ROOT/build/output/painel_`ano_inic'_`tri_inic'", replace
 }
 
