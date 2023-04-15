@@ -14,6 +14,19 @@ base_reg[, `:=` (
   year_quarter = as.numeric(str_remove(year_quarter, "_")))]
 
 base_reg[, `:=` (
+  position_names = case_when(position %in% c(3,5,7,9) ~ "Formal",
+                             position %in% c(4,6,8,10) ~ "Informal",
+                             position %in% c(1,2) ~ "Non-Employed"))]
+
+  base_reg[, `:=`( homem = case_when(gender == 1 ~ 1,
+                    gender == 2 ~ 0),
+                    negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
+                                      race == 1 | race == 3 ~ 0))]
+  
+  base_reg[, `:=`(urbana = case_when(household_location == 1 ~ 1,
+                     household_location == 2 ~ 0))]
+
+base_reg[, `:=` (
     lead_position = shift(position_names, type = "lead")), by = id_code]
 
 base_reg[, position_transition := paste(position_names, sep = " to ", lead_position), by = id_code]
