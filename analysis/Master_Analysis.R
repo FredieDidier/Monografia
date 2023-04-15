@@ -28,6 +28,7 @@ library(rcartocolor)
 library(grid)
 library(gridExtra)
 library(Hmisc)
+library(data.table)
 
 ###########################################
 #                                         #
@@ -39,30 +40,30 @@ library(Hmisc)
 #  1.1) Lendo painel     #
 ############################
 
-painel_2019 = readr::read_rds("./input/painel_2019.rds")
+# painel_2019 = readr::read_rds("./input/painel_2019.rds")
 
-###################################
-#  1.2) Gerando matriz 2019 Geral #
-###################################
+# ###################################
+# #  1.2) Gerando matriz 2019 Geral #
+# ###################################
+# 
+# source("./analysis/_transition_matrix_function.R")
+# 
+# matriz1 = cria_matriz_transicao(painel_2019, "2019_1", "2019_2", 10, prop = FALSE)
+# matriz2 = cria_matriz_transicao(painel_2019, "2019_2", "2019_3", 10, prop = FALSE)
+# matriz3 = cria_matriz_transicao(painel_2019, "2019_3", "2019_4", 10, prop = FALSE)
+# matriz_soma = matriz1 + matriz2 + matriz3
+# 
+# matriz_final = scale(matriz_soma, center = F, scale = colSums(matriz_soma))
+# 
+# saveRDS(matriz_final, "./input/transition_matrix_2019.rds")
 
-source("./analysis/_transition_matrix_function.R")
-
-matriz1 = cria_matriz_transicao(painel_2019, "2019_1", "2019_2", 10, prop = FALSE)
-matriz2 = cria_matriz_transicao(painel_2019, "2019_2", "2019_3", 10, prop = FALSE)
-matriz3 = cria_matriz_transicao(painel_2019, "2019_3", "2019_4", 10, prop = FALSE)
-matriz_soma = matriz1 + matriz2 + matriz3
-
-matriz_final = scale(matriz_soma, center = F, scale = colSums(matriz_soma))
-
-saveRDS(matriz_final, "./input/transition_matrix_2019.rds")
-
-##############################################
-#                                            #
-# 2) Gerar matriz de transicao 2019 por educ #  
-#                                            #
-##############################################
-
-source("./analysis/_transition_matrices_by_educ.R")
+# ##############################################
+# #                                            #
+# # 2) Gerar matriz de transicao 2019 por educ #  
+# #                                            #
+# ##############################################
+# 
+# source("./analysis/_transition_matrices_by_educ.R")
 
 
 ###########################################

@@ -1,5 +1,3 @@
-
-
 ### filtrar pra pessoas de determinada educação
 ### Multiplicar pela soma total do peso amostral
 ### Identificar esses mesmos indivíduos no trimestre seguinte
@@ -74,7 +72,7 @@ matrizes <- pmap_dfr(
        
 )
 
-write_csv(matrizes, "./input/transicoes_por_educ_3_x_3.csv")
+write_csv(matrizes, "./output/transicoes_por_educ_3_x_3.csv")
 
 
 
@@ -85,29 +83,21 @@ matrizes <- pmap_dfr(
   purrr::insistently(function(trim, next_trim, educ){
     message(paste0("Transition ", trim, " to ", next_trim, "\n educ ", educ))
     
-    df <- readr::read_rds(
-      paste0("input/painel_",
-             trim,
-             "_",
-             educ,
-             ".rds")
-    )
+    df = data.table(get(load(paste("build/output/panel_by_education_level/painel_", trim, "_", educ, ".RData", sep=""),environment())))
     
-    df = df %>%
-      mutate(aux = case_when(occupation_condition == 1 ~ 1,
-                             position %in% c(1,2) ~ 2)) %>%
-      mutate(position = aux)
+    df[, aux := case_when(occupation_condition == 1 ~ 1,
+                          position %in% c(1,2) ~ 2)]
+    df[, position := aux]
     
     mat <- cria_matriz_transicao(df, trim, next_trim, 2)
-    colnames(mat) <- 1:2
+    mat = data.table(mat)
+    setnames(mat, c("1", "2"))
     
-    mat <- as_tibble(mat)
-    mat$posicao_inicial <- 1:2
+    mat[, posicao_inicial := 1:2]
     
-    mat <- mat %>%
-      pivot_longer(-posicao_inicial,
-                   names_to = "posicao_final",
-                   values_to = "transition")
+    mat <- melt(mat, id.vars = "posicao_inicial", 
+                variable.name = "posicao_final",
+                value.name = "transition")
     
     mat$educ <- educ
     mat$trim <- trim
@@ -118,7 +108,7 @@ matrizes <- pmap_dfr(
   
 )
 
-write_csv(matrizes, "./input/transicoes_por_educ_2_x_2.csv")
+write_csv(matrizes, "./output/transicoes_por_educ_2_x_2.csv")
 
 
 
@@ -130,24 +120,21 @@ matrizes <- pmap_dfr(
     
     message(paste0("Transition ", trim, " to ", next_trim, "\n educ ", educ))
     
-    df <- readr::read_rds(
-      paste0("input/painel_",
-             trim,
-             "_",
-             educ,
-             ".rds")
-    )
+    df = data.table(get(load(paste("build/output/panel_by_education_level/painel_", trim, "_", educ, ".RData", sep=""),environment())))
     
     mat <- cria_matriz_transicao(df, trim, next_trim, 10)
-    colnames(mat) <- 1:10
+    mat = data.table(mat)
+    setnames(mat, c("1", "2",
+                    "3", "4",
+                    "5", "6",
+                    "7", "8",
+                    "9", "10"))
     
-    mat <- as_tibble(mat)
-    mat$posicao_inicial <- 1:10
+    mat[, posicao_inicial := 1:10]
     
-    mat <- mat %>%
-      pivot_longer(-posicao_inicial,
-                   names_to = "posicao_final",
-                   values_to = "transition")
+    mat <- melt(mat, id.vars = "posicao_inicial", 
+                variable.name = "posicao_final",
+                value.name = "transition")
     
     mat$educ <- educ
     mat$trim <- trim
@@ -158,7 +145,7 @@ matrizes <- pmap_dfr(
   
 )
 
-write_csv(matrizes, "./input/transicoes_por_educ_10_x_10.csv")
+write_csv(matrizes, "./output/transicoes_por_educ_10_x_10.csv")
 
 
 
@@ -171,24 +158,21 @@ matrizes <- pmap_dfr(
     
     message(paste0("Transition ", trim, " to ", next_trim, "\n educ ", educ))
     
-    df <- readr::read_rds(
-      paste0("input/painel_",
-             trim,
-             "_",
-             educ,
-             ".rds")
-    )
+    df = data.table(get(load(paste("build/output/panel_by_education_level/painel_", trim, "_", educ, ".RData", sep=""),environment())))
     
     mat <- cria_matriz_transicao(df, trim, next_trim, 10, prop = FALSE)
-    colnames(mat) <- 1:10
+    mat = data.table(mat)
+    setnames(mat, c("1", "2",
+                    "3", "4",
+                    "5", "6",
+                    "7", "8",
+                    "9", "10"))
     
-    mat <- as_tibble(mat)
-    mat$posicao_inicial <- 1:10
+    mat[, posicao_inicial := 1:10]
     
-    mat <- mat %>%
-      pivot_longer(-posicao_inicial,
-                   names_to = "posicao_final",
-                   values_to = "transition")
+    mat <- melt(mat, id.vars = "posicao_inicial", 
+                variable.name = "posicao_final",
+                value.name = "transition")
     
     mat$educ <- educ
     mat$trim <- trim
@@ -199,17 +183,17 @@ matrizes <- pmap_dfr(
   
 )
 
- write_csv(matrizes, "./input/transicoes_por_educ_10_x_10_prop_F.csv")
+ write_csv(matrizes, "./output/transicoes_por_educ_10_x_10_prop_F.csv")
 
  
- ### Para fazer a matriz de transição de 2019 por educ
- 
- matrizes = read_csv("./input/transicoes_por_educ_10_x_10_prop_F.csv")
- 
- matrizes = matrizes %>%
-   filter(trim %in% c("2019_1", "2019_2", "2019_3", "2019_4")) %>%
-   group_by(educ, posicao_inicial, posicao_final) %>%
-   summarise(transition = sum(transition)) %>%
-   mutate(transition = transition/sum(transition)) %>%
-   mutate(transition = transition * 100)
+ # ### Para fazer a matriz de transição de 2019 por educ
+ # 
+ # matrizes = read_csv("./output/transicoes_por_educ_10_x_10_prop_F.csv")
+ # 
+ # matrizes = matrizes %>%
+ #   filter(trim %in% c("2019_1", "2019_2", "2019_3", "2019_4")) %>%
+ #   group_by(educ, posicao_inicial, posicao_final) %>%
+ #   summarise(transition = sum(transition)) %>%
+ #   mutate(transition = transition/sum(transition)) %>%
+ #   mutate(transition = transition * 100)
 

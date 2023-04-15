@@ -1,7 +1,7 @@
 # This code is written in the R programming language and performs a loop to generate clean datasets.
 # The first lines define two vectors, list_trimestres and list_educ, which will be used to specify the datasets that the loop will generate. list_trimestres contains strings with the names of files that the loop will read, and list_educ contains the education levels that will be used to filter the data.
 # The loop starts with the map2 function from the purrr package. This function iterates over two vectors, list_trimestres and list_educ, applying a function to each pair of values. The function is defined as an anonymous function with two arguments, trim and educ_level, corresponding to the current values of the two vectors.
-# Inside the loop, the function reads a file using the haven::read_dta function and applies two functions, clean_painel() and aggregate_sectors(), to clean and aggregate the data. The cleaned dataset is then filtered by educ_level and year_quarter, and the id_code column is selected and unlisted to obtain a vector of unique IDs.
+# Inside the loop, the function reads a file using the haven::read_dta function and applies three functions, clean_painel(), aggregate_sectors() and aggregate_occupations() to clean and aggregate the data. The cleaned dataset is then filtered by educ_level and year_quarter, and the id_code column is selected and unlisted to obtain a vector of unique IDs.
 # The cleaned dataset is filtered again to keep only the rows that have an id_code present in the vector of unique IDs, then grouped by id_code and sorted by id_code and year_quarter. A new column, new_id, is created that indicates the row's position in the group, and only rows with a new_id equal to 2 are kept.
 # Finally, the resulting dataset is saved to a file in RData format using the save function, with a filename based on the current values of trim and educ_level.
 # In summary, this code generates clean datasets from a set of files, filters them by education level and quarter, and keeps only the second row of each group of IDs. The resulting datasets are saved to separate files.
@@ -42,19 +42,21 @@ map2(list_trimestres, list_educ,
        
        df <- haven::read_dta(paste0("build/output/painel_", trim, ".dta")) %>%
          clean_painel() %>%
-         aggregate_sectors()
-       
+         aggregate_sectors() %>%
+         aggregate_occupations()
+
        df_aux <- df %>%
          filter(educ == educ_level, year_quarter == trim) %>%
          select(id_code) %>%
          unlist()
-       
+
        df <- df %>%
          filter(id_code %in% df_aux) %>%
          group_by(id_code) %>%
          arrange(id_code, year_quarter) %>%
          mutate(new_id = n()) %>%
          filter(new_id == 2)
+       
        
          save(df, file = paste0("build/output/panel_by_education_level/painel_",
 

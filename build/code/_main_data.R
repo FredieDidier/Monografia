@@ -23,7 +23,7 @@ base_reg[, position_transition := paste(position_names, sep = " to ", lead_posit
 
 base_reg <- base_reg[!grepl("NA", position_transition)]
 
-write.dta(base_reg, "./output/_main_data.dta")
+write.dta(base_reg, "./output/main_data.dta")
 
 
 

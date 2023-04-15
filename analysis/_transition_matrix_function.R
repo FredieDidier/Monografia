@@ -18,9 +18,6 @@
 # 
 # If prop is TRUE, the function returns the ratio of final_number to initial_number. If prop is FALSE, the function returns final_number.
 
-
-
-
 funcao = function(df, initial_quarter, final_quarter, initial_position,
                   final_position, prop = TRUE){
   

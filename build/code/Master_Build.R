@@ -51,6 +51,7 @@ setwd(wd)
 
 source("./build/code/_cleaning_paineis.R")
 source("./build/code/_aggregating_sector_codes.R")
+source("./build/code/_aggregating_occupation_codes.R")
 
 #############################################
 #                                           #
@@ -59,8 +60,6 @@ source("./build/code/_aggregating_sector_codes.R")
 #############################################
 
 source("./build/code/_panel_by_education_level.R")
-
-
 
 ##########################################
 #                                        #
