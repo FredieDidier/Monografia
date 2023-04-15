@@ -1,9 +1,11 @@
-# The code is loading multiple R data files stored in a directory named "build/output/panel_by_education_level" 
-# and combining them into a single data frame called base_reg using map_dfr(). 
-# It then converts the year_quarter variable to numeric format and creates a new variable called 
-# lead_position which contains the next position in the sequence for each individual in the dataset.
-# The code then creates a variable called position_transition which is a string combining the position_names and lead_position variables using "to" as a separator. 
-# Finally, the code removes any observations where position_transition contains the string "NA", and writes the resulting data frame as a Stata file to "./output/_main_data.dta".
+# The code reads a list of files from a specific directory using the dir_ls function from the fs package. It then loads each file from the list using the get and load functions, and combines them into a single data frame using the map_dfr function from the purrr package.
+# 
+# The code then converts the year_quarter column from string to numeric using as.numeric and str_remove functions from the stringr package. It creates a new column called lead_position by shifting the position_names column by one observation for each id_code, using the shift function from the data.table package. It then creates a new column called position_transition by pasting position_names and lead_position together, separated by " to ", using the paste function.
+# 
+# The code removes any observations where position_transition contains the string "NA", using the !grepl function. Finally, it writes the resulting data frame to a Stata file using the write.dta function from the foreign package.
+
+
+
 
 file_list <- dir_ls("build/output/panel_by_education_level")
 base_reg <- file_list %>% 

@@ -14,7 +14,8 @@ trimestres <- c("2012_1", "2012_2", "2012_3", "2012_4",
                    "2018_1", "2018_2", "2018_3", "2018_4",
                    "2019_1", "2019_2", "2019_3", "2019_4",
                    "2020_1", "2020_2", "2020_3", "2020_4",
-                   "2021_1", "2021_2", "2021_3", "2021_4")
+                   "2021_1", "2021_2", "2021_3", "2021_4",
+                "2022_1", "2022_2", "2022_3")
 
 trimestres <- rep(trimestres, 4)
 
@@ -27,15 +28,16 @@ next_trimestres <- c("2012_2", "2012_3", "2012_4",
                         "2018_1", "2018_2", "2018_3", "2018_4",
                         "2019_1", "2019_2", "2019_3", "2019_4",
                         "2020_1", "2020_2", "2020_3", "2020_4",
-                        "2021_1", "2021_2", "2021_3", "2021_4", "2022_1")
+                        "2021_1", "2021_2", "2021_3", "2021_4", "2022_1",
+                     "2022_2", "2022_3", "2022_4")
 
 next_trimestres <- rep(next_trimestres, 4)
 
 educ <- c(
-  rep(1, 40),
-  rep(2, 40),
-  rep(3, 40),
-  rep(4, 40)
+  rep(1, 43),
+  rep(2, 43),
+  rep(3, 43),
+  rep(4, 43)
 )
 
 source("./analysis/_transition_matrix_function.R")
@@ -47,37 +49,27 @@ matrizes <- pmap_dfr(
      purrr::insistently(function(trim, next_trim, educ){
        message(paste0("Transition ", trim, " to ", next_trim, "\n educ ", educ))
        
-       df <- readr::read_rds(
-         paste0("input/painel_",
-                trim,
-                "_",
-                educ,
-                ".rds")
-       )
-       
-       df = df %>%
-         mutate(aux = case_when(position %in% c(3,5,7,9) ~ 1, #formal
-                                position %in% c(4,6,8,10) ~ 2, #informal
-                                position %in% c(1,2) ~ 3 #inactive + unemployed
-                               )) %>%
-       mutate(position = aux)
+       df = data.table(get(load(paste("build/output/panel_by_education_level/painel_", trim, "_", educ, ".RData", sep=""),environment())))
+      
+       df[, aux := case_when(position %in% c(3,5,7,9) ~ 1, #formal
+                             position %in% c(4,6,8,10) ~ 2, #informal
+                             position %in% c(1,2) ~ 3 #inactive + unemployed
+       )]
+       df[, position := aux]
        
        mat <- cria_matriz_transicao(df, trim, next_trim, 3)
-       colnames(mat) <- 1:3
+       mat = data.table(mat)
+       setnames(mat, c("1", "2", "3"))
+
+       mat[, posicao_inicial := 1:3]
+       mat <- melt(mat, id.vars = "posicao_inicial", 
+                   variable.name = "posicao_final",
+                   value.name = "transition")
        
-       mat <- as_tibble(mat)
-       mat$posicao_inicial <- 1:3
+       mat[, educ := educ]
+       mat[, trim := trim]
        
-       mat <- mat %>%
-         pivot_longer(-posicao_inicial,
-                      names_to = "posicao_final",
-                      values_to = "transition")
-       
-       mat$educ <- educ
-       mat$trim <- trim
-       
-       mat <- mat %>%
-         relocate(trim, educ, posicao_inicial, posicao_final)
+       mat <- mat[, .(trim, educ, posicao_inicial, posicao_final, transition)]
      }, quiet = FALSE)
        
 )
