@@ -1,6 +1,3 @@
-source("./build/_cleaning_paineis.R")
-source("./build/_aggregating_sector_codes.R")
-source("./build/_aggregating_occupation_codes.R")
 
 trimestres <- c("2012_1", "2012_2", "2012_3", "2012_4",
                 "2013_1", "2013_2", "2013_3", "2013_4",
@@ -29,7 +26,7 @@ map(trimestres,
     base::message(paste0("Trimester ", trim))
             
      df <- haven::read_dta(
-       paste0("data-raw/Trimestres/painel_",
+       paste0("build/output/painel_",
               trim,
               ".dta")
        ) %>%
