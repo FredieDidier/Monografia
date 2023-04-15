@@ -1,5 +1,7 @@
 * ------------------------------------------------------------------------
 
+set more off
+
 *** FOLDERS PATHWAY
 
 * check what your username is in Stata by typing "di c(username)"

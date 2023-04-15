@@ -15,6 +15,8 @@ datazoom_pnadcontinua, years(2012/2022) ///
 					
 * Gerando arquivos separados por pares de trimestres
 
+set more off
+
 cd $ROOT
 
 local files PNAD_painel_1_rs PNAD_painel_2_rs PNAD_painel_3_rs PNAD_painel_4_rs ///
@@ -23,7 +25,7 @@ local files PNAD_painel_1_rs PNAD_painel_2_rs PNAD_painel_3_rs PNAD_painel_4_rs 
 
 
 * Montando um arquivo único
-cd "$ROOT/build/output/painel"
+cd "$ROOT/build/output/painel/pnadcontinua"
 
 clear
 
