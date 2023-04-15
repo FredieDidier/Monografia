@@ -11,15 +11,16 @@ trimestres <- c("2012_1", "2012_2", "2012_3", "2012_4",
                 "2018_1", "2018_2", "2018_3", "2018_4",
                 "2019_1", "2019_2", "2019_3", "2019_4",
                 "2020_1", "2020_2", "2020_3", "2020_4",
-                "2021_1", "2021_2", "2021_3", "2021_4")
+                "2021_1", "2021_2", "2021_3", "2021_4",
+                "2022_1", "2022_2", "2022_3")
 
 trimestres <- rep(trimestres, 4)
 
 educ <- c(
-  rep(1, 40),
-  rep(2, 40),
-  rep(3, 40),
-  rep(4, 40)
+  rep(1, 43),
+  rep(2, 43),
+  rep(3, 43),
+  rep(4, 43)
 )
 
 map(trimestres,
@@ -40,9 +41,9 @@ map(trimestres,
          function(educ_level){
            base::message(paste0("    ", "Education level ", educ_level))
            
-           df %>%
+           df = df %>%
            filter(educ == educ_level, year_quarter == trim) %>%
-           write_rds(paste0("input/trimestre_", trim, "_", educ_level, ".rds"))
+           save(df, paste0("output/trimestre_", trim, "_", educ_level, ".RData"))
          }
          )
    }
