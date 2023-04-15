@@ -42,7 +42,7 @@ map(trimestres,
            df = df %>%
            filter(educ == educ_level, year_quarter == trim)
            
-          save(df, file = paste0("build/output/trimestre_", trim, "_", educ_level, ".RData"))
+          save(df, file = paste0("build/output/trimestres/trimestre_", trim, "_", educ_level, ".RData"))
          }
          )
    }
