@@ -4,9 +4,6 @@
 # 
 # The code removes any observations where position_transition contains the string "NA", using the !grepl function. Finally, it writes the resulting data frame to a Stata file using the write.dta function from the foreign package.
 
-
-
-
 file_list <- dir_ls("build/output/panel_by_education_level")
 base_reg <- file_list %>% 
   map_dfr(~ get(load(.))) 
