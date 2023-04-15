@@ -2,7 +2,7 @@
 # 
 # The code then converts the year_quarter column from string to numeric using as.numeric and str_remove functions from the stringr package. It creates a new column called lead_position by shifting the position_names column by one observation for each id_code, using the shift function from the data.table package. It then creates a new column called position_transition by pasting position_names and lead_position together, separated by " to ", using the paste function.
 # 
-# The code removes any observations where position_transition contains the string "NA", using the !grepl function. Finally, it writes the resulting data frame to a Stata file using the write.dta function from the foreign package.
+# The code removes any observations where position_transition contains the string "NA" and the ones started with "Non-Employed", using the !grepl function. Finally, it writes the resulting data frame to a Stata file using the write.dta function from the foreign package.
 
 file_list <- dir_ls("build/output/panel_by_education_level")
 base_reg <- file_list %>% 
@@ -32,6 +32,9 @@ base_reg[, `:=` (
 base_reg[, position_transition := paste(position_names, sep = " to ", lead_position), by = id_code]
 
 base_reg <- base_reg[!grepl("NA", position_transition)]
+base_reg <- base_reg[!grepl("Non-Employed to Formal", position_transition)]
+base_reg <- base_reg[!grepl("Non-Employed to Informal", position_transition)]
+base_reg <- base_reg[!grepl("Non-Employed to Non-Employed", position_transition)]
 
 write.dta(base_reg, "./output/main_data.dta")
 

@@ -27,13 +27,8 @@ replace transition = 2 if position_transition == "Formal to Non-Employed"
 replace transition = 3 if position_transition == "Informal to Formal"
 replace transition = 4 if position_transition == "Informal to Informal"
 replace transition = 5 if position_transition == "Informal to Non-Employed"
-replace transition = 6 if position_transition == "Non-Employed to Formal"
-replace transition = 7 if position_transition == "Non-Employed to Informal"
-replace transition = 8 if position_transition == "Non-Employed to Non-Employed"
 
 labmask transition, values(position_transition)
-
-drop if transition >= 6
 
 ///////////////////
 // Sem controles //
