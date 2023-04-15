@@ -36,7 +36,7 @@ base_reg <- base_reg[!grepl("Non-Employed to Formal", position_transition)]
 base_reg <- base_reg[!grepl("Non-Employed to Informal", position_transition)]
 base_reg <- base_reg[!grepl("Non-Employed to Non-Employed", position_transition)]
 
-write.dta(base_reg, "./output/main_data.dta")
+write.dta(base_reg, ".build/output/main_data.dta")
 
 
 
