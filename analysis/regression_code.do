@@ -1,6 +1,6 @@
-cd "C:/GitHub/Monografia"
+cd "/Users/Fredie/Documents/GitHub/Monografia"
 
-use "input/regression_df.dta", clear
+use "output/main_data.dta", clear
 
 *** amostra aleatória pequena
 ***
