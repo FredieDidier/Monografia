@@ -1,6 +1,9 @@
 library(tidyverse)
 library(rcartocolor)
-library(extrafont)
+library(showtext)
+
+font_add_google(name = "Roboto", family = "roboto")
+showtext_auto()
 
 base = haven::read_dta("./input/reg_grafico.dta")
 
@@ -13,8 +16,6 @@ base = base %>%
                                                                                  "Incomplete High School",
                                                                                  "Incomplete College",
                                                                                  "Complete College")))
-  
-
 transition_labels = c(
   "0" = "Formal to Formal",
   "1" = "Formal to Informal",
@@ -46,7 +47,7 @@ df %>%
   labs(x = "Year", y = "Coefficient", title = transition_labels[t1 + 1]) +
   
   theme_minimal() +
-  theme(text = element_text(family = "LM Roman 10"),
+  theme(text = element_text(family = "roboto"),
         plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
         legend.title = element_blank(), 
         legend.text = element_text(size = 20),
@@ -60,8 +61,8 @@ df %>%
           size = rel(1.2)
         )) +
   
-    scale_x_discrete(breaks = paste0(seq(2012, 2021, 1), "1"),
-                    labels = seq(2012,2021, 1))
+    scale_x_discrete(breaks = paste0(seq(2012, 2022, 1), "1"),
+                    labels = seq(2012,2022, 1))
 
 }
 

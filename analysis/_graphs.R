@@ -1,10 +1,6 @@
 library(extrafont)
 library(tidyverse)
-
-font_import(path = "C:/Users/Fredie/AppData/Local/Microsoft/Windows/Fonts")
-y
-loadfonts(device = "win")
-
+library(showtext)
 library(ggsci)
 library(RColorBrewer)
 library(ghibli)
@@ -16,9 +12,12 @@ library(ggthemes)
 
  ## Gráfico Matrizes
 
-matrizes = read.csv("./input/transicoes_por_educ_2_x_2.csv")
+matrizes = read.csv("./output/transicoes_por_educ_2_x_2.csv")
  
-matrizes1 = read.csv("./input/transicoes_por_educ_3_x_3.csv")
+matrizes1 = read.csv("./output/transicoes_por_educ_3_x_3.csv")
+
+font_add_google(name = "Roboto", family = "roboto")
+showtext_auto()
 
 
 changing_df = function(df){
@@ -54,7 +53,7 @@ compare_transitions = function(df, pos1, pos2, var){
      labs(x = "Year", y = "Proportion") + ggtitle("") +
      
      theme_minimal() +
-     theme(text = element_text(family = "LM Roman 10"),
+     theme(text = element_text(family = "roboto"),
            plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
            legend.title = element_blank(), 
            legend.text = element_text(size = 20),
@@ -68,9 +67,11 @@ compare_transitions = function(df, pos1, pos2, var){
              size = rel(1.2)
            )) +
      
-     scale_x_discrete(breaks = paste0(2012:2021, "_1"),
-                      labels = 2012:2021) +
+     scale_x_discrete(breaks = paste0(2012:2022, "_1"),
+                      labels = 2012:2022) +
     guides(fill = guide_legend(nrow = 4, byrow = TRUE))
    
- }
+}
+
+compare_transitions(matrizes, 1, 2, "transition")
  
