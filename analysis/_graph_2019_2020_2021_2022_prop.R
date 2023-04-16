@@ -1,39 +1,14 @@
 library(rcartocolor)
 library(tidyverse)
-library(extrafont)
+library(showtext)
+library(fs)
 
-trimestres = c("2019_1", "2019_2", "2019_3", "2019_4",
-               "2020_1", "2020_2", "2020_3", "2020_4",
-               "2021_1", "2021_2", "2021_3", "2021_4", "2022_1")
+font_add_google(name = "Roboto", family = "roboto")
+showtext_auto()
 
-trimestres <- rep(trimestres, 4)
-
-educ <- c(
-  rep(1, 13),
-  rep(2, 13),
-  rep(3, 13),
-  rep(4, 13)
-)
-
-df = map2_dfr(trimestres, educ,
-              
-              function(trim, educ){
-                
-                message(paste0("Downloading", trim, "\n educ ", educ))
-                
-                df <- readr::read_rds(
-                  paste0("input/trimestre_",
-                         trim,
-                         "_",
-                         educ,
-                         ".rds")
-                  
-                  
-                  
-                )
-                df
-              }
-)
+file_list <- dir_ls("build/output/trimestres")
+df <- file_list %>% 
+  map_dfr(~ get(load(.)))
                   
                   
 df = df %>%
@@ -76,10 +51,10 @@ compare_positions <- function(pos1, pos2, var){
     scale_color_manual(name = "Education Level",
                        values = carto_pal(name = "Safe")) +
     
-    labs(x = "Year", y = "Proportion") +
+    labs(x = "Year", y = var) +
     
     theme_minimal() +
-    theme(text = element_text(family = "LM Roman 10"),
+    theme(text = element_text(family = "roboto"),
           plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
           legend.title = element_blank(), 
           legend.text = element_text(size = 20),
@@ -99,3 +74,5 @@ compare_positions <- function(pos1, pos2, var){
     facet_wrap(~ position, labeller = as_labeller(position_labels))
   
 }
+
+compare_positions(5, 6, "wage")
