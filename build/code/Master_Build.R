@@ -1,10 +1,9 @@
 # Script para rodar os códigos que geram as bases prontas para produzir resultados
 # Estrutura:
 #
-# 1. Gerar paineis limpos
-# 2. Gerar painel de 2019
+# 1. Funcoes que vao limpar os paineis
+# 2. Gerar paineis por nivel educacional
 # 3. Criar uma base adequada para regressao
-# 4. 4) Base para grafico de proporcao de ocupados por educ 2012-2022
 
 ###########
 #  Setup  #
@@ -61,28 +60,6 @@ source("./build/code/_aggregating_occupation_codes.R")
 
 source("./build/code/_panel_by_education_level.R")
 
-##########################################
-#                                        #
-#   3) Gerar painel de 2019              #     
-#                                        #
-#########################################
-
-#list_trimestres = c("2019_1", "2019_3")
-
-#df = map(list_trimestres,
-#        
-#         function(trim){
-#           df <- haven::read_dta(paste0("build/output/painel_", trim, ".dta")) %>%
-#             clean_painel() %>%
-#             aggregate_sectors()
-#           
-#           
-#         }
-#) %>% bind_rows()
-#
-#df %>%
-#  readr::write_rds(paste0("build/output/painel_2019.rds"))
-
 ##################################
 #                                #
 #   3) Base para regressao       #
@@ -92,10 +69,4 @@ source("./build/code/_panel_by_education_level.R")
 source("./build/code/_main_data.R")
 
 
-#####################################################################
-#                                                          
-#   4) Base para grafico de proporcao de ocupados por educ 2012-2022    
-#                                                         
-####################################################################
 
-source("./build/_cleaning_trimesters.R")

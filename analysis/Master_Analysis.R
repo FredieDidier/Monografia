@@ -1,13 +1,14 @@
-# Script para rodar os códigos que geram as bases prontas para produzir resultados
+# Script para rodar os codigos que geram as bases prontas para produzir resultados
 # Estrutura:
 #
-# 1. Gerar matriz de transicao 2019 Geral
-# 2. Gerar matriz de transicao 2019 por nivel educ
-# 3. Gerar matriz de transicao 2012 - 2021 por educacao
-# 4. Gerar graficos sobre elementos da matriz 2012-2021
-# 5. Gerar graficos de mercado de trabalho/nivel educ de 2019 a 2022 
-# 6. Gerar graficos de regressão de 2012 a 2022
-# 7. Gerar informacoes sobre tabela descritiva
+# 1. Replicar o trabalho do Journal of Public Economics "Inequality of the coronavirus shock".
+# 2. Primeira analise: perda de emprego #grafico
+# 2.1. Porcentagem de perda de emprego por setor/categoria de emprego e educacao. #graficos
+# 3. Regressao para determinantes de perda de emprego e renda.
+# 4. Regressao para determinantes de perda de emprego e renda: caracteristicas individuais.
+# 5. Efeitos da industria para perder emprego (efeitos fixos) - grafico da regressao
+# 6. Efeitos da ocupacao para perder emprego (efeitos fixos) - grafico da regressao
+
 
 
 ###########
@@ -32,18 +33,16 @@ library(data.table)
 
 ###########################################
 #                                         #
-# 1) Gerar matriz de transicao 2019 Geral # 
+# 1) 
 #                                         #
 ###########################################
 
 ############################
-#  1.1) Lendo painel     #
+#      
 ############################
 
-# painel_2019 = readr::read_rds("./input/painel_2019.rds")
-
 # ###################################
-# #  1.2) Gerando matriz 2019 Geral #
+# #  
 # ###################################
 # 
 # source("./analysis/_transition_matrix_function.R")
@@ -59,16 +58,15 @@ library(data.table)
 
 # ##############################################
 # #                                            #
-# # 2) Gerar matriz de transicao 2019 por educ #  
+# # 2)   
 # #                                            #
 # ##############################################
 # 
-# source("./analysis/_transition_matrices_by_educ.R")
 
 
 ###########################################
 #                                         #
-# 3) Gerar matriz de transicao 2012-2021  #
+# 3)  
 #                                         #
 ###########################################
 
@@ -77,7 +75,7 @@ source("./analysis/_transition_matrices_by_educ.R")
 
 ####################################################
 #                                                  #
-# 4) Gerar graficos de transicao e outros 2012-2021#
+# 4) 
 #                                                  #
 ####################################################
 
@@ -107,71 +105,16 @@ ggsave("ocupados_conta_propria_2012-2021.png", path = "./output",
 
 #############################################################################
 #                                                                           #
-# 5) Gerar graficos de mercado de trabalho/nivel educ de 2019 a 2022        #                
+# 5)                       
 #                                                                           #
 #############################################################################
 
-source("./analysis/_graph_2019_2020_2021_2022_prop.R")
-
-ggsave("prop_inativos_desempregados_2019_2022.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("prop_formal_informal_priv_2019_2022.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("prop_formal_informal_conta_propria_2019_2022.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("prop_formal_informal_empreg_2019_2022.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("prop_formal_informal_pub_2019_2022.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("wage_formal_informal_priv_2019_2022.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("wage_formal_informal_self_employed_2019_2022.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("wage_formal_informal_empreg_2019_2022.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("wage_formal_informal_pub_2019_2022.png", path = "./output",
-       width = 13.66, height = 7.05)
 
 
 #####################################################
 #                                                   #                       
-# 6) Gerar graficos de regressão de 2012 a 2022     #                                       
+# 6)                                        
 #                                                   #                        
 #####################################################
-
-ggsave("formal_to_formal_transitions.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("formal_to_informal_transitions.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("formal_to_non_employed_transitions.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("informal_to_formal_transitions.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("informal_to_informal_transitions.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-ggsave("informal_to_non_employed_transitions.png", path = "./output",
-       width = 13.66, height = 7.05)
-
-################################################
-#                                              #
-# 7) Gerar informacoes sobre tabela descritiva # 
-#                                              #
-################################################
-
-source("./analysis/_descriptive_table.R")
-
 
 

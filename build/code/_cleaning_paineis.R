@@ -26,7 +26,7 @@ clean_painel = function(df){
            primary_sampling_unit = UPA,
            area_type = V1023,
            weights = V1028,
-           hours_worked = V4039C,
+           hours_worked = VD4037,
            gender = V2007, age = V2009,
            race = V2010,
            educ_level = V3003A, 
@@ -55,7 +55,9 @@ clean_painel = function(df){
            social_security_taxpayer_ref_week = VD4012,
            monthly_work_income = VD4017,
            household_location = V1022,
-           occupation_code = V4010) %>%
+           occupation_code = V4010,
+           not_salaried_worker = V40121,
+           temporary_worker = V4025) %>%
     unite(col = "year_quarter", year:quarter, sep = "_")
   
   df = df %>%
@@ -70,7 +72,8 @@ clean_painel = function(df){
                                 worker == 1 & job_function == 4 & work_category %in% c(5,7) ~ 9,
                                 worker == 1 & job_function == 4 & work_category == 6 ~ 10)) %>%
     select(id_code, year_quarter, workforce_condition, worker, signed_work_card, cnpj,
-           job_function, occupation_condition, position, social_security_taxpayer,
+           job_function, hours_worked, not_salaried_worker, temporary_worker,
+           occupation_condition, position, social_security_taxpayer,
            higher_educ_level, work_category, gender, race, age,
            years_of_study, monthly_work_income, weights, job_start, sector_code,
            household_location, occupation_code) %>%
