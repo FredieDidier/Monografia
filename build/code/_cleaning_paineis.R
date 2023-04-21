@@ -21,7 +21,8 @@ clean_painel = function(df){
            VD3004, VD3005, VD4001, VD4002,
            VD4005, VD4007, VD4009,
            V4013, V4039C,
-           VD4012, VD4017, V4010) %>%
+           VD4012, VD4017, V4010, VD4037,
+           V40121, V4025) %>%
     rename(id_code = idind, year = Ano, quarter = Trimestre,
            primary_sampling_unit = UPA,
            area_type = V1023,

@@ -5,42 +5,74 @@
 # The code removes any observations where position_transition contains the string "NA" and the ones started with "Non-Employed", using the !grepl function. Finally, it writes the resulting data frame to a Stata file using the write.dta function from the foreign package.
 
 file_list <- dir_ls("build/output/panel_by_education_level")
-base_reg <- file_list %>% 
-  map_dfr(~ get(load(.))) 
+file_list = str_extract(file_list, "painel_[0-9]{4}_[0-9]{1}_[0-9]{1}")
 
-base_reg = data.table(base_reg)
+reg_prep = function(panel){
+  
+  panel = str_extract(panel, "painel_[0-9]{4}_[0-9]{1}_[0-9]{1}")
 
-base_reg[, `:=` (
+  df = data.table(get(load(paste0("build/output/panel_by_education_level/", panel, ".RData"))))
+
+df[, `:=` (
   year_quarter = as.numeric(str_remove(year_quarter, "_")))]
 
-base_reg[, `:=` (
+df[, `:=` (
   position_names = case_when(position %in% c(3,5,7,9) ~ "Formal",
                              position %in% c(4,6,8,10) ~ "Informal",
                              position %in% c(1,2) ~ "Non-Employed"))]
 
-  base_reg[, `:=`( homem = case_when(gender == 1 ~ 1,
+  df[, `:=`( homem = case_when(gender == 1 ~ 1,
                     gender == 2 ~ 0),
                     negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
                                       race == 1 | race == 3 ~ 0))]
   
-  base_reg[, `:=`(urbana = case_when(household_location == 1 ~ 1,
+  df[, `:=`(urbana = case_when(household_location == 1 ~ 1,
                      household_location == 2 ~ 0))]
 
-base_reg[, `:=` (
+df[, `:=` (
     lead_position = shift(position_names, type = "lead")), by = id_code]
 
-base_reg[, position_transition := paste(position_names, sep = " to ", lead_position), by = id_code]
+df[, position_transition := paste(position_names, sep = " to ", lead_position), by = id_code]
 
-base_reg <- base_reg[!grepl("NA", position_transition)]
-base_reg <- base_reg[!grepl("Non-Employed to Formal", position_transition)]
-base_reg <- base_reg[!grepl("Non-Employed to Informal", position_transition)]
-base_reg <- base_reg[!grepl("Non-Employed to Non-Employed", position_transition)]
+df = df %>%
+  select(-c(new_id))
 
-write.dta(base_reg, ".build/output/main_data.dta")
+df = df %>%
+  filter(position_transition %in% c("Formal to Formal",
+                                    "Formal to Informal",
+                                    "Formal to Non-Employed",
+                                    "Informal to Formal",
+                                    "Informal to Informal",
+                                    "Informal to Non-Employed",
+                                    "Non-Employed to Formal",
+                                    "Non-Employed to Informal",
+                                    "Non-Employed to Non-Employed"))
 
+# Francisco, vc tem que criar a pasta "regression" no seu PC.
 
+save(df, file = paste0("build/output/regression/",
+                       panel,
+                       ".RData"))
+}
 
-#base_reg = base_reg %>%
+for(i in 1:length(file_list)){
+  cat(i, sep="\n")
+  
+  reg_prep(file_list[i])
+  }
+
+ffs = dir_ls("build/output/regression")
+
+df <- ffs %>% 
+  map_dfr(~ get(load(.))) 
+
+df = df %>%
+  group_by(id_code) %>%
+  mutate(id = n())
+
+write.dta(df, "build/output/regression/main_data.dta")
+
+#df = df %>%
   #mutate(position_names = case_when(position %in% c(3,5,7,9) ~ "Formal",
                   #                  position %in% c(4,6,8,10) ~ "Informal",
                    #                 position %in% c(1,2) ~ "Non-Employed")) %>%
@@ -52,7 +84,7 @@ write.dta(base_reg, ".build/output/main_data.dta")
                             #household_location == 2 ~ 0))
 
 
-#base_reg = base_reg %>%
+#df = df %>%
  # mutate(year_quarter = str_remove(year_quarter, "_")) %>%
   #mutate(year_quarter = as.numeric(year_quarter)) %>%
   #group_by(id_code) %>%
@@ -60,5 +92,4 @@ write.dta(base_reg, ".build/output/main_data.dta")
   #mutate(lead_position = dplyr::lead(position_names)) %>%
   #mutate(position_transition = paste(position_names, sep = " to ", lead_position)) %>%
   #filter(!str_detect(position_transition, "NA"))
-
 
