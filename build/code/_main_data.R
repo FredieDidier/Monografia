@@ -49,6 +49,14 @@ df = df %>%
                                     "Non-Employed to Non-Employed"))
 
 # Francisco, vc tem que criar a pasta "regression" no seu PC.
+# Set the path to the folder
+folder_path <- paste0("build/output/regression") 
+
+# Check if the folder exists
+if (!file.exists(folder_path)) {
+  # Create the folder if it does not exist
+  dir.create(folder_path)
+}  
 
 save(df, file = paste0("build/output/regression/",
                        panel,
