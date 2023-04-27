@@ -12,11 +12,11 @@ df = data %>%
   select(year_quarter, position_names, position_transition, position, educ, weights)
 
 df = df %>%
-  mutate(numerador = case_when(position_names == "Formal" ~ 1,
+  mutate(denominador = case_when(position_names == "Formal" ~ 1,
                                position_names == "Informal" ~ 1))
 
 df = df %>%
-  mutate(denominador = case_when(position_transition == "Formal to Non-Employed" ~ 1,
+  mutate(numerador = case_when(position_transition == "Formal to Non-Employed" ~ 1,
                                  position_transition == "Informal to Non-Employed" ~ 1))
 
 
@@ -30,7 +30,7 @@ df = df %>%
             den_weights = sum(den_weights, na.rm = TRUE))
 
 df = df %>%
-  mutate(job_loss = (den_weights/num_weights)*100)
+  mutate(job_loss = (num_weights/den_weights)*100)
 
 df = df %>%
   mutate(educ = as.factor(educ))
