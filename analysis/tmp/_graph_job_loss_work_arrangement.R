@@ -1,0 +1,73 @@
+library(showtext)
+library(tidyverse)
+library(rcartocolor)
+library(haven)
+
+data = read_dta("build/output/regression/main_data.dta")
+
+font_add_google(name = "Open Sans", family = "Open Sans")
+showtext_auto()
+
+df = data %>%
+  select(year_quarter, position_names, position_transition, position, worker, temporary_worker,
+         monthly_work_income, weights) %>%
+  mutate(labor_status = case_when(temporary_worker == 1 ~ "Temporary",
+                                  temporary_worker == 2 ~ "Permanent",
+                                  monthly_work_income > 0 ~ "Salaried",
+                                  worker == 1 & monthly_work_income == 0 ~ "Not Salaried"))
+
+df = df %>%
+  mutate(numerador = case_when(position_names == "Formal" ~ 1,
+                               position_names == "Informal" ~ 1))
+
+df = df %>%
+  mutate(denominador = case_when(position_transition == "Formal to Non-Employed" ~ 1,
+                                 position_transition == "Informal to Non-Employed" ~ 1))
+
+
+df = df %>%
+  mutate(num_weights = numerador * weights) %>%
+  mutate(den_weights = denominador * weights)
+
+df = df %>%
+  group_by(labor_status) %>%
+  summarize(num_weights = sum(num_weights, na.rm = TRUE),
+            den_weights = sum(den_weights, na.rm = TRUE))
+
+df = df %>%
+  mutate(job_loss = (den_weights/num_weights)*100)
+
+df = df %>%
+  mutate(labor_status = as.factor(labor_status))
+
+df = df %>%
+  filter(!is.na(labor_status))
+
+df = df %>%
+  mutate(labor = case_when(labor_status == "Not Salaried" ~ 1,
+                           labor_status == "Permanent" ~ 2,
+                           labor_status == "Salaried" ~ 3,
+                           labor_status == "Temporary" ~ 4))
+
+graph = ggplot(df, aes(x = reorder(labor, -job_loss))) +
+  geom_bar(aes(y = job_loss, fill = labor_status), stat = "identity") +
+  scale_fill_manual(name = "Labor Status",
+                    values = carto_pal(name = "Vivid")) +
+  labs(x = "", y = "Job Loss %") + ggtitle("Job Loss by Labor Status") +
+  theme_minimal() +
+  theme(text = element_text(family = "Open Sans"),
+        plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+        legend.title = element_text(size = 18, face = "bold"), 
+        legend.text = element_text(size = 20),
+        legend.position = "right",
+        axis.title = element_text(size = 18, face = "bold", hjust = 0.5),
+        strip.text = element_text(size = 18, face = "bold", hjust = 0.5),
+        axis.line = element_line(size = 0.75, colour = "black"),
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(
+          family = "Helvetica",
+          colour = "black",
+          size = rel(1.2)
+        )) +
+  guides(fill = guide_legend(nrow = 4, byrow = TRUE))
+

@@ -50,7 +50,7 @@ aggregate_sectors = function(df){
                                  sector_code %in% c(58000, 59000, 60001, 60002, 61000, 62000, 63000) ~ "Informacao e Comunicacao",
                                  sector_code %in% c(64000, 65000, 66001, 66002) ~ "Atividades Financeiras e de Seguros",
                                  sector_code == 68000 ~ "Atividades Imobiliarias",
-                                 sector_code %in% c(69000, 70000, 71000, 72000, 73010, 73020, 74000, 75000) ~ "Atividades Profissionais, Cientificas e T?cnicas",
+                                 sector_code %in% c(69000, 70000, 71000, 72000, 73010, 73020, 74000, 75000) ~ "Atividades Profissionais, Cientificas e Tecnicas",
                                  sector_code %in% c(77010, 77020, 78000, 79000, 80000, 81011, 81012, 81020, 82001, 82002, 82003, 82009) ~ "Atividades Administrativas e Servicos Complementares",
                                  sector_code %in% c(84011, 84012, 84013, 84014, 84015, 84016, 84017, 84020) ~ "Administracao Publica, Defesa e Seguridade Social",
                                  sector_code %in% c(85011, 85012, 85013, 85014, 85021, 85029) ~ "Educacao",
