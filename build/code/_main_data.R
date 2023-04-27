@@ -48,6 +48,9 @@ df = df %>%
                                     "Non-Employed to Informal",
                                     "Non-Employed to Non-Employed"))
 
+df = df %>%
+  select(-c(not_salaried_worker))
+
 # Francisco, vc tem que criar a pasta "regression" no seu PC.
 # Set the path to the folder
 folder_path <- paste0("build/output/regression") 

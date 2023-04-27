@@ -112,78 +112,78 @@ write_csv(matrizes, "./output/transicoes_por_educ_2_x_2.csv")
 
 
 
-matrizes <- pmap_dfr(
-  
-  list(trimestres, next_trimestres, educ),
-  
-  purrr::insistently(function(trim, next_trim, educ){
-    
-    message(paste0("Transition ", trim, " to ", next_trim, "\n educ ", educ))
-    
-    df = data.table(get(load(paste("build/output/panel_by_education_level/painel_", trim, "_", educ, ".RData", sep=""),environment())))
-    
-    mat <- cria_matriz_transicao(df, trim, next_trim, 10)
-    mat = data.table(mat)
-    setnames(mat, c("1", "2",
-                    "3", "4",
-                    "5", "6",
-                    "7", "8",
-                    "9", "10"))
-    
-    mat[, posicao_inicial := 1:10]
-    
-    mat <- melt(mat, id.vars = "posicao_inicial", 
-                variable.name = "posicao_final",
-                value.name = "transition")
-    
-    mat$educ <- educ
-    mat$trim <- trim
-    
-    mat <- mat %>%
-      relocate(trim, educ, posicao_inicial, posicao_final)
-  }, quiet = FALSE)
-  
-)
-
-write_csv(matrizes, "./output/transicoes_por_educ_10_x_10.csv")
-
-
-
-
-matrizes <- pmap_dfr(
-  
-  list(trimestres, next_trimestres, educ),
-  
-  purrr::insistently(function(trim, next_trim, educ){
-    
-    message(paste0("Transition ", trim, " to ", next_trim, "\n educ ", educ))
-    
-    df = data.table(get(load(paste("build/output/panel_by_education_level/painel_", trim, "_", educ, ".RData", sep=""),environment())))
-    
-    mat <- cria_matriz_transicao(df, trim, next_trim, 10, prop = FALSE)
-    mat = data.table(mat)
-    setnames(mat, c("1", "2",
-                    "3", "4",
-                    "5", "6",
-                    "7", "8",
-                    "9", "10"))
-    
-    mat[, posicao_inicial := 1:10]
-    
-    mat <- melt(mat, id.vars = "posicao_inicial", 
-                variable.name = "posicao_final",
-                value.name = "transition")
-    
-    mat$educ <- educ
-    mat$trim <- trim
-    
-    mat <- mat %>%
-      relocate(trim, educ, posicao_inicial, posicao_final)
-  }, quiet = FALSE)
-  
-)
-
- write_csv(matrizes, "./output/transicoes_por_educ_10_x_10_prop_F.csv")
+# matrizes <- pmap_dfr(
+#   
+#   list(trimestres, next_trimestres, educ),
+#   
+#   purrr::insistently(function(trim, next_trim, educ){
+#     
+#     message(paste0("Transition ", trim, " to ", next_trim, "\n educ ", educ))
+#     
+#     df = data.table(get(load(paste("build/output/panel_by_education_level/painel_", trim, "_", educ, ".RData", sep=""),environment())))
+#     
+#     mat <- cria_matriz_transicao(df, trim, next_trim, 10)
+#     mat = data.table(mat)
+#     setnames(mat, c("1", "2",
+#                     "3", "4",
+#                     "5", "6",
+#                     "7", "8",
+#                     "9", "10"))
+#     
+#     mat[, posicao_inicial := 1:10]
+#     
+#     mat <- melt(mat, id.vars = "posicao_inicial", 
+#                 variable.name = "posicao_final",
+#                 value.name = "transition")
+#     
+#     mat$educ <- educ
+#     mat$trim <- trim
+#     
+#     mat <- mat %>%
+#       relocate(trim, educ, posicao_inicial, posicao_final)
+#   }, quiet = FALSE)
+#   
+# )
+# 
+# write_csv(matrizes, "./output/transicoes_por_educ_10_x_10.csv")
+# 
+# 
+# 
+# 
+# matrizes <- pmap_dfr(
+#   
+#   list(trimestres, next_trimestres, educ),
+#   
+#   purrr::insistently(function(trim, next_trim, educ){
+#     
+#     message(paste0("Transition ", trim, " to ", next_trim, "\n educ ", educ))
+#     
+#     df = data.table(get(load(paste("build/output/panel_by_education_level/painel_", trim, "_", educ, ".RData", sep=""),environment())))
+#     
+#     mat <- cria_matriz_transicao(df, trim, next_trim, 10, prop = FALSE)
+#     mat = data.table(mat)
+#     setnames(mat, c("1", "2",
+#                     "3", "4",
+#                     "5", "6",
+#                     "7", "8",
+#                     "9", "10"))
+#     
+#     mat[, posicao_inicial := 1:10]
+#     
+#     mat <- melt(mat, id.vars = "posicao_inicial", 
+#                 variable.name = "posicao_final",
+#                 value.name = "transition")
+#     
+#     mat$educ <- educ
+#     mat$trim <- trim
+#     
+#     mat <- mat %>%
+#       relocate(trim, educ, posicao_inicial, posicao_final)
+#   }, quiet = FALSE)
+#   
+# )
+# 
+#  write_csv(matrizes, "./output/transicoes_por_educ_10_x_10_prop_F.csv")
 
  
  # ### Para fazer a matriz de transição de 2019 por educ
