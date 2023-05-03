@@ -43,13 +43,16 @@ df = df %>%
                                     "Formal to Non-Employed",
                                     "Informal to Formal",
                                     "Informal to Informal",
-                                    "Informal to Non-Employed",
-                                    "Non-Employed to Formal",
-                                    "Non-Employed to Informal",
-                                    "Non-Employed to Non-Employed"))
+                                    "Informal to Non-Employed"))
 
 df = df %>%
   select(-c(not_salaried_worker))
+
+df = df %>%
+  mutate(labor_status = case_when(temporary_worker == 1 ~ "Temporary",
+                                  temporary_worker == 2 ~ "Permanent",
+                                  monthly_work_income > 0 ~ "Salaried",
+                                  worker == 1 & monthly_work_income == 0 ~ "Not Salaried"))
 
 # Set the path to the folder
 folder_path <- paste0("build/output/regression") 

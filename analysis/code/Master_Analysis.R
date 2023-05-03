@@ -30,6 +30,28 @@ library(Hmisc)
 library(data.table)
 library(RColorBrewer)
 library(haven)
+library(here)
+
+####################
+# Folder Path
+####################
+
+user <- Sys.info()[["user"]]
+print(paste("user name:", user))
+
+if (user == "Fredie") {
+  wd <- "/Users/Fredie/Documents/GitHub/Monografia"
+} else if (user == "Francisco") {
+  wd <- "C:/Users/Francisco/Dropbox/Research/Monografia-Fredie"
+} else if (user == "DELL") {
+  wd <- "C:/Users/DELL/Documents/GitHub/Monografia-Fredie"
+} else if (user == "f.cavalcanti") {
+  wd <- "C:/Users/DELL/Documents/GitHub/Monografia-Fredie"
+} else {
+  stop("Invalid user")
+}
+
+setwd(wd)
 
 ###########################################
 #                                         #
@@ -46,15 +68,15 @@ library(haven)
 
 # Categoria de Emprego
 
-source("analysis/tmp/_graph_job_loss_work_category.R")
+source("analysis/code/_graph_job_loss_work_category.R")
 
 # Educação
 
-source("analysis/tmp/_graph_job_loss_educ.R")
+source("analysis/code/_graph_job_loss_educ.R")
 
 # Work Arrangement
 
-source("analysis/tmp/_graph_job_loss_work_arrangement.R")
+source("analysis/code/_graph_job_loss_work_arrangement.R")
 
 
 ###########################################

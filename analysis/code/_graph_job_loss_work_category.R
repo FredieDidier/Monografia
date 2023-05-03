@@ -2,6 +2,7 @@ library(showtext)
 library(haven)
 library(tidyverse)
 library(RColorBrewer)
+library(here)
 
 data = read_dta("build/output/regression/main_data.dta")
 
@@ -72,3 +73,7 @@ graph = ggplot(df, aes(x = reorder(position, -job_loss))) +
         )) +
   guides(fill = guide_legend(nrow = 4, byrow = TRUE))
 
+graph
+
+ggsave(filename = here(wd, "analysis", "output", "graph", "_graph_job_loss_work_category.png"),
+       width = 9, height = 12, device = "png", dpi = 300)

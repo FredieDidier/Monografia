@@ -35,6 +35,33 @@ cap mkdir "$ROOT/analysis/output/graph"
 do "$ROOT/analysis/code/_graph_job_loss_sectors.do"
 * 2.1. Porcentagem de perda de emprego por setor/categoria de emprego e educacao. #graficos
 * 3. Regressao para determinantes de perda de emprego e renda.
+use "$ROOT/build/output/regression/main_data.dta", clear
+sample 2
+gen denominador = 1 if position_names == "Formal"
+replace denominador = 1 if position_names == "Informal"
+
+gen numerador = 1 if position_transition == "Formal to Non-Employed"
+replace numerador = 1 if position_transition == "Informal to Non-Employed"
+
+gen item1 = numerador * weights
+gen item2 = denominador * weights
+cap drop job_loss
+gen job_loss = .
+replace job_loss = 0 if denominador == 1
+replace job_loss = 1 if numerador == 1
+egen ind = group(id_code)
+xtset ind year_quarter
+* generate variable of quartely date
+*tostring year_quarter, replace
+*gen quarter = substr(year_quarter, 5, 1)
+*gen year = substr(year_quarter, 1, 4)
+*gen iten1 = year + "." + quarter
+*gen  trim = quarterly(iten1, "YQ")
+*drop iten*
+*format trim %tm
+*destring id_code, replace
+*xtset id_code trim
+
 * 4. Regressao para determinantes de perda de emprego e renda: caracteristicas individuais.
 * 5. Efeitos da industria para perder emprego (efeitos fixos) - grafico da regressao
 * 6. Efeitos da ocupacao para perder emprego (efeitos fixos) - grafico da regressao
