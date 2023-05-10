@@ -29,10 +29,11 @@ capture mkdir "$ROOT/analysis/tmp"
 cap mkdir "$ROOT/analysis/input"
 cap mkdir "$ROOT/analysis/output"
 cap mkdir "$ROOT/analysis/output/graph"
+cap mkdir "$ROOT/analysis/output/regressions"
 
 * 1. Replicar o trabalho do Journal of Public Economics "Inequality of the coronavirus shock".
 * 2. Primeira analise: perda de emprego #grafico
-do "$ROOT/analysis/code/_graph_job_loss_sectors.do"
+*do "$ROOT/analysis/code/_graph_job_loss_sectors.do" // OLHAR NO R
 * 2.1. Porcentagem de perda de emprego por setor/categoria de emprego e educacao. #graficos
 * 3. Regressao para determinantes de perda de emprego e renda.
 use "$ROOT/build/output/regression/main_data.dta", clear
@@ -63,6 +64,8 @@ xtset ind year_quarter
 *xtset id_code trim
 
 * 4. Regressao para determinantes de perda de emprego e renda: caracteristicas individuais.
+do "$ROOT/analysis/code/_table_regression_job_loss_determinants.do"
+
 * 5. Efeitos da industria para perder emprego (efeitos fixos) - grafico da regressao
 * 6. Efeitos da ocupacao para perder emprego (efeitos fixos) - grafico da regressao
 
