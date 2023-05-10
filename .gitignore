@@ -42,3 +42,9 @@ input/regression.csv
 build/input
 build/output
 .DS_Store
+latex/*.aux
+latex/*.log
+latex/*.out
+latex/*.pdf
+latex/*.gz
+
