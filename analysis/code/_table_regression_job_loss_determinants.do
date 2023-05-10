@@ -14,6 +14,7 @@ monthly_work_income ///
 urbana ///
 job_start ///
 i.year_quarter ///
+[aw=weights] ///
 ,  absorb(ind )
 
 global rmse_score : di %9.3fc `e(rmse)' 

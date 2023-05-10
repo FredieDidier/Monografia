@@ -65,6 +65,7 @@ xtset ind year_quarter
 
 * 4. Regressao para determinantes de perda de emprego e renda: caracteristicas individuais.
 do "$ROOT/analysis/code/_table_regression_job_loss_determinants.do"
+do "$ROOT/analysis/code/_graph_regression_job_loss_determinants.do"
 
 * 5. Efeitos da industria para perder emprego (efeitos fixos) - grafico da regressao
 * 6. Efeitos da ocupacao para perder emprego (efeitos fixos) - grafico da regressao

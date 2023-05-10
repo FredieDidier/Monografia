@@ -48,3 +48,4 @@ latex/*.out
 latex/*.pdf
 latex/*.gz
 
+analysis/tmp/
