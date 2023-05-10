@@ -1,0 +1,84 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage{appendix}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{natbib}
+  \setcitestyle{open={(},close={)}}
+\usepackage{indentfirst}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+
+
+%\usepackage{datetime}
+\usepackage[nodayofweek,level]{datetime}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{threeparttable}
+\usepackage{pdflscape}
+\usepackage{lscape}
+\usepackage{array} % for defining a new column type
+\usepackage{tabulary}
+\newcolumntype{K}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage{animate}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage{siunitx}
+\usepackage{gensymb} % degree symbol \degree
+
+\makeatletter
+\newcommand{\leqnos}{\tagsleft@true\let\veqno\@@leqno}
+\newcommand{\reqnos}{\tagsleft@false\let\veqno\@@eqno}
+\reqnos
+\makeatother
+
+
+\newdate{date}{30}{07}{2022}
+\date{\displaydate{date} }
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue, backref=page]{hyperref}
+\usepackage{setspace}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+\setstretch{1.5}
+\usepackage{comment} % package to selectively include/exclude portions of text
+\usepackage{setspace} % The \addlinespace command is part of the "setspace" package in LaTeX.
+
+
+\title{\LARGE JOB LOSS}
+
+\begin{document}
+
+\maketitle
+
+\section{Descriptive analysis}\label{sec:desc_pam}
+
+\input{../analysis/output/regressions/_table_regression_job_loss_determinants.tex}
+
+\begin{figure}[hb]
+  \centering
+  \caption{Job loss work category}
+  \includegraphics[width=0.85\linewidth]{../analysis/output/graph/_graph_job_loss_work_category.png}
+  \label{fig:_graph_job_loss_work_category}
+\end{figure}
+
+
+\end{document}
+
+
