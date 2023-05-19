@@ -90,7 +90,7 @@ graph = ggplot(df, aes(x = reorder(sector, job_loss))) +
         legend.position = "none",
         axis.title = element_text(size = 18, face = "bold", hjust = 0.5),
         strip.text = element_text(size = 18, face = "bold", hjust = 0.5),
-        axis.line = element_line(size = 0.75, colour = "black"),
+        axis.line = element_line(linewidth = 0.75, colour = "black"),
         axis.text = element_text(
           family = "Helvetica",
           colour = "black",
