@@ -47,7 +47,7 @@ df = df %>%
 
 df = df %>%
   mutate(labor_status = case_when(temporary_worker == 1 ~ "Temporary",
-                                  temporary_worker == 2 ~ "Permanent",
+                                  occupation_condition = 1 & temporary_worker == 2 ~ "Permanent",
                                   occupation_condition == 1 & monthly_work_income > 0 ~ "Salaried",
                                   occupation_condition == 1 & monthly_work_income == 0 ~ "Not Salaried"))
 
