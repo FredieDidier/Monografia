@@ -72,7 +72,7 @@ for(i in 1:length(file_list)){
   }
 
 ffs = dir_ls("build/output/regression")
-ffs = str_extract(ffs, "painel_[0-9]{4}_[0-9]{1}_[0-9]{1}") 
+ffs = ffs[2:172]
 ## A linha 78 filtra o diretório "regression" para apenas os arquivos que contém "painel_"
 
 df <- ffs %>% 
