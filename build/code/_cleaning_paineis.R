@@ -57,7 +57,6 @@ clean_painel = function(df){
            monthly_work_income = VD4017,
            household_location = V1022,
            occupation_code = V4010,
-           not_salaried_worker = V40121,
            temporary_worker = V4025) %>%
     unite(col = "year_quarter", year:quarter, sep = "_")
   
@@ -73,7 +72,7 @@ clean_painel = function(df){
                                 occupation_condition == 1 & job_function %in% c(2,4) & work_category %in% c(5,7) ~ 9, #Formal Public Sector
                                 occupation_condition == 1 & job_function %in% c(2,4) & work_category == 6 ~ 10)) %>% #Informal Public Sector
     select(id_code, year_quarter, state, workforce_condition, signed_work_card, cnpj,
-           job_function, hours_worked, not_salaried_worker, temporary_worker,
+           job_function, hours_worked, temporary_worker,
            occupation_condition, position, social_security_taxpayer,
            higher_educ_level, work_category, gender, race, age,
            years_of_study, monthly_work_income, weights, job_start, sector_code,
