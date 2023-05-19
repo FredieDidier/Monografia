@@ -48,7 +48,7 @@ df = df %>%
 df = df %>%
   mutate(labor_status = case_when(temporary_worker == 1 ~ "Temporary",
                                   temporary_worker == 2 ~ "Permanent",
-                                  monthly_work_income > 0 ~ "Salaried",
+                                  occupation_condition == 1 & monthly_work_income > 0 ~ "Salaried",
                                   occupation_condition == 1 & monthly_work_income == 0 ~ "Not Salaried"))
 
 # Set the path to the folder
