@@ -53,7 +53,7 @@ df = df %>%
                             sector_code == "Atividades Financeiras e de Seguros" ~ "Financial and Insurance Activities",
                             sector_code == "Atividades Imobiliarias" ~ "Real Estate Activities",
                             sector_code == "Atividades Mal Definidas" ~ "Undefined Activities",
-                            sector_code == "Atividades Profissionais, Cientificas e T?cnicas" ~
+                            sector_code == "Atividades Profissionais, Cientificas e Tecnicas" ~
                               "Professional, Scientific, and Technical Activities",
                             sector_code == "Comercio e Reparacao de Veiculos Automotores" ~
                               "Trade and Repair of Motor Vehicles",
@@ -68,7 +68,8 @@ df = df %>%
                             sector_code == "Organismos Internacionais" ~ "International Organizations",
                             sector_code == "Outras Atividades de Servicos" ~ "Other Service Activities",
                             sector_code == "Saude Humana e Servicos Sociais" ~ "Human Health and Social Services",
-                            sector_code == "Transporte, Armazenagem e Correio" ~ "Transportation, Storage, and Postal Services"
+                            sector_code == "Transporte, Armazenagem e Correio" ~ "Transportation, Storage, and Postal Services",
+                            sector_code == "Servicos Domesticos" ~ "Domestic Services"
                             ))
 
 df = df %>%
@@ -80,7 +81,7 @@ df = df %>%
 graph = ggplot(df, aes(x = reorder(sector, job_loss))) +
   geom_bar(aes(y = job_loss, fill = job_loss), stat = "identity") +
   coord_flip() +
-  labs(x = "Sectors", y = "Job Loss %") + ggtitle("Job Loss by Sector") +
+  labs(x = "Sectors", y = "Job Loss %") + 
   theme_minimal() +
   theme(text = element_text(family = "Open Sans"),
         plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
@@ -97,4 +98,7 @@ graph = ggplot(df, aes(x = reorder(sector, job_loss))) +
           face = "bold"
         ))
 
+graph
 
+ggsave(filename = here(wd, "analysis", "output", "graph", "_graph_job_loss_sectors.png"),
+       width = 9, height = 12, device = "png", dpi = 300)

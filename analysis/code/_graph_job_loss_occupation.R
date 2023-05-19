@@ -85,4 +85,6 @@ graph = ggplot(df, aes(x = reorder(occupation, job_loss))) +
 
 graph
 
+ggsave(filename = here(wd, "analysis", "output", "graph", "_graph_job_loss_occupation.png"),
+       width = 9, height = 12, device = "png", dpi = 300)
 

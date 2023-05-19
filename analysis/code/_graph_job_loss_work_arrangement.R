@@ -9,12 +9,8 @@ font_add_google(name = "Open Sans", family = "Open Sans")
 showtext_auto()
 
 df = data %>%
-  select(year_quarter, position_names, position_transition, position, worker, temporary_worker,
-         monthly_work_income, weights) %>%
-  mutate(labor_status = case_when(temporary_worker == 1 ~ "Temporary",
-                                  temporary_worker == 2 ~ "Permanent",
-                                  monthly_work_income > 0 ~ "Salaried",
-                                  worker == 1 & monthly_work_income == 0 ~ "Not Salaried"))
+  select(year_quarter, position_names, position_transition, position, temporary_worker,
+         monthly_work_income, labor_status, weights)
 
 df = df %>%
   mutate(denominador = case_when(position_names == "Formal" ~ 1,
@@ -41,7 +37,7 @@ df = df %>%
   mutate(labor_status = as.factor(labor_status))
 
 df = df %>%
-  filter(!is.na(labor_status))
+  filter(!labor_status == "NA")
 
 df = df %>%
   mutate(labor = case_when(labor_status == "Not Salaried" ~ 1,
@@ -53,16 +49,16 @@ graph = ggplot(df, aes(x = reorder(labor, -job_loss))) +
   geom_bar(aes(y = job_loss, fill = labor_status), stat = "identity") +
   scale_fill_manual(name = "Labor Status",
                     values = carto_pal(name = "Vivid")) +
-  labs(x = "", y = "Job Loss %") + ggtitle("Job Loss by Labor Status") +
+  labs(x = "", y = "Job Loss %") +
   theme_minimal() +
   theme(text = element_text(family = "Open Sans"),
         plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
         legend.title = element_text(size = 18, face = "bold"), 
         legend.text = element_text(size = 20),
-        legend.position = "right",
+        legend.position = c(0.85, 0.85),
         axis.title = element_text(size = 18, face = "bold", hjust = 0.5),
         strip.text = element_text(size = 18, face = "bold", hjust = 0.5),
-        axis.line = element_line(size = 0.75, colour = "black"),
+        axis.line = element_line(linewidth = 0.75, colour = "black"),
         axis.text.x = element_blank(),
         axis.text.y = element_text(
           family = "Helvetica",
@@ -71,3 +67,7 @@ graph = ggplot(df, aes(x = reorder(labor, -job_loss))) +
         )) +
   guides(fill = guide_legend(nrow = 4, byrow = TRUE))
 
+graph
+
+ggsave(filename = here(wd, "analysis", "output", "graph", "_graph_job_loss_work_arrangement.png"),
+       width = 9, height = 12, device = "png", dpi = 300)
