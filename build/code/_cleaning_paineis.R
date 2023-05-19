@@ -79,10 +79,10 @@ clean_painel = function(df){
            years_of_study, monthly_work_income, weights, job_start, sector_code,
            household_location, occupation_code) %>%
     mutate(educ = case_when(
-      higher_educ_level %in% c(1,2) ~ 1,
-      higher_educ_level %in% c(3,4) ~ 2,
-      higher_educ_level %in% c(5,6) ~ 3,
-      higher_educ_level %in% c(7) ~ 4
+      higher_educ_level %in% c(1,2) | is.na(higher_educ_level) ~ 1, #sem instrucao/fund incompleto
+      higher_educ_level %in% c(3,4) ~ 2, #ensino medio incompleto
+      higher_educ_level %in% c(5,6) ~ 3, # ensino superior incompleto
+      higher_educ_level %in% c(7) ~ 4 # ensino superior completo
     ))
   
 }
