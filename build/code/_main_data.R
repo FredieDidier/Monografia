@@ -46,9 +46,6 @@ df = df %>%
                                     "Informal to Non-Employed"))
 
 df = df %>%
-  select(-c(not_salaried_worker))
-
-df = df %>%
   mutate(labor_status = case_when(temporary_worker == 1 ~ "Temporary",
                                   temporary_worker == 2 ~ "Permanent",
                                   monthly_work_income > 0 ~ "Salaried",
