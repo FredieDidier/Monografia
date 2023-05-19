@@ -71,6 +71,7 @@ clean_painel = function(df){
                                 occupation_condition == 1 & job_function == 5 & cnpj == 2 ~ 8, #Informal Employer
                                 occupation_condition == 1 & job_function %in% c(2,4) & work_category %in% c(5,7) ~ 9, #Formal Public Sector
                                 occupation_condition == 1 & job_function %in% c(2,4) & work_category == 6 ~ 10)) %>% #Informal Public Sector
+    filter(age >= 14) %>%
     select(id_code, year_quarter, state, workforce_condition, signed_work_card, cnpj,
            job_function, hours_worked, temporary_worker,
            occupation_condition, position, social_security_taxpayer,
@@ -78,7 +79,7 @@ clean_painel = function(df){
            years_of_study, monthly_work_income, weights, job_start, sector_code,
            household_location, occupation_code) %>%
     mutate(educ = case_when(
-      higher_educ_level %in% c(1,2) | is.na(higher_educ_level) ~ 1, #sem instrucao/fund incompleto
+      higher_educ_level %in% c(1,2) ~ 1, #sem instrucao/fund incompleto
       higher_educ_level %in% c(3,4) ~ 2, #ensino medio incompleto
       higher_educ_level %in% c(5,6) ~ 3, # ensino superior incompleto
       higher_educ_level %in% c(7) ~ 4 # ensino superior completo
