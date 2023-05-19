@@ -52,7 +52,8 @@ df = df %>%
                               "Skilled Workers, Construction Workers and Craftsmen, Mechanical Arts and Other Crafts",
                             occupation_code == "Trabalhadores de Apoio Administrativo" ~ "Administrative Support Workers",
                             occupation_code == "Trabalhadores dos Servicos, Vendedores dos Comercios e Mercados" ~ 
-                              "Service Workers, Trade and Market Sellers"
+                              "Service Workers, Trade and Market Sellers",
+                            occupation_code == "Membros das Forcas Armadas, Policiais e Bombeiros Militares" ~ "Members of the Armed Forces, Police and Military Firefighters"
                             
   ))
 
@@ -65,7 +66,7 @@ df = df %>%
 graph = ggplot(df, aes(x = reorder(occupation, job_loss))) +
   geom_bar(aes(y = job_loss, fill = job_loss), stat = "identity") +
   coord_flip() +
-  labs(x = "", y = "Job Loss %") + ggtitle("Job Loss by Occupation") +
+  labs(x = "", y = "Job Loss %") +
   theme_minimal() +
   theme(text = element_text(family = "Open Sans"),
         plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
@@ -74,12 +75,14 @@ graph = ggplot(df, aes(x = reorder(occupation, job_loss))) +
         legend.position = "none",
         axis.title = element_text(size = 18, face = "bold", hjust = 0.5),
         strip.text = element_text(size = 18, face = "bold", hjust = 0.5),
-        axis.line = element_line(size = 0.75, colour = "black"),
+        axis.line = element_line(linewidth = 0.75, colour = "black"),
         axis.text = element_text(
           family = "Helvetica",
           colour = "black",
           size = rel(1.2),
           face = "bold"
         ))
+
+graph
 
 

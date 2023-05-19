@@ -52,7 +52,7 @@ aggregate_occupations = function(df){
         9312, 9313, 9321, 9329, 9331, 9332, 9333, 9334, 9411, 9412, 9510, 9520, 9611,
         9612, 9613, 9621, 9622, 9623, 9624, 9629) ~ "Ocupacoes Elementares",
       occupation_code %in% c(
-        0110, 0210, 0411, 0412, 0511, 0512) ~ "Membros das Forcas Armadas, Policiais e Bombeiros Miliatres"
+        0110, 0210, 0411, 0412, 0511, 0512) ~ "Membros das Forcas Armadas, Policiais e Bombeiros Militares"
       
         
     ))

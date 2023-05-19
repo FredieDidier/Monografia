@@ -54,17 +54,17 @@ graph = ggplot(df, aes(x = reorder(position, -job_loss))) +
   geom_bar(aes(y = job_loss, fill = work_category), stat = "identity") +
   scale_fill_manual(name = "Work Category",
                     values = brewer.pal(8, name = "Set1")) +
-  labs(x = "", y = "Job Loss %") + ggtitle("Job Loss by Work Category") +
+  labs(x = "", y = "Job Loss %") +
   
   theme_minimal() +
   theme(text = element_text(family = "Open Sans"),
         plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
         legend.title = element_text(size = 18, face = "bold"), 
         legend.text = element_text(size = 20),
-        legend.position = "right",
+        legend.position = c(0.75,0.75),
         axis.title = element_text(size = 18, face = "bold", hjust = 0.5),
         strip.text = element_text(size = 18, face = "bold", hjust = 0.5),
-        axis.line = element_line(size = 0.75, colour = "black"),
+        axis.line = element_line(linewidth = 0.75, colour = "black"),
         axis.text.x = element_blank(),
         axis.text.y = element_text(
           family = "Helvetica",
