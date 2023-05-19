@@ -24,6 +24,7 @@ clean_painel = function(df){
            VD4012, VD4017, V4010, VD4037,
            V40121, V4025) %>%
     rename(id_code = idind, year = Ano, quarter = Trimestre,
+           state = UF,
            primary_sampling_unit = UPA,
            area_type = V1023,
            weights = V1028,
@@ -37,7 +38,6 @@ clean_painel = function(df){
            cnpj = V4019,
            job_function = V4012,
            job_area = V4014,
-           worker = V4001,
            public_server = V4028,
            signed_work_card = V4029,
            social_security_taxpayer = V4032,
@@ -62,17 +62,17 @@ clean_painel = function(df){
     unite(col = "year_quarter", year:quarter, sep = "_")
   
   df = df %>%
-    mutate(position = case_when(workforce_condition == 2 ~ 1,
-                                worker == 2 & occupation_condition == 2 & workforce_condition == 1 ~ 2,
-                                worker == 1 & work_category == 1 & job_function == 3 ~ 3,
-                                worker == 1 & work_category == 2 & job_function == 3 ~ 4,
-                                worker == 1 & job_function == 6 & social_security_taxpayer == 1 ~ 5,
-                                worker == 1 & job_function == 6 & social_security_taxpayer == 2 ~ 6,
-                                worker == 1 & job_function == 5 & cnpj == 1 ~ 7,
-                                worker == 1 & job_function == 5 & cnpj == 2 ~ 8,
-                                worker == 1 & job_function == 4 & work_category %in% c(5,7) ~ 9,
-                                worker == 1 & job_function == 4 & work_category == 6 ~ 10)) %>%
-    select(id_code, year_quarter, workforce_condition, worker, signed_work_card, cnpj,
+    mutate(position = case_when(workforce_condition == 2 | is.na(workforce_condition) ~ 1, #inativo
+                                occupation_condition == 2  & workforce_condition == 1 ~ 2, #desempregado
+                                occupation_condition == 1 & work_category %in% c(1,3) & job_function %in% c(1,3) ~ 3, #Formal Private
+                                occupation_condition == 1 & work_category %in% c(2,4,10) & job_function %in% c(1,3,7) ~ 4, #Informal Private
+                                occupation_condition == 1 & job_function == 6 & social_security_taxpayer == 1 ~ 5, #Formal Self-Employed
+                                occupation_condition == 1 & job_function == 6 & social_security_taxpayer == 2 ~ 6, #Informal Self-Employed
+                                occupation_condition == 1 & job_function == 5 & cnpj == 1 ~ 7, #Formal Employer
+                                occupation_condition == 1 & job_function == 5 & cnpj == 2 ~ 8, #Informal Employer
+                                occupation_condition == 1 & job_function %in% c(2,4) & work_category %in% c(5,7) ~ 9, #Formal Public Sector
+                                occupation_condition == 1 & job_function %in% c(2,4) & work_category == 6 ~ 10)) %>% #Informal Public Sector
+    select(id_code, year_quarter, state, workforce_condition, signed_work_card, cnpj,
            job_function, hours_worked, not_salaried_worker, temporary_worker,
            occupation_condition, position, social_security_taxpayer,
            higher_educ_level, work_category, gender, race, age,

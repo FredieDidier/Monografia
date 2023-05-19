@@ -52,7 +52,7 @@ df = df %>%
   mutate(labor_status = case_when(temporary_worker == 1 ~ "Temporary",
                                   temporary_worker == 2 ~ "Permanent",
                                   monthly_work_income > 0 ~ "Salaried",
-                                  worker == 1 & monthly_work_income == 0 ~ "Not Salaried"))
+                                  occupation_condition == 1 & monthly_work_income == 0 ~ "Not Salaried"))
 
 # Set the path to the folder
 folder_path <- paste0("build/output/regression") 
@@ -75,6 +75,8 @@ for(i in 1:length(file_list)){
   }
 
 ffs = dir_ls("build/output/regression")
+ffs = str_extract(ffs, "painel_[0-9]{4}_[0-9]{1}_[0-9]{1}") 
+## A linha 78 filtra o diretório "regression" para apenas os arquivos que contém "painel_"
 
 df <- ffs %>% 
   map_dfr(~ get(load(.))) 
