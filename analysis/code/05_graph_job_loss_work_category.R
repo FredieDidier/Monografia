@@ -56,7 +56,7 @@ graph = ggplot(df, aes(x = reorder(position, -job_loss))) +
                     values = brewer.pal(8, name = "Set1")) +
   labs(x = "", y = "Job Loss %") +
   
-  theme_minimal() +
+  theme_bw() +
   theme(text = element_text(family = "Open Sans"),
         plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
         legend.title = element_text(size = 22, face = "bold"), 

@@ -82,7 +82,7 @@ graph = ggplot(df, aes(x = reorder(sector, job_loss))) +
   geom_bar(aes(y = job_loss, fill = job_loss), stat = "identity") +
   coord_flip() +
   labs(x = "Sectors", y = "Job Loss %") + 
-  theme_minimal() +
+  theme_bw() +
   theme(text = element_text(family = "Open Sans"),
         plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
         legend.title = element_blank(), 

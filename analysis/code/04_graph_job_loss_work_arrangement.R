@@ -46,11 +46,16 @@ df = df %>%
                            labor_status == "Temporary" ~ 4))
 
 graph = ggplot(df, aes(x = reorder(labor, -job_loss))) +
-  geom_bar(aes(y = job_loss, fill = labor_status), stat = "identity") +
+  geom_bar(aes(y = job_loss, fill = factor(labor_status, ordered = T, levels = c(
+    "Not Salaried",
+    "Temporary",
+    "Salaried",
+    "Permanent"
+  ))), stat = "identity") +
   scale_fill_manual(name = "Labor Status",
                     values = carto_pal(name = "Vivid")) +
   labs(x = "", y = "Job Loss %") +
-  theme_minimal() +
+  theme_bw() +
   theme(text = element_text(family = "Open Sans"),
         plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
         legend.title = element_text(size = 22, face = "bold"), 
