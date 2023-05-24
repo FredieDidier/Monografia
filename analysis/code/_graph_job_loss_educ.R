@@ -26,7 +26,7 @@ df = df %>%
 
 df = df %>%
   group_by(educ) %>%
-  summarize(num_weights = sum(num_weights, na.rm = TRUE),
+  summarise(num_weights = sum(num_weights, na.rm = TRUE),
             den_weights = sum(den_weights, na.rm = TRUE))
 
 df = df %>%
@@ -55,20 +55,24 @@ graph = ggplot(df, aes(x = reorder(educ, -job_loss))) +
   scale_fill_manual(name = "Education Level",
                     values = carto_pal(name = "Safe")) +
   labs(x = "", y = "Job Loss %") +
-  theme_minimal() +
+  theme_bw() +
   theme(text = element_text(family = "Open Sans"),
+        legend.key.size = unit(1, "cm"),
+        legend.key.height = unit(1, "cm"),
+        legend.key.width = unit(4, "cm"),
         plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
-        legend.title = element_text(size = 18, face = "bold"), 
-        legend.text = element_text(size = 20),
+        legend.title = element_text(size = 22, face = "bold"), 
+        legend.text = element_text(size = 16),
         legend.position = c(0.85,0.85),
         axis.title = element_text(size = 18, face = "bold", hjust = 0.5),
         strip.text = element_text(size = 18, face = "bold", hjust = 0.5),
         axis.line = element_line(linewidth = 0.75, colour = "black"),
         axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 40),
         axis.text.y = element_text(
           family = "Helvetica",
           colour = "black",
-          size = rel(1.2)
+          size = rel(4.0)
         )) +
   guides(fill = guide_legend(nrow = 4, byrow = TRUE))
 

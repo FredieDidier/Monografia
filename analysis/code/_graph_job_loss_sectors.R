@@ -25,7 +25,7 @@ df = df %>%
 
 df = df %>%
   group_by(sector_code) %>%
-  summarize(num_weights = sum(num_weights, na.rm = TRUE),
+  summarise(num_weights = sum(num_weights, na.rm = TRUE),
             den_weights = sum(den_weights, na.rm = TRUE))
 
 df = df %>%
@@ -88,6 +88,7 @@ graph = ggplot(df, aes(x = reorder(sector, job_loss))) +
         legend.title = element_blank(), 
         legend.text = element_text(size = 20),
         legend.position = "none",
+        axis.title.y = element_text(size = 40),
         axis.title = element_text(size = 18, face = "bold", hjust = 0.5),
         strip.text = element_text(size = 18, face = "bold", hjust = 0.5),
         axis.line = element_line(linewidth = 0.75, colour = "black"),
