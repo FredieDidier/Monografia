@@ -28,7 +28,7 @@ df = df %>%
 df = df %>%
   filter(position >= 3) %>%
   group_by(position) %>%
-  summarize(num_weights = sum(num_weights, na.rm = TRUE),
+  summarise(num_weights = sum(num_weights, na.rm = TRUE),
             den_weights = sum(den_weights, na.rm = TRUE))
 
 df = df %>%
@@ -59,9 +59,10 @@ graph = ggplot(df, aes(x = reorder(position, -job_loss))) +
   theme_minimal() +
   theme(text = element_text(family = "Open Sans"),
         plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
-        legend.title = element_text(size = 18, face = "bold"), 
+        legend.title = element_text(size = 22, face = "bold"), 
         legend.text = element_text(size = 20),
         legend.position = c(0.75,0.75),
+        axis.title.y = element_text(size = 40),
         axis.title = element_text(size = 18, face = "bold", hjust = 0.5),
         strip.text = element_text(size = 18, face = "bold", hjust = 0.5),
         axis.line = element_line(linewidth = 0.75, colour = "black"),
