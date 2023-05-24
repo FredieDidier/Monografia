@@ -34,7 +34,7 @@ cap mkdir "$ROOT/build/output"
 *****
 * Rodar painel
 *****
-do "$ROOT/build/code/_geracao_paineis"
+do "$ROOT/build/code/000_geracao_paineis"
 ********************************************************
 **	delete temporary files
 ********************************************************

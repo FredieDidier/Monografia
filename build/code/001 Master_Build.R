@@ -49,9 +49,9 @@ setwd(wd)
 #                                #
 ##################################
 
-source("./build/code/_cleaning_paineis.R")
-source("./build/code/_aggregating_sector_codes.R")
-source("./build/code/_aggregating_occupation_codes.R")
+source("./build/code/01_cleaning_paineis.R")
+source("./build/code/02_aggregating_sector_codes.R")
+source("./build/code/03_aggregating_occupation_codes.R")
 
 #############################################
 #                                           #
@@ -59,7 +59,7 @@ source("./build/code/_aggregating_occupation_codes.R")
 #       Cria paineis por nivel educacional  #
 #############################################
 
-source("./build/code/_panel_by_education_level.R")
+source("./build/code/04_panel_by_education_level.R")
 
 ##################################
 #                                #
@@ -67,7 +67,7 @@ source("./build/code/_panel_by_education_level.R")
 #                                #
 ##################################
 
-source("./build/code/_main_data.R")
+source("./build/code/05_main_data.R")
 
 
 
