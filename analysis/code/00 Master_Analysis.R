@@ -66,17 +66,27 @@ setwd(wd)
 # #                                            #
 # ##############################################
 
-# Categoria de Emprego
+# Educaçao
 
-source("analysis/code/_graph_job_loss_work_category.R")
+source("analysis/code/01_graph_job_loss_educ.R")
 
-# Educação
+# Setores
 
-source("analysis/code/_graph_job_loss_educ.R")
+source("analysis/code/02_graph_job_loss_sectors.R")
+
+# Ocupacao
+
+source("analysis/code/03_graph_job_loss_occupation.R")
 
 # Work Arrangement
 
-source("analysis/code/_graph_job_loss_work_arrangement.R")
+source("analysis/code/04_graph_job_loss_work_arrangement.R")
+
+# Categoria de Emprego
+
+source("analysis/code/05_graph_job_loss_work_category.R")
+
+
 
 
 ###########################################
