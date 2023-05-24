@@ -1,7 +1,7 @@
 
 * regressao: job loss
 
-global CONTROLS workforce_condition worker signed_work_card cnpj job_function hours_worked not_salaried_worker temporary_worker occupation_condition position social_security_taxpayer higher_educ_level work_category gender race age years_of_study monthly_work_income weights job_start educ urbana 
+global CONTROLS workforce_condition worker signed_work_card cnpj job_function hours_worked temporary_worker occupation_condition position social_security_taxpayer higher_educ_level work_category gender race age years_of_study monthly_work_income weights job_start educ urbana 
 
 reghdfe job_loss ///
 position ///
