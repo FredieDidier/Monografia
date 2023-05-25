@@ -1,15 +1,31 @@
 
 * regressao: job loss
 
-global CONTROLS workforce_condition worker signed_work_card cnpj job_function hours_worked temporary_worker occupation_condition position social_security_taxpayer higher_educ_level work_category gender race age years_of_study monthly_work_income weights job_start educ urbana 
+global CONTROLS workforce_condition signed_work_card cnpj job_function hours_worked temporary_worker occupation_condition position social_security_taxpayer gender race age years_of_study monthly_work_income weights job_start educ urbana state
 
+
+* é preciso instalar o pacote "reghdfe"
+
+*******************************************************************************
+* install packages for replication
+*******************************************************************************
+
+* net install reghdfe, from("https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/") // for reghdfe
+
+* Regressão 1
+xtreg job_loss ///
+i.educ /// 
+, rob
+
+
+* Regressão 5
 reghdfe job_loss ///
 position ///
 signed_work_card /// 
 hours_worked /// i.job_function 
 i.temporary_worker /// i.job_function 
 i.educ /// 
-i.work_category /// 
+ /// 
 monthly_work_income ///
 urbana ///
 job_start ///
