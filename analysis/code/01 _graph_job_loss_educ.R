@@ -5,7 +5,7 @@ library(haven)
 
 data = read_dta("build/output/regression/main_data.dta")
 
-font_add_google(name = "Open Sans", family = "Open Sans")
+font_add_google(name = "Roboto", family = "roboto")
 showtext_auto()
 
 df = data %>%
@@ -56,7 +56,7 @@ graph = ggplot(df, aes(x = reorder(educ, -job_loss))) +
                     values = carto_pal(name = "Safe")) +
   labs(x = "", y = "Job Loss %") +
   theme_bw() +
-  theme(text = element_text(family = "Open Sans"),
+  theme(text = element_text(family = "roboto"),
         legend.key.size = unit(1, "cm"),
         legend.key.height = unit(1, "cm"),
         legend.key.width = unit(4, "cm"),

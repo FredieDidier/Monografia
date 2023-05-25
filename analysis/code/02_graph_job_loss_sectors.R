@@ -4,7 +4,7 @@ library(tidyverse)
 
 data = read_dta("build/output/regression/main_data.dta")
 
-font_add_google(name = "Open Sans", family = "Open Sans")
+font_add_google(name = "Roboto", family = "roboto")
 showtext_auto()
 
 df = data %>%
@@ -83,7 +83,7 @@ graph = ggplot(df, aes(x = reorder(sector, job_loss))) +
   coord_flip() +
   labs(x = "Sectors", y = "Job Loss %") + 
   theme_bw() +
-  theme(text = element_text(family = "Open Sans"),
+  theme(text = element_text(family = "roboto"),
         plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
         legend.title = element_blank(), 
         legend.text = element_text(size = 20),
