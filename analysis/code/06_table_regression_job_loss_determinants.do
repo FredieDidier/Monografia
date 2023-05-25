@@ -1,3 +1,4 @@
+set more off
 
 * regressao: job loss
 
