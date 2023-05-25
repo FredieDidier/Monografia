@@ -1,7 +1,7 @@
 
 * regressao: job loss
 
-global CONTROLS workforce_condition signed_work_card cnpj job_function hours_worked temporary_worker occupation_condition position social_security_taxpayer gender race age years_of_study monthly_work_income weights job_start educ urbana state
+global CONTROLS signed_work_card cnpj job_function hours_worked temporary_worker position social_security_taxpayer gender race age monthly_work_income weights job_start educ urbana state
 
 * edit indpendent variables
 cap drop educ1
@@ -82,7 +82,7 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 * Regressão 3
 reghdfe job_loss ///
 educ2 educ3 educ4 /// 
- job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
+signed_work_card cnpj job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
 i.year_quarter ///
 i.state ///
 i.urbana ///
@@ -104,7 +104,9 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 	*/	addstat("Root mean squared error", $rmse_score )	 /*
 	*/	addtext(State FE, Yes, City FE, Yes) /*
 	*/	tex(fragment) /*
-	*/	
+	*/
+	
+* Regressão 4	
 	
 	
 * Regressão 5
