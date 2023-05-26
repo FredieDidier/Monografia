@@ -84,18 +84,20 @@ graph = ggplot(df, aes(x = reorder(sector, job_loss))) +
   labs(x = "Sectors", y = "Job Loss %") + 
   theme_bw() +
   theme(text = element_text(family = "roboto"),
-        plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
         legend.title = element_blank(), 
         legend.text = element_text(size = 20),
         legend.position = "none",
-        axis.title.y = element_text(size = 40),
-        axis.title = element_text(size = 18, face = "bold", hjust = 0.5),
+        axis.title = element_text(size = 80, hjust = 0.5),
         strip.text = element_text(size = 18, face = "bold", hjust = 0.5),
         axis.line = element_line(linewidth = 0.75, colour = "black"),
-        axis.text = element_text(
+        axis.text.x = element_text(family = "Helvetica",
+                                   colour = "black",
+                                   size = rel(3.0),
+                                   face = "bold"),
+        axis.text.y = element_text(
           family = "Helvetica",
           colour = "black",
-          size = rel(1.2),
+          size = rel(3.0),
           face = "bold"
         ))
 
