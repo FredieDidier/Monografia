@@ -1,4 +1,4 @@
-set more off
+set more off, permanently
 
 * regressao: job loss
 
@@ -25,6 +25,10 @@ gen educ4 = 1 if educ ==4
 replace educ4 = 0 if educ4 ==.
 label variable educ4 "Complete college"
 
+cap drop sector_numeric
+cap drop occupation_numeric
+encode sector_code, gen(sector_numeric)
+encode occupation_code, gen(occupation_numeric)
 
 * é preciso instalar o pacote "reghdfe"
 
@@ -39,6 +43,9 @@ reghdfe job_loss ///
 educ2 educ3 educ4 /// 
 [aw=weights] ///
 , noabsorb
+
+global rmse_score : di %9.3fc `e(rmse)' 
+di "Root mean squared error = $rmse_score"
 
 outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants.tex", /*
 	*/	title("") /*	
@@ -76,14 +83,14 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 	*/	keep(educ2 educ3 educ4)  /*
 	*/	nocons	/*
 	*/	addstat("Root mean squared error", $rmse_score )	 /*
-	*/	addtext(State FE, Yes, City FE, Yes) /*
+	*/	addtext(State FE, Yes, Urban FE, Yes) /*
 	*/	tex(fragment) /*
 	*/	
 
 * Regressão 3
 reghdfe job_loss ///
 educ2 educ3 educ4 /// 
-signed_work_card cnpj job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
+signed_work_card job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
 i.year_quarter ///
 i.state ///
 i.urbana ///
@@ -103,18 +110,44 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 	*/	keep(educ2 educ3 educ4)  /*
 	*/	nocons	/*
 	*/	addstat("Root mean squared error", $rmse_score )	 /*
-	*/	addtext(State FE, Yes, City FE, Yes) /*
+	*/	addtext(State FE, Yes, Urban FE, Yes, Time-varying observables, Yes) /*
 	*/	tex(fragment) /*
 	*/
 	
 * Regressão 4	
-	
+reghdfe job_loss ///
+educ2 educ3 educ4 /// 
+signed_work_card job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
+i.year_quarter ///
+i.sector_numeric i.occupation_numeric ///
+i.state ///
+i.urbana ///
+[aw=weights] ///
+, noabsorb
+
+global rmse_score : di %9.3fc `e(rmse)' 
+di "Root mean squared error = $rmse_score"
+
+outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants.tex", /*
+	*/	title("") /*	
+	*/	level(95) /*
+	*/	dec(3) /*
+	*/	fmt(fc) /*
+	*/	label /*
+	*/		/* depvar
+	*/	keep(educ2 educ3 educ4)  /*
+	*/	nocons	/*
+	*/	addstat("Root mean squared error", $rmse_score )	 /*
+	*/	addtext(State FE, Yes, Urban FE, Yes, Time-varying observables, Yes, Occupation and Sector FE, Yes) /*
+	*/	tex(fragment) /*
+	*/
 	
 * Regressão 5
 reghdfe job_loss ///
 educ2 educ3 educ4 ///  
- job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
+ signed_work_card job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
 i.year_quarter ///
+i.sector_numeric i.occupation_numeric ///
 i.state ///
 i.urbana ///
 [aw=weights] ///
@@ -133,6 +166,6 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 	*/	keep(educ2 educ3 educ4)  /*
 	*/	nocons	/*
 	*/	addstat("Root mean squared error", $rmse_score )	 /*
-	*/	addtext(State FE, Yes, City FE, Yes, Ind FE, Yes) /*
+	*/	addtext(State FE, Yes, Urban FE, Yes, Ind FE, Yes, Time-varying observables, Yes, Occupation and Sector FE, Yes) /*
 	*/	tex(fragment) /*
 	*/	

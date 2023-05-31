@@ -83,7 +83,24 @@ clean_painel = function(df){
       higher_educ_level %in% c(3,4) ~ 2, #ensino medio incompleto
       higher_educ_level %in% c(5,6) ~ 3, # ensino superior incompleto
       higher_educ_level %in% c(7) ~ 4 # ensino superior completo
-    ))
+    )) %>%
+    mutate(signed_work_card = case_when(signed_work_card == 1 ~ 1,
+                                        signed_work_card == 2 ~ 0,
+                                        TRUE ~ 0)) %>%
+    mutate(cnpj = case_when(cnpj == 1 ~ 1,
+                                        cnpj == 2 ~ 0,
+                                        TRUE ~ 0)) %>%
+    mutate(temporary_worker = case_when(temporary_worker == 1 ~ 1,
+                                        temporary_worker == 2 ~ 0,
+                                        TRUE ~ 0)) %>%
+    mutate(social_security_taxpayer = case_when(social_security_taxpayer == 1 ~ 1,
+                                        social_security_taxpayer == 2 ~ 0,
+                                        TRUE ~ 0))
+  
+  df = data.table(df)
+  
+  df$monthly_work_income[is.na(df$monthly_work_income)] <- 0
+    
   
 }
 
