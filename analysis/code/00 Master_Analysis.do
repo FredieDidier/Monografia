@@ -38,7 +38,6 @@ cap mkdir "$ROOT/analysis/output/regressions"
 * 2.1. Porcentagem de perda de emprego por setor/categoria de emprego e educacao. #graficos
 * 3. Regressao para determinantes de perda de emprego e renda.
 use "$ROOT/build/output/regression/main_data.dta", clear
-sample 10
 gen denominador = 1 if position_names == "Formal"
 replace denominador = 1 if position_names == "Informal"
 
