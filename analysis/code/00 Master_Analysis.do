@@ -1,6 +1,7 @@
 * ------------------------------------------------------------------------
 
-set more off
+cap drop macro all
+set more off, permanently
 
 *** FOLDERS PATHWAY
 
@@ -62,6 +63,35 @@ xtset ind year_quarter
 *format trim %tm
 *destring id_code, replace
 *xtset id_code trim
+
+global CONTROLS signed_work_card cnpj job_function hours_worked temporary_worker position social_security_taxpayer gender race age monthly_work_income weights job_start educ urbana state
+
+* edit indpendent variables
+cap drop educ1
+gen educ1 = 1 if educ ==1 
+replace educ1 = 0 if educ1 ==.
+label variable educ1 "Incomplete primary school"
+
+cap drop educ2
+gen educ2 = 1 if educ ==2
+replace educ2 = 0 if educ2 ==.
+label variable educ2 "Incomplete high school"
+
+cap drop educ3
+gen educ3 = 1 if educ ==3
+replace educ3 = 0 if educ3 ==.
+label variable educ3 "Incomplete college"
+
+cap drop educ4
+gen educ4 = 1 if educ ==4
+replace educ4 = 0 if educ4 ==.
+label variable educ4 "Complete college"
+
+cap drop sector_numeric
+cap drop occupation_numeric
+encode sector_code, gen(sector_numeric)
+encode occupation_code, gen(occupation_numeric)
+
 
 * 4. Regressao para determinantes de perda de emprego e renda: caracteristicas individuais.
 do "$ROOT/analysis/code/06_table_regression_job_loss_determinants.do"
