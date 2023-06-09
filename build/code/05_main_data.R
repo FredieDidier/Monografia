@@ -26,6 +26,8 @@ df[, `:=` (
                     negro = case_when(race == 2 | race == 4 | race == 5 ~ 1,
                                       race == 1 | race == 3 ~ 0))]
   
+  df$negro[is.na(df$negro)] <- 0
+  
   df[, `:=`(urbana = case_when(household_location == 1 ~ 1,
                      household_location == 2 ~ 0))]
 
