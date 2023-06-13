@@ -7,19 +7,21 @@
 # In summary, this code generates clean datasets from a set of files, filters them by education level and quarter, and keeps only the second row of each group of IDs. The resulting datasets are saved to separate files.
 
 ##################################
-# Loop que gera paineis limpos   #                        
+# Loop que gera paineis limpos   #
 ##################################
-list_trimestres <- c("2012_1", "2012_2", "2012_3", "2012_4",
-                     "2013_1", "2013_2", "2013_3", "2013_4",
-                     "2014_1", "2014_2", "2014_3", "2014_4",
-                     "2015_1", "2015_2", "2015_3", "2015_4",
-                     "2016_1", "2016_2", "2016_3", "2016_4",
-                     "2017_1", "2017_2", "2017_3", "2017_4",
-                     "2018_1", "2018_2", "2018_3", "2018_4",
-                     "2019_1", "2019_2", "2019_3", "2019_4",
-                     "2020_1", "2020_2", "2020_3", "2020_4",
-                     "2021_1", "2021_2", "2021_3", "2021_4",
-                     "2022_1", "2022_2", "2022_3")
+list_trimestres <- c(
+  "2012_1", "2012_2", "2012_3", "2012_4",
+  "2013_1", "2013_2", "2013_3", "2013_4",
+  "2014_1", "2014_2", "2014_3", "2014_4",
+  "2015_1", "2015_2", "2015_3", "2015_4",
+  "2016_1", "2016_2", "2016_3", "2016_4",
+  "2017_1", "2017_2", "2017_3", "2017_4",
+  "2018_1", "2018_2", "2018_3", "2018_4",
+  "2019_1", "2019_2", "2019_3", "2019_4",
+  "2020_1", "2020_2", "2020_3", "2020_4",
+  "2021_1", "2021_2", "2021_3", "2021_4",
+  "2022_1", "2022_2", "2022_3"
+)
 
 list_trimestres <- rep(list_trimestres, 4)
 
@@ -32,38 +34,50 @@ list_educ <- c(
 
 
 # generate folder for output
-dir.create("build/output/panel_by_education_level")
+output_folder_path <- paste0("build/output/panel_by_education_level")
+if (!file.exists(output_folder_path)) {
+  # Create the folder if it does not exist
+  dir.create(output_folder_path)
+}
+rm(output_folder_path)
 
-map2(list_trimestres, list_educ,
-     
-     function(trim, educ_level){
-       
-       message(paste0("Downloading", trim, "\n educ_level ", educ_level))
-       
-       df <- haven::read_dta(paste0("build/output/painel_", trim, ".dta")) %>%
-         clean_painel() %>%
-         aggregate_sectors() %>%
-         aggregate_occupations()
+# run loop
+map2(
+  list_trimestres, list_educ,
+  function(trim, educ_level) {
+    message(paste0("Downloading quarter data of ", trim, " and education level ", educ_level))
 
-       df_aux <- df %>%
-         filter(educ == educ_level, year_quarter == trim) %>%
-         select(id_code) %>%
-         unlist()
+    df <- haven::read_dta(paste0("build/output/painel_", trim, ".dta")) %>%
+      clean_painel() %>%
+      aggregate_sectors() %>%
+      aggregate_occupations()
+    
+    message(paste0("Successfully cleanup data of quarter ", trim, " and education level ", educ_level))
 
-       df <- df %>%
-         filter(id_code %in% df_aux) %>%
-         group_by(id_code) %>%
-         arrange(id_code, year_quarter) %>%
-         mutate(new_id = n()) %>%
-         filter(new_id == 2)
-       
-       
-         save(df, file = paste0("build/output/panel_by_education_level/painel_",
+    df_aux <- df %>%
+      filter(educ == educ_level, year_quarter == trim) %>%
+      select(id_code) %>%
+      unlist()
 
-                                 trim,
-                                 "_",
-                                 educ_level,
-                                 ".RData")
-         )
-     }
+    message(paste0("Successfully edition in data of quarter ", trim, " and education level ", educ_level))
+
+    df <- df %>%
+      filter(id_code %in% df_aux) %>%
+      group_by(id_code) %>%
+      arrange(id_code, year_quarter) %>%
+      mutate(new_id = n()) %>%
+      filter(new_id == 2)
+
+    message(paste0("Successfully filtering in data of quarter ", trim, " and education level ", educ_level))
+
+    save(df, file = paste0(
+      "build/output/panel_by_education_level/painel_",
+      trim,
+      "_",
+      educ_level,
+      ".RData"
+    ))
+
+    message(paste0("Successfully save data of quarter ", trim, " and education level ", educ_level))
+  }
 )

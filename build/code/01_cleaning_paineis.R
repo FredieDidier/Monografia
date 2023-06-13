@@ -100,7 +100,8 @@ clean_painel = function(df){
   df = data.table(df)
   
   df$monthly_work_income[is.na(df$monthly_work_income)] <- 0
-    
+  
+  df
   
 }
 
