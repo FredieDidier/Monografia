@@ -32,7 +32,7 @@ coefplot (save_estimates, label(nome da especificacao))  	/*
 	*/	subtitle("")	/*
 	*/	xtitle("") 	/*
 	*/	graphregion(fcolor(white)) 	/*	
-	*/	xlabel(1 "2012.1" 2"2012.2" 3 "2012.3" 4 "2012.4" 5 "2013.1" 6 "2013.2" 7 "2013.3" 8 "2013.4" 9 "2014.1" 10 "2014.2" 11 "2014.3" 12 "2014.4" 13 "2015.1" 14 "2015.2" 15 "2015.3" 16 "2015.4" 17 "2016.1" 18 "2016.2" 19 "2016.3" 20 "2016.4" 21 "2017.1" 22 "2017.2" 23 "2017.3" 24 "2017.4" 25 "2018.1" 26 "2018.2" 27 "2018.3" 28 "2018.4" 29 "2019.1" 30 "2019.2" 31 "2019.3" 32 "2019.4" 33 "2020.1" 34 "2020.2" 35 "2020.3" 36 "2020.4" 37 "2021.1" 38 "2021.2" 39 "2021.3" 40 "2021.4" 41 "2022.1" 42 "2022.2" 43 "2022.3" 44 "2022.4", angle(45)  labsize(2.1)  )	/*
+	*/	xlabel(4 "2012.4" 8 "2013.4" 12 "2014.4" 16 "2015.4" 20 "2016.4" 24 "2017.4" 28 "2018.4" 32 "2019.4" 36 "2020.4" 40 "2021.4" 44 "2022.4", angle(45)  labsize(2.1)  )	/*
 	*/	ytitle("")	/*	
 	*/	yline( 0.00, lpattern(longdash_dot) lwidth(medium) lcolor(black))	/* add horizontal lines at specified y values
 	*/	ylabel(#7) 	/*
@@ -60,7 +60,7 @@ coefplot (save_estimates, label(nome da especificacao))  	/*
 	*/	subtitle("")	/*
 	*/	xtitle("") 	/*
 	*/	graphregion(fcolor(white)) 	/*	
-	*/	xlabel(1 "2012.1" 2"2012.2" 3 "2012.3" 4 "2012.4" 5 "2013.1" 6 "2013.2" 7 "2013.3" 8 "2013.4" 9 "2014.1" 10 "2014.2" 11 "2014.3" 12 "2014.4" 13 "2015.1" 14 "2015.2" 15 "2015.3" 16 "2015.4" 17 "2016.1" 18 "2016.2" 19 "2016.3" 20 "2016.4" 21 "2017.1" 22 "2017.2" 23 "2017.3" 24 "2017.4" 25 "2018.1" 26 "2018.2" 27 "2018.3" 28 "2018.4" 29 "2019.1" 30 "2019.2" 31 "2019.3" 32 "2019.4" 33 "2020.1" 34 "2020.2" 35 "2020.3" 36 "2020.4" 37 "2021.1" 38 "2021.2" 39 "2021.3" 40 "2021.4" 41 "2022.1" 42 "2022.2" 43 "2022.3" 44 "2022.4", angle(45)  labsize(2.1)  )	/*
+	*/	xlabel(4 "2012.4" 8 "2013.4" 12 "2014.4" 16 "2015.4" 20 "2016.4" 24 "2017.4" 28 "2018.4" 32 "2019.4" 36 "2020.4" 40 "2021.4" 44 "2022.4", angle(45)  labsize(2.1)  )	/*
 	*/	ytitle("")	/*	
 	*/	yline( 0.00, lpattern(longdash_dot) lwidth(medium) lcolor(black))	/* add horizontal lines at specified y values
 	*/	ylabel(#7) 	/*
@@ -87,7 +87,7 @@ coefplot (save_estimates, label(nome da especificacao))  	/*
 	*/	subtitle("")	/*
 	*/	xtitle("") 	/*
 	*/	graphregion(fcolor(white)) 	/*	
-	*/	xlabel(1 "2012.1" 2"2012.2" 3 "2012.3" 4 "2012.4" 5 "2013.1" 6 "2013.2" 7 "2013.3" 8 "2013.4" 9 "2014.1" 10 "2014.2" 11 "2014.3" 12 "2014.4" 13 "2015.1" 14 "2015.2" 15 "2015.3" 16 "2015.4" 17 "2016.1" 18 "2016.2" 19 "2016.3" 20 "2016.4" 21 "2017.1" 22 "2017.2" 23 "2017.3" 24 "2017.4" 25 "2018.1" 26 "2018.2" 27 "2018.3" 28 "2018.4" 29 "2019.1" 30 "2019.2" 31 "2019.3" 32 "2019.4" 33 "2020.1" 34 "2020.2" 35 "2020.3" 36 "2020.4" 37 "2021.1" 38 "2021.2" 39 "2021.3" 40 "2021.4" 41 "2022.1" 42 "2022.2" 43 "2022.3" 44 "2022.4", angle(45)  labsize(2.1)  )	/*
+	*/	xlabel(4 "2012.4" 8 "2013.4" 12 "2014.4" 16 "2015.4" 20 "2016.4" 24 "2017.4" 28 "2018.4" 32 "2019.4" 36 "2020.4" 40 "2021.4" 44 "2022.4", angle(45)  labsize(2.1)  )	/*
 	*/	ytitle("")	/*	
 	*/	yline( 0.00, lpattern(longdash_dot) lwidth(medium) lcolor(black))	/* add horizontal lines at specified y values
 	*/	ylabel(#7) 	/*
@@ -104,5 +104,22 @@ coefplot (save_estimates, label(nome da especificacao))  	/*
 	graph use "$ROOT/analysis/tmp/_graph_regression_job_loss_determinants_educ4.gph"
 	*erase "$ROOT/analysis/graph/_graph_regression_job_loss_determinants_educ4.gph"	
 	graph export "$ROOT/analysis/output/graph/_graph_regression_job_loss_determinants_educ4.png", replace	
+	
+* combine graphs
+graph combine "$ROOT/analysis/tmp/_graph_regression_job_loss_determinants_educ2.gph" "$ROOT/analysis/tmp/_graph_regression_job_loss_determinants_educ3.gph" "$ROOT/analysis/tmp/_graph_regression_job_loss_determinants_educ4.gph", /*
+	*/ ycommon /*
+	*/ xcommon /*
+	*/ cols(1) /*
+	*/ scheme(s2color) /*
+	*/ commonscheme /*
+	*/ xsize(4) /*
+	*/ ysize(5) /*
+	*/ scale(1) /*
+	*/ graphregion(margin(tiny))	 /* 
+	*/	plotregion(margin(zero) ifcolor(none))	
+	
+	* save graph 
+	graph export "$ROOT/analysis/output/graph/_graph_regression_job_loss_determinants.png", replace	
+	
 	
 restore	
