@@ -95,6 +95,7 @@ encode occupation_code, gen(occupation_numeric)
 * 4. Regressao para determinantes de perda de emprego e renda: caracteristicas individuais.
 do "$ROOT/analysis/code/06_table_regression_job_loss_determinants.do"
 do "$ROOT/analysis/code/07_graph_regression_job_loss_determinants.do"
+do "$ROOT/analysis/code/08_graph_regression_job_loss_determinants_fixed_effect_model.do"
 
 * 5. Efeitos da industria para perder emprego (efeitos fixos) - grafico da regressao
 * 6. Efeitos da ocupacao para perder emprego (efeitos fixos) - grafico da regressao
