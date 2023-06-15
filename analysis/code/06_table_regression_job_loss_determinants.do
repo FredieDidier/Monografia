@@ -112,6 +112,7 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 	*/	tex(fragment) /*
 	*/
 	
+/*
 * Regressão 5
 reghdfe job_loss ///
 educ2 educ3 educ4 ///  

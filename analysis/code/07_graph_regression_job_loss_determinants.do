@@ -13,12 +13,13 @@ quietly xi I.charact_educ4*I.year_quarter, prefix(_ww_) noomit
 * Main regression
 reghdfe job_loss ///
 _zz_chaXyea_1_* _xx_chaXyea_1_* _ww_chaXyea_1_* ///  
- signed_work_card job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
+signed_work_card job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
+i.year_quarter ///
 i.sector_numeric i.occupation_numeric ///
 i.state ///
 i.urbana ///
 [aw=weights] ///
-,  absorb(ind )
+, noabsorb
 
 quietly estimates save "$ROOT/analysis/tmp/save_estimates", replace 
 estimates store save_estimates
