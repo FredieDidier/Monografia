@@ -37,15 +37,15 @@ df[, `:=` (
 df[, position_transition := paste(position_names, sep = " to ", lead_position), by = id_code]
 
 df = df %>%
-  select(-c(new_id))
-
-df = df %>%
   filter(position_transition %in% c("Formal to Formal",
                                     "Formal to Informal",
                                     "Formal to Non-Employed",
                                     "Informal to Formal",
                                     "Informal to Informal",
                                     "Informal to Non-Employed"))
+
+df = df %>%
+  select(-new_id)
 
 df = df %>%
   mutate(labor_status = case_when(occupation_condition == 1 & temporary_worker == 1 ~ "Temporary",
@@ -75,7 +75,7 @@ for(i in 1:length(file_list)){
 
 ffs = dir_ls("build/output/regression")
 ffs = ffs[2:172]
-## A linha 78 filtra o diretório "regression" para apenas os arquivos que contém "painel_"
+## A linha 73 filtra o diretório "regression" para apenas os arquivos que contém "painel_"
 
 df <- ffs %>% 
   map_dfr(~ get(load(.))) 

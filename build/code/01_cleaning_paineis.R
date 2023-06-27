@@ -22,7 +22,7 @@ clean_painel = function(df){
            VD4005, VD4007, VD4009,
            V4013, V4039,
            VD4012, VD4017, V4010, VD4037,
-           V40121, V4025) %>%
+           V40121, V4025, VD4010) %>%
     rename(id_code = idind, year = Ano, quarter = Trimestre,
            state = UF,
            primary_sampling_unit = UPA,
@@ -57,7 +57,8 @@ clean_painel = function(df){
            monthly_work_income = VD4017,
            household_location = V1022,
            occupation_code = V4010,
-           temporary_worker = V4025) %>%
+           temporary_worker = V4025,
+           sectors = VD4010) %>%
     unite(col = "year_quarter", year:quarter, sep = "_")
   
   df = df %>%
@@ -77,7 +78,7 @@ clean_painel = function(df){
            occupation_condition, position, social_security_taxpayer,
            higher_educ_level, work_category, gender, race, age,
            years_of_study, monthly_work_income, weights, job_start, sector_code,
-           household_location, occupation_code) %>%
+           household_location, occupation_code, sectors) %>%
     mutate(educ = case_when(
       higher_educ_level %in% c(1,2) ~ 1, #sem instrucao/fund incompleto
       higher_educ_level %in% c(3,4) ~ 2, #ensino medio incompleto
@@ -95,7 +96,12 @@ clean_painel = function(df){
                                         TRUE ~ 0)) %>%
     mutate(social_security_taxpayer = case_when(social_security_taxpayer == 1 ~ 1,
                                         social_security_taxpayer == 2 ~ 0,
-                                        TRUE ~ 0))
+                                        TRUE ~ 0)) %>%
+    mutate(sectors = case_when(sectors %in% c(5, 6, 7, 8, 9, 10, 11, 12) ~ "Services",
+                               sectors == 1 ~ "Agriculture",
+                               sectors == 2 ~ "Industries",
+                               sectors == 3 ~ "Construction",
+                               sectors == 4 ~ "Trade"))
   
   df = data.table(df)
   
