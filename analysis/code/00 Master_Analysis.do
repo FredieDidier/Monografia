@@ -69,22 +69,22 @@ global CONTROLS signed_work_card cnpj job_function hours_worked temporary_worker
 cap drop educ1
 gen educ1 = 1 if educ ==1 
 replace educ1 = 0 if educ1 ==.
-label variable educ1 "Incomplete primary school"
+label variable educ1 "a) Incomplete primary school"
 
 cap drop educ2
 gen educ2 = 1 if educ ==2
 replace educ2 = 0 if educ2 ==.
-label variable educ2 "Incomplete high school"
+label variable educ2 "b) Incomplete high school"
 
 cap drop educ3
 gen educ3 = 1 if educ ==3
 replace educ3 = 0 if educ3 ==.
-label variable educ3 "Incomplete college"
+label variable educ3 "c) Incomplete college"
 
 cap drop educ4
 gen educ4 = 1 if educ ==4
 replace educ4 = 0 if educ4 ==.
-label variable educ4 "Complete college"
+label variable educ4 "d) Complete college"
 
 cap drop sector_numeric
 cap drop occupation_numeric
@@ -92,8 +92,13 @@ encode sector_code, gen(sector_numeric)
 encode occupation_code, gen(occupation_numeric)
 
 
-*  Regressao para determinantes de perda de emprego e renda: caracteristicas individuais.
+*  Table: Probability of Job Loss Relative to Least Educated Individuals by Educational Level Categories
 do "$ROOT/analysis/code/06_table_regression_job_loss_determinants.do"
+
+*  Table: Probability of Job Loss Relative to Least Educated Individuals During Pandemic by Educational Level Categories
+do "$ROOT/analysis/code/06_table_regression_job_loss_determinants_with_interaction.do"
+
+*  Graph: Probability of Job Loss Relative to Least Educated Individuals by Educational Level Categories
 do "$ROOT/analysis/code/07_graph_regression_job_loss_determinants.do"
 
 *do "$ROOT/analysis/code/08_graph_regression_job_loss_determinants_fixed_effect_model.do"
