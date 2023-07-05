@@ -1,27 +1,33 @@
-\begin{tabular}{lccccc}
-\multicolumn{6}{c}{} \\ \hline
- &  &  &  &  & (5) \\
- &  &  &  & (4) &  \\
- &  &  & (3) &  &  \\
- & (1) & (2) &  &  &  \\
- & (1) &  &  &  &  \\
-VARIABLES & job\_loss & job\_loss & job\_loss & job\_loss & job\_loss \\ \hline
- &  &  &  &  &  \\
-Incomplete high school & -0.016*** & -0.008*** & -0.010*** & -0.003*** & 0.002*** \\
- & (0.000) & (0.000) & (0.000) & (0.000) & (0.001) \\
-Incomplete college & -0.054*** & -0.044*** & -0.036*** & -0.021*** & 0.003*** \\
- & (0.000) & (0.000) & (0.000) & (0.000) & (0.001) \\
-Complete college & -0.096*** & -0.081*** & -0.071*** & -0.035*** & 0.000 \\
- & (0.000) & (0.000) & (0.000) & (0.000) & (0.001) \\
- &  &  &  &  &  \\
-Observations & 6,501,799 & 6,501,799 & 6,501,799 & 6,501,799 & 5,864,251 \\
-R-squared & 0.014 & 0.024 & 0.072 & 0.078 & 0.468 \\
-Root mean squared error & 0.293 & 0.291 & 0.284 & 0.283 & 0.219 \\
-State FE &  & Yes & Yes & Yes & Yes \\
-Urban FE &  & Yes & Yes & Yes & Yes \\
-Time-varying observables &  &  & Yes & Yes & Yes \\
-Occupation and Sector FE &  &  &  & Yes & Yes \\
- Ind FE &  &  &  &  & Yes \\ \hline
-\multicolumn{6}{c}{ Standard errors in parentheses} \\
-\multicolumn{6}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\begin{tabular}{lcccc}
+\multicolumn{5}{c}{} \\ \hline
+ &  &  &  & (4) \\
+ &  &  & (3) &  \\
+ & (1) & (2) &  &  \\
+ & (1) &  &  &  \\
+VARIABLES & job\_loss & job\_loss & job\_loss & job\_loss \\ \hline
+ &  &  &  &  \\
+a) Incomplete primary school & 0.137*** & 0.151*** & 0.317*** & 0.214*** \\
+ & (0.000) & (0.002) & (0.002) & (0.002) \\
+b) Incomplete high school & 0.121*** & 0.143*** & 0.307*** & 0.210*** \\
+ & (0.000) & (0.002) & (0.002) & (0.002) \\
+c) Incomplete college & 0.083*** & 0.107*** & 0.281*** & 0.193*** \\
+ & (0.000) & (0.002) & (0.002) & (0.002) \\
+d) Complete college & 0.041*** & 0.070*** & 0.246*** & 0.179*** \\
+ & (0.000) & (0.002) & (0.002) & (0.002) \\
+ &  &  &  &  \\
+Observations & 6,501,799 & 6,501,799 & 6,501,799 & 6,501,799 \\
+R-squared & 0.108 & 0.117 & 0.161 & 0.166 \\
+Root mean squared error: & 0.293 & 0.291 & 0.284 & 0.283 \\
+F Statistic: a = b: & 1967 & 440 & 693 & 72.3 \\
+\hspace{1mm} P-value a = b: & 0.000 & 0.000 & 0.000 & 0.000 \\
+F Statistic: b = c: & 12196 & 11069 & 6224 & 2536 \\
+\hspace{1mm} P-value b = c: & 0.000 & 0.000 & 0.000 & 0.000 \\
+F Statistic: c = d: & 16879 & 13289 & 10068 & 1181 \\
+\hspace{1mm} P-value c = d: & 0.000 & 0.000 & 0.000 & 0.000 \\
+State FE & - & Yes & Yes & Yes \\
+Urban FE & - & Yes & Yes & Yes \\
+Time-varying observables & - & - & Yes & Yes \\
+ Occupation and sector FE & - & - & - & Yes \\ \hline
+\multicolumn{5}{c}{ Standard errors in parentheses} \\
+\multicolumn{5}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
 \end{tabular}

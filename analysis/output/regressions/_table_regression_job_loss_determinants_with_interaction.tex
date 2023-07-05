@@ -1,0 +1,41 @@
+\begin{tabular}{lcccc}
+\multicolumn{5}{c}{} \\ \hline
+ &  &  &  & (4) \\
+ &  &  & (3) &  \\
+ & (1) & (2) &  &  \\
+ & (1) &  &  &  \\
+VARIABLES & job\_loss & job\_loss & job\_loss & job\_loss \\ \hline
+ &  &  &  &  \\
+a) Incomplete primary school & 0.142*** & 0.153*** & 0.319*** & 0.216*** \\
+ & (0.000) & (0.002) & (0.002) & (0.002) \\
+b) Incomplete high school & 0.125*** & 0.145*** & 0.309*** & 0.213*** \\
+ & (0.000) & (0.002) & (0.002) & (0.002) \\
+c) Incomplete college & 0.086*** & 0.106*** & 0.280*** & 0.193*** \\
+ & (0.000) & (0.002) & (0.002) & (0.002) \\
+d) Complete college & 0.042*** & 0.067*** & 0.243*** & 0.176*** \\
+ & (0.000) & (0.002) & (0.002) & (0.002) \\
+e) Pandemic * Incomplete primary school & -0.029*** & 0.016*** & 0.014*** & 0.012*** \\
+ & (0.001) & (0.001) & (0.001) & (0.001) \\
+f) Pandemic * Incomplete high school & -0.024*** & 0.021*** & 0.019*** & 0.015*** \\
+ & (0.001) & (0.001) & (0.001) & (0.001) \\
+g) Pandemic * Incomplete college & -0.011*** & 0.034*** & 0.031*** & 0.027*** \\
+ & (0.000) & (0.001) & (0.001) & (0.001) \\
+h) Pandemic * Complete college & -0.005*** & 0.042*** & 0.042*** & 0.038*** \\
+ & (0.001) & (0.001) & (0.001) & (0.001) \\
+ &  &  &  &  \\
+Observations & 6,501,799 & 6,501,799 & 6,501,799 & 6,501,799 \\
+R-squared & 0.109 & 0.118 & 0.161 & 0.167 \\
+Root mean squared error: & 0.293 & 0.291 & 0.284 & 0.283 \\
+F Statistic: a + e = b + f: & 154 & 14.8 & 43.2 & .0000499 \\
+\hspace{1mm} P-value a + e = b + f: & 0.000 & 0.000 & 0.000 & 0.994 \\
+F Statistic: a + e = c  + g: & 2794 & 1574 & 964 & 115 \\
+\hspace{1mm} P-value a + e = c + g: & 0.000 & 0.000 & 0.000 & 0.000 \\
+F Statistic: a + e = d + h: & 8842 & 5688 & 3623 & 281 \\
+\hspace{1mm} P-value a + e = d + h: & 0.000 & 0.000 & 0.000 & 0.000 \\
+State FE & - & Yes & Yes & Yes \\
+Urban FE & - & Yes & Yes & Yes \\
+Time-varying observables & - & - & Yes & Yes \\
+ Occupation and sector FE & - & - & - & Yes \\ \hline
+\multicolumn{5}{c}{ Standard errors in parentheses} \\
+\multicolumn{5}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\end{tabular}
