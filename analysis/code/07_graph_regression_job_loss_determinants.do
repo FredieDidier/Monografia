@@ -1,6 +1,8 @@
 preserve
 
-* generate dummy variables by quarter
+********************************************************************************
+* Step 1: Generate dummy variables by education x quarter
+********************************************************************************
 cap drop charact_educ*
 quietly gen charact_educ1 = educ1
 quietly gen charact_educ2 = educ2
@@ -11,7 +13,9 @@ quietly xi I.charact_educ2*I.year_quarter, prefix(_zz_) noomit
 quietly xi I.charact_educ3*I.year_quarter, prefix(_xx_) noomit
 quietly xi I.charact_educ4*I.year_quarter, prefix(_ww_) noomit
 	
-* Main regression
+********************************************************************************	
+* Step 2: Run the main regression
+********************************************************************************
 reg job_loss ///
 _yy_chaXyea_1_* _zz_chaXyea_1_* _xx_chaXyea_1_* _ww_chaXyea_1_* ///  
 signed_work_card job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
@@ -25,19 +29,14 @@ i.urbana ///
 cap drop error
 predict error, stdp
 
-******************************************************************************
-* Remove the coefficients from the regressions
-* and save them in a temporary file separately for each category
-******************************************************************************
-
-******************
+********************************************************************************
+* Step 3: Fit values by education level
+********************************************************************************
 * Category: educ1
-******************
 
-* fitted values
 cap drop fitted_values_educ1
 ge fitted_values_educ1 = /* 
- */ _b[_yy_chaXyea_1_20121]*_yy_chaXyea_1_20121 + /*  
+ */ _b[_yy_chaXyea_1_20121]*_yy_chaXyea_1_20121 + /*  	
  */ _b[_yy_chaXyea_1_20122]*_yy_chaXyea_1_20122 + /*  
  */ _b[_yy_chaXyea_1_20123]*_yy_chaXyea_1_20123 + /*  
  */ _b[_yy_chaXyea_1_20124]*_yy_chaXyea_1_20124 + /*  
@@ -85,11 +84,8 @@ replace fitted_values_educ1 = . if fitted_values_educ1==0
 generate lb_educ1 = fitted_values_educ1 - invnormal(0.975)*error
 generate ub_educ1 = fitted_values_educ1 + invnormal(0.975)*error
 
-******************
 * Category: educ2
-******************
 
-* fitted values
 cap drop fitted_values_educ2
 ge fitted_values_educ2 = /* 
  */ _b[_zz_chaXyea_1_20121]*_zz_chaXyea_1_20121 + /*  
@@ -140,11 +136,8 @@ replace fitted_values_educ2 = . if fitted_values_educ2==0
 generate lb_educ2 = fitted_values_educ2 - invnormal(0.975)*error
 generate ub_educ2 = fitted_values_educ2 + invnormal(0.975)*error
 
-******************
 * Category: educ3
-******************
 
-* fitted values
 cap drop fitted_values_educ3
 ge fitted_values_educ3 = /* 
  */ _b[_xx_chaXyea_1_20121]*_xx_chaXyea_1_20121 + /*  
@@ -195,11 +188,8 @@ replace fitted_values_educ3 = . if fitted_values_educ3==0
 generate lb_educ3 = fitted_values_educ3 - invnormal(0.975)*error
 generate ub_educ3 = fitted_values_educ3 + invnormal(0.975)*error
 
-******************
 * Category: educ4
-******************
 
-* fitted values
 cap drop fitted_values_educ4
 ge fitted_values_educ4 = /* 
  */ _b[_ww_chaXyea_1_20121]*_ww_chaXyea_1_20121 + /*  
@@ -252,7 +242,15 @@ generate ub_educ4 = fitted_values_educ4 + invnormal(0.975)*error
 cap drop error 
 cap drop yhat
 
+********************************************************************************
+* Step 4: Collapse results by year_quarter
+********************************************************************************
+
 collapse (mean) fitted_values_educ* lb_educ* ub_educ* , by(year_quarter)
+
+********************************************************************************
+* Step 5: Convert year_quarter to a quarterly date variable
+********************************************************************************
 
 * Create a new variable to store the dates
 cap drop date_var 
@@ -276,33 +274,42 @@ forval i = 1/`=_N' {
     replace date_var = `date' in `i'
 }
 
-
 * Format the variable as a date
-* format date_var %td
 format date_var %td
-
 describe date_var
-tsset date_var
+gen quarterly_date = qofd(date_var)
+format quarterly_date %tq
+tsset quarterly_date
+
+********************************************************************************
+* Step 6: Create the line plot
+********************************************************************************
 
 tsline fitted_values_educ1 fitted_values_educ2 fitted_values_educ3 fitted_values_educ4 ///
 	, 	///
-	lpattern(shortdash dash_dot dash longdash)  ///
+	lpattern(longdash dash shortdash dot)  ///
 	lwidth(thick thick thick thick) ///
+	lstyle(p1mark p3mark p7mark p10mark)  ///
+	lcolor(black%30 black%50 black%70 black ) ///
 	title("")	///
 	subtitle("") ///
 	xtitle("") ///
-	xlabel( , angle(0)  labsize(3.1) ) ///
-	ytitle("") ///
-	ylabel(#7, angle(0) format(%9.2f) ) ///
+	xlabel(#10 , angle(0) labsize(2.5) ) ///
+	ytitle("Coefficient") ///
+	ylabel(#10, angle(0) labsize(2.5) format(%9.2f) ) ///
 	yscale( axis(1) range() lstyle(none)  ) ///
+	tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3) ) ///
 	legend(order(1 "Incomplete primary school" 2 "Incomplete high school" 3 "Incomplete college" 4 "Complete college") ///
-	       pos(11) ring(0) col(1) rows(4) size(3) symxsize(*0.6) symysize(*0.6)) ///
+	       pos(11) ring(0) col(1) rows(4) size(2.5) symxsize(*0.6) symysize(*0.6)) ///
 	note("") ///
 	recast(line) ///
 	graphregion(fcolor(white)) ///
-	scheme(  s2gcolor  ) /// economist s1mono   s1manual  s2gmanual 
-	saving("$ROOT/analysis/tmp/_graph_regression_job_loss_determinants.gph", replace)
+	scheme( s2gcolor ) /// economist s1mono   s1manual  s2gmanual 
+	saving("$ROOT/analysis/tmp/_graph_regression_job_loss_determinants.gph", replace)	
 
+********************************************************************************
+* Step 7: Export and save the graph
+********************************************************************************
 
 	* save graph 
 	graph use "$ROOT/analysis/tmp/_graph_regression_job_loss_determinants.gph"
