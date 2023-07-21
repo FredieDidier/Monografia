@@ -103,8 +103,31 @@ do "$ROOT/analysis/code/07_graph_regression_job_loss_determinants.do"
 
 *do "$ROOT/analysis/code/08_graph_regression_job_loss_determinants_fixed_effect_model.do"
 
-*
+* Heterogeneous Analysis
+** Gender
+do "$ROOT/analysis/code/09_graph_regression_men_nofe_job_loss_determinants.do"
+do "$ROOT/analysis/code/11_graph_regression_women_nofe_job_loss_determinants.do"
 
+* Combine graphs
+graph combine "$ROOT/analysis/tmp/_graph_regression_men_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_women_nofe_job_loss_determinants.gph" /*
+	*/ , 	/*
+	*/  /* ycommon
+	*/  /* xcommon 
+	*/  cols(1) /* 
+	*/ scheme() /*
+	*/ commonscheme /*
+	*/ xsize(4) /*
+	*/ ysize(5) /*
+	*/ scale(1) /*
+	*/ graphregion(margin(tiny))	 /* 
+	*/ plotregion(margin(zero) ifcolor(none)) /*
+	*/ saving("$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_gender_job_loss_determinants.gph", replace)	
+
+	* save graph 
+	graph use "$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_gender_job_loss_determinants.gph"
+	*erase "$ROOT/analysis/graph/_graph_regression_heterogeneous_analysis_gender_job_loss_determinants.gph"	
+	graph export "$ROOT/analysis/output/graph/_graph_regression_heterogeneous_analysis_gender_job_loss_determinants.png", replace		
+	
 
 ********************************************************
 **	delete temporary files
