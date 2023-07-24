@@ -295,13 +295,13 @@ tsline fitted_values_educ1 fitted_values_educ2 fitted_values_educ3 fitted_values
 	lwidth(thick thick thick thick) ///
 	lstyle(p1mark p3mark p7mark p10mark)  ///
 	lcolor(black%30 black%50 black%70 black ) ///
-	title("")	///
+	title("Industries")	///
 	subtitle("") ///
 	xtitle("") ///
 	xlabel(#10 , angle(0) labsize(2.5) ) ///
 	ytitle("Coefficient") ///
 	ylabel(#10, angle(0) labsize(2.5) format(%9.2f) ) ///
-	yscale( axis(1) range() lstyle(none)  ) ///
+	yscale( axis(1) range(0.16 0.45) lstyle(none)  ) ///
 	tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3) ) ///
 	legend(order(1 "Incomplete primary school" 2 "Incomplete high school" 3 "Incomplete college" 4 "Complete college") ///
 	       pos(11) ring(0) col(1) rows(4) size(2.5) symxsize(*0.6) symysize(*0.6)) ///

@@ -295,7 +295,7 @@ tsline fitted_values_educ1 fitted_values_educ2 fitted_values_educ3 fitted_values
 	lpattern(longdash dash shortdash dot)  ///
 	lwidth(thick thick thick thick) ///
 	lstyle(p1mark p3mark p7mark p10mark)  ///
-	lcolor(black%30 black%50 black%70 black ) ///
+	lcolor(gs13 gs10 gs5 gs0 ) ///
 	title("Women")	///
 	subtitle("") ///
 	xtitle("") ///
