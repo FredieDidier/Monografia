@@ -101,56 +101,43 @@ do "$ROOT/analysis/code/06_table_regression_job_loss_determinants_with_interacti
 *  Graph: Probability of Job Loss Relative to Least Educated Individuals by Educational Level Categories
 do "$ROOT/analysis/code/07_graph_regression_job_loss_determinants.do"
 
+*****************************
 * Heterogeneous Analysis
+*****************************
 
-** Gender
-do "$ROOT/analysis/code/09_graph_regression_men_nofe_job_loss_determinants.do"
-do "$ROOT/analysis/code/11_graph_regression_women_nofe_job_loss_determinants.do"
-
-* Combine graphs
-graph combine "$ROOT/analysis/tmp/_graph_regression_men_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_women_nofe_job_loss_determinants.gph" /*
-	*/ , 	/*
-	*/  /* ycommon
-	*/  /* xcommon 
-	*/  cols(1) /* 
-	*/ scheme() /*
-	*/ commonscheme /*
-	*/ xsize(4) /*
-	*/ ysize(5) /*
-	*/ scale(1) /*
-	*/ graphregion(margin(tiny))	 /* 
-	*/ plotregion(margin(zero) ifcolor(none)) /*
-	*/ saving("$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_gender_job_loss_determinants.gph", replace)	
-
-	* save graph 
-	graph use "$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_gender_job_loss_determinants.gph"
-	*erase "$ROOT/analysis/graph/_graph_regression_heterogeneous_analysis_gender_job_loss_determinants.gph"	
-	graph export "$ROOT/analysis/output/graph/_graph_regression_heterogeneous_analysis_gender_job_loss_determinants.png", replace	
+* Demographics
 	
-	** Race
+	do "$ROOT/analysis/code/09_graph_regression_men_nofe_job_loss_determinants.do"
+	do "$ROOT/analysis/code/11_graph_regression_women_nofe_job_loss_determinants.do"
 	do "$ROOT/analysis/code/13_graph_regression_black_nofe_job_loss_determinants.do"
-    do "$ROOT/analysis/code/15_graph_regression_white_nofe_job_loss_determinants.do"
+	do "$ROOT/analysis/code/15_graph_regression_white_nofe_job_loss_determinants.do"
 	
 	* Combine graphs
-graph combine "$ROOT/analysis/tmp/_graph_regression_black_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_white_nofe_job_loss_determinants.gph" /*
-	*/ , 	/*
-	*/  /* ycommon
-	*/  /* xcommon 
-	*/  cols(1) /* 
-	*/ scheme() /*
-	*/ commonscheme /*
-	*/ xsize(4) /*
-	*/ ysize(5) /*
-	*/ scale(1) /*
-	*/ graphregion(margin(tiny))	 /* 
-	*/ plotregion(margin(zero) ifcolor(none)) /*
-	*/ saving("$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_race_job_loss_determinants.gph", replace)	
-
-	* save graph 
-	graph use "$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_race_job_loss_determinants.gph"
-	*erase "$ROOT/analysis/graph/_graph_regression_heterogeneous_analysis_race_job_loss_determinants.gph"	
-	graph export "$ROOT/analysis/output/graph/_graph_regression_heterogeneous_analysis_race_job_loss_determinants.png", replace	
+	graph combine "$ROOT/analysis/tmp/_graph_regression_men_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_women_nofe_job_loss_determinants.gph"  "$ROOT/analysis/tmp/_graph_regression_white_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_black_nofe_job_loss_determinants.gph" /*
+		*/ , 	/*
+		*/  /* ycommon
+		*/  /* xcommon 
+		*/ cols(2) /* 
+		*/ scheme() /*
+		*/ commonscheme /*
+		*/ xsize(9) /*
+		*/ ysize(6) /*
+		*/ scale(1) /*
+		*/ graphregion(margin(tiny))	 /* 
+		*/ plotregion(margin(zero) ifcolor(none)) /*
+		*/ saving("$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_demographics_job_loss_determinants.gph", replace)	
 	
+		* save graph 
+		graph use "$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_demographics_job_loss_determinants.gph"
+		*erase "$ROOT/analysis/graph/_graph_regression_heterogeneous_analysis_demographics_job_loss_determinants.gph"	
+		graph export "$ROOT/analysis/output/graph/_graph_regression_heterogeneous_analysis_demographics_job_loss_determinants.png", replace		
+		
+	cap erase "$ROOT/analysis/output/graph/_graph_regression_women_nofe_job_loss_determinants.png"
+	cap erase "$ROOT/analysis/output/graph/_graph_regression_men_nofe_job_loss_determinants.png"
+	cap erase "$ROOT/analysis/output/graph/_graph_regression_white_nofe_job_loss_determinants.png"
+	cap erase "$ROOT/analysis/output/graph/_graph_regression_black_nofe_job_loss_determinants.png"	
+	
+	***********
 	** Sectors
 	do "$ROOT/analysis/code/17_graph_regression_agriculture_nofe_job_loss_determinants.do"
 	do "$ROOT/analysis/code/19_graph_regression_industries_nofe_job_loss_determinants.do"
@@ -178,10 +165,6 @@ graph combine "$ROOT/analysis/tmp/_graph_regression_agriculture_nofe_job_loss_de
 	graph export "$ROOT/analysis/output/graph/_graph_regression_heterogeneous_analysis_sectors_job_loss_determinants.png", replace	
 
 
-
-
-	
-	
 
 ********************************************************
 **	delete temporary files

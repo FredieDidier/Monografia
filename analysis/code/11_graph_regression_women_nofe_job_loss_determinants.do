@@ -3,26 +3,25 @@ preserve
 * Regression for gender = women with no fixed effects 
 
 keep if gender == 2
-sample 50
 
 ********************************************************************************
 * Step 1: Generate dummy variables by education x quarter
 ********************************************************************************
 cap drop charact_educ*
 quietly gen charact_educ1 = educ1
-quietly gen charact_educ2 = educ2
-quietly gen charact_educ3 = educ3
+quietly replace  charact_educ1 = 1 if educ2 ==1
+quietly replace  charact_educ1 = 1 if educ3 ==1
 quietly gen charact_educ4 = educ4
 quietly xi I.charact_educ1*I.year_quarter, prefix(_yy_) noomit
-quietly xi I.charact_educ2*I.year_quarter, prefix(_zz_) noomit
-quietly xi I.charact_educ3*I.year_quarter, prefix(_xx_) noomit
+*quietly xi I.charact_educ2*I.year_quarter, prefix(_zz_) noomit
+*quietly xi I.charact_educ3*I.year_quarter, prefix(_xx_) noomit
 quietly xi I.charact_educ4*I.year_quarter, prefix(_ww_) noomit
 	
 ********************************************************************************	
 * Step 2: Run the main regression
 ********************************************************************************
 reg job_loss ///
-_yy_chaXyea_1_* _zz_chaXyea_1_* _xx_chaXyea_1_* _ww_chaXyea_1_* ///  
+_yy_chaXyea_1_* _ww_chaXyea_1_* ///  _xx_chaXyea_1_*  _zz_chaXyea_1_* 
 signed_work_card job_function hours_worked temporary_worker social_security_taxpayer race age monthly_work_income job_start ///
 i.year_quarter ///
 i.sector_numeric i.occupation_numeric ///
@@ -90,7 +89,7 @@ generate lb_educ1 = fitted_values_educ1 - invnormal(0.975)*error
 generate ub_educ1 = fitted_values_educ1 + invnormal(0.975)*error
 
 * Category: educ2
-
+/*
 cap drop fitted_values_educ2
 ge fitted_values_educ2 = /* 
  */ _b[_zz_chaXyea_1_20121]*_zz_chaXyea_1_20121 + /*  
@@ -140,9 +139,10 @@ ge fitted_values_educ2 = /*
 replace fitted_values_educ2 = . if fitted_values_educ2==0
 generate lb_educ2 = fitted_values_educ2 - invnormal(0.975)*error
 generate ub_educ2 = fitted_values_educ2 + invnormal(0.975)*error
+*/
 
 * Category: educ3
-
+/*
 cap drop fitted_values_educ3
 ge fitted_values_educ3 = /* 
  */ _b[_xx_chaXyea_1_20121]*_xx_chaXyea_1_20121 + /*  
@@ -192,6 +192,7 @@ ge fitted_values_educ3 = /*
 replace fitted_values_educ3 = . if fitted_values_educ3==0
 generate lb_educ3 = fitted_values_educ3 - invnormal(0.975)*error
 generate ub_educ3 = fitted_values_educ3 + invnormal(0.975)*error
+*/
 
 * Category: educ4
 
@@ -290,22 +291,21 @@ tsset quarterly_date
 * Step 6: Create the line plot
 ********************************************************************************
 
-tsline fitted_values_educ1 fitted_values_educ2 fitted_values_educ3 fitted_values_educ4 ///
+tsline fitted_values_educ1 fitted_values_educ4 /// fitted_values_educ3 fitted_values_educ2 
 	, 	///
-	lpattern(longdash dash shortdash dot)  ///
-	lwidth(thick thick thick thick) ///
-	lstyle(p1mark p3mark p7mark p10mark)  ///
-	lcolor(gs13 gs10 gs5 gs0 ) ///
+    lpattern(longdash shortdash)  /// dash dot longdash shortdash
+    lwidth(thick thick) ///
+    lcolor(gs11 gs1) ///
 	title("Women")	///
 	subtitle("") ///
 	xtitle("") ///
-	xlabel(#10 , angle(0) labsize(2.5) ) ///
+	xlabel(#5 , angle(0) labsize(2.5) ) ///
 	ytitle("Coefficient") ///
 	ylabel(#10, angle(0) labsize(2.5) format(%9.2f) ) ///
-	yscale( axis(1) range(0.16 0.45) lstyle(none)  ) ///
+	yscale( axis(1) range(0.13 0.40) lstyle(none)  ) ///
 	tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3) ) ///
-	legend(order(1 "Incomplete primary school" 2 "Incomplete high school" 3 "Incomplete college" 4 "Complete college") ///
-	       pos(11) ring(0) col(1) rows(4) size(2.5) symxsize(*0.6) symysize(*0.6)) ///
+    legend(off order(1 "No college" 2 "College") ///
+           pos(11) ring(0) col(1) rows(2) size(2.5) symxsize(*0.6) symysize(*0.6)) ///
 	note("") ///
 	recast(line) ///
 	graphregion(fcolor(white)) ///
