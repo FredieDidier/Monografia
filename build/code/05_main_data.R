@@ -74,7 +74,7 @@ for(i in 1:length(file_list)){
   }
 
 ffs = dir_ls("build/output/regression")
-ffs = ffs[2:172]
+ffs = ffs[2:173]
 ## A linha 73 filtra o diretório "regression" para apenas os arquivos que contém "painel_"
 
 df <- ffs %>% 
