@@ -3,19 +3,19 @@
 * generate variable depicting the pandemic period
 cap drop pandemic*
 gen pandemic = 0
-replace pandemic = 1 if year_quarter >= 20201 & year_quarter <= 20214
+replace pandemic = 1 if year_quarter >= 20201 & year_quarter <= 20201
 
 gen pandemic_educ1 = 0
-replace pandemic_educ1 = 1 if educ1 == 1 & year_quarter >= 20201 & year_quarter <= 20214
+replace pandemic_educ1 = 1 if educ1 == 1 & year_quarter >= 20201 & year_quarter <= 20201
 
 gen pandemic_educ2 = 0
-replace pandemic_educ2 = 1 if educ2 == 1 & year_quarter >= 20201 & year_quarter <= 20214
+replace pandemic_educ2 = 1 if educ2 == 1 & year_quarter >= 20201 & year_quarter <= 20201
 
 gen pandemic_educ3 = 0
-replace pandemic_educ3 = 1 if educ3 == 1 & year_quarter >= 20201 & year_quarter <= 20214
+replace pandemic_educ3 = 1 if educ3 == 1 & year_quarter >= 20201 & year_quarter <= 20201
 
 gen pandemic_educ4 = 0
-replace pandemic_educ4 = 1 if educ4 == 1 & year_quarter >= 20201 & year_quarter <= 20214
+replace pandemic_educ4 = 1 if educ4 == 1 & year_quarter >= 20201 & year_quarter <= 20201
 
 label variable pandemic "Pandemic"
 
