@@ -91,6 +91,9 @@ cap drop occupation_numeric
 encode sector_code, gen(sector_numeric)
 encode occupation_code, gen(occupation_numeric)
 
+*****************************
+* Main Analysis
+*****************************
 
 *  Table: Probability of Job Loss Relative to Least Educated Individuals by Educational Level Categories
 do "$ROOT/analysis/code/06_table_regression_job_loss_determinants.do"
@@ -137,34 +140,37 @@ do "$ROOT/analysis/code/07_graph_regression_job_loss_determinants.do"
 	cap erase "$ROOT/analysis/output/graph/_graph_regression_white_nofe_job_loss_determinants.png"
 	cap erase "$ROOT/analysis/output/graph/_graph_regression_black_nofe_job_loss_determinants.png"	
 	
-	***********
-	** Sectors
+* Sectors
+
 	do "$ROOT/analysis/code/17_graph_regression_agriculture_nofe_job_loss_determinants.do"
 	do "$ROOT/analysis/code/19_graph_regression_industries_nofe_job_loss_determinants.do"
-	do "$ROOT/analysis/code/21_graph_regression_construction_nofe_job_loss_determinants.do"
-	do "$ROOT/analysis/code/23_graph_regression_trade_and_services_nofe_job_loss_determinants.do"
+	do "$ROOT/analysis/code/21_graph_regression_trade_nofe_job_loss_determinants.do"
+	do "$ROOT/analysis/code/23_graph_regression_services_nofe_job_loss_determinants.do"
 
 	* Combine graphs
-graph combine "$ROOT/analysis/tmp/_graph_regression_agriculture_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_industries_nofe_job_loss_determinants.gph"  "$ROOT/analysis/tmp/_graph_regression_construction_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_trade_and_services_nofe_job_loss_determinants.gph"/*
-	*/ , 	/*
-	*/  /* ycommon
-	*/  /* xcommon 
-	*/  cols(1) /* 
-	*/ scheme() /*
-	*/ commonscheme /*
-	*/ xsize(4) /*
-	*/ ysize(5) /*
-	*/ scale(1) /*
-	*/ graphregion(margin(tiny))	 /* 
-	*/ plotregion(margin(zero) ifcolor(none)) /*
-	*/ saving("$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_sectors_job_loss_determinants.gph", replace)	
-
-	* save graph 
-	graph use "$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_sectors_job_loss_determinants.gph"
-	*erase "$ROOT/analysis/graph/_graph_regression_heterogeneous_analysis_race_job_loss_determinants.gph"	
-	graph export "$ROOT/analysis/output/graph/_graph_regression_heterogeneous_analysis_sectors_job_loss_determinants.png", replace	
-
-
+	graph combine "$ROOT/analysis/tmp/_graph_regression_agriculture_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_industries_nofe_job_loss_determinants.gph"  "$ROOT/analysis/tmp/_graph_regression_trade_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_services_nofe_job_loss_determinants.gph"  /*
+		*/ , 	/*
+		*/  /* ycommon
+		*/  /* xcommon 
+		*/ cols(2) /* 
+		*/ scheme() /*
+		*/ commonscheme /*
+		*/ xsize(9) /*
+		*/ ysize(6) /*
+		*/ scale(1) /*
+		*/ graphregion(margin(tiny))	 /* 
+		*/ plotregion(margin(zero) ifcolor(none)) /*
+		*/ saving("$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_sectors_job_loss_determinants.gph", replace)	
+	
+		* save graph 
+		graph use "$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_sectors_job_loss_determinants.gph"
+		*erase "$ROOT/analysis/graph/_graph_regression_heterogeneous_analysis_sectors_job_loss_determinants.gph"	
+		graph export "$ROOT/analysis/output/graph/_graph_regression_heterogeneous_analysis_sectors_job_loss_determinants.png", replace		
+		
+	cap erase "$ROOT/analysis/output/graph/_graph_regression_agriculture_nofe_job_loss_determinants.png"
+	cap erase "$ROOT/analysis/output/graph/_graph_regression_industries_nofe_job_loss_determinants.png"
+	cap erase "$ROOT/analysis/output/graph/_graph_regression_trade_nofe_job_loss_determinants.png"
+	cap erase "$ROOT/analysis/output/graph/_graph_regression_services_nofe_job_loss_determinants.png"
 
 ********************************************************
 **	delete temporary files
