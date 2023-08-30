@@ -46,7 +46,7 @@ local pvalue_2 : display %9.3fc `pvalue_2'
 di "F statistic = `fstat_2'"
 di "Pvalue = `pvalue_2'"
 
-test educ1 + pandemic_educ1 = educ3 + pandemic_educ3
+test educ2 + pandemic_educ2 = educ3 + pandemic_educ3
 
 local fstat_3 = r(F)
 local fstat_3 : display %9.3g `fstat_3' 
@@ -57,7 +57,7 @@ local pvalue_3 : display %9.3fc `pvalue_3'
 di "F statistic = `fstat_3'"
 di "Pvalue = `pvalue_3'"
 
-test educ1 + pandemic_educ1 = educ4 + pandemic_educ4
+test educ3 + pandemic_educ3 = educ4 + pandemic_educ4
 
 local fstat_4 = r(F)
 local fstat_4 : display %9.3g `fstat_4' 
@@ -79,8 +79,8 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 	*/	nocons	/*
 	*/	addtext("Root mean squared error:", "`rmse_score'" ,  	/*
 	*/ 	"F Statistic: a + e = b + f:", "`fstat_2'" , "\hspace{1mm} P-value a + e = b + f:", "`pvalue_2'" ,  /*
-	*/ 	"F Statistic: a + e = c  + g:", "`fstat_3'" , "\hspace{1mm} P-value a + e = c + g:", "`pvalue_3'" ,  /*
-	*/ 	"F Statistic: a + e = d + h:", "`fstat_4'" , "\hspace{1mm} P-value a + e = d + h:", "`pvalue_4'" ,  /*
+	*/ 	"F Statistic: b + f: = c  + g:", "`fstat_3'" , "\hspace{1mm} P-value b + f: = c + g:", "`pvalue_3'" ,  /*
+	*/ 	"F Statistic: c + g = d + h:", "`fstat_4'" , "\hspace{1mm} P-value c + g = d + h:", "`pvalue_4'" ,  /*
 	*/ 	"State FE", "-", "Urban FE", "-", "Time-varying observables", "-", "Occupation and sector FE", "-" )	 /* 
 	*/	tex(fragment) /*
 	*/	replace
@@ -110,7 +110,7 @@ local pvalue_2 : display %9.3fc `pvalue_2'
 di "F statistic = `fstat_2'"
 di "Pvalue = `pvalue_2'"
 
-test educ1 + pandemic_educ1 = educ3 + pandemic_educ3
+test educ2 + pandemic_educ2 = educ3 + pandemic_educ3
 
 local fstat_3 = r(F)
 local fstat_3 : display %9.3g `fstat_3' 
@@ -121,7 +121,7 @@ local pvalue_3 : display %9.3fc `pvalue_3'
 di "F statistic = `fstat_3'"
 di "Pvalue = `pvalue_3'"
 
-test educ1 + pandemic_educ1 = educ4 + pandemic_educ4
+test educ3 + pandemic_educ3 = educ4 + pandemic_educ4
 
 local fstat_4 = r(F)
 local fstat_4 : display %9.3g `fstat_4' 
@@ -143,8 +143,8 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 	*/	nocons	/*
 	*/	addtext("Root mean squared error:", "`rmse_score'" ,  	/*
 	*/ 	"F Statistic: a + e = b + f:", "`fstat_2'" , "\hspace{1mm} P-value a + e = b + f:", "`pvalue_2'" ,  /*
-	*/ 	"F Statistic: a + e = c  + g:", "`fstat_3'" , "\hspace{1mm} P-value a + e = c + g:", "`pvalue_3'" ,  /*
-	*/ 	"F Statistic: a + e = d + h:", "`fstat_4'" , "\hspace{1mm} P-value a + e = d + h:", "`pvalue_4'" ,  /*
+	*/ 	"F Statistic: b + f: = c  + g:", "`fstat_3'" , "\hspace{1mm} P-value b + f: = c + g:", "`pvalue_3'" ,  /*
+	*/ 	"F Statistic: c + g = d + h:", "`fstat_4'" , "\hspace{1mm} P-value c + g = d + h:", "`pvalue_4'" ,  /*
 	*/ 	"State FE", "Yes", "Urban FE", "Yes", "Time-varying observables", "-", "Occupation and sector FE", "-" )	 /* 
 	*/	tex(fragment) /*
 	*/	
@@ -175,7 +175,7 @@ local pvalue_2 : display %9.3fc `pvalue_2'
 di "F statistic = `fstat_2'"
 di "Pvalue = `pvalue_2'"
 
-test educ1 + pandemic_educ1 = educ3 + pandemic_educ3
+test educ2 + pandemic_educ2 = educ3 + pandemic_educ3
 
 local fstat_3 = r(F)
 local fstat_3 : display %9.3g `fstat_3' 
@@ -186,7 +186,7 @@ local pvalue_3 : display %9.3fc `pvalue_3'
 di "F statistic = `fstat_3'"
 di "Pvalue = `pvalue_3'"
 
-test educ1 + pandemic_educ1 = educ4 + pandemic_educ4
+test educ3 + pandemic_educ3 = educ4 + pandemic_educ4
 
 local fstat_4 = r(F)
 local fstat_4 : display %9.3g `fstat_4' 
@@ -208,8 +208,8 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 	*/	nocons	/*
 	*/	addtext("Root mean squared error:", "`rmse_score'" ,  	/*
 	*/ 	"F Statistic: a + e = b + f:", "`fstat_2'" , "\hspace{1mm} P-value a + e = b + f:", "`pvalue_2'" ,  /*
-	*/ 	"F Statistic: a + e = c  + g:", "`fstat_3'" , "\hspace{1mm} P-value a + e = c + g:", "`pvalue_3'" ,  /*
-	*/ 	"F Statistic: a + e = d + h:", "`fstat_4'" , "\hspace{1mm} P-value a + e = d + h:", "`pvalue_4'" ,  /*
+	*/ 	"F Statistic: b + f: = c  + g:", "`fstat_3'" , "\hspace{1mm} P-value b + f: = c + g:", "`pvalue_3'" ,  /*
+	*/ 	"F Statistic: c + g = d + h:", "`fstat_4'" , "\hspace{1mm} P-value c + g = d + h:", "`pvalue_4'" ,  /*
 	*/ 	"State FE", "Yes", "Urban FE", "Yes", "Time-varying observables", "Yes", "Occupation and sector FE", "-" )	 /* 
 	*/	tex(fragment) /*
 	*/	
@@ -274,8 +274,8 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 	*/	nocons	/*
 	*/	addtext("Root mean squared error:", "`rmse_score'" ,  	/*
 	*/ 	"F Statistic: a + e = b + f:", "`fstat_2'" , "\hspace{1mm} P-value a + e = b + f:", "`pvalue_2'" ,  /*
-	*/ 	"F Statistic: a + e = c  + g:", "`fstat_3'" , "\hspace{1mm} P-value a + e = c + g:", "`pvalue_3'" ,  /*
-	*/ 	"F Statistic: a + e = d + h:", "`fstat_4'" , "\hspace{1mm} P-value a + e = d + h:", "`pvalue_4'" ,  /*
+	*/ 	"F Statistic: b + f: = c  + g:", "`fstat_3'" , "\hspace{1mm} P-value b + f: = c + g:", "`pvalue_3'" ,  /*
+	*/ 	"F Statistic: c + g = d + h:", "`fstat_4'" , "\hspace{1mm} P-value c + g = d + h:", "`pvalue_4'" ,  /*
 	*/ 	"State FE", "Yes", "Urban FE", "Yes", "Time-varying observables", "Yes", "Occupation and sector FE", "Yes" )	 /* 
 	*/	tex(fragment) /*
 	*/	
