@@ -197,7 +197,7 @@ do "$ROOT/analysis/code/07_graph_regression_job_loss_determinants.do"
 		* save graph 
 		graph use "$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_position_job_loss_determinants.gph"		
 		graph export "$ROOT/analysis/output/graph/_graph_regression_heterogeneous_analysis_position_job_loss_determinants.png", replace	
-		erase "$ROOT/analysis/graph/_graph_regression_heterogeneous_analysis_position_job_loss_determinants.gph"	
+		cap erase "$ROOT/analysis/graph/tmp/_graph_regression_heterogeneous_analysis_position_job_loss_determinants.gph"	
 		
 	cap erase "$ROOT/analysis/tmp/_graph_regression_agriculture_nofe_job_loss_determinants.png"
 	cap erase "$ROOT/analysis/tmp/_graph_regression_industries_nofe_job_loss_determinants.png"
