@@ -31,6 +31,7 @@ cap mkdir "$ROOT/analysis/input"
 cap mkdir "$ROOT/analysis/output"
 cap mkdir "$ROOT/analysis/output/graph"
 cap mkdir "$ROOT/analysis/output/regressions"
+cap mkdir "$ROOT/analysis/output/descriptive_statistics"
 
 * 1. Replicar o trabalho do Journal of Public Economics "Inequality of the coronavirus shock".
 * 2. Primeira analise: perda de emprego #grafico
@@ -94,6 +95,9 @@ encode occupation_code, gen(occupation_numeric)
 *****************************
 * Main Analysis
 *****************************
+
+*  Table: Descriptive Statistics
+do "$ROOT/analysis/code/01_table_descriptive_statistics.do"
 
 *  Table: Probability of Job Loss Relative to Least Educated Individuals by Educational Level Categories
 do "$ROOT/analysis/code/06_table_regression_job_loss_determinants.do"
