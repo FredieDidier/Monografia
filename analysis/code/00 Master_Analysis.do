@@ -97,6 +97,9 @@ encode occupation_code, gen(occupation_numeric)
 *****************************
 
 *  Table: Descriptive Statistics
+do "$ROOT/analysis/code/01_table_matching_algorithm.do"
+
+*  Table: Descriptive Statistics
 do "$ROOT/analysis/code/01_table_descriptive_statistics.do"
 
 *  Table: Probability of Job Loss Relative to Least Educated Individuals by Educational Level Categories
