@@ -130,13 +130,16 @@ gsort id_dom iten1 Ano Trimestre
 * Generate a new identifier "iten2" within each "id_dom" group if "iten1" is not missing.
 by id_dom iten1, sort: gen iten2 = _n if iten1 != .
 
+* Creates a variable "iten3" that contains the maximum value of "iten2" within each "id_dom" group.
+by id_dom, sort: egen iten3 = max(iten2) if iten1 != .
+
 * Calculate the maximum value of "iten2" within each "id_dom," "Ano," and "Trimestre" group, ]
 * and store it in "hs_that_appear_1_time" to "hs_that_appear_5_time" based on the value of "iten2."
-by id_dom Ano Trimestre, sort: egen hs_that_appear_1_time = max(iten2) if iten2 == 1
-by id_dom Ano Trimestre, sort: egen hs_that_appear_2_time = max(iten2) if iten2 == 2 
-by id_dom Ano Trimestre, sort: egen hs_that_appear_3_time = max(iten2) if iten2 == 3 
-by id_dom Ano Trimestre, sort: egen hs_that_appear_4_time = max(iten2) if iten2 == 4 
-by id_dom Ano Trimestre, sort: egen hs_that_appear_5_time = max(iten2) if iten2 == 5
+by id_dom Ano Trimestre, sort: egen hs_that_appear_1_time = max(iten2) if iten2 == 1 & iten3 == 1
+by id_dom Ano Trimestre, sort: egen hs_that_appear_2_time = max(iten2) if iten2 == 2 & iten3 == 2 
+by id_dom Ano Trimestre, sort: egen hs_that_appear_3_time = max(iten2) if iten2 == 3 & iten3 == 3 
+by id_dom Ano Trimestre, sort: egen hs_that_appear_4_time = max(iten2) if iten2 == 4 & iten3 == 4 
+by id_dom Ano Trimestre, sort: egen hs_that_appear_5_time = max(iten2) if iten2 == 5 & iten3 == 5
 
 * Browse the data to explore the variables "id_dom," "iten1," "Ano," "Trimestre," "iten*," and "hs_that_appear_*."
 
@@ -149,7 +152,7 @@ by painel, sort: egen n_hs_that_appear_4_time = count(iten1) if hs_that_appear_4
 by painel, sort: egen n_hs_that_appear_5_time = count(iten1) if hs_that_appear_5_time == 5
 
 * Calculate the count of "iten1" within each "painel" group if "iten2" is not missing.
-by painel, sort: egen n_hs_that_appear_all = count(iten1) if iten2 != .
+by painel, sort: egen n_hs_that_appear_all = count(iten2) if iten2 == 1
 
 * Calculate the mode of "n_hs_that_appear_1" within each "painel" group and set it to 0 if it's missing.
 by painel, sort: egen n_hs_1 = mode(n_hs_that_appear_1)
@@ -167,15 +170,23 @@ replace n_hs_5 = 0 if n_hs_that_appear_5 == .
 by painel, sort: egen n_hs_all = mode(n_hs_that_appear_all)
 replace n_hs_all = 0 if n_hs_that_appear_all == .
 
+* save temporary data to retrive later to check (if needed)
+save "$ROOT/analysis/tmp/matching_before_collapse.dta", replace
+
+collapse (max ) sh_* n_id_that_appear* n_hs_1 n_hs_2 n_hs_3 n_hs_4 n_hs_5 n_hs_all, by(painel)
+
+* save temporary data to retrive later to check (if needed)
+save "$ROOT/analysis/tmp/matching_after_collapse.dta", replace
+use "$ROOT/analysis/tmp/matching_after_collapse.dta", clear
+
 * Calculate the percentages of "n_hs_1" to "n_hs_5" in relation to "n_hs_all" 
 * and store them in "sh_hs_between_pairs1" to "sh_hs_between_pairs5."
+cap drop sh_hs_between_*
 gen sh_hs_between_pairs1 = (n_hs_1 / n_hs_all) * 100
 gen sh_hs_between_pairs2 = (n_hs_2 / n_hs_all) * 100
 gen sh_hs_between_pairs3 = (n_hs_3 / n_hs_all) * 100
 gen sh_hs_between_pairs4 = (n_hs_4 / n_hs_all) * 100
 gen sh_hs_between_pairs5 = (n_hs_5 / n_hs_all) * 100
-
-collapse (max ) sh_* , by(painel)
 
 format %9.2f sh_id_between_pairs1
 format %9.2f sh_id_between_pairs2
@@ -189,16 +200,26 @@ format %9.2f sh_hs_between_pairs3
 format %9.2f sh_hs_between_pairs4
 format %9.2f sh_hs_between_pairs5
 
-* export data for individuals
+* export data for share of individuals
  export delimited ///
  painel sh_hs_between_pairs1 sh_hs_between_pairs2 sh_hs_between_pairs3 sh_hs_between_pairs4 sh_hs_between_pairs5 ///
- using "$ROOT/analysis/output/descriptive_statistics/_table_matching_algorithm_households.csv", replace 
+ using "$ROOT/analysis/output/descriptive_statistics/_table_matching_algorithm_share_households.csv", replace 
 
-* export data for households
+ * export data for number of individuals
+export delimited ///
+painel n_id_that_appear_1 n_id_that_appear_2 n_id_that_appear_3 n_id_that_appear_4 n_id_that_appear_5 n_id_that_appear_all  ///
+using "$ROOT/analysis/output/descriptive_statistics/_table_matching_algorithm_number_individuals.csv", replace
+ 	
+* export data for share of households
 export delimited ///
 painel sh_id_between_pairs1 sh_id_between_pairs2 sh_id_between_pairs3 sh_id_between_pairs4 sh_id_between_pairs5  ///
-using "$ROOT/analysis/output/descriptive_statistics/_table_matching_algorithm_individuals.csv", replace
- 	
+using "$ROOT/analysis/output/descriptive_statistics/_table_matching_algorithm_share_individuals.csv", replace
+
+* export data for number of households
+ export delimited ///
+ painel n_hs_1 n_hs_2 n_hs_3 n_hs_4 n_hs_5 n_hs_all ///
+ using "$ROOT/analysis/output/descriptive_statistics/_table_matching_algorithm_number_households.csv", replace 
+
 *Losses between pairs of trimesters, following the Basic matching criteria (in \%)
 
 *Losses between pairs of trimesters, following the Advanced matching criteria (in \%)
