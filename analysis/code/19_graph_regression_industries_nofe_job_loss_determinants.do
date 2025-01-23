@@ -294,7 +294,7 @@ tsline fitted_values_educ1 fitted_values_educ4 /// fitted_values_educ2 fitted_va
     lpattern(longdash shortdash)  /// dash dot longdash shortdash
     lwidth(thick thick) ///
     lcolor(gs11 gs1) ///
-	title("Industries")	///
+	title("Manufactory")	///
 	subtitle("") ///
 	xtitle("") ///
 	xlabel(#5 , angle(0) labsize(2.5) ) ///

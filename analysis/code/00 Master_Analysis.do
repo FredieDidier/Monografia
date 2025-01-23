@@ -12,7 +12,7 @@ if "`c(username)'" == "Francisco"   {
 }
 else if "`c(username)'" == "DELL"   {
 	version 16.1
-	global ROOT "C:\Users\DELL\Documents\GitHub\Monografia-Fredie"
+	global ROOT "D:\OneDrive\Documentos\GitHub\Monografia-Fredie"
 }
 else if "`c(username)'" == "f.cavalcanti"   {
 	version 16.1
