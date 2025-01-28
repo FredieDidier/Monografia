@@ -34,7 +34,7 @@ if (user == "Fredie") {
 } else if (user == "Francisco") {
   wd <- "C:/Users/Francisco/Dropbox/Research/Monografia-Fredie"
 } else if (user == "DELL") {
-  wd <- "C:/Users/DELL/Documents/GitHub/Monografia-Fredie"
+  wd <- "D:/OneDrive/Documentos/GitHub/Monografia-Fredie"
 } else if (user == "f.cavalcanti") {
   wd <- "C:/Users/DELL/Documents/GitHub/Monografia-Fredie"
 } else {

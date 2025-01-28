@@ -11,7 +11,7 @@ if "`c(username)'" == "Francisco"   {
 }
 else if "`c(username)'" == "DELL"   {
 	version 16.1
-	global ROOT "C:\Users\DELL\Documents\GitHub\Monografia-Fredie"
+	global ROOT "D:\OneDrive\Documentos\GitHub\Monografia-Fredie"
 	global ROOT_DATA "D:\Dropbox\DataZoom\BasesIBGE\datazoom_rar\PNAD_CONTINUA\pnadcontinua_trimestral_2022024"
 }
 else if "`c(username)'" == "f.cavalcanti"   {
