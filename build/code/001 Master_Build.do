@@ -18,10 +18,10 @@ else if "`c(username)'" == "f.cavalcanti"   {
 	version 16.1
 	global ROOT "C:/Users/f.cavalcanti/Documents/GitHub/"
 }
-else if "`c(username)'" == "Fredie"   {
-	version 14.1
-	global ROOT "/Users/Fredie/Documents/GitHub/Monografia"
-	global ROOT_DATA "/Users/Fredie/Documents/GitHub/Monografia/build/input"
+else if "`c(username)'" == "fredie"   {
+	version 18.0
+	global ROOT "/Users/fredie/Documents/GitHub/Monografia"
+	global ROOT_DATA "/Users/fredie/Documents/GitHub/Monografia/build/input"
 }
 
 cd $ROOT
