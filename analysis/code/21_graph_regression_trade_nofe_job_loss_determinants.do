@@ -8,21 +8,17 @@ preserve
 * Step 1: Generate dummy variables by education x quarter
 ********************************************************************************
 cap drop charact_educ*
+quietly gen charact_educ0 = educ0
 quietly gen charact_educ1 = educ1
-quietly replace  charact_educ1 = 1 if educ2 ==1
-quietly replace  charact_educ1 = 1 if educ3 ==1
-quietly gen charact_educ4 = educ4
-quietly xi I.charact_educ1*I.year_quarter, prefix(_yy_) noomit
-*quietly xi I.charact_educ2*I.year_quarter, prefix(_zz_) noomit
-*quietly xi I.charact_educ3*I.year_quarter, prefix(_xx_) noomit
-quietly xi I.charact_educ4*I.year_quarter, prefix(_ww_) noomit
-	
+quietly xi I.charact_educ0*I.year_quarter, prefix(_aa_) noomit
+quietly xi I.charact_educ1*I.year_quarter, prefix(_bb_) noomit
+
 ********************************************************************************	
 * Step 2: Run the main regression
 ********************************************************************************
 reg job_loss ///
-_yy_chaXyea_1_* _ww_chaXyea_1_* ///  _xx_chaXyea_1_*  _zz_chaXyea_1_* 
-signed_work_card job_function hours_worked temporary_worker social_security_taxpayer gender age monthly_work_income job_start ///
+_aa_chaXyea_1_* _bb_chaXyea_1_* ///
+signed_work_card job_function hours_worked temporary_worker social_security_taxpayer race age monthly_work_income job_start ///
 i.year_quarter ///
 i.sector_numeric i.occupation_numeric ///
 i.state ///
@@ -36,213 +32,125 @@ predict error, stdp
 ********************************************************************************
 * Step 3: Fit values by education level
 ********************************************************************************
-* Category: educ1
+* Category: educ0 (No College)
+
+cap drop fitted_values_educ0
+ge fitted_values_educ0 = /* 
+ */ _b[_aa_chaXyea_1_20121]*_aa_chaXyea_1_20121 + /*  	
+ */ _b[_aa_chaXyea_1_20122]*_aa_chaXyea_1_20122 + /*  
+ */ _b[_aa_chaXyea_1_20123]*_aa_chaXyea_1_20123 + /*  
+ */ _b[_aa_chaXyea_1_20124]*_aa_chaXyea_1_20124 + /*  
+ */ _b[_aa_chaXyea_1_20131]*_aa_chaXyea_1_20131 + /*  
+ */ _b[_aa_chaXyea_1_20132]*_aa_chaXyea_1_20132 + /*  
+ */ _b[_aa_chaXyea_1_20133]*_aa_chaXyea_1_20133 + /*  
+ */ _b[_aa_chaXyea_1_20134]*_aa_chaXyea_1_20134 + /*  
+ */ _b[_aa_chaXyea_1_20141]*_aa_chaXyea_1_20141 + /*  
+ */ _b[_aa_chaXyea_1_20142]*_aa_chaXyea_1_20142 + /*  
+ */ _b[_aa_chaXyea_1_20143]*_aa_chaXyea_1_20143 + /*  
+ */ _b[_aa_chaXyea_1_20144]*_aa_chaXyea_1_20144 + /*  
+ */ _b[_aa_chaXyea_1_20151]*_aa_chaXyea_1_20151 + /*  
+ */ _b[_aa_chaXyea_1_20152]*_aa_chaXyea_1_20152 + /*  
+ */ _b[_aa_chaXyea_1_20153]*_aa_chaXyea_1_20153 + /*  
+ */ _b[_aa_chaXyea_1_20154]*_aa_chaXyea_1_20154 + /*  
+ */ _b[_aa_chaXyea_1_20161]*_aa_chaXyea_1_20161 + /*  
+ */ _b[_aa_chaXyea_1_20162]*_aa_chaXyea_1_20162 + /*  
+ */ _b[_aa_chaXyea_1_20163]*_aa_chaXyea_1_20163 + /*  
+ */ _b[_aa_chaXyea_1_20164]*_aa_chaXyea_1_20164 + /*  
+ */ _b[_aa_chaXyea_1_20171]*_aa_chaXyea_1_20171 + /*  
+ */ _b[_aa_chaXyea_1_20172]*_aa_chaXyea_1_20172 + /*  
+ */ _b[_aa_chaXyea_1_20173]*_aa_chaXyea_1_20173 + /*  
+ */ _b[_aa_chaXyea_1_20174]*_aa_chaXyea_1_20174 + /*  
+ */ _b[_aa_chaXyea_1_20181]*_aa_chaXyea_1_20181 + /*  
+ */ _b[_aa_chaXyea_1_20182]*_aa_chaXyea_1_20182 + /*  
+ */ _b[_aa_chaXyea_1_20183]*_aa_chaXyea_1_20183 + /*  
+ */ _b[_aa_chaXyea_1_20184]*_aa_chaXyea_1_20184 + /*  
+ */ _b[_aa_chaXyea_1_20191]*_aa_chaXyea_1_20191 + /*  
+ */ _b[_aa_chaXyea_1_20192]*_aa_chaXyea_1_20192 + /*  
+ */ _b[_aa_chaXyea_1_20193]*_aa_chaXyea_1_20193 + /*  
+ */ _b[_aa_chaXyea_1_20194]*_aa_chaXyea_1_20194 + /*  
+ */ _b[_aa_chaXyea_1_20201]*_aa_chaXyea_1_20201 + /*  
+ */ _b[_aa_chaXyea_1_20202]*_aa_chaXyea_1_20202 + /*  
+ */ _b[_aa_chaXyea_1_20203]*_aa_chaXyea_1_20203 + /*  
+ */ _b[_aa_chaXyea_1_20204]*_aa_chaXyea_1_20204 + /*  
+ */ _b[_aa_chaXyea_1_20211]*_aa_chaXyea_1_20211 + /*  
+ */ _b[_aa_chaXyea_1_20212]*_aa_chaXyea_1_20212 + /*  
+ */ _b[_aa_chaXyea_1_20213]*_aa_chaXyea_1_20213 + /*  
+ */ _b[_aa_chaXyea_1_20214]*_aa_chaXyea_1_20214 + /*  
+ */ _b[_aa_chaXyea_1_20221]*_aa_chaXyea_1_20221 + /*  
+ */ _b[_aa_chaXyea_1_20222]*_aa_chaXyea_1_20222 + /*  
+ */ _b[_aa_chaXyea_1_20223]*_aa_chaXyea_1_20223 + /*
+ */ _b[_aa_chaXyea_1_20224]*_aa_chaXyea_1_20224 + /*
+ */ _b[_aa_chaXyea_1_20231]*_aa_chaXyea_1_20231 + /*
+ */ _b[_aa_chaXyea_1_20232]*_aa_chaXyea_1_20232 + /*
+ */ _b[_aa_chaXyea_1_20233]*_aa_chaXyea_1_20233 + /*
+ */ _b[_aa_chaXyea_1_20234]*_aa_chaXyea_1_20234 + /*
+ */ _b[_aa_chaXyea_1_20241]*_aa_chaXyea_1_20241 + /*
+ */ _b[_aa_chaXyea_1_20242]*_aa_chaXyea_1_20242 + /*
+ */ _b[_aa_chaXyea_1_20243]*_aa_chaXyea_1_20243
+
+replace fitted_values_educ0 = . if fitted_values_educ0==0
+generate lb_educ0 = fitted_values_educ0 - invnormal(0.975)*error
+generate ub_educ0 = fitted_values_educ0 + invnormal(0.975)*error
+
+* Category: educ1 (Complete College)
 
 cap drop fitted_values_educ1
 ge fitted_values_educ1 = /* 
- */ _b[_yy_chaXyea_1_20121]*_yy_chaXyea_1_20121 + /*  	
- */ _b[_yy_chaXyea_1_20122]*_yy_chaXyea_1_20122 + /*  
- */ _b[_yy_chaXyea_1_20123]*_yy_chaXyea_1_20123 + /*  
- */ _b[_yy_chaXyea_1_20124]*_yy_chaXyea_1_20124 + /*  
- */ _b[_yy_chaXyea_1_20131]*_yy_chaXyea_1_20131 + /*  
- */ _b[_yy_chaXyea_1_20132]*_yy_chaXyea_1_20132 + /*  
- */ _b[_yy_chaXyea_1_20133]*_yy_chaXyea_1_20133 + /*  
- */ _b[_yy_chaXyea_1_20134]*_yy_chaXyea_1_20134 + /*  
- */ _b[_yy_chaXyea_1_20141]*_yy_chaXyea_1_20141 + /*  
- */ _b[_yy_chaXyea_1_20142]*_yy_chaXyea_1_20142 + /*  
- */ _b[_yy_chaXyea_1_20143]*_yy_chaXyea_1_20143 + /*  
- */ _b[_yy_chaXyea_1_20144]*_yy_chaXyea_1_20144 + /*  
- */ _b[_yy_chaXyea_1_20151]*_yy_chaXyea_1_20151 + /*  
- */ _b[_yy_chaXyea_1_20152]*_yy_chaXyea_1_20152 + /*  
- */ _b[_yy_chaXyea_1_20153]*_yy_chaXyea_1_20153 + /*  
- */ _b[_yy_chaXyea_1_20154]*_yy_chaXyea_1_20154 + /*  
- */ _b[_yy_chaXyea_1_20161]*_yy_chaXyea_1_20161 + /*  
- */ _b[_yy_chaXyea_1_20162]*_yy_chaXyea_1_20162 + /*  
- */ _b[_yy_chaXyea_1_20163]*_yy_chaXyea_1_20163 + /*  
- */ _b[_yy_chaXyea_1_20164]*_yy_chaXyea_1_20164 + /*  
- */ _b[_yy_chaXyea_1_20171]*_yy_chaXyea_1_20171 + /*  
- */ _b[_yy_chaXyea_1_20172]*_yy_chaXyea_1_20172 + /*  
- */ _b[_yy_chaXyea_1_20173]*_yy_chaXyea_1_20173 + /*  
- */ _b[_yy_chaXyea_1_20174]*_yy_chaXyea_1_20174 + /*  
- */ _b[_yy_chaXyea_1_20181]*_yy_chaXyea_1_20181 + /*  
- */ _b[_yy_chaXyea_1_20182]*_yy_chaXyea_1_20182 + /*  
- */ _b[_yy_chaXyea_1_20183]*_yy_chaXyea_1_20183 + /*  
- */ _b[_yy_chaXyea_1_20184]*_yy_chaXyea_1_20184 + /*  
- */ _b[_yy_chaXyea_1_20191]*_yy_chaXyea_1_20191 + /*  
- */ _b[_yy_chaXyea_1_20192]*_yy_chaXyea_1_20192 + /*  
- */ _b[_yy_chaXyea_1_20193]*_yy_chaXyea_1_20193 + /*  
- */ _b[_yy_chaXyea_1_20194]*_yy_chaXyea_1_20194 + /*  
- */ _b[_yy_chaXyea_1_20201]*_yy_chaXyea_1_20201 + /*  
- */ _b[_yy_chaXyea_1_20202]*_yy_chaXyea_1_20202 + /*  
- */ _b[_yy_chaXyea_1_20203]*_yy_chaXyea_1_20203 + /*  
- */ _b[_yy_chaXyea_1_20204]*_yy_chaXyea_1_20204 + /*  
- */ _b[_yy_chaXyea_1_20211]*_yy_chaXyea_1_20211 + /*  
- */ _b[_yy_chaXyea_1_20212]*_yy_chaXyea_1_20212 + /*  
- */ _b[_yy_chaXyea_1_20213]*_yy_chaXyea_1_20213 + /*  
- */ _b[_yy_chaXyea_1_20214]*_yy_chaXyea_1_20214 + /*  
- */ _b[_yy_chaXyea_1_20221]*_yy_chaXyea_1_20221 + /*  
- */ _b[_yy_chaXyea_1_20222]*_yy_chaXyea_1_20222 + /*  
- */ _b[_yy_chaXyea_1_20223]*_yy_chaXyea_1_20223 
+ */ _b[_bb_chaXyea_1_20121]*_bb_chaXyea_1_20121 + /*  
+ */ _b[_bb_chaXyea_1_20122]*_bb_chaXyea_1_20122 + /*  
+ */ _b[_bb_chaXyea_1_20123]*_bb_chaXyea_1_20123 + /*  
+ */ _b[_bb_chaXyea_1_20124]*_bb_chaXyea_1_20124 + /*  
+ */ _b[_bb_chaXyea_1_20131]*_bb_chaXyea_1_20131 + /*  
+ */ _b[_bb_chaXyea_1_20132]*_bb_chaXyea_1_20132 + /*  
+ */ _b[_bb_chaXyea_1_20133]*_bb_chaXyea_1_20133 + /*  
+ */ _b[_bb_chaXyea_1_20134]*_bb_chaXyea_1_20134 + /*  
+ */ _b[_bb_chaXyea_1_20141]*_bb_chaXyea_1_20141 + /*  
+ */ _b[_bb_chaXyea_1_20142]*_bb_chaXyea_1_20142 + /*  
+ */ _b[_bb_chaXyea_1_20143]*_bb_chaXyea_1_20143 + /*  
+ */ _b[_bb_chaXyea_1_20144]*_bb_chaXyea_1_20144 + /*  
+ */ _b[_bb_chaXyea_1_20151]*_bb_chaXyea_1_20151 + /*  
+ */ _b[_bb_chaXyea_1_20152]*_bb_chaXyea_1_20152 + /*  
+ */ _b[_bb_chaXyea_1_20153]*_bb_chaXyea_1_20153 + /*  
+ */ _b[_bb_chaXyea_1_20154]*_bb_chaXyea_1_20154 + /*  
+ */ _b[_bb_chaXyea_1_20161]*_bb_chaXyea_1_20161 + /*  
+ */ _b[_bb_chaXyea_1_20162]*_bb_chaXyea_1_20162 + /*  
+ */ _b[_bb_chaXyea_1_20163]*_bb_chaXyea_1_20163 + /*  
+ */ _b[_bb_chaXyea_1_20164]*_bb_chaXyea_1_20164 + /*  
+ */ _b[_bb_chaXyea_1_20171]*_bb_chaXyea_1_20171 + /*  
+ */ _b[_bb_chaXyea_1_20172]*_bb_chaXyea_1_20172 + /*  
+ */ _b[_bb_chaXyea_1_20173]*_bb_chaXyea_1_20173 + /*  
+ */ _b[_bb_chaXyea_1_20174]*_bb_chaXyea_1_20174 + /*  
+ */ _b[_bb_chaXyea_1_20181]*_bb_chaXyea_1_20181 + /*  
+ */ _b[_bb_chaXyea_1_20182]*_bb_chaXyea_1_20182 + /*  
+ */ _b[_bb_chaXyea_1_20183]*_bb_chaXyea_1_20183 + /*  
+ */ _b[_bb_chaXyea_1_20184]*_bb_chaXyea_1_20184 + /*  
+ */ _b[_bb_chaXyea_1_20191]*_bb_chaXyea_1_20191 + /*  
+ */ _b[_bb_chaXyea_1_20192]*_bb_chaXyea_1_20192 + /*  
+ */ _b[_bb_chaXyea_1_20193]*_bb_chaXyea_1_20193 + /*  
+ */ _b[_bb_chaXyea_1_20194]*_bb_chaXyea_1_20194 + /*  
+ */ _b[_bb_chaXyea_1_20201]*_bb_chaXyea_1_20201 + /*  
+ */ _b[_bb_chaXyea_1_20202]*_bb_chaXyea_1_20202 + /*  
+ */ _b[_bb_chaXyea_1_20203]*_bb_chaXyea_1_20203 + /*  
+ */ _b[_bb_chaXyea_1_20204]*_bb_chaXyea_1_20204 + /*  
+ */ _b[_bb_chaXyea_1_20211]*_bb_chaXyea_1_20211 + /*  
+ */ _b[_bb_chaXyea_1_20212]*_bb_chaXyea_1_20212 + /*  
+ */ _b[_bb_chaXyea_1_20213]*_bb_chaXyea_1_20213 + /*  
+ */ _b[_bb_chaXyea_1_20214]*_bb_chaXyea_1_20214 + /*  
+ */ _b[_bb_chaXyea_1_20221]*_bb_chaXyea_1_20221 + /*  
+ */ _b[_bb_chaXyea_1_20222]*_bb_chaXyea_1_20222 + /*  
+ */ _b[_bb_chaXyea_1_20223]*_bb_chaXyea_1_20223 + /*
+ */ _b[_bb_chaXyea_1_20224]*_bb_chaXyea_1_20224 + /*
+ */ _b[_bb_chaXyea_1_20231]*_bb_chaXyea_1_20231 + /*
+ */ _b[_bb_chaXyea_1_20232]*_bb_chaXyea_1_20232 + /*
+ */ _b[_bb_chaXyea_1_20233]*_bb_chaXyea_1_20233 + /*
+ */ _b[_bb_chaXyea_1_20234]*_bb_chaXyea_1_20234 + /*
+ */ _b[_bb_chaXyea_1_20241]*_bb_chaXyea_1_20241 + /*
+ */ _b[_bb_chaXyea_1_20242]*_bb_chaXyea_1_20242 + /*
+ */ _b[_bb_chaXyea_1_20243]*_bb_chaXyea_1_20243
 
 replace fitted_values_educ1 = . if fitted_values_educ1==0
 generate lb_educ1 = fitted_values_educ1 - invnormal(0.975)*error
 generate ub_educ1 = fitted_values_educ1 + invnormal(0.975)*error
-
-* Category: educ2
-/*
-cap drop fitted_values_educ2
-ge fitted_values_educ2 = /* 
- */ _b[_zz_chaXyea_1_20121]*_zz_chaXyea_1_20121 + /*  
- */ _b[_zz_chaXyea_1_20122]*_zz_chaXyea_1_20122 + /*  
- */ _b[_zz_chaXyea_1_20123]*_zz_chaXyea_1_20123 + /*  
- */ _b[_zz_chaXyea_1_20124]*_zz_chaXyea_1_20124 + /*  
- */ _b[_zz_chaXyea_1_20131]*_zz_chaXyea_1_20131 + /*  
- */ _b[_zz_chaXyea_1_20132]*_zz_chaXyea_1_20132 + /*  
- */ _b[_zz_chaXyea_1_20133]*_zz_chaXyea_1_20133 + /*  
- */ _b[_zz_chaXyea_1_20134]*_zz_chaXyea_1_20134 + /*  
- */ _b[_zz_chaXyea_1_20141]*_zz_chaXyea_1_20141 + /*  
- */ _b[_zz_chaXyea_1_20142]*_zz_chaXyea_1_20142 + /*  
- */ _b[_zz_chaXyea_1_20143]*_zz_chaXyea_1_20143 + /*  
- */ _b[_zz_chaXyea_1_20144]*_zz_chaXyea_1_20144 + /*  
- */ _b[_zz_chaXyea_1_20151]*_zz_chaXyea_1_20151 + /*  
- */ _b[_zz_chaXyea_1_20152]*_zz_chaXyea_1_20152 + /*  
- */ _b[_zz_chaXyea_1_20153]*_zz_chaXyea_1_20153 + /*  
- */ _b[_zz_chaXyea_1_20154]*_zz_chaXyea_1_20154 + /*  
- */ _b[_zz_chaXyea_1_20161]*_zz_chaXyea_1_20161 + /*  
- */ _b[_zz_chaXyea_1_20162]*_zz_chaXyea_1_20162 + /*  
- */ _b[_zz_chaXyea_1_20163]*_zz_chaXyea_1_20163 + /*  
- */ _b[_zz_chaXyea_1_20164]*_zz_chaXyea_1_20164 + /*  
- */ _b[_zz_chaXyea_1_20171]*_zz_chaXyea_1_20171 + /*  
- */ _b[_zz_chaXyea_1_20172]*_zz_chaXyea_1_20172 + /*  
- */ _b[_zz_chaXyea_1_20173]*_zz_chaXyea_1_20173 + /*  
- */ _b[_zz_chaXyea_1_20174]*_zz_chaXyea_1_20174 + /*  
- */ _b[_zz_chaXyea_1_20181]*_zz_chaXyea_1_20181 + /*  
- */ _b[_zz_chaXyea_1_20182]*_zz_chaXyea_1_20182 + /*  
- */ _b[_zz_chaXyea_1_20183]*_zz_chaXyea_1_20183 + /*  
- */ _b[_zz_chaXyea_1_20184]*_zz_chaXyea_1_20184 + /*  
- */ _b[_zz_chaXyea_1_20191]*_zz_chaXyea_1_20191 + /*  
- */ _b[_zz_chaXyea_1_20192]*_zz_chaXyea_1_20192 + /*  
- */ _b[_zz_chaXyea_1_20193]*_zz_chaXyea_1_20193 + /*  
- */ _b[_zz_chaXyea_1_20194]*_zz_chaXyea_1_20194 + /*  
- */ _b[_zz_chaXyea_1_20201]*_zz_chaXyea_1_20201 + /*  
- */ _b[_zz_chaXyea_1_20202]*_zz_chaXyea_1_20202 + /*  
- */ _b[_zz_chaXyea_1_20203]*_zz_chaXyea_1_20203 + /*  
- */ _b[_zz_chaXyea_1_20204]*_zz_chaXyea_1_20204 + /*  
- */ _b[_zz_chaXyea_1_20211]*_zz_chaXyea_1_20211 + /*  
- */ _b[_zz_chaXyea_1_20212]*_zz_chaXyea_1_20212 + /*  
- */ _b[_zz_chaXyea_1_20213]*_zz_chaXyea_1_20213 + /*  
- */ _b[_zz_chaXyea_1_20214]*_zz_chaXyea_1_20214 + /*  
- */ _b[_zz_chaXyea_1_20221]*_zz_chaXyea_1_20221 + /*  
- */ _b[_zz_chaXyea_1_20222]*_zz_chaXyea_1_20222 + /*  
- */ _b[_zz_chaXyea_1_20223]*_zz_chaXyea_1_20223 
-
-replace fitted_values_educ2 = . if fitted_values_educ2==0
-generate lb_educ2 = fitted_values_educ2 - invnormal(0.975)*error
-generate ub_educ2 = fitted_values_educ2 + invnormal(0.975)*error
-*/
-* Category: educ3
-/*
-cap drop fitted_values_educ3
-ge fitted_values_educ3 = /* 
- */ _b[_xx_chaXyea_1_20121]*_xx_chaXyea_1_20121 + /*  
- */ _b[_xx_chaXyea_1_20122]*_xx_chaXyea_1_20122 + /*  
- */ _b[_xx_chaXyea_1_20123]*_xx_chaXyea_1_20123 + /*  
- */ _b[_xx_chaXyea_1_20124]*_xx_chaXyea_1_20124 + /*  
- */ _b[_xx_chaXyea_1_20131]*_xx_chaXyea_1_20131 + /*  
- */ _b[_xx_chaXyea_1_20132]*_xx_chaXyea_1_20132 + /*  
- */ _b[_xx_chaXyea_1_20133]*_xx_chaXyea_1_20133 + /*  
- */ _b[_xx_chaXyea_1_20134]*_xx_chaXyea_1_20134 + /*  
- */ _b[_xx_chaXyea_1_20141]*_xx_chaXyea_1_20141 + /*  
- */ _b[_xx_chaXyea_1_20142]*_xx_chaXyea_1_20142 + /*  
- */ _b[_xx_chaXyea_1_20143]*_xx_chaXyea_1_20143 + /*  
- */ _b[_xx_chaXyea_1_20144]*_xx_chaXyea_1_20144 + /*  
- */ _b[_xx_chaXyea_1_20151]*_xx_chaXyea_1_20151 + /*  
- */ _b[_xx_chaXyea_1_20152]*_xx_chaXyea_1_20152 + /*  
- */ _b[_xx_chaXyea_1_20153]*_xx_chaXyea_1_20153 + /*  
- */ _b[_xx_chaXyea_1_20154]*_xx_chaXyea_1_20154 + /*  
- */ _b[_xx_chaXyea_1_20161]*_xx_chaXyea_1_20161 + /*  
- */ _b[_xx_chaXyea_1_20162]*_xx_chaXyea_1_20162 + /*  
- */ _b[_xx_chaXyea_1_20163]*_xx_chaXyea_1_20163 + /*  
- */ _b[_xx_chaXyea_1_20164]*_xx_chaXyea_1_20164 + /*  
- */ _b[_xx_chaXyea_1_20171]*_xx_chaXyea_1_20171 + /*  
- */ _b[_xx_chaXyea_1_20172]*_xx_chaXyea_1_20172 + /*  
- */ _b[_xx_chaXyea_1_20173]*_xx_chaXyea_1_20173 + /*  
- */ _b[_xx_chaXyea_1_20174]*_xx_chaXyea_1_20174 + /*  
- */ _b[_xx_chaXyea_1_20181]*_xx_chaXyea_1_20181 + /*  
- */ _b[_xx_chaXyea_1_20182]*_xx_chaXyea_1_20182 + /*  
- */ _b[_xx_chaXyea_1_20183]*_xx_chaXyea_1_20183 + /*  
- */ _b[_xx_chaXyea_1_20184]*_xx_chaXyea_1_20184 + /*  
- */ _b[_xx_chaXyea_1_20191]*_xx_chaXyea_1_20191 + /*  
- */ _b[_xx_chaXyea_1_20192]*_xx_chaXyea_1_20192 + /*  
- */ _b[_xx_chaXyea_1_20193]*_xx_chaXyea_1_20193 + /*  
- */ _b[_xx_chaXyea_1_20194]*_xx_chaXyea_1_20194 + /*  
- */ _b[_xx_chaXyea_1_20201]*_xx_chaXyea_1_20201 + /*  
- */ _b[_xx_chaXyea_1_20202]*_xx_chaXyea_1_20202 + /*  
- */ _b[_xx_chaXyea_1_20203]*_xx_chaXyea_1_20203 + /*  
- */ _b[_xx_chaXyea_1_20204]*_xx_chaXyea_1_20204 + /*  
- */ _b[_xx_chaXyea_1_20211]*_xx_chaXyea_1_20211 + /*  
- */ _b[_xx_chaXyea_1_20212]*_xx_chaXyea_1_20212 + /*  
- */ _b[_xx_chaXyea_1_20213]*_xx_chaXyea_1_20213 + /*  
- */ _b[_xx_chaXyea_1_20214]*_xx_chaXyea_1_20214 + /*  
- */ _b[_xx_chaXyea_1_20221]*_xx_chaXyea_1_20221 + /*  
- */ _b[_xx_chaXyea_1_20222]*_xx_chaXyea_1_20222 + /*  
- */ _b[_xx_chaXyea_1_20223]*_xx_chaXyea_1_20223 
-
-replace fitted_values_educ3 = . if fitted_values_educ3==0
-generate lb_educ3 = fitted_values_educ3 - invnormal(0.975)*error
-generate ub_educ3 = fitted_values_educ3 + invnormal(0.975)*error
-*/
-* Category: educ4
-
-cap drop fitted_values_educ4
-ge fitted_values_educ4 = /* 
- */ _b[_ww_chaXyea_1_20121]*_ww_chaXyea_1_20121 + /*  
- */ _b[_ww_chaXyea_1_20122]*_ww_chaXyea_1_20122 + /*  
- */ _b[_ww_chaXyea_1_20123]*_ww_chaXyea_1_20123 + /*  
- */ _b[_ww_chaXyea_1_20124]*_ww_chaXyea_1_20124 + /*  
- */ _b[_ww_chaXyea_1_20131]*_ww_chaXyea_1_20131 + /*  
- */ _b[_ww_chaXyea_1_20132]*_ww_chaXyea_1_20132 + /*  
- */ _b[_ww_chaXyea_1_20133]*_ww_chaXyea_1_20133 + /*  
- */ _b[_ww_chaXyea_1_20134]*_ww_chaXyea_1_20134 + /*  
- */ _b[_ww_chaXyea_1_20141]*_ww_chaXyea_1_20141 + /*  
- */ _b[_ww_chaXyea_1_20142]*_ww_chaXyea_1_20142 + /*  
- */ _b[_ww_chaXyea_1_20143]*_ww_chaXyea_1_20143 + /*  
- */ _b[_ww_chaXyea_1_20144]*_ww_chaXyea_1_20144 + /*  
- */ _b[_ww_chaXyea_1_20151]*_ww_chaXyea_1_20151 + /*  
- */ _b[_ww_chaXyea_1_20152]*_ww_chaXyea_1_20152 + /*  
- */ _b[_ww_chaXyea_1_20153]*_ww_chaXyea_1_20153 + /*  
- */ _b[_ww_chaXyea_1_20154]*_ww_chaXyea_1_20154 + /*  
- */ _b[_ww_chaXyea_1_20161]*_ww_chaXyea_1_20161 + /*  
- */ _b[_ww_chaXyea_1_20162]*_ww_chaXyea_1_20162 + /*  
- */ _b[_ww_chaXyea_1_20163]*_ww_chaXyea_1_20163 + /*  
- */ _b[_ww_chaXyea_1_20164]*_ww_chaXyea_1_20164 + /*  
- */ _b[_ww_chaXyea_1_20171]*_ww_chaXyea_1_20171 + /*  
- */ _b[_ww_chaXyea_1_20172]*_ww_chaXyea_1_20172 + /*  
- */ _b[_ww_chaXyea_1_20173]*_ww_chaXyea_1_20173 + /*  
- */ _b[_ww_chaXyea_1_20174]*_ww_chaXyea_1_20174 + /*  
- */ _b[_ww_chaXyea_1_20181]*_ww_chaXyea_1_20181 + /*  
- */ _b[_ww_chaXyea_1_20182]*_ww_chaXyea_1_20182 + /*  
- */ _b[_ww_chaXyea_1_20183]*_ww_chaXyea_1_20183 + /*  
- */ _b[_ww_chaXyea_1_20184]*_ww_chaXyea_1_20184 + /*  
- */ _b[_ww_chaXyea_1_20191]*_ww_chaXyea_1_20191 + /*  
- */ _b[_ww_chaXyea_1_20192]*_ww_chaXyea_1_20192 + /*  
- */ _b[_ww_chaXyea_1_20193]*_ww_chaXyea_1_20193 + /*  
- */ _b[_ww_chaXyea_1_20194]*_ww_chaXyea_1_20194 + /*  
- */ _b[_ww_chaXyea_1_20201]*_ww_chaXyea_1_20201 + /*  
- */ _b[_ww_chaXyea_1_20202]*_ww_chaXyea_1_20202 + /*  
- */ _b[_ww_chaXyea_1_20203]*_ww_chaXyea_1_20203 + /*  
- */ _b[_ww_chaXyea_1_20204]*_ww_chaXyea_1_20204 + /*  
- */ _b[_ww_chaXyea_1_20211]*_ww_chaXyea_1_20211 + /*  
- */ _b[_ww_chaXyea_1_20212]*_ww_chaXyea_1_20212 + /*  
- */ _b[_ww_chaXyea_1_20213]*_ww_chaXyea_1_20213 + /*  
- */ _b[_ww_chaXyea_1_20214]*_ww_chaXyea_1_20214 + /*  
- */ _b[_ww_chaXyea_1_20221]*_ww_chaXyea_1_20221 + /*  
- */ _b[_ww_chaXyea_1_20222]*_ww_chaXyea_1_20222 + /*  
- */ _b[_ww_chaXyea_1_20223]*_ww_chaXyea_1_20223 
-
-replace fitted_values_educ4 = . if fitted_values_educ4==0
-generate lb_educ4 = fitted_values_educ4 - invnormal(0.975)*error
-generate ub_educ4 = fitted_values_educ4 + invnormal(0.975)*error
 cap drop error 
 cap drop yhat
 
@@ -289,27 +197,30 @@ tsset quarterly_date
 * Step 6: Create the line plot
 ********************************************************************************
 
-tsline fitted_values_educ1 fitted_values_educ4 /// fitted_values_educ2 fitted_values_educ3
-	, 	///
-    lpattern(longdash shortdash)  /// dash dot longdash shortdash
-    lwidth(thick thick) ///
-    lcolor(gs11 gs1) ///
-	title("Trade and Construction")	///
-	subtitle("") ///
-	xtitle("") ///
-	xlabel(#5 , angle(0) labsize(2.5) ) ///
-	ytitle("Coefficient") ///
-	ylabel(#10, angle(0) labsize(2.5) format(%9.2f) ) ///
-	yscale( axis(1) range(0.05 0.40) lstyle(none)  ) ///
-	tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3) ) ///
-	legend(off order(1 "Incomplete primary school" 2 "Incomplete high school" 3 "Incomplete college" 4 "Complete college") ///
-	       pos(11) ring(0) col(1) rows(4) size(2.5) symxsize(*0.6) symysize(*0.6)) ///
+
+tsline fitted_values_educ0 fitted_values_educ1 /// 
+    lb_educ0 ub_educ0 lb_educ1 ub_educ1 ///
+    , ///
+    lpattern(dash solid dash dash solid solid) ///
+    lwidth(thick thick thin thin thin thin) ///
+    lstyle(p1mark p10mark p1mark p1mark p10mark p10mark) ///
+    lcolor(black%50 black black%30 black%30 black%30 black%30) ///
+    title("Trade and Construction") ///
+    subtitle("") ///
+    xtitle("") ///
+    xlabel(#8, angle(45) labsize(2.5)) ///
+    ytitle("Coefficient") ///
+    ylabel(#10, angle(0) labsize(2.5) format(%9.2f)) ///
+    yscale(axis(1) range(0.13 0.35) lstyle(none)) ///
+    tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3)) ///
+    legend(off order(1 "No college" 2 "College") ///
+            pos(11) ring(0) col(1) rows(4) size(2.5) symxsize(*0.6) symysize(*0.6)) ///
 	note("") ///
 	recast(line) ///
 	graphregion(fcolor(white)) ///
 	scheme( s2gcolor ) /// economist s1mono   s1manual  s2gmanual 
-	saving("$ROOT/analysis/tmp/_graph_regression_trade_nofe_job_loss_determinants.gph", replace)	
-
+	saving("$ROOT/analysis/tmp/_graph_regression_trade_nofe_job_loss_determinants.gph", replace)
+	
 ********************************************************************************
 * Step 7: Export and save the graph
 ********************************************************************************

@@ -1,10 +1,8 @@
 preserve
 
 label variable job_loss "Lost work in the next quarter"
-label variable educ1 "Incomplete primary school"
-label variable educ2 "Incomplete high school"
-label variable educ3 "Incomplete college"
-label variable educ4 "Complete college"
+label variable educ0 "No College"
+label variable educ1 "Complete College"
 label variable signed_work_card "Individual with a formal contract"
 label variable hours_worked "Working hours per week"
 label variable temporary_worker "Temporary worker"
@@ -19,9 +17,9 @@ gen sec_Agriculture = 1 if sectors == "Agriculture"
 replace sec_Agriculture =0 if sec_Agriculture ==.
 label variable sec_Agriculture "Agricultural sector"
 
-gen sec_Industries = 1 if sectors == "Industries"
-replace sec_Industries =0 if sec_Industries ==.
-label variable sec_Industries "Industry sector"
+gen sec_Manufacture = 1 if sectors == "Manufacture"
+replace sec_Manufacture =0 if sec_Manufacture ==.
+label variable sec_Manufacture "Manufacture sector"
 
 gen sec_Services = 1 if sectors == "Services"
 replace sec_Services =0 if sec_Services ==.
@@ -44,7 +42,7 @@ label variable po_Public "Government"
 
 eststo store_statistics: quietly estpost summarize ///
 job_loss ///
-educ1 educ2 educ3 educ4 ///
+educ0 educ1 ///
 monthly_work_income  ///
 hours_worked ///
 temporary_worker ////
@@ -53,7 +51,7 @@ signed_work_card ///
 po_Informal ///
 po_Public ///
 sec_Agriculture ///
-sec_Industries ///
+sec_Manufacture ///
 sec_Services ///
 sec_Trade ///
 homem ///
@@ -78,7 +76,7 @@ estadd scalar num_obs = `num_obs'
 
 * local notes
 local ttitle "Descriptive statistics"
-local tnotes "Source: IBGE's Quarterly Continuous PNAD from 2012 to 2022."
+local tnotes "Source: IBGE's Quarterly Continuous PNAD from 2012 to 2024."
 	
 #delim ;    
 	esttab store_statistics using "$ROOT/analysis/output/descriptive_statistics/_table_descriptive_statistics.tex",		

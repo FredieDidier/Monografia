@@ -6,32 +6,20 @@
  & (1) &  &  &  \\
 VARIABLES & job\_loss & job\_loss & job\_loss & job\_loss \\ \hline
  &  &  &  &  \\
-a) Incomplete primary school & 0.137*** & 0.151*** & 0.317*** & 0.213*** \\
- & (0.000) & (0.002) & (0.002) & (0.002) \\
-b) Incomplete high school & 0.120*** & 0.143*** & 0.307*** & 0.210*** \\
- & (0.000) & (0.002) & (0.002) & (0.002) \\
-c) Incomplete college & 0.082*** & 0.107*** & 0.280*** & 0.193*** \\
- & (0.000) & (0.002) & (0.002) & (0.002) \\
-d) Complete college & 0.041*** & 0.070*** & 0.247*** & 0.179*** \\
- & (0.000) & (0.002) & (0.002) & (0.002) \\
-e) Pandemic * Incomplete primary school & 0.041*** & 0.043*** & 0.043*** & 0.042*** \\
- & (0.002) & (0.002) & (0.002) & (0.002) \\
-f) Pandemic * Incomplete high school & 0.041*** & 0.041*** & 0.042*** & 0.040*** \\
- & (0.002) & (0.002) & (0.002) & (0.002) \\
-g) Pandemic * Incomplete college & 0.047*** & 0.046*** & 0.045*** & 0.042*** \\
+No College & 0.108*** & 0.145*** & 0.312*** & 0.201*** \\
+ & (0.000) & (0.001) & (0.002) & (0.002) \\
+Complete College & 0.041*** & 0.088*** & 0.265*** & 0.182*** \\
+ & (0.000) & (0.001) & (0.002) & (0.002) \\
+Pandemic * No College & 0.040*** & 0.040*** & 0.039*** & 0.039*** \\
  & (0.001) & (0.001) & (0.001) & (0.001) \\
-h) Pandemic * Complete college & 0.018*** & 0.015*** & 0.017*** & 0.013*** \\
+Pandemic * Complete College & 0.018*** & 0.014*** & 0.014*** & 0.012*** \\
  & (0.002) & (0.002) & (0.002) & (0.002) \\
  &  &  &  &  \\
-Observations & 6,501,799 & 6,501,799 & 6,501,799 & 6,501,799 \\
-R-squared & 0.109 & 0.118 & 0.161 & 0.166 \\
-Root mean squared error: & 0.293 & 0.291 & 0.284 & 0.283 \\
-F Statistic: a + e = b + f: & 36.7 & 12.7 & 18.7 & 4.19 \\
-\hspace{1mm} P-value a + e = b + f: & 0.000 & 0.000 & 0.000 & 0.041 \\
-F Statistic: b + f: = c  + g: & 188 & 178 & 104 & 105 \\
-\hspace{1mm} P-value b + f: = c + g: & 0.000 & 0.000 & 0.000 & 0.000 \\
-F Statistic: c + g = d + h: & 1289 & 1183 & 1023 & 794 \\
-\hspace{1mm} P-value c + g = d + h: & 0.000 & 0.000 & 0.000 & 0.000 \\
+Observations & 7,934,275 & 7,934,275 & 7,934,275 & 7,934,275 \\
+R-squared & 0.103 & 0.113 & 0.159 & 0.166 \\
+Root mean squared error: & 0.293 & 0.291 & 0.283 & 0.282 \\
+F Statistic: No College + Pandemic*No College = Complete College + Pandemic*Complete College: & 2413 & 2069 & 1660 & 675 \\
+\hspace{1mm} P-value: & 0.000 & 0.000 & 0.000 & 0.000 \\
 State FE & - & Yes & Yes & Yes \\
 Urban FE & - & Yes & Yes & Yes \\
 Time-varying observables & - & - & Yes & Yes \\

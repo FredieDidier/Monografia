@@ -10,7 +10,7 @@ file_list = str_extract(file_list, "painel_[0-9]{4}_[0-9]{1}_[0-9]{1}")
 reg_prep = function(panel){
   
   panel = str_extract(panel, "painel_[0-9]{4}_[0-9]{1}_[0-9]{1}")
-
+  
   df = data.table(get(load(paste0("build/output/panel_by_education_level/", panel, ".RData"))))
 
 df[, `:=` (
@@ -49,7 +49,7 @@ df = df %>%
 
 df = df %>%
   mutate(labor_status = case_when(occupation_condition == 1 & temporary_worker == 1 ~ "Temporary",
-                                  occupation_condition == 1 & temporary_worker == 2 ~ "Permanent",
+                                  occupation_condition == 1 & temporary_worker == 0 ~ "Permanent",
                                   occupation_condition == 1 & monthly_work_income > 0 ~ "Salaried",
                                   occupation_condition == 1 & monthly_work_income == 0 ~ "Not Salaried"))
 
@@ -74,7 +74,7 @@ for(i in 1:length(file_list)){
   }
 
 ffs = dir_ls("build/output/regression")
-ffs = ffs[2:173]
+ffs = ffs[1:102]
 ## A linha 73 filtra o diretório "regression" para apenas os arquivos que contém "painel_"
 
 df <- ffs %>% 

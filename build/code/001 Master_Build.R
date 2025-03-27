@@ -29,8 +29,8 @@ library(data.table)
 user <- Sys.info()[["user"]]
 print(paste("user name:", user))
 
-if (user == "Fredie") {
-  wd <- "/Users/Fredie/Documents/GitHub/Monografia"
+if (user == "fredie") {
+  wd <- "/Users/fredie/Documents/GitHub/Monografia"
 } else if (user == "Francisco") {
   wd <- "C:/Users/Francisco/Dropbox/Research/Monografia-Fredie"
 } else if (user == "DELL") {
