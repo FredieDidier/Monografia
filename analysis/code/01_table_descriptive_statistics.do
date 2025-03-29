@@ -17,7 +17,7 @@ gen sec_Agriculture = 1 if sectors == "Agriculture"
 replace sec_Agriculture =0 if sec_Agriculture ==.
 label variable sec_Agriculture "Agricultural sector"
 
-gen sec_Manufacture = 1 if sectors == "Manufacture"
+gen sec_Manufacture = 1 if sectors == "Industries"
 replace sec_Manufacture =0 if sec_Manufacture ==.
 label variable sec_Manufacture "Manufacture sector"
 
