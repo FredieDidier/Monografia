@@ -26,7 +26,7 @@ local files PNAD_painel_1_rs PNAD_painel_2_rs PNAD_painel_3_rs PNAD_painel_4_rs 
 
 
 * Montando um arquivo único
-cd "$ROOT/build/output/painel/pnadcontinua"
+cd "$ROOT_DATA"
 
 clear
 
@@ -34,7 +34,7 @@ append using `files'
 
 tempfile base_completa
 
-save `base_completa', replace
+save "$ROOT/build/output/painel/`base_completa'", replace
 
 * Loop que  cria as bases
 

@@ -47,7 +47,9 @@ if (user == "Fredie") {
   wd <- "C:/Users/DELL/Documents/GitHub/Monografia-Fredie"
 } else if (user == "f.cavalcanti") {
   wd <- "C:/Users/DELL/Documents/GitHub/Monografia-Fredie"
-} else {
+} else if (user == "ACER") {
+    wd <- "C:/Users/DELL/Documents/GitHub/Monografia"
+}else {
   stop("Invalid user")
 }
 

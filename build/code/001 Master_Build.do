@@ -18,6 +18,11 @@ else if "`c(username)'" == "f.cavalcanti"   {
 	version 16.1
 	global ROOT "C:/Users/f.cavalcanti/Documents/GitHub/"
 }
+else if "`c(username)'" == "ACER"   {
+	version 16.1
+	global ROOT "C:\Users\ACER\Documents\GitHub\Monografia"
+	global ROOT_DATA "C:\Users\ACER\Dropbox\data_sources\IBGE\PNAD_CONTINUA\pnadcontinua_trimestral_2022024\Stata\pnadcontinua"
+}
 else if "`c(username)'" == "fredie"   {
 	version 18.0
 	global ROOT "/Users/fredie/Documents/GitHub/Monografia"
