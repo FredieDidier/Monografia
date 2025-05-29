@@ -35,6 +35,7 @@ append using `files'
 tempfile base_completa
 
 save "$ROOT/build/output/painel/`base_completa'", replace
+use "$ROOT/build/output/painel/base_completa.dta", clear
 
 * Loop que  cria as bases
 
@@ -54,7 +55,7 @@ forvalues i = 1/`: word count `ano1''{
 	local ano_fin: word `i' of `ano2'
 	local tri_fin: word `i' of `tri2'
 	
-	use `base_completa' if (Ano == `ano_inic' & Trimestre == `tri_inic') | (Ano == `ano_fin' & Trimestre == `tri_fin'), clear
+	use "$ROOT/build/output/painel/base_completa.dta" if (Ano == `ano_inic' & Trimestre == `tri_inic') | (Ano == `ano_fin' & Trimestre == `tri_fin'), clear
 			
 	save "$ROOT/build/output/painel_`ano_inic'_`tri_inic'", replace
 }
