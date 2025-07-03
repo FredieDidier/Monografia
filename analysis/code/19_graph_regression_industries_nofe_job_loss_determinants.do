@@ -209,9 +209,10 @@ tsline fitted_values_educ0 fitted_values_educ1 ///
     xtitle("") ///
     xlabel(#8, angle(45) labsize(2.5)) ///
     ytitle("Coefficient") ///
-    ylabel(#10, angle(0) labsize(2.5) format(%9.2f)) ///
-    yscale(axis(1) range(0.13 0.35) lstyle(none)) ///
+    ylabel(#3, angle(0) labsize(2.5) format(%9.2f)) ///
+    yscale(axis(1) range(0.25 0.35) lstyle(none)) ///
     tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3)) ///
+	tline(2021q4, lcolor(red) lpattern(dash) lwidth(0.3)) ///
     legend(off order(1 "No college" 2 "College") ///
             pos(11) ring(0) col(1) rows(4) size(2.5) symxsize(*0.6) symysize(*0.6)) ///
 	note("") ///

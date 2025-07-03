@@ -1,8 +1,8 @@
 preserve
 
-* Regression for sectors == Agriculture with no fixed effects 
+* Regression for sectors == Trade with no fixed effects 
 
- keep if sectors == "Agriculture"
+ keep if sectors == "Trade"
 
 ********************************************************************************
 * Step 1: Generate dummy variables by education x quarter
@@ -204,29 +204,30 @@ tsline fitted_values_educ0 fitted_values_educ1 ///
     lwidth(thick thick thin thin thin thin) ///
     lstyle(p1mark p10mark p1mark p1mark p10mark p10mark) ///
     lcolor(black%50 black black%30 black%30 black%30 black%30) ///
-	title("Agriculture")	///
+	title("Trade")	///
 	subtitle("") ///
 	xtitle("") ///
 	xlabel(#5 , angle(0) labsize(2.5) ) ///
 	ytitle("Coefficient") ///
-	ylabel(#10, angle(0) labsize(2.5) format(%9.2f) ) ///
-	yscale( axis(1) range(0.05 0.40) lstyle(none)  ) ///
+	ylabel(#3, angle(0) labsize(2.5) format(%9.2f) ) ///
+	yscale( axis(1) range(0.30 0.40) lstyle(none)  ) ///
 	tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3) ) ///
+	tline(2021q4, lcolor(red) lpattern(dash) lwidth(0.3)) ///
     legend(on order(1 "No college" 2 "Complete College") ///
            pos(11) ring(0) col(1) rows(2) size(2.5) symxsize(*0.6) symysize(*0.6)) ///
 	note("") ///
 	recast(line) ///
 	graphregion(fcolor(white)) ///
 	scheme( s2gcolor ) /// economist s1mono   s1manual  s2gmanual 
-	saving("$ROOT/analysis/tmp/_graph_regression_agriculture_nofe_job_loss_determinants.gph", replace)	
+	saving("$ROOT/analysis/tmp/_graph_regression_trade_nofe_job_loss_determinants.gph", replace)	
 
 ********************************************************************************
 * Step 7: Export and save the graph
 ********************************************************************************
 
 	* save graph 
-	graph use "$ROOT/analysis/tmp/_graph_regression_agriculture_nofe_job_loss_determinants.gph"
+	graph use "$ROOT/analysis/tmp/_graph_regression_trade_nofe_job_loss_determinants.gph"
 	*erase "$ROOT/analysis/graph/_graph_regression_job_loss_determinants.gph"	
-	graph export "$ROOT/analysis/output/graph/_graph_regression_agriculture_nofe_job_loss_determinants.png", replace	
+	graph export "$ROOT/analysis/output/graph/_graph_regression_trade_nofe_job_loss_determinants.png", replace	
 	
 	restore
