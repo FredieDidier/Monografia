@@ -15,22 +15,22 @@ label variable pandemic "Pandemic"
 label variable pandemic_educ0 "Pandemic * No College"
 label variable pandemic_educ1 "Pandemic * Complete College"
 
-* generate variable depicting the pandemic period (2020.2)
-gen pandemic_2020_2 = 0
-replace pandemic_2020_2 = 1 if year_quarter == 20202
+* generate variable depicting the pandemic period (2020.2 - 2021.4)
+gen pandemic_2020_2_2021_4 = 0
+replace pandemic_2020_2_2021_4 = 1 if year_quarter >= 20202 & year_quarter <= 20214
 
-gen pandemic_2020_2_educ0 = 0
-replace pandemic_2020_2_educ0 = 1 if educ0 == 1 & year_quarter == 20202
+gen pandemic_2020_2_2021_4_educ0 = 0
+replace pandemic_2020_2_2021_4_educ0 = 1 if educ0 == 1 & year_quarter >= 20202 & year_quarter <= 20214
 
-gen pandemic_2020_2_educ1 = 0
-replace pandemic_2020_2_educ1 = 1 if educ1 == 1 & year_quarter == 20202
+gen pandemic_2020_2_2021_4_educ1 = 0
+replace pandemic_2020_2_2021_4_educ1 = 1 if educ1 == 1 & year_quarter >= 20202 & year_quarter <= 20214
 
 label variable pandemic "Pandemic"
-label variable pandemic_2020_2 "Pandemic 2020_2"
+label variable pandemic_2020_2_2021_4 "Pandemic 2020_2 - 2021_4"
 label variable pandemic_educ0 "Pandemic * No College"
-label variable pandemic_2020_2_educ0 "Pandemic 2020_2 * No College"
+label variable pandemic_2020_2_2021_4_educ0 "Pandemic 2020_2 - 2021_4 * No College"
 label variable pandemic_educ1 "Pandemic * Complete College"
-label variable pandemic_2020_2_educ1 "Pandemic 2020_2 * Complete College"
+label variable pandemic_2020_2_2021_4_educ1 "Pandemic 2020_2 - 2021_4 * Complete College"
 
 
 * Regressão 1
@@ -289,7 +289,7 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 * Regressão 7
 reg job_loss ///
 educ0 educ1 ///
-pandemic_2020_2_educ0 pandemic_2020_2_educ1 /// 
+pandemic_2020_2_2021_4_educ0 pandemic_2020_2_2021_4_educ1 /// 
 [aw=weights] ///
 , nocons
 
@@ -297,7 +297,7 @@ local rmse_score : di %9.3fc `e(rmse)'
 local rmse_score : display %9.3fc `rmse_score' 
 di "Root mean squared error = `rmse_score'"
 
-test educ0 + pandemic_2020_2_educ0 = educ1 + pandemic_2020_2_educ1
+test educ0 + pandemic_2020_2_2021_4_educ0 = educ1 + pandemic_2020_2_2021_4_educ1
 
 local fstat = r(F) 
 local fstat : display %9.3g `fstat' 
@@ -308,17 +308,17 @@ local pvalue : display %9.3fc `pvalue'
 di "F statistic = `fstat'"
 di "Pvalue = `pvalue'"
 
-outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants_with_interaction_2020_2.tex", /*
+outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants_with_interaction_2020_2-2021-4.tex", /*
 	*/	title("") /*	
 	*/	level(95) /*
 	*/	dec(3) /*
 	*/	fmt(fc) /*
 	*/	label /*
 	*/		/* depvar
-	*/	keep(educ0 educ1 pandemic_2020_2_educ0 pandemic_2020_2_educ1)  /*
+	*/	keep(educ0 educ1 pandemic_2020_2_2021_4_educ0 pandemic_2020_2_2021_4_educ1)  /*
 	*/	nocons	/*
 	*/	addtext("Root mean squared error:", "`rmse_score'" ,  	/*
-	*/ 	"F Statistic: No College + Pandemic 2020_2*No College = Complete College + Pandemic 2020_2*Complete College:", "`fstat'" , /*
+	*/ 	"F Statistic: No College + Pandemic 2020_2 - 2021_4*No College = Complete College + Pandemic 2020_2 - 2021_4*Complete College:", "`fstat'" , /*
 	*/ 	"\hspace{1mm} P-value:", "`pvalue'" ,  /*
 	*/ 	"State FE", "-", "Urban FE", "-", "Time-varying observables", "-", "Occupation and sector FE", "-" )	 /* 
 	*/	tex(fragment) /*
@@ -327,7 +327,7 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 * Regressão 8
 reg job_loss ///
 educ0 educ1 ///
-pandemic_2020_2_educ0 pandemic_2020_2_educ1 /// 
+pandemic_2020_2_2021_4_educ0 pandemic_2020_2_2021_4_educ1 /// 
 i.year_quarter ///
 i.state ///
 i.urbana ///
@@ -338,7 +338,7 @@ local rmse_score : di %9.3fc `e(rmse)'
 local rmse_score : display %9.3fc `rmse_score' 
 di "Root mean squared error = `rmse_score'"
 
-test educ0 + pandemic_2020_2_educ0 = educ1 + pandemic_2020_2_educ1
+test educ0 + pandemic_2020_2_2021_4_educ0 = educ1 + pandemic_2020_2_2021_4_educ1
 
 local fstat = r(F) 
 local fstat : display %9.3g `fstat' 
@@ -349,17 +349,17 @@ local pvalue : display %9.3fc `pvalue'
 di "F statistic = `fstat'"
 di "Pvalue = `pvalue'"
 
-outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants_with_interaction_2020_2.tex", /*
+outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants_with_interaction_2020_2-2021-4.tex", /*
 	*/	title("") /*	
 	*/	level(95) /*
 	*/	dec(3) /*
 	*/	fmt(fc) /*
 	*/	label /*
 	*/		/* depvar
-	*/	keep(educ0 educ1 pandemic_2020_2_educ0 pandemic_2020_2_educ1)  /*
+	*/	keep(educ0 educ1 pandemic_2020_2_2021_4_educ0 pandemic_2020_2_2021_4_educ1)  /*
 	*/	nocons	/*
 	*/	addtext("Root mean squared error:", "`rmse_score'" ,  	/*
-	*/ 	"F Statistic: No College + Pandemic 2020_2*No College = Complete College + Pandemic 2020_2*Complete College:", "`fstat'" , /*
+	*/ 	"F Statistic: No College + Pandemic 2020_2 - 2021_4*No College = Complete College + Pandemic 2020_2 - 2021_4*Complete College:", "`fstat'" , /*
 	*/ 	"\hspace{1mm} P-value:", "`pvalue'" ,  /*
 	*/ 	"State FE", "Yes", "Urban FE", "Yes", "Time-varying observables", "-", "Occupation and sector FE", "-" )	 /* 
 	*/	tex(fragment) /*
@@ -368,7 +368,7 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 * Regressão 9
 reg job_loss ///
 educ0 educ1 ///
-pandemic_2020_2_educ0 pandemic_2020_2_educ1 /// 
+pandemic_2020_2_2021_4_educ0 pandemic_2020_2_2021_4_educ1 /// 
 gender race age ///
 i.year_quarter ///
 i.state ///
@@ -380,7 +380,7 @@ local rmse_score : di %9.3fc `e(rmse)'
 local rmse_score : display %9.3fc `rmse_score' 
 di "Root mean squared error = `rmse_score'"
 
-test educ0 + pandemic_2020_2_educ0 = educ1 + pandemic_2020_2_educ1
+test educ0 + pandemic_2020_2_2021_4_educ0 = educ1 + pandemic_2020_2_2021_4_educ1
 
 local fstat = r(F) 
 local fstat : display %9.3g `fstat' 
@@ -391,17 +391,17 @@ local pvalue : display %9.3fc `pvalue'
 di "F statistic = `fstat'"
 di "Pvalue = `pvalue'"
 
-outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants_with_interaction_2020_2.tex", /*
+outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants_with_interaction_2020_2-2021-4.tex", /*
 	*/	title("") /*	
 	*/	level(95) /*
 	*/	dec(3) /*
 	*/	fmt(fc) /*
 	*/	label /*
 	*/		/* depvar
-	*/	keep(educ0 educ1 pandemic_2020_2_educ0 pandemic_2020_2_educ1)  /*
+	*/	keep(educ0 educ1 pandemic_2020_2_2021_4_educ0 pandemic_2020_2_2021_4_educ1)  /*
 	*/	nocons	/*
 	*/	addtext("Root mean squared error:", "`rmse_score'" ,  	/*
-	*/ 	"F Statistic: No College + Pandemic 2020_2*No College = Complete College + Pandemic 2020_2*Complete College:", "`fstat'" , /*
+	*/ 	"F Statistic: No College + Pandemic 2020_2 - 2021_4*No College = Complete College + Pandemic 2020_2 - 2021_4*Complete College:", "`fstat'" , /*
 	*/ 	"\hspace{1mm} P-value:", "`pvalue'" ,  /*
 	*/ 	"State FE", "Yes", "Urban FE", "Yes", "Time-varying observables", "Yes", "Occupation and sector FE", "-" )	 /* 
 	*/	tex(fragment) /*
@@ -411,8 +411,8 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 * Regressão 10	
 reg job_loss ///
 educ0 educ1 ///
-pandemic_2020_2_educ0 pandemic_2020_2_educ1 /// 
- gender race age ///
+pandemic_2020_2_2021_4_educ0 pandemic_2020_2_2021_4_educ1 /// 
+gender race age ///
 i.year_quarter ///
 i.sector_numeric i.occupation_numeric ///
 i.state ///
@@ -424,7 +424,7 @@ local rmse_score : di %9.3fc `e(rmse)'
 local rmse_score : display %9.3fc `rmse_score' 
 di "Root mean squared error = `rmse_score'"
 
-test educ0 + pandemic_2020_2_educ0 = educ1 + pandemic_2020_2_educ1
+test educ0 + pandemic_2020_2_2021_4_educ0 = educ1 + pandemic_2020_2_2021_4_educ1
 
 local fstat = r(F) 
 local fstat : display %9.3g `fstat' 
@@ -435,17 +435,17 @@ local pvalue : display %9.3fc `pvalue'
 di "F statistic = `fstat'"
 di "Pvalue = `pvalue'"
 
-outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants_with_interaction_2020_2.tex", /*
+outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants_with_interaction_2020_2-2021-4.tex", /*
 	*/	title("") /*	
 	*/	level(95) /*
 	*/	dec(3) /*
 	*/	fmt(fc) /*
 	*/	label /*
 	*/		/* depvar
-	*/	keep(educ0 educ1 pandemic_2020_2_educ0 pandemic_2020_2_educ1)  /*
+	*/	keep(educ0 educ1 pandemic_2020_2_2021_4_educ0 pandemic_2020_2_2021_4_educ1)  /*
 	*/	nocons	/*
 	*/	addtext("Root mean squared error:", "`rmse_score'" ,  	/*
-	*/ 	"F Statistic: No College + Pandemic 2020_2*No College = Complete College + Pandemic 2020_2*Complete College:", "`fstat'" , /*
+	*/ 	"F Statistic: No College + Pandemic 2020_2 - 2021_4*No College = Complete College + Pandemic 2020_2 - 2021_4*Complete College:", "`fstat'" , /*
 	*/ 	"\hspace{1mm} P-value:", "`pvalue'" ,  /*
 	*/ 	"State FE", "Yes", "Urban FE", "Yes", "Time-varying observables", "Yes", "Occupation and sector FE", "Yes" )	 /* 
 	*/	tex(fragment) /*
@@ -455,7 +455,7 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 * Regressão 11
 reg job_loss ///
 educ0 educ1 ///
-pandemic_2020_2_educ0 pandemic_2020_2_educ1 /// 
+pandemic_2020_2_2021_4_educ0 pandemic_2020_2_2021_4_educ1 /// 
 signed_work_card job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
 i.year_quarter ///
 i.state ///
@@ -467,7 +467,7 @@ local rmse_score : di %9.3fc `e(rmse)'
 local rmse_score : display %9.3fc `rmse_score' 
 di "Root mean squared error = `rmse_score'"
 
-test educ0 + pandemic_2020_2_educ0 = educ1 + pandemic_2020_2_educ1
+test educ0 + pandemic_2020_2_2021_4_educ0 = educ1 + pandemic_2020_2_2021_4_educ1
 
 local fstat = r(F) 
 local fstat : display %9.3g `fstat' 
@@ -478,17 +478,17 @@ local pvalue : display %9.3fc `pvalue'
 di "F statistic = `fstat'"
 di "Pvalue = `pvalue'"
 
-outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants_with_interaction_2020_2.tex", /*
+outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants_with_interaction_2020_2-2021-4.tex", /*
 	*/	title("") /*	
 	*/	level(95) /*
 	*/	dec(3) /*
 	*/	fmt(fc) /*
 	*/	label /*
 	*/		/* depvar
-	*/	keep(educ0 educ1 pandemic_2020_2_educ0 pandemic_2020_2_educ1)  /*
+	*/	keep(educ0 educ1 pandemic_2020_2_2021_4_educ0 pandemic_2020_2_2021_4_educ1)  /*
 	*/	nocons	/*
 	*/	addtext("Root mean squared error:", "`rmse_score'" ,  	/*
-	*/ 	"F Statistic: No College + Pandemic 2020_2*No College = Complete College + Pandemic 2020_2*Complete College:", "`fstat'" , /*
+	*/ 	"F Statistic: No College + Pandemic 2020_2 - 2021_4*No College = Complete College + Pandemic 2020_2 - 2021_4*Complete College:", "`fstat'" , /*
 	*/ 	"\hspace{1mm} P-value:", "`pvalue'" ,  /*
 	*/ 	"State FE", "Yes", "Urban FE", "Yes", "Time-varying observables", "Yes", "Occupation and sector FE", "-" )	 /* 
 	*/	tex(fragment) /*
@@ -497,7 +497,7 @@ outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_dete
 * Regressão 12
 reg job_loss ///
 educ0 educ1 ///
-pandemic_2020_2_educ0 pandemic_2020_2_educ1 /// 
+pandemic_2020_2_2021_4_educ0 pandemic_2020_2_2021_4_educ1 /// 
 signed_work_card job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
 i.year_quarter ///
 i.sector_numeric i.occupation_numeric ///
@@ -510,7 +510,7 @@ local rmse_score : di %9.3fc `e(rmse)'
 local rmse_score : display %9.3fc `rmse_score' 
 di "Root mean squared error = `rmse_score'"
 
-test educ0 + pandemic_2020_2_educ0 = educ1 + pandemic_2020_2_educ1
+test educ0 + pandemic_2020_2_2021_4_educ0 = educ1 + pandemic_2020_2_2021_4_educ1
 
 local fstat = r(F) 
 local fstat : display %9.3g `fstat' 
@@ -521,17 +521,17 @@ local pvalue : display %9.3fc `pvalue'
 di "F statistic = `fstat'"
 di "Pvalue = `pvalue'"
 
-outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants_with_interaction_2020_2.tex", /*
+outreg2	using "$ROOT/analysis/output/regressions/_table_regression_job_loss_determinants_with_interaction_2020_2-2021-4.tex", /*
 	*/	title("") /*	
 	*/	level(95) /*
 	*/	dec(3) /*
 	*/	fmt(fc) /*
 	*/	label /*
 	*/		/* depvar
-	*/	keep(educ0 educ1 pandemic_2020_2_educ0 pandemic_2020_2_educ1)  /*
+	*/	keep(educ0 educ1 pandemic_2020_2_2021_4_educ0 pandemic_2020_2_2021_4_educ1)  /*
 	*/	nocons	/*
 	*/	addtext("Root mean squared error:", "`rmse_score'" ,  	/*
-	*/ 	"F Statistic: No College + Pandemic 2020_2*No College = Complete College + Pandemic 2020_2*Complete College:", "`fstat'" , /*
+	*/ 	"F Statistic: No College + Pandemic 2020_2 - 2021_4*No College = Complete College + Pandemic 2020_2 - 2021_4*Complete College:", "`fstat'" , /*
 	*/ 	"\hspace{1mm} P-value:", "`pvalue'" ,  /*
 	*/ 	"State FE", "Yes", "Urban FE", "Yes", "Time-varying observables", "Yes", "Occupation and sector FE", "Yes" )	 /* 
 	*/	tex(fragment) /*

@@ -3,11 +3,8 @@ preserve
 * Regression for position == Private with no fixed effects 
  
  keep if position == 3  /* Formal Private
-	*/ | position == 4 /* Informal Private
 	*/ | position == 5 /* Formal Self-Employed
-	*/ | position == 6 /* Informal Self-Employed
 	*/ | position == 7 /* Formal Employer
-	*/ | position == 8 /* Informal Employer
 	*/  
 
 ********************************************************************************
@@ -24,7 +21,7 @@ quietly xi I.charact_educ1*I.year_quarter, prefix(_bb_) noomit
 ********************************************************************************
 reg job_loss ///
 _aa_chaXyea_1_* _bb_chaXyea_1_* ///
-signed_work_card job_function hours_worked temporary_worker social_security_taxpayer race age monthly_work_income job_start ///
+signed_work_card job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
 i.year_quarter ///
 i.sector_numeric i.occupation_numeric ///
 i.state ///
@@ -210,13 +207,13 @@ tsline fitted_values_educ0 fitted_values_educ1 ///
     lwidth(thick thick thin thin thin thin) ///
     lstyle(p1mark p10mark p1mark p1mark p10mark p10mark) ///
     lcolor(black%50 black black%30 black%30 black%30 black%30) ///
-	title("Private")	///
+	title("Formal Private")	///
 	subtitle("") ///
 	xtitle("") ///
 	xlabel(#5 , angle(0) labsize(2.5) ) ///
 	ytitle("Coefficient") ///
 	ylabel(#3, angle(0) labsize(2.5) format(%9.2f) ) ///
-	yscale( axis(1) range(0.25 0.40) lstyle(none)  ) ///
+	yscale( axis(1) range(-0.05 0.05) lstyle(none)  ) ///
 	tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3) ) ///
 	tline(2021q4, lcolor(red) lpattern(dash) lwidth(0.3) ) ///
     legend(off order(1 "No college" 2 "College") ///

@@ -137,39 +137,8 @@ do "$ROOT/analysis/code/07_graph_regression_job_loss_determinants.do"
 	cap erase "$ROOT/analysis/output/graph/_graph_regression_white_nofe_job_loss_determinants.png"
 	cap erase "$ROOT/analysis/output/graph/_graph_regression_black_nofe_job_loss_determinants.png"	
 	
-* Sectors
-
-	do "$ROOT/analysis/code/17_graph_regression_trade_nofe_job_loss_determinants.do"
-	do "$ROOT/analysis/code/19_graph_regression_manufacture_nofe_job_loss_determinants.do"
-	do "$ROOT/analysis/code/21_graph_regression_construction_nofe_job_loss_determinants.do"
-	do "$ROOT/analysis/code/23_graph_regression_services_nofe_job_loss_determinants.do"
-
-	* Combine graphs
-	graph combine "$ROOT/analysis/tmp/_graph_regression_trade_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_manufacture_nofe_job_loss_determinants.gph"  "$ROOT/analysis/tmp/_graph_regression_construction_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_services_nofe_job_loss_determinants.gph"  /*
-		*/ , 	/*
-		*/  /* ycommon
-		*/  /* xcommon 
-		*/ cols(2) /* 
-		*/ scheme() /*
-		*/ commonscheme /*
-		*/ xsize(9) /*
-		*/ ysize(6) /*
-		*/ scale(1) /*
-		*/ graphregion(margin(tiny))	 /* 
-		*/ plotregion(margin(zero) ifcolor(none)) /*
-		*/ saving("$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_sectors_job_loss_determinants.gph", replace)	
 	
-		* save graph 
-		graph use "$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_sectors_job_loss_determinants.gph"
-		*erase "$ROOT/analysis/graph/_graph_regression_heterogeneous_analysis_sectors_job_loss_determinants.gph"	
-		graph export "$ROOT/analysis/output/graph/_graph_regression_heterogeneous_analysis_sectors_job_loss_determinants.png", replace		
-		
-	cap erase "$ROOT/analysis/output/graph/_graph_regression_trade_nofe_job_loss_determinants.png"
-	cap erase "$ROOT/analysis/output/graph/_graph_regression_manufacture_nofe_job_loss_determinants.png"
-	cap erase "$ROOT/analysis/output/graph/_graph_regression_construction_nofe_job_loss_determinants.png"
-	cap erase "$ROOT/analysis/output/graph/_graph_regression_services_nofe_job_loss_determinants.png"
-	
-* Position: Formal, informal, public, and private
+* Position: Formal, informal, formal public, and formal private
 
 	do "$ROOT/analysis/code/24_graph_regression_formal_nofe_job_loss_determinants.do"
 	do "$ROOT/analysis/code/25_graph_regression_informal_nofe_job_loss_determinants.do"
@@ -200,6 +169,39 @@ do "$ROOT/analysis/code/07_graph_regression_job_loss_determinants.do"
 	cap erase "$ROOT/analysis/tmp/_graph_regression_informal_nofe_job_loss_determinants.png"
 	cap erase "$ROOT/analysis/tmp/_graph_regression_public_nofe_job_loss_determinants.png"
 	cap erase "$ROOT/analysis/tmp/_graph_regression_private_nofe_job_loss_determinants.png"	
+	
+	
+* Position: Formal Self-Employed, Informal Self-Employed, Signed Work Card, and No Signed Work Card
+
+	do "$ROOT/analysis/code/28_graph_regression_formal_self_employed_nofe_job_loss_determinants.do"
+	do "$ROOT/analysis/code/29_graph_regression_informal_self_employed_nofe_job_loss_determinants.do"
+	do "$ROOT/analysis/code/30_graph_regression_signed_work_card_nofe_job_loss_determinants.do"
+	do "$ROOT/analysis/code/31_graph_regression_no_signed_work_card_nofe_job_loss_determinants.do"
+
+	* Combine graphs
+	graph combine "$ROOT/analysis/tmp/_graph_regression_formal_self_employed_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_informal_self_employed_nofe_job_loss_determinants.gph"  "$ROOT/analysis/tmp/_graph_regression_signed_work_card_nofe_job_loss_determinants.gph" "$ROOT/analysis/tmp/_graph_regression_no_signed_work_card_nofe_job_loss_determinants.gph"  /*
+		*/ , 	/*
+		*/  /* ycommon
+		*/  /* xcommon 
+		*/ cols(2) /* 
+		*/ scheme() /*
+		*/ commonscheme /*
+		*/ xsize(9) /*
+		*/ ysize(6) /*
+		*/ scale(1) /*
+		*/ graphregion(margin(tiny))	 /* 
+		*/ plotregion(margin(zero) ifcolor(none)) /*
+		*/ saving("$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_position_job_loss_determinants_2.gph", replace)	
+	
+		* save graph 
+		graph use "$ROOT/analysis/tmp/_graph_regression_heterogeneous_analysis_position_job_loss_determinants_2.gph"		
+		graph export "$ROOT/analysis/output/graph/_graph_regression_heterogeneous_analysis_position_job_loss_determinants_2.png", replace	
+		cap erase "$ROOT/analysis/graph/tmp/_graph_regression_heterogeneous_analysis_position_job_loss_determinants_2.gph"	
+		
+cap erase "$ROOT/analysis/tmp/_graph_regression_formal_self_employed_nofe_job_loss_determinants.gph" 
+cap erase "$ROOT/analysis/tmp/_graph_regression_informal_self_employednofe_job_loss_determinants.gph"  
+cap erase "$ROOT/analysis/tmp/_graph_regression_signed_work_card_nofe_job_loss_determinants.gph" 
+cap erase "$ROOT/analysis/tmp/_graph_regression_no_signed_work_card_nofe_job_loss_determinants.gph"
 
 ********************************************************
 **	delete temporary files

@@ -1,8 +1,6 @@
 preserve
 
-* Regression for sectors == Trade with no fixed effects 
-
- keep if sectors == "Services"
+keep if position == 5
 
 ********************************************************************************
 * Step 1: Generate dummy variables by education x quarter
@@ -18,7 +16,7 @@ quietly xi I.charact_educ1*I.year_quarter, prefix(_bb_) noomit
 ********************************************************************************
 reg job_loss ///
 _aa_chaXyea_1_* _bb_chaXyea_1_* ///
-signed_work_card job_function hours_worked temporary_worker social_security_taxpayer race age monthly_work_income job_start ///
+signed_work_card job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
 i.year_quarter ///
 i.sector_numeric i.occupation_numeric ///
 i.state ///
@@ -197,37 +195,37 @@ tsset quarterly_date
 * Step 6: Create the line plot
 ********************************************************************************
 
-tsline fitted_values_educ0 fitted_values_educ1 /// 
+tsline fitted_values_educ0 fitted_values_educ1 ///
     lb_educ0 ub_educ0 lb_educ1 ub_educ1 ///
     , ///
     lpattern(dash solid dash dash solid solid) ///
     lwidth(thick thick thin thin thin thin) ///
     lstyle(p1mark p10mark p1mark p1mark p10mark p10mark) ///
     lcolor(black%50 black black%30 black%30 black%30 black%30) ///
-    title("Services") ///
-    subtitle("") ///
-    xtitle("") ///
-    xlabel(#8, angle(45) labsize(2.5)) ///
-    ytitle("Coefficient") ///
-    ylabel(#3, angle(0) labsize(2.5) format(%9.2f)) ///
-    yscale(axis(1) range(0.20 0.35) lstyle(none)) ///
-    tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3)) ///
+	title("Formal Self-Employed")	///
+	subtitle("") ///
+	xtitle("") ///
+	xlabel(#5 , angle(0) labsize(2.5) ) ///
+	ytitle("Coefficient") ///
+	ylabel(#3, angle(0) labsize(2.5) format(%9.2f) ) ///
+	yscale( axis(1) range(0.05 0.15) lstyle(none)  ) ///
+	tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3) ) ///
 	tline(2021q4, lcolor(red) lpattern(dash) lwidth(0.3)) ///
-    legend(off order(1 "No college" 2 "College") ///
-            pos(11) ring(0) col(1) rows(4) size(2.5) symxsize(*0.6) symysize(*0.6)) ///
+    legend(on order(1 "No college" 2 "Complete College") ///
+           pos(11) ring(0) col(1) rows(2) size(2.5) symxsize(*0.6) symysize(*0.6)) ///
 	note("") ///
 	recast(line) ///
 	graphregion(fcolor(white)) ///
 	scheme( s2gcolor ) /// economist s1mono   s1manual  s2gmanual 
-	saving("$ROOT/analysis/tmp/_graph_regression_services_nofe_job_loss_determinants.gph", replace)
-	
+	saving("$ROOT/analysis/tmp/_graph_regression_formal_self_employed_nofe_job_loss_determinants.gph", replace)	
+
 ********************************************************************************
 * Step 7: Export and save the graph
 ********************************************************************************
 
 	* save graph 
-	graph use "$ROOT/analysis/tmp/_graph_regression_services_nofe_job_loss_determinants.gph"
-	*erase "$ROOT/analysis/graph/_graph_regression_services_nofe_job_loss_determinants.gph"	
-	graph export "$ROOT/analysis/output/graph/_graph_regression_services_nofe_job_loss_determinants.png", replace	
+	graph use "$ROOT/analysis/tmp/_graph_regression_formal_self_employed_nofe_job_loss_determinants.gph"
+	*erase "$ROOT/analysis/graph/_graph_regression_formal_nofe_job_loss_determinants.gph"	
+	graph export "$ROOT/analysis/output/graph/_graph_regression_formal_self_employed_nofe_job_loss_determinants.png", replace	
 	
 	restore
