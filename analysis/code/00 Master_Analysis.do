@@ -171,7 +171,7 @@ do "$ROOT/analysis/code/07_graph_regression_job_loss_determinants.do"
 	cap erase "$ROOT/analysis/tmp/_graph_regression_private_nofe_job_loss_determinants.png"	
 	
 	
-* Position: Formal Self-Employed, Informal Self-Employed, Signed Work Card, and No Signed Work Card
+* Position: Formal Self-Employed, Informal Self-Employed, Formal Employee, and Informal Employee
 
 	do "$ROOT/analysis/code/28_graph_regression_formal_self_employed_nofe_job_loss_determinants.do"
 	do "$ROOT/analysis/code/29_graph_regression_informal_self_employed_nofe_job_loss_determinants.do"

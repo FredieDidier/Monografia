@@ -212,7 +212,7 @@ tsline fitted_values_educ0 fitted_values_educ1 ///
     ylabel(#3, angle(0) labsize(2.5) format(%9.2f)) ///
     yscale(axis(1) range(0.13 0.25) lstyle(none)) ///
     tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3)) ///
-	tline(2021q4, lcolor(red) lpattern(dash) lwidth(0.3)) ///
+	tline(2021q3, lcolor(red) lpattern(dash) lwidth(0.3)) ///
     legend(on order(1 "No college" 2 "Complete College") ///
            pos(11) ring(0) col(1) rows(4) size(2.5) symxsize(*0.6) symysize(*0.6)) ///
     note("") ///

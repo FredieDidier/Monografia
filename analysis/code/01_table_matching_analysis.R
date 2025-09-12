@@ -3,23 +3,27 @@ library(data.table)
 library(haven)
 library(stringr)
 library(here)
+library(pbapply)
 
 # Clear environment
 rm(list = ls())
 
 #===============================================================================
-# CONSOLIDATED ANALYSIS - GENERAL AVERAGE BY QUARTER
-# Calculating overlap between quarters for the entire sample
+# CONSOLIDATED ANALYSIS - MATCHING RATES BY QUARTER
+# Calculating retention rates (% that stay for at least X quarters)
 #===============================================================================
 
 # Set working directory and load data files
 file_path = here("build", "output")
 
 # Get all panel .dta files
-panel_files <- list.files(pattern = "^painel_.*\\.dta$", full.names = TRUE)
+panel_files <- list.files(path = file_path, pattern = "^painel_.*\\.dta$", full.names = TRUE)
+
+# Set progress bar
+pboptions(type = "timer", char = "=", txt.width = 50, style = 3)
 
 # Read and combine all panel files using data.table
-combined_data <- rbindlist(lapply(panel_files, function(file) {
+combined_data <- rbindlist(pblapply(panel_files, function(file) {
   dt <- as.data.table(read_dta(file))
   return(dt[, .(Ano, Trimestre, UPA, Estrato, V1008, V1014, V1016, V1028, painel, idind)])
 }), fill = TRUE)
@@ -34,7 +38,7 @@ combined_data <- combined_data[, .SD[1], by = .(idind, Ano, Trimestre)]
 combined_data[, id_dom := paste(UPA, V1008, V1014, sep = "_")]
 
 #===============================================================================
-# INDIVIDUALS - Consolidated Analysis
+# INDIVIDUALS - Retention Analysis
 #===============================================================================
 
 # Count how many quarters each individual appears in
@@ -51,11 +55,29 @@ individual_counts[is.na(count), count := 0]
 # Calculate total individuals
 total_individuals <- individual_counts[, sum(count)]
 
-# Calculate percentages for individuals
+# Calculate percentages for individuals (exactly X quarters)
 individual_counts[, percentage := (count / total_individuals) * 100]
 
+# Calculate RETENTION rates (at least X quarters)
+# Q1: 100% (everyone appears at least 1 quarter)
+# Q2: 100% - % that appear exactly 1 quarter
+# Q3: 100% - % that appear exactly 1 or 2 quarters
+# Q4: 100% - % that appear exactly 1, 2, or 3 quarters
+# Q5: 100% - % that appear exactly 1, 2, 3, or 4 quarters
+
+individual_retention <- data.table(
+  n_quarters = 1:5,
+  retention_rate = c(
+    100.0,  # Everyone appears at least 1 quarter
+    100.0 - individual_counts[n_quarters == 1, percentage],
+    100.0 - individual_counts[n_quarters <= 2, sum(percentage)],
+    100.0 - individual_counts[n_quarters <= 3, sum(percentage)],
+    100.0 - individual_counts[n_quarters <= 4, sum(percentage)]
+  )
+)
+
 #===============================================================================
-# HOUSEHOLDS - Consolidated Analysis  
+# HOUSEHOLDS - Retention Analysis  
 #===============================================================================
 
 # Create unique household-quarter combinations
@@ -74,55 +96,66 @@ household_counts[is.na(count), count := 0]
 # Calculate total households
 total_households <- household_counts[, sum(count)]
 
-# Calculate percentages for households
+# Calculate percentages for households (exactly X quarters)
 household_counts[, percentage := (count / total_households) * 100]
 
+# Calculate RETENTION rates (at least X quarters)
+household_retention <- data.table(
+  n_quarters = 1:5,
+  retention_rate = c(
+    100.0,  # Everyone appears at least 1 quarter
+    100.0 - household_counts[n_quarters == 1, percentage],
+    100.0 - household_counts[n_quarters <= 2, sum(percentage)],
+    100.0 - household_counts[n_quarters <= 3, sum(percentage)],
+    100.0 - household_counts[n_quarters <= 4, sum(percentage)]
+  )
+)
+
 #===============================================================================
-# CREATE FINAL CONSOLIDATED TABLES
+# CREATE FINAL RETENTION TABLE
 #===============================================================================
 
-# Create percentage table (main output requested)
-percentage_table <- data.table(
+# Create retention percentage table (main output requested)
+retention_table <- data.table(
   type = c("Individuals", "Households"),
   Q1 = c(
-    individual_counts[n_quarters == 1, percentage],
-    household_counts[n_quarters == 1, percentage]
+    individual_retention[n_quarters == 1, retention_rate],
+    household_retention[n_quarters == 1, retention_rate]
   ),
   Q2 = c(
-    individual_counts[n_quarters == 2, percentage],
-    household_counts[n_quarters == 2, percentage]
+    individual_retention[n_quarters == 2, retention_rate],
+    household_retention[n_quarters == 2, retention_rate]
   ),
   Q3 = c(
-    individual_counts[n_quarters == 3, percentage],
-    household_counts[n_quarters == 3, percentage]
+    individual_retention[n_quarters == 3, retention_rate],
+    household_retention[n_quarters == 3, retention_rate]
   ),
   Q4 = c(
-    individual_counts[n_quarters == 4, percentage],
-    household_counts[n_quarters == 4, percentage]
+    individual_retention[n_quarters == 4, retention_rate],
+    household_retention[n_quarters == 4, retention_rate]
   ),
   Q5 = c(
-    individual_counts[n_quarters == 5, percentage],
-    household_counts[n_quarters == 5, percentage]
+    individual_retention[n_quarters == 5, retention_rate],
+    household_retention[n_quarters == 5, retention_rate]
   )
 )
 
 # Round to 2 decimal places
 numeric_cols <- c("Q1", "Q2", "Q3", "Q4", "Q5")
-percentage_table[, (numeric_cols) := lapply(.SD, function(x) round(x, 2)), .SDcols = numeric_cols]
+retention_table[, (numeric_cols) := lapply(.SD, function(x) round(x, 2)), .SDcols = numeric_cols]
 
 #===============================================================================
 # DISPLAY AND EXPORT RESULTS
 #===============================================================================
 
 # Display results
-cat("=== CONSOLIDATED PERCENTAGE ANALYSIS ===\n")
-print(percentage_table)
+cat("=== RETENTION RATES ANALYSIS (% that stay for AT LEAST X quarters) ===\n")
+print(retention_table)
 
 output_dir <- here("analysis", "output", "descriptive_statistics")
 
-# Export percentage table
+# Export retention table
 fwrite(
-  percentage_table, 
-  file.path(output_dir, "_table_matching_consolidated_analysis.csv")
+  retention_table, 
+  file.path(output_dir, "_table_matching_retention_analysis.csv")
 )
-
