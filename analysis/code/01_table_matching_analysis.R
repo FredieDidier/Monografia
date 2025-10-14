@@ -159,3 +159,184 @@ fwrite(
   retention_table, 
   file.path(output_dir, "_table_matching_retention_analysis.csv")
 )
+
+
+#===============================================================================
+# ADDITIONAL ANALYSIS - PROBABILITY OF QUARTER-TO-QUARTER TRANSITION
+# For each quarter T, what percentage of those observed appear in T+1?
+#===============================================================================
+
+cat("\n=== TRANSITION PROBABILITY ANALYSIS (Quarter-to-Quarter) ===\n")
+#-------------------------------------------------------------------------------
+# INDIVIDUALS - Transition Probability
+#-------------------------------------------------------------------------------
+
+# Sort data to ensure proper ordering
+setorder(combined_data, idind, Ano, Trimestre)
+
+# Create a lagged version to identify consecutive quarters
+combined_data[, `:=`(
+  next_ano = shift(Ano, type = "lead"),
+  next_trim = shift(Trimestre, type = "lead")
+), by = idind]
+
+# Identify if the individual appears in the next quarter
+# Next quarter is either: same year, next trimestre OR next year, trimestre 1
+combined_data[, appears_next := ifelse(
+  (Ano == next_ano & Trimestre + 1 == next_trim) |
+    (Ano + 1 == next_ano & Trimestre == 4 & next_trim == 1),
+  1, 0
+)]
+
+# For the last observation, mark it as 0 (not shown) instead of NA
+combined_data[is.na(next_ano), appears_next := 0]
+
+# Create a variable for quarter position (1st appearance, 2nd, etc.)
+combined_data[, quarter_position := seq_len(.N), by = idind]
+
+# Identify the last position of each individual
+combined_data[, max_position := max(quarter_position), by = idind]
+
+# Exclude only those in position 5 (last possible quarter in the panel)
+# But include those who left in previous positions (1, 2, 3, 4)
+individual_transition <- combined_data[quarter_position <= 4, .(
+  n_observed = .N,
+  n_appear_next = sum(appears_next),
+  transition_prob = (sum(appears_next) / .N) * 100
+), by = quarter_position]
+
+# Rename for clarity
+setnames(individual_transition, "quarter_position", "from_quarter")
+
+# Overall transition probability (all quarters combined)
+overall_ind_transition <- combined_data[quarter_position <= 4, .(
+  from_quarter = "Overall",
+  n_observed = .N,
+  n_appear_next = sum(appears_next),
+  transition_prob = (sum(appears_next) / .N) * 100
+)]
+
+# Combine results
+individual_transition <- rbind(
+  individual_transition,
+  overall_ind_transition,
+  fill = TRUE
+)
+
+# Round percentages
+individual_transition[, transition_prob := round(transition_prob, 2)]
+
+cat("\n--- INDIVIDUALS: Transition Probability by Quarter Position ---\n")
+cat("(Given I observed someone in quarter N, what % appear in quarter N+1?)\n\n")
+print(individual_transition)
+
+#-------------------------------------------------------------------------------
+# HOUSEHOLDS - Transition Probability
+#-------------------------------------------------------------------------------
+
+# Create household dataset with proper ordering
+household_data_trans <- combined_data[, .SD[1], by = .(id_dom, Ano, Trimestre)]
+setorder(household_data_trans, id_dom, Ano, Trimestre)
+
+# Create lagged version for households
+household_data_trans[, `:=`(
+  next_ano = shift(Ano, type = "lead"),
+  next_trim = shift(Trimestre, type = "lead")
+), by = id_dom]
+
+# Identify if household appears in next quarter
+household_data_trans[, appears_next := ifelse(
+  (Ano == next_ano & Trimestre + 1 == next_trim) |
+    (Ano + 1 == next_ano & Trimestre == 4 & next_trim == 1),
+  1, 0
+)]
+
+# For the last observation, mark it as 0 (not shown) instead of NA
+household_data_trans[is.na(next_ano), appears_next := 0]
+
+# Create quarter position for households
+household_data_trans[, quarter_position := seq_len(.N), by = id_dom]
+
+# Identify the last position of each household
+household_data_trans[, max_position := max(quarter_position), by = id_dom]
+
+# Exclude only position 5, include whoever left before
+household_transition <- household_data_trans[quarter_position <= 4, .(
+  n_observed = .N,
+  n_appear_next = sum(appears_next),
+  transition_prob = (sum(appears_next) / .N) * 100
+), by = quarter_position]
+
+setnames(household_transition, "quarter_position", "from_quarter")
+
+# Overall transition probability
+overall_hh_transition <- household_data_trans[quarter_position <= 4, .(
+  from_quarter = "Overall",
+  n_observed = .N,
+  n_appear_next = sum(appears_next),
+  transition_prob = (sum(appears_next) / .N) * 100
+)]
+
+# Combine results
+household_transition <- rbind(
+  household_transition,
+  overall_hh_transition,
+  fill = TRUE
+)
+
+# Round percentages
+household_transition[, transition_prob := round(transition_prob, 2)]
+
+cat("\n--- HOUSEHOLDS: Transition Probability by Quarter Position ---\n")
+cat("(Given I observed a household in quarter N, what % appear in quarter N+1?)\n\n")
+print(household_transition)
+
+#-------------------------------------------------------------------------------
+# CREATE SUMMARY TABLE (Main result for your boss)
+#-------------------------------------------------------------------------------
+
+# Simple summary table showing overall transition probability
+transition_summary <- data.table(
+  Type = c("Individuals", "Households"),
+  `Observed in Quarter T` = c(
+    overall_ind_transition$n_observed,
+    overall_hh_transition$n_observed
+  ),
+  `Appear in Quarter T+1` = c(
+    overall_ind_transition$n_appear_next,
+    overall_hh_transition$n_appear_next
+  ),
+  `Transition Probability (%)` = c(
+    overall_ind_transition$transition_prob,
+    overall_hh_transition$transition_prob
+  )
+)
+
+cat("\n=== SUMMARY: Quarter-to-Quarter Transition Probability ===\n")
+cat("(Of every 100 people/households observed in a quarter, how many appear in the next quarter?)\n\n")
+print(transition_summary)
+
+#-------------------------------------------------------------------------------
+# EXPORT RESULTS
+#-------------------------------------------------------------------------------
+
+# Export individual transitions
+fwrite(
+  individual_transition,
+  file.path(output_dir, "_table_individual_transition_probability.csv")
+)
+
+# Export household transitions
+fwrite(
+  household_transition,
+  file.path(output_dir, "_table_household_transition_probability.csv")
+)
+
+# Export summary table
+fwrite(
+  transition_summary,
+  file.path(output_dir, "_table_transition_probability_summary.csv")
+)
+
+cat("\n✓ Transition probability analysis completed!\n")
+cat("✓ Files exported to:", output_dir, "\n")
