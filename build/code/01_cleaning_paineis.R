@@ -5,7 +5,7 @@ clean_painel = function(df){
   
   df <- df %>%
     select(idind, Ano, Trimestre,
-           UF, UPA, V1022, V1028, V2007, V2009, V1022,
+           UF, UPA, V1022, V1028, V2007, V2009,
            V1023, V2010, V3003A, V3009A,
            V4009, V4012, V4014, V4019,
            V4001, V4028, V4029,
@@ -13,7 +13,7 @@ clean_painel = function(df){
            V4071, V4076, VD2003, 
            VD3004, VD3005, VD4001, VD4002,
            VD4005, VD4007, VD4009,
-           V4013, V4039,
+           V4039,
            VD4012, VD4017, V4010, VD4037,
            V40121, V4025, VD4010) %>%
     rename(id_code = idind, year = Ano, quarter = Trimestre,

@@ -45,7 +45,7 @@ aggregate_sectors = function(df){
                                  sector_code %in% c(36000, 37000, 38000, 39000) ~ "Agua, Esgoto, Gestao de Residuos e Descontaminacao",
                                  sector_code %in% c(41000, 42000, 43000) ~ "Construcao",
                                  sector_code %in% c(45010, 45020, 45030, 45040) ~ "Comercio e Reparacao de Veiculos Automotores",
-                                 sector_code %in% c(49010, 4030, 49040, 49090, 50000, 51000, 52010, 52020, 53001, 53002) ~ "Transporte, Armazenagem e Correio",
+                                 sector_code %in% c(49010, 49030, 49040, 49090, 50000, 51000, 52010, 52020, 53001, 53002) ~ "Transporte, Armazenagem e Correio",
                                  sector_code %in% c(55000, 56011, 56012, 56020) ~ "Alojamento e Alimentacao",
                                  sector_code %in% c(58000, 59000, 60001, 60002, 61000, 62000, 63000) ~ "Informacao e Comunicacao",
                                  sector_code %in% c(64000, 65000, 66001, 66002) ~ "Atividades Financeiras e de Seguros",
