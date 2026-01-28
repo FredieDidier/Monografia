@@ -208,13 +208,14 @@ tsline fitted_values_educ0 fitted_values_educ1 ///
 	subtitle("") ///
 	xtitle("") ///
 	xlabel(#5 , angle(0) labsize(2.5) ) ///
-	ytitle("Coefficient") ///
+    ytitle("Job loss probability (t -> t+1)") ///
 	ylabel(#3, angle(0) labsize(2.5) format(%9.2f) ) ///
 	yscale( axis(1) range(0.25 0.40) lstyle(none)  ) ///
 	tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3) ) ///
 	tline(2021q3, lcolor(red) lpattern(dash) lwidth(0.3)) ///
-    legend(off order(1 "No College" 2 "Complete College") ///
-           pos(11) ring(0) col(1) rows(2) size(2.5) symxsize(*0.6) symysize(*0.6)) ///
+    legend(off order(1 "No college degree" 2 "College degree") ///
+              pos(11) ring(0) col(1) rows(2) ///
+              size(2.5) symxsize(*0.6) symysize(*0.6)) ///
 	note("") ///
 	recast(line) ///
 	graphregion(fcolor(white)) ///

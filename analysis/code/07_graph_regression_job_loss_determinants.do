@@ -194,28 +194,26 @@ tsset quarterly_date
 ********************************************************************************
 
 tsline fitted_values_educ0 fitted_values_educ1 ///
-    lb_educ0 ub_educ0 lb_educ1 ub_educ1 ///
-    , ///
-    lpattern(dash solid dash dash solid solid) ///
-    lwidth(thick thick thin thin thin thin) ///
-    lstyle(p1mark p10mark p1mark p1mark p10mark p10mark) ///
-    lcolor(black%50 black black%30 black%30 black%30 black%30) ///
-    title("") ///
-    subtitle("") ///
-    xtitle("") ///
-    xlabel(#12, angle(45) labsize(2.5)) /// Aumentado o número de labels e o ângulo para melhor visualização
-    ytitle("Coefficient") ///
-    ylabel(#10, angle(0) labsize(2.5) format(%9.2f)) ///
-    yscale(axis(1) range() lstyle(none)) ///
-    tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3)) ///
-	tline(2021q3, lcolor(red) lpattern(dash) lwidth(0.3)) ///
-    legend(order(1 "No College" 2 "Complete College" 3 "95% CI (No College)" 5 "95% CI (Complete College)") ///
-           pos(11) ring(0) col(1) rows(4) size(2.5) symxsize(*0.6) symysize(*0.6)) ///
-    note("") ///
-    recast(line) ///
-    graphregion(fcolor(white)) ///
-    scheme(s2gcolor) /// economist s1mono s1manual s2gmanual 
-    saving("$ROOT/analysis/tmp/_graph_regression_job_loss_determinants.gph", replace)	
+       lb_educ0 ub_educ0 lb_educ1 ub_educ1 ///
+    ,  lpattern(dash solid dash dash solid solid) ///
+       lwidth(thick thick thin thin thin thin) ///
+       lstyle(p1mark p10mark p1mark p1mark p10mark p10mark) ///
+       lcolor(black%50 black black%30 black%30 black%30 black%30) ///
+       title("") subtitle("") xtitle("") ///
+       xlabel(#12, angle(45) labsize(2.5)) ///
+       ytitle("Estimated job loss probability (t -> t+1)") ///
+       ylabel(#10, angle(0) labsize(2.5) format(%9.2f)) ///
+       yscale(axis(1) lstyle(none)) ///
+       tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3)) ///
+       tline(2021q3, lcolor(red) lpattern(dash) lwidth(0.3)) ///
+       legend(order(1 "No college degree" 2 "College degree") ///
+              pos(11) ring(0) col(1) rows(2) ///
+              size(2.5) symxsize(*0.6) symysize(*0.6)) ///
+       note("") recast(line) ///
+       graphregion(fcolor(white)) ///
+       scheme(s2gcolor) ///
+       saving("$ROOT/analysis/tmp/_graph_regression_job_loss_determinants.gph", replace)
+
 
 ********************************************************************************
 * Step 7: Export and save the graph
