@@ -1,108 +1,112 @@
 preserve
-
 label variable job_loss "Lost work in the next quarter"
-label variable educ0 "No College"
-label variable educ1 "Complete College"
-label variable signed_work_card "Individual with a formal contract"
+label variable educ0 "No College degree"
+label variable educ1 "Complete College degree"
+label variable signed_work_card "Formal Employee"
 label variable hours_worked "Working hours per week"
 label variable temporary_worker "Temporary worker"
 label variable social_security_taxpayer "Social security taxpayer"
-label variable homem "Men"
-label variable negro "Non-white race"
-label variable age "Years old"
-label variable monthly_work_income "Monthly work income (R\\$)"
+label variable age "Age"
+label variable monthly_work_income "Monthly work income (R\$)"
 label variable urbana "Lives in urban area"
 
-gen sec_Agriculture = 1 if sectors == "Agriculture"
-replace sec_Agriculture =0 if sec_Agriculture ==.
-label variable sec_Agriculture "Agricultural sector"
+* Generate gender variables
+gen men = (gender == 1)
+label variable men "Men"
+gen women = (gender == 2)
+label variable women "Women"
 
-gen sec_Manufacture = 1 if sectors == "Industries"
-replace sec_Manufacture =0 if sec_Manufacture ==.
-label variable sec_Manufacture "Manufacture sector"
+* Generate race variables
+gen white_race = (negro == 0)
+label variable white_race "White race"
+gen nonwhite_race = (negro == 1)
+label variable nonwhite_race "Non-white race"
 
-gen sec_Services = 1 if sectors == "Services"
-replace sec_Services =0 if sec_Services ==.
-label variable sec_Services "Services sector"
+* Generate position variables
+gen formal = (position_names == "Formal")
+label variable formal "Formal"
+gen informal = (position_names == "Informal")
+label variable informal "Informal"
+gen formal_public = (position == 9)
+label variable formal_public "Formal Public Sector"
+gen formal_private = (position == 3 | position == 5 | position == 7)
+label variable formal_private "Formal Private"
+gen formal_selfemployed = (position == 5)
+label variable formal_selfemployed "Formal Self-Employed"
+gen informal_selfemployed = (position == 6)
+label variable informal_selfemployed "Informal Self-Employed"
+gen informal_employee = (signed_work_card == 0)
+label variable informal_employee "Informal Employee"
 
-gen sec_Trade = 1 if sectors == "Trade" | sectors == "Construction"
-replace sec_Trade =0 if sec_Trade ==.
-label variable sec_Trade "Trade sector"
-
-gen po_Informal = 1 if position_names == "Informal"
-replace po_Informal =0 if po_Informal ==.
-label variable po_Informal "Informality"
-
-gen po_Public = 1 if position == 9  /* Formal Public Sector
-	*/ | position == 10 /* Informal Public Sector
-	*/ 
-	
-replace po_Public =0 if po_Public ==. 
-label variable po_Public "Government"
-
+eststo clear
 eststo store_statistics: quietly estpost summarize ///
-job_loss ///
-educ0 educ1 ///
-monthly_work_income  ///
-hours_worked ///
-temporary_worker ////
-social_security_taxpayer ///
-signed_work_card ///
-po_Informal ///
-po_Public ///
-sec_Agriculture ///
-sec_Manufacture ///
-sec_Services ///
-sec_Trade ///
-homem ///
-age ///
-negro ///
-urbana ///
-[aw=weights] 
-
-/*
-i.year_quarter ///
-i.sector_numeric i.occupation_numeric ///
-i.state ///
-i.urbana ///
-[aw=weights] 
-*/
+    job_loss ///
+    educ0 educ1 ///
+    men women ///
+    white_race nonwhite_race ///
+    formal informal ///
+    formal_public formal_private ///
+    formal_selfemployed informal_selfemployed ///
+    signed_work_card informal_employee ///
+    hours_worked ///
+    temporary_worker ///
+    social_security_taxpayer ///
+    age ///
+    monthly_work_income ///
+    urbana ///
+    [aw=weights] 
 
 * additional stats
 count
 local num_obs = r(N)
 di "`num_obs'"
-estadd scalar num_obs = `num_obs'
+estadd scalar num_obs = `num_obs' : store_statistics
 
 * local notes
 local ttitle "Descriptive statistics"
-local tnotes "Source: IBGE's Quarterly Continuous PNAD from 2012 to 2024."
-	
+local tnotes "Notes: Sample restricted to employed individuals at the interview date. The sample is at the person-quarter level and covers 2012Q1 to 2024Q4. Lost work in the next quarter is defined as a transition from employment in quarter \$t\$ to either unemployment or out of the labor force in quarter \$t+1\$. All statistics are weighted using survey weights."
+    
 #delim ;    
-	esttab store_statistics using "$ROOT/analysis/output/descriptive_statistics/_table_descriptive_statistics.tex",		
-		cells("mean(fmt(%12.2fc)) sd(fmt(%12.2fc))  min(fmt(%12.0fc)) max(fmt(%20.0fc))  ")
-		label
-		prehead(
-			"\begin{table}[H]"
-			"\centering"
-			"\label{tabledescriptivestatistics}"
-			"\caption{`ttitle'}"					
-			"\scalebox{0.75}{"
-			"\begin{tabular}{l*{@span}{r}}"
-			"\hline \hline"			
-    		)
-		postfoot(
-			"\hline \hline"
-			"\end{tabular}"		
-			"\begin{tablenotes}"
-			"\item \scriptsize{`tnotes'}"
-			"\end{tablenotes}"
-			"}"
-			"\end{table}"
-    		)
-    	stats(num_obs  , fmt(%12.0fc) labels("Number of observations"))	
-    	
-    	replace
- ;	 
-		
+    esttab store_statistics using "$ROOT/analysis/output/descriptive_statistics/_table_descriptive_statistics.tex",
+        cells("Mean(fmt(%12.2fc)) SD(fmt(%12.2fc)) Min(fmt(%12.0fc)) Max(fmt(%12.0fc))")
+        label
+        noobs
+        nonumber
+        nomtitle
+        prehead(
+            "\begin{table}[H]"
+            "\centering"
+            "\caption{`ttitle'}"
+            "\label{tabledescriptivestatistics}"
+            "\begin{threeparttable}"
+            "\scalebox{0.90}{"
+            "\begin{tabular}{l*{4}{r}}"
+            "\hline \hline"
+            "& mean & sd & min & max\\"
+            "\hline"
+        )
+        postfoot(
+            "\hline"
+        )
+        posthead("")
+        prefoot(
+            "\hline"
+        )
+        stats(num_obs, fmt(%12.0fc) labels("Number of observations"))
+    ;    
+#delim cr
+
+* Append the closing of the table manually
+file open myfile using "$ROOT/analysis/output/descriptive_statistics/_table_descriptive_statistics.tex", write append
+file write myfile "\hline \hline" _n
+file write myfile "\end{tabular}" _n
+file write myfile "}" _n
+file write myfile "\begin{tablenotes}" _n
+file write myfile "\item \begin{minipage}[t]{0.9\textwidth}" _n
+file write myfile "\end{minipage}" _n
+file write myfile "\end{tablenotes}" _n
+file write myfile "\end{threeparttable}" _n
+file write myfile "\end{table}" _n
+file close myfile
+        
 restore

@@ -18,7 +18,7 @@ quietly xi I.charact_educ1*I.year_quarter, prefix(_bb_) noomit
 ********************************************************************************
 reg job_loss ///
 _aa_chaXyea_1_* _bb_chaXyea_1_* ///
-signed_work_card job_function hours_worked temporary_worker social_security_taxpayer gender race age monthly_work_income job_start ///
+signed_work_card i.job_function hours_worked temporary_worker social_security_taxpayer i.gender i.race age monthly_work_income i.job_start ///
 i.year_quarter ///
 i.sector_numeric i.occupation_numeric ///
 i.state ///
@@ -210,7 +210,7 @@ tsline fitted_values_educ0 fitted_values_educ1 ///
 	xlabel(#5 , angle(0) labsize(2.5) ) ///
     ytitle("Job loss probability (t -> t+1)") ///
 	ylabel(#3, angle(0) labsize(2.5) format(%9.2f) ) ///
-	yscale( axis(1) range(0.05 0.15) lstyle(none)  ) ///
+	yscale( axis(1) range(0.10 0.20) lstyle(none)  ) ///
 	tline(2019q4, lcolor(red) lpattern(dash) lwidth(0.3) ) ///
 	tline(2021q3, lcolor(red) lpattern(dash) lwidth(0.3)) ///
     legend(on order(1 "No college degree" 2 "College degree") ///
