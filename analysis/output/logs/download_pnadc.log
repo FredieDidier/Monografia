@@ -1,0 +1,547 @@
+Mensagen de aviso:
+pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+Caching PNADC quarters into /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/input/pnadc_quarters
+  2012Q1  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2012/PNADC_012012_20250815.zip'
+Content type 'application/zip' length 216651311 bytes (206.6 MB)
+==================================================
+downloaded 206.6 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    566,873 rows, 69 cols, 11 MB, 2.6 min
+  2012Q2  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2012/PNADC_022012_20250815.zip'
+Content type 'application/zip' length 217937790 bytes (207.8 MB)
+==================================================
+downloaded 207.8 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    567,016 rows, 69 cols, 11 MB, 1.0 min
+  2012Q3  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2012/PNADC_032012_20250815.zip'
+Content type 'application/zip' length 217185193 bytes (207.1 MB)
+==================================================
+downloaded 207.1 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    562,640 rows, 69 cols, 11 MB, 1.1 min
+  2012Q4  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2012/PNADC_042012_20250815.zip'
+Content type 'application/zip' length 215911235 bytes (205.9 MB)
+==================================================
+downloaded 205.9 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    555,935 rows, 69 cols, 11 MB, 0.9 min
+  2013Q1  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2013/PNADC_012013_20250815.zip'
+Content type 'application/zip' length 220354011 bytes (210.1 MB)
+==================================================
+downloaded 210.1 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    564,773 rows, 69 cols, 11 MB, 2.1 min
+  2013Q2  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2013/PNADC_022013_20250815.zip'
+Content type 'application/zip' length 223948919 bytes (213.6 MB)
+==================================================
+downloaded 213.6 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    572,716 rows, 69 cols, 11 MB, 1.0 min
+  2013Q3  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2013/PNADC_032013_20250815.zip'
+Content type 'application/zip' length 223810057 bytes (213.4 MB)
+==================================================
+downloaded 213.4 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    571,446 rows, 69 cols, 11 MB, 1.1 min
+  2013Q4  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2013/PNADC_042013_20250815.zip'
+Content type 'application/zip' length 223918316 bytes (213.5 MB)
+==================================================
+downloaded 213.5 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    569,242 rows, 69 cols, 11 MB, 0.7 min
+  2014Q1  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2014/PNADC_012014_20250815.zip'
+Content type 'application/zip' length 226644664 bytes (216.1 MB)
+==================================================
+downloaded 216.1 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    573,480 rows, 69 cols, 11 MB, 0.7 min
+  2014Q2  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2014/PNADC_022014_20250815.zip'
+Content type 'application/zip' length 227512181 bytes (217.0 MB)
+==================================================
+downloaded 217.0 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    572,622 rows, 69 cols, 11 MB, 0.7 min
+  2014Q3  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2014/PNADC_032014_20250815.zip'
+Content type 'application/zip' length 229457217 bytes (218.8 MB)
+==================================================
+downloaded 218.8 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    576,414 rows, 69 cols, 11 MB, 0.7 min
+  2014Q4  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2014/PNADC_042014_20250815.zip'
+Content type 'application/zip' length 229340270 bytes (218.7 MB)
+==================================================
+downloaded 218.7 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    574,987 rows, 69 cols, 11 MB, 0.7 min
+  2015Q1  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2015/PNADC_012015_20250815.zip'
+Content type 'application/zip' length 229737727 bytes (219.1 MB)
+==================================================
+downloaded 219.1 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    572,982 rows, 69 cols, 11 MB, 0.7 min
+  2015Q2  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2015/PNADC_022015_20250815.zip'
+Content type 'application/zip' length 230645646 bytes (220.0 MB)
+==================================================
+downloaded 220.0 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    574,034 rows, 69 cols, 11 MB, 0.7 min
+  2015Q3  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2015/PNADC_032015_20250815.zip'
+Content type 'application/zip' length 230671556 bytes (220.0 MB)
+==================================================
+downloaded 220.0 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    573,151 rows, 69 cols, 11 MB, 0.7 min
+  2015Q4  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2015/PNADC_042015_20251210.zip'
+Content type 'application/zip' length 226113345 bytes (215.6 MB)
+==================================================
+downloaded 215.6 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    562,871 rows, 69 cols, 11 MB, 0.7 min
+  2016Q1  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2016/PNADC_012016_20250815.zip'
+Content type 'application/zip' length 228323018 bytes (217.7 MB)
+==================================================
+downloaded 217.7 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    566,932 rows, 69 cols, 11 MB, 0.7 min
+  2016Q2  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2016/PNADC_022016_20250815.zip'
+Content type 'application/zip' length 229685459 bytes (219.0 MB)
+==================================================
+downloaded 219.0 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    570,653 rows, 69 cols, 11 MB, 0.7 min
+  2016Q3  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2016/PNADC_032016_20250815.zip'
+Content type 'application/zip' length 230522349 bytes (219.8 MB)
+==================================================
+downloaded 219.8 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    572,023 rows, 69 cols, 11 MB, 0.8 min
+  2016Q4  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2016/PNADC_042016_20250815.zip'
+Content type 'application/zip' length 230159177 bytes (219.5 MB)
+==================================================
+downloaded 219.5 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    570,556 rows, 69 cols, 11 MB, 0.7 min
+  2017Q1  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2017/PNADC_012017_20250815.zip'
+Content type 'application/zip' length 231325596 bytes (220.6 MB)
+==================================================
+downloaded 220.6 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    572,379 rows, 69 cols, 11 MB, 0.8 min
+  2017Q2  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2017/PNADC_022017_20250815.zip'
+Content type 'application/zip' length 230527475 bytes (219.8 MB)
+==================================================
+downloaded 219.8 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    568,313 rows, 69 cols, 11 MB, 0.7 min
+  2017Q3  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2017/PNADC_032017_20250815.zip'
+Content type 'application/zip' length 230353746 bytes (219.7 MB)
+==================================================
+downloaded 219.7 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    566,671 rows, 69 cols, 11 MB, 0.7 min
+  2017Q4  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2017/PNADC_042017_20250815.zip'
+Content type 'application/zip' length 228888496 bytes (218.3 MB)
+==================================================
+downloaded 218.3 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    561,288 rows, 69 cols, 11 MB, 0.7 min
+  2018Q1  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2018/PNADC_012018_20250815.zip'
+Content type 'application/zip' length 229317676 bytes (218.7 MB)
+==================================================
+downloaded 218.7 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    560,741 rows, 69 cols, 11 MB, 0.7 min
+  2018Q2  downloading ...
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/2018/PNADC_022018_20250815.zip'
+Content type 'application/zip' length 228700392 bytes (218.1 MB)
+==================================================
+downloaded 218.1 MB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Dicionario_e_input_20221031.zip'
+Content type 'application/zip' length 70208 bytes (68 KB)
+==================================================
+downloaded 68 KB
+
+tentando a URL 'https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Trimestral/Microdados/Documentacao/Deflatores.zip'
+Content type 'application/zip' length 252140 bytes (246 KB)
+==================================================
+downloaded 246 KB
+
+    556,186 rows, 69 cols, 11 MB, 2.7 min
+  2018Q3  downloading ...
+The internet connection is unavailable.
+
+  2018Q4  downloading ...
+The internet connection is unavailable.
+
+  2019Q1  cached, skipping
+  2019Q2  downloading ...
+The internet connection is unavailable.
+
+  2019Q3  downloading ...
+The internet connection is unavailable.
+
+  2019Q4  downloading ...
+The internet connection is unavailable.
+
+  2020Q1  downloading ...
+The internet connection is unavailable.
+
+  2020Q2  downloading ...
+The internet connection is unavailable.
+
+  2020Q3  downloading ...
+The internet connection is unavailable.
+
+  2020Q4  downloading ...
+The internet connection is unavailable.
+
+  2021Q1  downloading ...
+The internet connection is unavailable.
+
+  2021Q2  downloading ...
+The internet connection is unavailable.
+
+  2021Q3  downloading ...
+The internet connection is unavailable.
+
+  2021Q4  downloading ...
+The internet connection is unavailable.
+
+  2022Q1  downloading ...
+The internet connection is unavailable.
+
+  2022Q2  downloading ...
+The internet connection is unavailable.
+
+  2022Q3  downloading ...
+The internet connection is unavailable.
+
+  2022Q4  downloading ...
+The internet connection is unavailable.
+
+  2023Q1  downloading ...
+The internet connection is unavailable.
+
+  2023Q2  downloading ...
+The internet connection is unavailable.
+
+  2023Q3  downloading ...
+The internet connection is unavailable.
+
+  2023Q4  downloading ...
+The internet connection is unavailable.
+
+  2024Q1  downloading ...
+The internet connection is unavailable.
+
+  2024Q2  downloading ...
+The internet connection is unavailable.
+
+  2024Q3  downloading ...
+The internet connection is unavailable.
+
+  2024Q4  downloading ...
+The internet connection is unavailable.
+
+  2025Q1  downloading ...
+The internet connection is unavailable.
+
+  2025Q2  downloading ...
+The internet connection is unavailable.
+
+  2025Q3  downloading ...
+The internet connection is unavailable.
+
+  2025Q4  downloading ...
+The internet connection is unavailable.
+
+  2026Q1  downloading ...
+The internet connection is unavailable.
+
+  2026Q2  downloading ...
+The internet connection is unavailable.
+
+  2026Q3  downloading ...
+The internet connection is unavailable.
+
+  2026Q4  downloading ...
+The internet connection is unavailable.
+
+
+Done. 27 quarters cached (0.3 GB).

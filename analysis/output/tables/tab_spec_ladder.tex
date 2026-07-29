@@ -1,0 +1,45 @@
+\begin{table}[htbp]
+\centering
+\caption{The college gap in employment exits across specifications}
+\label{tab:spec_ladder}
+\begin{threeparttable}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccccc}
+\toprule
+& (1) & (2) & (3) & (4) & (5) & (6) \\
+\midrule
+College, other quarters ($\delta$) & -0.069$^{***}$ & -0.069$^{***}$ & -0.060$^{***}$ & -0.053$^{***}$ & -0.023$^{***}$ & -0.010$^{***}$ \\
+ & (0.001) & (0.001) & (0.001) & (0.001) & (0.001) & (0.001) \\
+\addlinespace
+College $\times$ onset ($\omega_1$) & -0.021$^{***}$ & -0.021$^{***}$ & -0.023$^{***}$ & -0.025$^{***}$ & -0.025$^{***}$ & -0.026 \\
+ & (0.001) & (0.001) & (0.001) & (0.001) & (0.001) & (0.001) \\
+\quad Wild cluster bootstrap $p$ & -- & -- & -- & -- & -- & 0.177 \\
+\addlinespace
+College $\times$ mid-pandemic ($\omega_2$) & 0.029$^{***}$ & 0.029$^{***}$ & 0.029$^{***}$ & 0.027$^{***}$ & 0.027$^{***}$ & 0.027$^{***}$ \\
+ & (0.002) & (0.002) & (0.002) & (0.002) & (0.002) & (0.002) \\
+\quad Wild cluster bootstrap $p$ & -- & -- & -- & -- & -- & $<$0.0001 \\
+\midrule
+\multicolumn{7}{l}{\textit{Implied college gap}} \\
+\quad Onset ($\delta+\omega_1$) & -0.090$^{***}$ & -0.090$^{***}$ & -0.083$^{***}$ & -0.077$^{***}$ & -0.048$^{***}$ & -0.035$^{***}$ \\
+ & (0.000) & (0.000) & (0.000) & (0.000) & (0.001) & (0.001) \\
+\addlinespace
+\quad Mid-pandemic ($\delta+\omega_2$) & -0.040$^{***}$ & -0.040$^{***}$ & -0.030$^{***}$ & -0.026$^{***}$ & 0.005$^{**}$ & 0.018$^{***}$ \\
+ & (0.002) & (0.002) & (0.002) & (0.002) & (0.002) & (0.002) \\
+\midrule
+Year-quarter FE & -- & Yes & Yes & Yes & Yes & Yes \\
+State and urban FE & -- & -- & Yes & Yes & Yes & Yes \\
+Gender and race FE & -- & -- & -- & Yes & Yes & Yes \\
+Tenure FE & -- & -- & -- & -- & Yes & Yes \\
+Occupation and sector FE & -- & -- & -- & -- & -- & Yes \\
+Time-varying job controls & -- & -- & -- & -- & Yes & Yes \\
+\addlinespace
+Observations & 8,002,128 & 8,002,128 & 8,002,128 & 8,002,128 & 8,002,128 & 8,002,128 \\
+$R^2$ & 0.010 & 0.011 & 0.020 & 0.045 & 0.091 & 0.093 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item Notes: Survey-weighted linear probability models. The dependent variable is an indicator for exiting employment between $t$ and $t+1$. $\delta$ is the college gap outside the two pandemic windows; $\omega_1$ and $\omega_2$ shift it at the onset and during the mid-pandemic window. Standard errors in parentheses are two-way clustered by primary sampling unit and year-quarter. For the two pandemic deviations we also report, for the preferred specification in column (6), wild cluster bootstrap $p$-values clustered by year-quarter (52 clusters), using Rademacher weights with the null imposed and 9,999 replications; they test $\omega_1$ and $\omega_2$, the shifts in the gap, which is where the number of quarterly shocks rather than the number of records determines uncertainty. Stars denote $^{*}p<0.10$, $^{**}p<0.05$, $^{***}p<0.01$; they are based on the wild cluster bootstrap $p$-value wherever one is reported, and on the asymptotic two-way clustered standard error otherwise. The onset deviation $\omega_1$ therefore carries no stars in column (6): identified from a single year-quarter, it cannot be told apart from an ordinary quarterly shock. The implied gaps keep their asymptotic stars because they are dominated by $\delta$, which is identified across all 52 quarters. Periods are pre-pandemic 2012Q1--2019Q4, onset 2020Q1, mid-pandemic 2020Q2--2021Q3 and post-pandemic 2021Q4--2024Q4.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

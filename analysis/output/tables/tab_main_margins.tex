@@ -1,0 +1,52 @@
+\begin{table}[htbp]
+\centering
+\caption{Adjusted employment-exit probabilities and the college gap, by destination and period}
+\label{tab:main_margins}
+\begin{threeparttable}
+\footnotesize
+\renewcommand{\arraystretch}{0.96}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccrr}
+\toprule
+& \multicolumn{2}{c}{Adjusted level} & \multicolumn{3}{c}{College $-$ no college} & \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-6}
+& No college & College & Difference & 95\% CI & \multicolumn{2}{c}{\% change vs.\ pre-pandemic} \\
+\cmidrule(lr){6-7}
+Period & (1) & (2) & (3) & (4) & No college & College \\
+\midrule
+\multicolumn{7}{l}{\textit{Panel A. Employment exit}} \\
+\quad Pre-pandemic & 0.100 & 0.091 & -0.009$^{***}$ & [-0.011, -0.006] & -- & -- \\
+ & (0.0002) & (0.0011) & (0.0013) & & & \\
+\quad Onset & 0.136 & 0.100 & -0.035$^{***}$ & [-0.038, -0.033] & 36.1 & 10.4 \\
+ & (0.0003) & (0.0011) & (0.0014) & & & \\
+\quad Mid-pandemic & 0.056 & 0.074 & 0.018$^{***}$ & [0.015, 0.020] & -43.3 & -18.3 \\
+ & (0.0003) & (0.0010) & (0.0013) & & & \\
+\quad Post-pandemic & 0.097 & 0.087 & -0.010$^{***}$ & [-0.013, -0.008] & -2.5 & -4.4 \\
+ & (0.0003) & (0.0010) & (0.0013) & & & \\
+\addlinespace
+\multicolumn{7}{l}{\textit{Panel B. Exit into unemployment}} \\
+\quad Pre-pandemic & 0.032 & 0.028 & -0.003$^{***}$ & [-0.005, -0.002] & -- & -- \\
+ & (0.0001) & (0.0005) & (0.0007) & & & \\
+\quad Onset & 0.041 & 0.028 & -0.012$^{***}$ & [-0.014, -0.011] & 28.3 & -0.4 \\
+ & (0.0002) & (0.0005) & (0.0007) & & & \\
+\quad Mid-pandemic & 0.023 & 0.023 & 0.000 & [-0.001, 0.002] & -27.6 & -18.0 \\
+ & (0.0002) & (0.0005) & (0.0006) & & & \\
+\quad Post-pandemic & 0.026 & 0.025 & -0.001 & [-0.002, 0.000] & -16.6 & -10.1 \\
+ & (0.0001) & (0.0005) & (0.0006) & & & \\
+\addlinespace
+\multicolumn{7}{l}{\textit{Panel C. Exit into non-participation}} \\
+\quad Pre-pandemic & 0.068 & 0.062 & -0.006$^{***}$ & [-0.008, -0.004] & -- & -- \\
+ & (0.0002) & (0.0009) & (0.0010) & & & \\
+\quad Onset & 0.095 & 0.072 & -0.023$^{***}$ & [-0.025, -0.021] & 39.8 & 15.3 \\
+ & (0.0003) & (0.0009) & (0.0011) & & & \\
+\quad Mid-pandemic & 0.034 & 0.051 & 0.017$^{***}$ & [0.015, 0.019] & -50.7 & -18.5 \\
+ & (0.0003) & (0.0008) & (0.0011) & & & \\
+\quad Post-pandemic & 0.071 & 0.061 & -0.009$^{***}$ & [-0.011, -0.007] & 4.1 & -1.8 \\
+ & (0.0002) & (0.0008) & (0.0010) & & & \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\scriptsize
+\item Notes: Entries in columns (1)--(3) are survey-weighted average predictive margins from the event-study specification of equation~(\ref{eq:es}), which includes year-quarter, state, urban, gender, race, tenure, occupation and sector fixed effects and controls for age, age squared, usual weekly hours, log labour income, formality, temporary status and social security contribution. Margins are computed by holding the covariate distribution fixed and setting the college indicator to zero and to one in turn; they are not regression intercepts. Panel A is any exit from employment; Panels B and C split it by destination, so B and C sum to A by construction. Standard errors in parentheses are two-way clustered by primary sampling unit and year-quarter. Stars on the difference in column (3) denote $^{*}p<0.10$, $^{**}p<0.05$, $^{***}p<0.01$; the adjusted levels are probabilities and carry none. The last two columns report the percentage change in each group's adjusted level relative to its own pre-pandemic average.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

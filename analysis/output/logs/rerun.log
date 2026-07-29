@@ -1,0 +1,24 @@
+Mensagen de aviso:
+pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+[06:29:08] === RUN 03_main_estimation.R ===
+[06:29:13] loading cached event-study model
+[06:29:18] sup-t critical value for the 51 quarterly contrasts: 2.667 (pointwise 1.960)
+[06:29:19] wrote tab_main_margins.tex
+[06:29:19] loading cached specification ladder
+[06:29:23] loading cached wild cluster bootstrap p-values
+[06:29:23] wrote tab_spec_ladder.tex
+[06:29:28] wrote tab_vcov_sensitivity.tex
+[06:29:28] 03_main_estimation.R done.
+[06:29:28] === OK 03_main_estimation.R (0.3 min) ===
+[06:29:28] === RUN 07_attrition.R ===
+[06:29:33] household interview position among origins:
+   interview       N
+       <int>   <int>
+1:         1 2614560
+2:         2 2087456
+3:         3 1762447
+4:         4 1469812
+[06:29:35] retention sample: 5,731,020 origins still employed in t+1, household positions 1-3
+[06:29:35] overall one-quarter-ahead match rate: 0.8209
+[06:29:35] strict check (positions 1-2), match rate by education: college=0: 0.8292; college=1: 0.8311
+[06:29:51] fitting retention model ...

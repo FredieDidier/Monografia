@@ -1,0 +1,32 @@
+Source          : /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/output/main_data.parquet
+Origin rows     : 11,491,554
+
+Dropped, position undetermined: 0 (0.000%)
+Quarters        : 2012Q1 to 2024Q4  (52 quarters)
+Individuals     : 3,024,050
+Households      : 1,886,316
+PSUs            : 39,664
+Matched to t+1  : 0.6963
+
+Interview number distribution:
+  1: 2,290,380
+  2: 2,308,574
+  3: 2,307,370
+  4: 2,301,601
+  5: 2,283,629
+
+ESTIMATION SAMPLE: 8,002,128 matched origins
+Weighted exit rate            : 0.0938
+  no college                  : 0.1069
+  college                     : 0.0404
+Weighted E->U rate            : 0.0290
+Weighted E->N rate            : 0.0648
+Weighted college share        : 0.1970
+Weighted informal share       : 0.3972
+
+Missing values in the estimation sample:
+  none
+
+wrote /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/output/analysis_sample.parquet (122.9 MB)
+wrote /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/output/analysis_origins.parquet (179 MB)
+both files read back successfully

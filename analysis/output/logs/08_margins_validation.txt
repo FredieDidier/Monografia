@@ -1,0 +1,8 @@
+Maximum absolute discrepancy between the closed-form margins and marginaleffects::avg_predictions() over 52 quarters:
+  no college: 3.671e-15
+  college   : 3.636e-15
+
+The closed-form result used throughout the paper is
+    m_gq = ybar_q + (g - p_q) * Delta_q,
+which follows from the WLS normal equations because quarter is among the
+absorbed fixed effects, so weighted residuals sum to zero within a quarter.

@@ -1,0 +1,26 @@
+Rotation groups : 13
+Position undetermined: 0 (0.000% of origins)
+Ambiguous ids voided: 933 (5,525 person-quarters)
+Origin rows     : 11,491,554
+Quarters        : 2012Q1 to 2024Q4
+Matched to t+1  : 0.6963
+
+Destination at t+1 among matched origins (weighted):
+  Unemployed: 0.0290
+  Out of labour force: 0.0648
+  Employed: 0.9062
+
+Weighted exit rate         : 0.0938
+  of which to unemployment : 0.0290
+  of which to non-part.    : 0.0648
+
+Match rate by education (weighted):
+  college = 0: 0.6963  (n = 9,595,343)
+  college = 1: 0.7094  (n = 1,896,211)
+
+Match rate into t+1 by interview number:
+  interview 1: 0.8578
+  interview 2: 0.8678
+  interview 3: 0.8719
+  interview 4: 0.8742
+  interview 5: 0.0000

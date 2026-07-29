@@ -1,0 +1,29 @@
+\begin{table}[htbp]
+\centering
+\caption{Sensitivity of the college gap to the variance estimator}
+\label{tab:vcov}
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\toprule
+& Other quarters & Onset 2020Q1 & Mid-pandemic \\
+Clustering & $\delta$ & $\delta+\omega_1$ & $\delta+\omega_2$ \\
+\midrule
+Two-way: PSU and year-quarter & -0.010$^{***}$ & -0.035$^{***}$ & 0.018$^{***}$ \\
+ & (0.001) & (0.001) & (0.002) \\
+PSU & -0.010$^{***}$ & -0.035$^{***}$ & 0.018$^{***}$ \\
+ & (0.000) & (0.003) & (0.001) \\
+Household & -0.010$^{***}$ & -0.035$^{***}$ & 0.018$^{***}$ \\
+ & (0.000) & (0.003) & (0.001) \\
+Individual & -0.010$^{***}$ & -0.035$^{***}$ & 0.018$^{***}$ \\
+ & (0.000) & (0.003) & (0.001) \\
+Two-way: individual and year-quarter & -0.010$^{***}$ & -0.035$^{***}$ & 0.018$^{***}$ \\
+ & (0.001) & (0.001) & (0.002) \\
+Year-quarter & -0.010$^{***}$ & -0.035$^{***}$ & 0.018$^{***}$ \\
+ & (0.001) & (0.001) & (0.002) \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item Notes: All rows report the same point estimates from the full specification, column (6) of Table~\ref{tab:spec_ladder}; only the variance estimator changes. Number of clusters: 39,270 primary sampling units, 1,667,341 households, 3,024,050 individuals, 52 year-quarters. The onset contrast is a case in which no asymptotic cluster-robust variance is adequate: the deviation is identified from a single year-quarter cluster, and the cluster-robust variance is then known to be severely downward biased. The wild cluster bootstrap in Table~\ref{tab:spec_ladder} is the relevant benchmark for it.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

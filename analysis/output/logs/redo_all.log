@@ -1,0 +1,96 @@
+=== regenerating tables and figures (models cached) ===
+Wed Jul 29 15:33:11 -03 2026
+Mensagens de aviso:
+1: pacote 'ggplot2' foi compilado no R vers~ao 4.4.3 
+2: pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+[15:33:12] RUN 02_table_descriptive_statistics.R
+[15:33:36] wrote tab_descriptives.tex
+[15:33:36] wrote tab_sample_by_quarter.tex
+[15:33:36] wrote tab_matching.tex
+[15:33:36] 02_table_descriptive_statistics.R done.
+[15:33:36] OK  02_table_descriptive_statistics.R (0.4 min)
+[15:33:36] RUN 03_main_estimation.R
+[15:33:40] loading cached event study: exit
+[15:33:54] loading cached event study: exit_to_unemployment
+[15:34:08] loading cached event study: exit_to_nonpart
+[15:34:26] sup-t critical value for the 52 quarterly contrasts: 2.707 (pointwise 1.960)
+[15:34:32] wrote tab_main_margins.tex
+[15:34:32] loading cached specification ladder
+[15:34:37] loading cached wild cluster bootstrap p-values
+[15:34:37] wrote tab_spec_ladder.tex
+[15:34:48] wrote tab_vcov_sensitivity.tex
+[15:34:48] 03_main_estimation.R done.
+[15:34:48] OK  03_main_estimation.R (1.2 min)
+[15:34:48] RUN 04_figures_main.R
+[15:34:51] wrote fig_levels.pdf/.png
+[15:34:51] wrote fig_gap.pdf/.png
+[15:34:51] 04_figures_main.R done.
+[15:34:51] OK  04_figures_main.R (0 min)
+[15:34:51] RUN 05_heterogeneity.R
+[15:34:54]   cached: Formal
+[15:34:54]   cached: Informal
+[15:34:54]   cached: Men
+[15:34:54]   cached: Women
+[15:34:54]   cached: White
+[15:34:54]   cached: Non-White
+[15:34:54]   cached: Formal private employee
+[15:34:54]   cached: Informal private employee
+[15:34:54]   cached: Formal public sector
+[15:34:54]   cached: Formal self-employed
+[15:34:54]   cached: Informal self-employed
+[15:34:56] wrote fig_formal_informal.pdf/.png
+[15:34:57] wrote fig_by_demographics.pdf/.png
+[15:34:58] wrote fig_by_position.pdf/.png
+[15:34:58] wrote tab_heterogeneity.tex
+[15:34:58] 05_heterogeneity.R done.
+[15:34:58] OK  05_heterogeneity.R (0.1 min)
+[15:34:58] RUN 06_decomposition.R
+[15:35:00] decomposition over cells: formal x sector x occupation
+[15:35:11]   5,496,521 PSU-quarter-education-cell totals; 100 distinct cells
+[15:35:11]   bootstrapping (500 PSU-level replications) ...
+[15:38:06]   done in 2.9 min
+[15:38:06] decomposition over cells: formal x position_grp x sector x occupation
+[15:38:18]   6,096,137 PSU-quarter-education-cell totals; 382 distinct cells
+[15:38:19]   bootstrapping (500 PSU-level replications) ...
+[15:41:54]   done in 3.6 min
+[15:41:55] wrote fig_decomposition.pdf/.png
+[15:41:55] wrote tab_decomposition.tex
+[15:41:55] 06_decomposition.R done.
+[15:41:55] OK  06_decomposition.R (7 min)
+[15:41:55] RUN 07_attrition.R
+[15:42:00] origins by interview number:
+   interview       n matched
+       <int>   <int>   <num>
+1:         1 2290380  0.8592
+2:         2 2308574  0.8694
+3:         3 2307370  0.8734
+4:         4 2301601  0.8742
+5:         5 2283629  0.0000
+[15:42:21] retention sample: 9,207,925 origins in interviews 1-4
+[15:42:21] overall t -> t+1 match rate: 0.8679
+[15:42:44] loading cached retention propensities
+[15:42:45] retention propensity: min 0.421 median 0.876 max 0.991
+[15:43:09] wrote tab_attrition.tex
+[15:43:09] wrote tab_ipw.tex
+[15:43:10] wrote fig_retention.pdf/.png
+[15:43:10] 07_attrition.R done.
+[15:43:10] OK  07_attrition.R (1.2 min)
+[15:43:10] RUN 08_robustness.R
+[15:43:25]   cached: baseline
+[15:43:25]   cached: prime_age
+[15:43:25]   cached: to_informal
+Error in vapply(pn, function(p) r[[paste0("gap_", p)]], numeric(1)) : 
+  values must be length 1,
+ but FUN(X[[1]]) result is length 0
+Calls: source ... withVisible -> eval -> eval -> unlist -> lapply -> FUN -> vapply
+Al'em disso: Mensagens de aviso:
+1: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+2: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+3: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+4: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+Execuc~ao interrompida
+ABORT

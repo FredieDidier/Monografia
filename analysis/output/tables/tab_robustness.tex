@@ -1,0 +1,28 @@
+\begin{table}[htbp]
+\centering
+\caption{Robustness of the adjusted college gap}
+\label{tab:robustness}
+\begin{threeparttable}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccr}
+\toprule
+Specification & Pre-pandemic & Onset & Mid-pandemic & Post-pandemic & Obs. \\
+\midrule
+Baseline & -0.009$^{***}$ & -0.035$^{***}$ & 0.018$^{***}$ & -0.010$^{***}$ & 8,002,128 \\
+ & (0.001) & (0.001) & (0.001) & (0.001) & \\
+Prime age 25--54 & -0.008$^{***}$ & -0.037$^{***}$ & 0.009$^{***}$ & -0.012$^{***}$ & 5,570,238 \\
+ & (0.001) & (0.001) & (0.001) & (0.001) & \\
+Unweighted & -0.011$^{***}$ & -0.026$^{***}$ & 0.024$^{***}$ & -0.015$^{***}$ & 8,002,128 \\
+ & (0.001) & (0.001) & (0.001) & (0.001) & \\
+Base quarter 2019Q1 & -0.009$^{***}$ & -0.035$^{***}$ & 0.018$^{***}$ & -0.010$^{***}$ & 8,002,128 \\
+ & (0.001) & (0.001) & (0.001) & (0.001) & \\
+Outcome: informal employment in $t+1$ & -0.028$^{***}$ & -0.009$^{***}$ & -0.047$^{***}$ & -0.020$^{***}$ & 8,002,128 \\
+ & (0.002) & (0.002) & (0.002) & (0.002) & \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item Notes: Each row reports survey-weighted average predictive differences in the outcome between workers with and without a college degree, from the full specification of equation~(\ref{eq:es}). The last row replaces the outcome by an indicator for being informally employed in $t+1$ -- a destination state, not a transition, so it includes workers who were already informal in $t$. Standard errors in parentheses are two-way clustered by primary sampling unit and year-quarter. Stars denote $^{*}p<0.10$, $^{**}p<0.05$, $^{***}p<0.01$. Periods are pre-pandemic 2012Q1--2019Q4, onset 2020Q1, mid-pandemic 2020Q2--2021Q3 and post-pandemic 2021Q4--2024Q4.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

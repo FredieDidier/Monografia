@@ -1,0 +1,9 @@
+Overall t -> t+1 match rate (rho): 0.8679
+Source: directly observed in analysis_origins.parquet (stage-3 build).
+Mid-pandemic adjusted gap among matched workers: +0.0177
+Unmatched-worker exit-rate differential needed to zero out the gap: -0.1160
+
+Interpretation: to overturn the mid-pandemic reversal, unmatched college
+workers would have to exit employment by the amount above relative to
+unmatched non-college workers -- opposite in sign to what is observed among
+matched workers, and several times larger.

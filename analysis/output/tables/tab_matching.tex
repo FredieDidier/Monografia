@@ -1,0 +1,26 @@
+\begin{table}[htbp]
+\centering
+\caption{Performance of the stage-3 panel identification}
+\label{tab:matching}
+\begin{threeparttable}
+\begin{tabular}{lccccc}
+\multicolumn{6}{l}{\textit{Panel A. Share linked across at least $k$ interviews (\%)}} \\
+\toprule
+& $k=1$ & $k=2$ & $k=3$ & $k=4$ & $k=5$ \\
+\midrule
+Individuals & 100.0 & 83.3 & 70.6 & 59.2 & 46.0 \\
+Households & 100.0 & 92.8 & 84.9 & 75.4 & 60.8 \\
+\bottomrule
+\addlinespace
+\multicolumn{6}{l}{\textit{Panel B. Share matched into the next quarter, by interview (\%)}} \\
+\toprule
+& From 1st & From 2nd & From 3rd & From 4th & Overall \\
+\midrule
+Employed workers & 85.8 & 86.8 & 87.2 & 87.4 & 86.8 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item Notes: Computed on all quarterly \textit{PNAD Cont\'inua} rotation panels used in the paper. Panel A covers the whole panel population and reports the share of linked units observed in at least $k$ of the five scheduled interviews. Panel B is restricted to workers employed at the interview date and reports the share the algorithm links into the following quarter, by the interview they are observed in; the fifth interview is the last scheduled one and is excluded. Stage 3 links respondents on household, sex and date of birth, donates birth dates across interviews, and resolves fragmented sequences with a graph-theoretic fuzzy match.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

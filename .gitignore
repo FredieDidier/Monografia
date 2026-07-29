@@ -1,51 +1,32 @@
-
-pnad_painel/PNADC_012019_20190729.txt
-pnad_painel/PNADC_012020.txt
-pnad_painel/PNADC_022019.txt
-pnad_painel/PNADC_022020.txt
-pnad_painel/PNADC_032019.txt
-pnad_painel/PNADC_032020.txt
-pnad_painel/PNADC_042019.txt
-pnad_painel/PNADC_042020.txt
-pnad_painel/pnadcontinua/.Rhistory
-pnad_painel/pnadcontinua/Painel_amostra.dta
-pnad_painel/pnadcontinua/Painel_completo.dta
-pnad_painel/pnadcontinua/PNAD_painel_6_rs.dta
-pnad_painel/pnadcontinua/PNAD_painel_7_rs.dta
-pnad_painel/pnadcontinua/PNAD_painel_8_rs.dta
-pnad_painel/pnadcontinua/PNADC2019.dta
-pnad_painel/pnadcontinua/PNADC2020.dta
-
-PNADC2019.dta
-PNADC2020.dta
-Painel_completo.dta
-Raw Data/Painel/pnadcontinua/PNADC2012.dta
-Raw Data/Painel/pnadcontinua/PNADC2013.dta
-Raw Data/Painel/pnadcontinua/PNADC2014.dta
-Raw Data/Painel/pnadcontinua/PNADC2015.dta
-Raw Data/Painel/pnadcontinua/PNADC2016.dta
-Raw Data/Painel/pnadcontinua/PNADC2017.dta
-Raw Data/Painel/pnadcontinua/PNADC2018.dta
-Raw Data/Painel/pnadcontinua/PNADC2021.dta
-Raw Data/PNADC_012012.txt
-Raw Data/PNADC_012013.txt
-*.txt
+# ---- Large data ------------------------------------------------------------
+# Micro-data live in the Dropbox project folder, never in git.
 *.dta
-input/painel_2019.rds
-input/painel_2019-2021.rds
 *.rds
-input/regression.csv
-*.Rhistory
-*.Rproj
+*.parquet
+*.RData
+*.rda
+build/input/
+build/output/
+analysis/output/estimates/
+analysis/tmp/
+
+# ---- R ---------------------------------------------------------------------
+.Rhistory
+.RData
+.Rproj.user/
 *.Rproj.user
-.Rproj.user
-build/input
-build/output
-.DS_Store
+
+# ---- LaTeX -----------------------------------------------------------------
 latex/*.aux
+latex/*.bbl
+latex/*.blg
+latex/*.fdb_latexmk
+latex/*.fls
 latex/*.log
 latex/*.out
-latex/*.pdf
-latex/*.gz
+latex/*.spl
+latex/*.synctex.gz
+latex/*.toc
 
-analysis/tmp/
+# ---- OS --------------------------------------------------------------------
+.DS_Store

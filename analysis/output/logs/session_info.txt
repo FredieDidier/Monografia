@@ -1,0 +1,31 @@
+Software environment
+====================
+
+R version : R version 4.4.2 (2024-10-31)
+Platform  : aarch64-apple-darwin20
+Running   : macOS 26.5.2
+BLAS      : /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib
+fixest threads: 1
+
+Package versions
+----------------
+  data.table         1.18.2.1
+  arrow              21.0.0
+  readstata13        0.11.0
+  fixest             0.12.1
+  marginaleffects    0.24.0
+  fwildclusterboot   0.14.3
+  ggplot2            4.0.2
+  scales             1.4.0
+  haven              2.5.5
+  sandwich           3.1.1
+
+Random number generation
+------------------------
+  RNG kind         : Mersenne-Twister, Inversion, Rejection
+  Global seed      : 20260615
+  Wild bootstrap   : 9999 replications
+  sup-t multiplier : 10000 draws
+  Decomposition    : 500 replications
+
+Generated: 2026-07-29 13:06:51 -03

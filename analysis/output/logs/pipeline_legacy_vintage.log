@@ -1,0 +1,176 @@
+Mensagen de aviso:
+pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+[22:38:46] ROOT    = /Users/fredie/Documents/GitHub/Monografia
+[22:38:46] DROPBOX = /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19
+[22:38:46] analysis sample already built, skipping 01 (delete analysis_sample.parquet to rebuild)
+[22:38:46] ======================================================================
+[22:38:46] RUN  02_table_descriptive_statistics.R
+[22:38:46] ======================================================================
+[22:38:59] wrote tab_descriptives.tex
+[22:39:00] wrote tab_sample_by_quarter.tex
+[22:39:00] wrote tab_matching.tex
+[22:39:00] 02_table_descriptive_statistics.R done.
+[22:39:00] OK   02_table_descriptive_statistics.R  (0.2 min)
+[22:39:00] ======================================================================
+[22:39:00] RUN  03_main_estimation.R
+[22:39:00] ======================================================================
+[22:39:04] fitting event-study model on 7,934,275 observations ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[22:46:22]   done in 7.3 min
+[22:46:31] sup-t critical value for the 51 quarterly contrasts: 2.667 (pointwise 1.960)
+[22:46:32] wrote tab_main_margins.tex
+[22:46:32] fitting spec (1) ...
+[22:46:34] fitting spec (2) ...
+[22:46:36] fitting spec (3) ...
+[22:46:42] fitting spec (4) ...
+[22:46:57] fitting spec (5) ...
+[22:47:33] fitting spec (6) ...
+[22:49:14] wild cluster bootstrap p-values (9,999 replications, clustered by year-quarter) ...
+[22:49:14] wrote tab_spec_ladder.tex
+[22:49:21] wrote tab_vcov_sensitivity.tex
+[22:49:21] 03_main_estimation.R done.
+[22:49:21] OK   03_main_estimation.R  (10.3 min)
+[22:49:21] ======================================================================
+[22:49:21] RUN  04_figures_main.R
+[22:49:21] ======================================================================
+[22:49:22] wrote fig1_adjusted_levels.pdf/.png
+[22:49:22] wrote fig2_adjusted_gap.pdf/.png
+[22:49:22] 04_figures_main.R done.
+[22:49:22] OK   04_figures_main.R  (0 min)
+[22:49:22] ======================================================================
+[22:49:22] RUN  05_heterogeneity.R
+[22:49:22] ======================================================================
+[22:49:26]   fitting Formal (4,313,123 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[22:52:55]     done in 3.5 min
+[22:52:55]   fitting Informal (3,621,152 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[22:55:46]     done in 2.9 min
+[22:55:47]   fitting Men (4,601,877 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[22:59:29]     done in 3.7 min
+[22:59:31]   fitting Women (3,332,398 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[23:02:07]     done in 2.6 min
+[23:02:08]   fitting White (3,355,220 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[23:04:47]     done in 2.7 min
+[23:04:48]   fitting Black or brown (4,513,113 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[23:07:55]     done in 3.1 min
+[23:07:56]   fitting Formal private employee (2,705,663 obs) ...
+The variable 'social_security' has been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[23:09:58]     done in 2 min
+[23:09:59]   fitting Informal private employee (1,684,727 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[23:11:28]     done in 1.5 min
+[23:11:28]   fitting Formal public sector (821,282 obs) ...
+The variable 'social_security' has been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[23:12:00]     done in 0.5 min
+[23:12:00]   fitting Formal self-employed (613,181 obs) ...
+The variables 'temporary' and 'social_security' have been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[23:12:52]     done in 0.9 min
+[23:12:52]   fitting Informal self-employed (1,624,365 obs) ...
+The variables 'temporary' and 'social_security' have been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[23:14:32]     done in 1.7 min
+[23:14:32] wrote fig3_formal_informal.pdf/.png
+[23:14:33] wrote fig4_gap_by_group.pdf/.png
+[23:14:33] wrote tab_heterogeneity.tex
+[23:14:33] 05_heterogeneity.R done.
+[23:14:33] OK   05_heterogeneity.R  (25.2 min)
+[23:14:33] ======================================================================
+[23:14:33] RUN  06_decomposition.R
+[23:14:33] ======================================================================
+[23:14:37] decomposition over cells: formal x sector x occupation
+[23:14:45]   5,429,454 PSU-quarter-education-cell totals; 101 distinct cells
+[23:14:45]   bootstrapping (500 PSU-level replications) ...
+[23:17:02]   done in 2.3 min
+[23:17:02] decomposition over cells: formal x position_grp x sector x occupation
+[23:17:12]   6,002,079 PSU-quarter-education-cell totals; 385 distinct cells
+[23:17:12]   bootstrapping (500 PSU-level replications) ...
+[23:19:56]   done in 2.7 min
+[23:19:57] wrote fig5_decomposition.pdf/.png
+[23:19:57] wrote tab_decomposition.tex
+[23:19:57] 06_decomposition.R done.
+[23:19:57] OK   06_decomposition.R  (5.4 min)
+[23:19:57] ======================================================================
+[23:19:57] RUN  07_attrition.R
+[23:19:57] ======================================================================
+[23:20:00] household interview position among origins:
+   interview       N
+       <int>   <int>
+1:         1 2614560
+2:         2 2087456
+3:         3 1762447
+4:         4 1469812
+[23:20:02] retention sample: 6,464,463 origins in household positions 1-3
+[23:20:02] overall one-quarter-ahead retention: 0.7412
+[23:20:02] strict check (positions 1-2), retention by education: college=0: 0.7351; college=1: 0.7957
+[23:20:21] fitting retention model ...
+[00:00:44] retention propensity: min 0.05 median 0.763 max 0.954
+[00:00:44] re-fitting the event study with inverse-retention weights ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[00:06:32]   done in 5.8 min
+[00:06:35] re-fitting the event study on the retention subsample ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[00:12:46] wrote tab_attrition.tex
+[00:12:46] wrote tab_ipw.tex
+[00:12:47] wrote fig6_retention.pdf/.png
+[00:12:47] 07_attrition.R done.
+[00:12:47] OK   07_attrition.R  (52.8 min)
+[00:12:47] ======================================================================
+[00:12:47] RUN  08_robustness.R
+[00:12:47] ======================================================================
+[00:12:51]   fitting baseline (7,934,275 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[00:20:08]     done in 7.3 min
+[00:20:08]   fitting prime_age (5,518,220 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[00:24:36]     done in 4.5 min
+[00:24:36]   fitting unweighted ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[00:31:55]   fitting with 2019Q1 as the base quarter ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[00:38:54]   fitting to_informal (7,934,275 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[00:45:55]     done in 7 min
+[00:45:55] wrote tab_robustness.tex
+[00:45:55] validating margins against marginaleffects ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+Maximum absolute discrepancy between the closed-form margins and marginaleffects::avg_predictions() over 51 quarters:
+  no college: 1.582e-15
+  college   : 1.485e-15 
+[00:46:54] 08_robustness.R done.
+[00:46:54] OK   08_robustness.R  (34.1 min)
+[00:46:54] ======================================================================
+[00:46:54] RUN  09_session_info.R
+[00:46:54] ======================================================================
+Error in file(filename, "r", encoding = encoding) : 
+  n~ao 'e poss'ivel abrir a conex~ao
+Calls: source -> file
+Al'em disso: Mensagens de aviso:
+1: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+2: Please note that the seeding behavior for random number generation for `boottest()` has changed with
+`fwildclusterboot` version 0.13.
+
+It will no longer be possible to exactly reproduce results produced by versions lower than 0.13.
+
+If your prior results were produced under sufficiently many bootstrap iterations, none of your conclusions
+will change. For more details about this change, please read the notes in
+[news.md](https://cran.r-project.org/web/packages/fwildclusterboot/news/news.html).
+This warning is displayed once per session. 
+3: pacote 'ggplot2' foi compilado no R vers~ao 4.4.3 
+4: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+5: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+6: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+7: In file(filename, "r", encoding = encoding) :
+  n~ao foi poss'ivel abrir o arquivo '/Users/fredie/Documents/GitHub/Monografia/analysis/code/09_session_info.R': No such file or directory
+Execuc~ao interrompida

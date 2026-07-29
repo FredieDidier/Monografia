@@ -1,0 +1,128 @@
+=== STEP 4: analysis ===
+Wed Jul 29 10:45:07 -03 2026
+Mensagens de aviso:
+1: pacote 'ggplot2' foi compilado no R vers~ao 4.4.3 
+2: pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+[10:45:08] ROOT    = /Users/fredie/Documents/GitHub/Monografia
+[10:45:08] DROPBOX = /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19
+[10:45:08] analysis sample is newer than main_data.parquet, skipping 01 (delete analysis_sample.parquet to force a rebuild)
+[10:45:08] ======================================================================
+[10:45:08] RUN  02_table_descriptive_statistics.R
+[10:45:08] ======================================================================
+[10:45:33] wrote tab_descriptives.tex
+[10:45:34] wrote tab_sample_by_quarter.tex
+[10:45:34] wrote tab_matching.tex
+[10:45:34] 02_table_descriptive_statistics.R done.
+[10:45:34] OK   02_table_descriptive_statistics.R  (0.4 min)
+[10:45:34] ======================================================================
+[10:45:34] RUN  03_main_estimation.R
+[10:45:34] ======================================================================
+[10:45:38] fitting event study for exit on 8,002,128 observations ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[10:53:20]   done in 7.7 min
+[10:53:34] fitting event study for exit_to_unemployment on 8,002,128 observations ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:01:12]   done in 7.6 min
+[11:01:27] fitting event study for exit_to_nonpart on 8,002,128 observations ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:09:29]   done in 8 min
+[11:09:47] sup-t critical value for the 52 quarterly contrasts: 2.707 (pointwise 1.960)
+[11:09:51] wrote tab_main_margins.tex
+[11:09:51] fitting spec (1) ...
+[11:09:55] fitting spec (2) ...
+[11:09:59] fitting spec (3) ...
+[11:10:05] fitting spec (4) ...
+[11:10:22] fitting spec (5) ...
+[11:11:00] fitting spec (6) ...
+[11:12:43] wild cluster bootstrap p-values (9,999 replications, clustered by year-quarter) for the preferred specification ...
+Too guarantee reproducibility, don't forget to set a global random seed **both** via `set.seed()` and
+`dqrng::dqset.seed()`.
+This message is displayed once every 8 hours.
+[11:19:52]   done in 7.2 min
+[11:19:52] wrote tab_spec_ladder.tex
+[11:20:04] wrote tab_vcov_sensitivity.tex
+[11:20:04] 03_main_estimation.R done.
+[11:20:04] OK   03_main_estimation.R  (34.5 min)
+[11:20:04] ======================================================================
+[11:20:04] RUN  04_figures_main.R
+[11:20:04] ======================================================================
+[11:20:06] wrote fig_levels.pdf/.png
+[11:20:07] wrote fig_gap.pdf/.png
+[11:20:07] 04_figures_main.R done.
+[11:20:07] OK   04_figures_main.R  (0 min)
+[11:20:07] ======================================================================
+[11:20:07] RUN  05_heterogeneity.R
+[11:20:07] ======================================================================
+[11:20:09]   fitting Formal (4,363,453 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:23:38]     done in 3.5 min
+[11:23:39]   fitting Informal (3,638,675 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:26:34]     done in 2.9 min
+[11:26:35]   fitting Men (4,656,560 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:29:49]     done in 3.2 min
+[11:29:50]   fitting Women (3,345,568 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:32:19]     done in 2.5 min
+[11:32:20]   fitting White (3,419,874 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:35:01]     done in 2.7 min
+[11:35:02]   fitting Non-White (4,582,254 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:38:05]     done in 3 min
+[11:38:06]   fitting Formal private employee (2,679,329 obs) ...
+The variable 'social_security' has been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:40:07]     done in 2 min
+[11:40:08]   fitting Informal private employee (1,674,121 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:41:36]     done in 1.5 min
+[11:41:36]   fitting Formal public sector (818,008 obs) ...
+The variable 'social_security' has been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:42:10]     done in 0.6 min
+[11:42:11]   fitting Formal self-employed (624,666 obs) ...
+The variables 'temporary' and 'social_security' have been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:43:05]     done in 0.9 min
+[11:43:06]   fitting Informal self-employed (1,621,692 obs) ...
+The variables 'temporary' and 'social_security' have been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[11:44:45]     done in 1.7 min
+[11:44:46] wrote fig_formal_informal.pdf/.png
+[11:44:47] wrote fig_by_demographics.pdf/.png
+[11:44:47] wrote fig_by_position.pdf/.png
+[11:44:47] wrote tab_heterogeneity.tex
+[11:44:47] 05_heterogeneity.R done.
+[11:44:47] OK   05_heterogeneity.R  (24.7 min)
+[11:44:47] ======================================================================
+[11:44:47] RUN  06_decomposition.R
+[11:44:47] ======================================================================
+[11:44:50] decomposition over cells: formal x sector x occupation
+[11:44:59]   5,496,521 PSU-quarter-education-cell totals; 100 distinct cells
+[11:44:59]   bootstrapping (500 PSU-level replications) ...
+[11:48:08]   done in 3.2 min
+[11:48:09] decomposition over cells: formal x position_grp x sector x occupation
+[11:48:22]   6,096,137 PSU-quarter-education-cell totals; 382 distinct cells
+[11:48:23]   bootstrapping (500 PSU-level replications) ...
+[11:52:13]   done in 3.8 min
+[11:52:16] wrote fig_decomposition.pdf/.png
+[11:52:16] wrote tab_decomposition.tex
+[11:52:16] 06_decomposition.R done.
+[11:52:16] OK   06_decomposition.R  (7.5 min)
+[11:52:16] ======================================================================
+[11:52:16] RUN  07_attrition.R
+[11:52:16] ======================================================================
+[11:52:22] origins by interview number:
+   interview       n matched
+       <int>   <int>   <num>
+1:         1 2290380  0.8592
+2:         2 2308574  0.8694
+3:         3 2307370  0.8734
+4:         4 2301601  0.8742
+5:         5 2283629  0.0000
+[11:52:45] retention sample: 9,207,925 origins in interviews 1-4
+[11:52:45] overall t -> t+1 match rate: 0.8679
+[11:53:08] fitting retention model ...
+ABORT: analysis failed
