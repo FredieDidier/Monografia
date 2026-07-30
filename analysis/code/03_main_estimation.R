@@ -126,7 +126,7 @@ pm <- fread(file.path(DIR_EST, "adjusted_margins_periods_exit.csv"))
 fwrite(pm, file.path(DIR_EST, "adjusted_margins_periods.csv"))
 
 write_tex(c(
-  "\\begin{table}[htbp]",
+  "\\begin{table}[H]",
   "\\centering",
   "\\caption{Adjusted employment-exit probabilities and the college gap, by destination and period}",
   "\\label{tab:main_margins}",
@@ -302,7 +302,7 @@ yesno <- function(idx) sapply(SPECS, function(s)
   if (all(idx %in% c(s$fe, s$x))) "Yes" else "--")
 
 write_tex(c(
-  "\\begin{table}[htbp]",
+  "\\begin{table}[H]",
   "\\centering",
   "\\caption{The college gap in employment exits across specifications}",
   "\\label{tab:spec_ladder}",
@@ -397,7 +397,7 @@ vrows <- rbindlist(lapply(names(VCOVS), function(nm) {
 fwrite(vrows, file.path(DIR_EST, "vcov_sensitivity.csv"))
 
 write_tex(c(
-  "\\begin{table}[htbp]",
+  "\\begin{table}[H]",
   "\\centering",
   "\\caption{Sensitivity of the college gap to the variance estimator}",
   "\\label{tab:vcov}",

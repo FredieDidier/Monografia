@@ -126,7 +126,7 @@ blk <- function(res, title) {
 }
 
 write_tex(c(
-  "\\begin{table}[htbp]",
+  "\\begin{table}[H]",
   "\\centering",
   "\\caption{Composition versus within-cell decomposition of the education gap}",
   "\\label{tab:decomposition}",
@@ -153,7 +153,7 @@ write_tex(c(
          "components weighted by the quarter's share of the total survey weight. ",
          "Brackets report 95\\% percentile intervals from ", B_DECOMP,
          " bootstrap replications that draw exponential multipliers at the ",
-         "primary-sampling-unit-by-quarter level (seed ", SEED, "). Stars denote ",
+         "primary-sampling-unit-by-quarter level. Stars denote ",
          "$^{*}p<0.10$, $^{**}p<0.05$, $^{***}p<0.01$ on the bootstrap standard ",
          "error of the entry. ", PERIOD_NOTE),
   "\\end{tablenotes}",

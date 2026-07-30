@@ -1,25 +1,26 @@
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{The adjusted college gap under inverse-retention-probability weighting}
 \label{tab:ipw}
 \begin{threeparttable}
-\begin{tabular}{lcc}
+\begin{tabular}{lccc}
 \toprule
-& Survey weights & Survey $\times$ inverse-retention weights \\
-Period & (1) & (2) \\
+& Survey weights & Survey $\times$ inverse- & Difference \\
+& & retention weights & (2) $-$ (1) \\
+Period & (1) & (2) & (3) \\
 \midrule
-Pre-pandemic & -0.009$^{***}$ & -0.009$^{***}$ \\
- & (0.001) & (0.001) \\
-Onset & -0.035$^{***}$ & -0.035$^{***}$ \\
- & (0.001) & (0.001) \\
-Mid-pandemic & 0.018$^{***}$ & 0.018$^{***}$ \\
- & (0.001) & (0.001) \\
-Post-pandemic & -0.010$^{***}$ & -0.010$^{***}$ \\
- & (0.001) & (0.001) \\
+Pre-pandemic & -0.0089$^{***}$ & -0.0089$^{***}$ & -0.0001 \\
+ & (0.0013) & (0.0014) & \\
+Onset & -0.0354$^{***}$ & -0.0353$^{***}$ & 0.0000 \\
+ & (0.0014) & (0.0014) & \\
+Mid-pandemic & 0.0177$^{***}$ & 0.0179$^{***}$ & 0.0003 \\
+ & (0.0013) & (0.0014) & \\
+Post-pandemic & -0.0104$^{***}$ & -0.0103$^{***}$ & 0.0001 \\
+ & (0.0013) & (0.0013) & \\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}[flushleft]\footnotesize
-\item Notes: Both columns are estimated on the matched origins of the retention sample (8,002,128 person-quarters) with the full specification, so the two differ only in the weights. Column (2) multiplies the survey weight by the inverse of a predicted probability of being matched into $t+1$, trimmed at 0.05, from a separate logit per year-quarter on education, demographics, job characteristics and state, occupation and sector fixed effects. Standard errors are two-way clustered by primary sampling unit and year-quarter. Periods are pre-pandemic 2012Q1--2019Q4, onset 2020Q1, mid-pandemic 2020Q2--2021Q3 and post-pandemic 2021Q4--2024Q4.
+\item Notes: Both columns are estimated on the matched origins of the retention sample (8,002,128 person-quarters) with the full specification, so the two differ only in the weights. Column (2) multiplies the survey weight by the inverse of a predicted probability of being matched into $t+1$, trimmed at 0.05, from a separate logit per year-quarter on education, demographics, job characteristics and state, occupation and sector fixed effects. Column (3) reports the difference between the two point estimates. Entries are given to four decimals because re-weighting moves the gap by less than half a thousandth. Standard errors are two-way clustered by primary sampling unit and year-quarter. Periods are pre-pandemic 2012Q1--2019Q4, onset 2020Q1, mid-pandemic 2020Q2--2021Q3 and post-pandemic 2021Q4--2024Q4.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}

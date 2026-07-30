@@ -186,7 +186,7 @@ for (i in seq_len(nrow(wide))) {
 }
 
 write_tex(c(
-  "\\begin{table}[htbp]",
+  "\\begin{table}[H]",
   "\\centering",
   "\\caption{Adjusted college gap in employment exits, by labour market segment}",
   "\\label{tab:heterogeneity}",

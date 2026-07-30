@@ -88,7 +88,7 @@ body <- append(body, "\\addlinespace",
                after = which(names(VARS) == "informal"))
 
 tex <- c(
-  "\\begin{table}[htbp]",
+  "\\begin{table}[H]",
   "\\centering",
   "\\caption{Descriptive statistics}",
   "\\label{tab:descriptives}",
@@ -151,7 +151,7 @@ if (length(cell) > 2L * half)                       # odd number of quarters
 qcol <- "Quarter $t$ & Person-quarters & PSUs & College & Exit rate"
 
 write_tex(c(
-  "\\begin{table}[htbp]",
+  "\\begin{table}[H]",
   "\\centering",
   "\\caption{Sample composition by quarter}",
   "\\label{tab:sample_by_quarter}",
@@ -208,7 +208,7 @@ mbi_row <- sprintf("Employed workers & %s \\\\",
                    collapse = " & "))
 
 write_tex(c(
-  "\\begin{table}[htbp]",
+  "\\begin{table}[H]",
   "\\centering",
   "\\caption{Performance of the stage-3 panel identification}",
   "\\label{tab:matching}",

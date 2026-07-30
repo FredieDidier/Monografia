@@ -114,7 +114,7 @@ rows <- unlist(lapply(seq_len(nrow(wide)), function(i) {
 }))
 
 write_tex(c(
-  "\\begin{table}[htbp]",
+  "\\begin{table}[H]",
   "\\centering",
   "\\caption{Robustness of the adjusted college gap}",
   "\\label{tab:robustness}",

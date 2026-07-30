@@ -237,7 +237,7 @@ rows_bal <- vapply(seq_len(nrow(bal)), function(i) {
 }, character(1))
 
 write_tex(c(
-  "\\begin{table}[htbp]",
+  "\\begin{table}[H]",
   "\\centering",
   "\\caption{Panel retention and selection into the matched sample}",
   "\\label{tab:attrition}",
@@ -272,21 +272,26 @@ write_tex(c(
 ), file.path(DIR_TABLES, "tab_attrition.tex"))
 
 write_tex(c(
-  "\\begin{table}[htbp]",
+  "\\begin{table}[H]",
   "\\centering",
   "\\caption{The adjusted college gap under inverse-retention-probability weighting}",
   "\\label{tab:ipw}",
   "\\begin{threeparttable}",
-  "\\begin{tabular}{lcc}",
+  "\\begin{tabular}{lccc}",
   "\\toprule",
-  "& Survey weights & Survey $\\times$ inverse-retention weights \\\\",
-  "Period & (1) & (2) \\\\",
+  "& Survey weights & Survey $\\times$ inverse- & Difference \\\\",
+  "& & retention weights & (2) $-$ (1) \\\\",
+  "Period & (1) & (2) & (3) \\\\",
   "\\midrule",
+  # Four decimals, not the three used elsewhere. Re-weighting moves the gap by
+  # about 2e-4, so at three decimals the two columns print identically and the
+  # table looks like a copy-paste error rather than the intended null result.
   unlist(lapply(seq_len(nrow(cmp)), function(i) {
     z <- cmp[i]
-    c(sprintf("%s & %s & %s \\\\", z$period,
-              fmt_est(z$gap_base, z$se_base), fmt_est(z$gap_ipw, z$se_ipw)),
-      sprintf(" & %s & %s \\\\", fmt_se(z$se_base), fmt_se(z$se_ipw)))
+    c(sprintf("%s & %s & %s & %s \\\\", z$period,
+              fmt_est(z$gap_base, z$se_base, 4), fmt_est(z$gap_ipw, z$se_ipw, 4),
+              fmt_num(z$gap_ipw - z$gap_base, 4)),
+      sprintf(" & %s & %s & \\\\", fmt_se(z$se_base, 4), fmt_se(z$se_ipw, 4)))
   })),
   "\\bottomrule",
   "\\end{tabular}",
@@ -297,7 +302,10 @@ write_tex(c(
          "multiplies the survey weight by the inverse of a predicted probability ",
          "of being matched into $t+1$, trimmed at 0.05, from a separate logit ",
          "per year-quarter on education, demographics, job characteristics and ",
-         "state, occupation and sector fixed effects. Standard errors are two-way ",
+         "state, occupation and sector fixed effects. Column (3) reports the ",
+         "difference between the two point estimates. Entries are given to four ",
+         "decimals because re-weighting moves the gap by less than half a ",
+         "thousandth. Standard errors are two-way ",
          "clustered by primary sampling unit and year-quarter. ", PERIOD_NOTE),
   "\\end{tablenotes}",
   "\\end{threeparttable}",
