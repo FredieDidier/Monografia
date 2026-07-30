@@ -134,7 +134,7 @@ write_tex(c(
   "\\begin{tabular}{lcccc}",
   "\\toprule",
   "& Total gap & Composition & Within-cell & Within-cell \\\\",
-  "Period & $\\Delta_q$ & component & component & share (\\%) \\\\",
+  "Period & $\\Delta^{\\mathrm{raw}}_q$ & component & component & share (\\%) \\\\",
   "\\midrule",
   blk(main, sprintf("Cells: formality $\\times$ sector $\\times$ occupation (%d cells)",
                     main$ncell)),

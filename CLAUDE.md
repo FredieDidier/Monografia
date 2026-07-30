@@ -222,7 +222,7 @@ is a deviation from the immediate pre-pandemic gap. Periods: onset `Q_ONSET =
 
 **Inference.** Default variance: **two-way clustered by PSU and year-quarter**.
 `tab_vcov_sensitivity` reports clustering by PSU, household, individual,
-individual × year-quarter, and year-quarter alone. Because 51 quarterly
+individual × year-quarter, and year-quarter alone. Because 52 quarterly
 contrasts are reported, **sup-*t* simultaneous bands** are computed by
 multiplier bootstrap (10,000 draws, critical value ≈2.71) alongside the
 pointwise intervals. **Wild cluster bootstrap** *p*-values clustered by

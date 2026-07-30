@@ -96,7 +96,8 @@ fit_es <- function(d, outcome = "exit",
 #' Extract the quarter-by-quarter adjusted education gaps and their covariance.
 #'
 #' @return list(q, est, se, V) where `V` is the full covariance matrix of the
-#'   51 gaps, needed for the simultaneous bands.
+#'   52 gaps (the reference quarter included, where Delta = delta), needed
+#'   for the simultaneous bands.
 es_gaps <- function(m, quarters, ref = REF_QUARTER) {
   b  <- stats::coef(m)
   V  <- stats::vcov(m)
@@ -127,7 +128,7 @@ es_gaps <- function(m, quarters, ref = REF_QUARTER) {
 #' sup-t simultaneous critical value via the multiplier bootstrap.
 #'
 #' Draws from N(0, V) and takes the (1 - alpha) quantile of max_q |z_q| / se_q.
-#' Used instead of 51 separate pointwise intervals (Comment 3).
+#' Used instead of 52 separate pointwise intervals (Comment 3).
 supt_crit <- function(V, se, alpha = 0.05, B = B_SUPT, seed = SEED) {
   set.seed(seed)
   ev <- eigen((V + t(V)) / 2, symmetric = TRUE)
