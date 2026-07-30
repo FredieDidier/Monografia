@@ -74,9 +74,10 @@ committed; `.gitignore` blocks `*.parquet`, `*.dta`, `*.rds`, `*.RData`.
   so the legacy path needs the file regenerated before it will run.
 - If Dropbox is online-only, materialise a file before reading:
   `cat main_data.parquet > /dev/null`.
-- `analysis/input/analysis_sample.parquet` is a stale local copy from before the
-  paths moved; nothing reads it (`ANALYSIS_PQ` resolves under `DIR_DATA`).
-
+- `analysis/input/` holds **only** the committed matching CSVs. No parquet
+  belongs there: `ANALYSIS_PQ` and `ORIGINS_PQ` always resolve under `DIR_DATA`
+  (Dropbox), including in `dictionary/build_dictionary.R`.
+  
 ### Panel identification (stage 3)
 
 `build_pnadc_panel(panel = "advanced_3")`, the datazoom.social **stage-3**
@@ -302,6 +303,4 @@ algorithm, kept so the two vintages can be compared.
 - Build, analysis and manuscript all run end to end on the stage-3 vintage; the
   three referee-flagged gaps (E→U vs E→N, unmatched origins, `UPA`/`Estrato`/
   `V1016`) are closed.
-- Open: Zenodo deposit on acceptance (README promises it); regenerate
-  `analysis_sample_legacy.parquet` if the vintage comparison is to be re-run;
-  `analysis/input/analysis_sample.parquet` is a stale copy that can be deleted.
+- Open: Zenodo deposit on acceptance (README promises it).
