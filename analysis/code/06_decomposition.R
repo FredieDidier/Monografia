@@ -1,7 +1,7 @@
 # =============================================================================
 # 06_decomposition.R
 #
-# Comment 6. Splits the raw education gap in employment exits into
+# Splits the unconditional education gap in employment exits into
 #
 #   Gap_q = sum_k (s_Ckq - s_Nkq) m_Nkq  +  sum_k s_Ckq (m_Ckq - m_Nkq)
 #           \_______ composition _______/    \_______ within-cell _______/
@@ -46,6 +46,17 @@ PERIOD_NOTE <- sprintf(
 CELL_MAIN <- c("formal", "sector", "occupation")
 CELL_ALT  <- c("formal", "position_grp", "sector", "occupation")
 
+# Size of the full crossing, for the table note. `formal` is nested inside
+# `position_grp` (every position is already labelled formal or informal), so
+# multiplying the two would count each combination twice.
+n_cross <- function(vars) {
+  if (all(c("formal", "position_grp") %in% vars)) vars <- setdiff(vars, "formal")
+  prod(vapply(vars, function(v) {
+    x <- d[[v]]
+    if (is.factor(x)) nlevels(x) else uniqueN(x)
+  }, numeric(1)))
+}
+
 run_decomp <- function(cell_vars, tag) {
   msg("decomposition over cells: ", paste(cell_vars, collapse = " x "))
   agg <- decomp_cells(d, cell_vars, "exit")
@@ -56,7 +67,21 @@ run_decomp <- function(cell_vars, tag) {
   dq  <- decompose_from_cells(agg)
   dp  <- decomp_periods(dq, qw, PERIODS)
 
-  msg("  bootstrapping (", B_DECOMP, " PSU-level replications) ...")
+  # Cells occupied by only one education group have no counterfactual rate for
+  # the other, and decompose_from_cells() carries the missing rate as zero. The
+  # gap identity still closes, because the absent group's share is zero, but the
+  # split between the two components is arbitrary in those cells: the whole
+  # contribution lands on the within-cell term. Report how much weight that is,
+  # so the reader can see the decomposition is not resting on it.
+  sup <- agg[, .(sw = sum(sw)), by = .(qtr, college, cell)]
+  sup <- dcast(sup, qtr + cell ~ college, value.var = "sw", fill = 0)
+  setnames(sup, c("0", "1"), c("sw_N", "sw_C"), skip_absent = TRUE)
+  one_group <- sup[sw_N == 0 | sw_C == 0, sum(sw_N + sw_C)] /
+               sup[, sum(sw_N + sw_C)]
+  msg("  weight in cells observed for one education group only: ",
+      formatC(100 * one_group, format = "f", digits = 2), "%")
+
+  msg("  two-way bootstrap (", B_DECOMP, " replications, PSU x quarter) ...")
   t0 <- Sys.time()
   bs <- decompose_boot(agg, qw, PERIODS, B = B_DECOMP, seed = SEED)
   msg("  done in ", round(as.numeric(Sys.time() - t0, units = "mins"), 1), " min")
@@ -64,7 +89,8 @@ run_decomp <- function(cell_vars, tag) {
   out <- merge(dp, bs, by = "period", sort = FALSE)
   fwrite(dq, file.path(DIR_EST, sprintf("decomposition_quarterly_%s.csv", tag)))
   fwrite(out, file.path(DIR_EST, sprintf("decomposition_periods_%s.csv", tag)))
-  list(quarterly = dq, periods = out, ncell = uniqueN(agg$cell))
+  list(quarterly = dq, periods = out, ncell = uniqueN(agg$cell),
+       one_group = one_group)
 }
 
 main <- run_decomp(CELL_MAIN, "main")
@@ -109,11 +135,21 @@ f3 <- function(x) fmt_num(x, 3)
 # text quotes for the same quantity.
 f1 <- function(x) fmt_num(x, 1)
 
+# The onset period is a single quarter. Resampling quarters cannot say anything
+# about the uncertainty of a one-quarter average -- the draws that retain 2020Q1
+# differ only in their PSU draw -- so its point estimates are reported without
+# an interval or stars rather than with ones that would overstate what is known.
+SINGLE_Q <- names(PERIODS)[lengths(PERIODS) == 1L]
+
 blk <- function(res, title) {
   r <- res$periods
   c(sprintf("\\multicolumn{5}{l}{\\textit{%s}} \\\\", title),
     unlist(lapply(seq_len(nrow(r)), function(i) {
       z <- r[i]
+      if (z$period %in% SINGLE_Q)
+        return(sprintf("\\quad %s & %s & %s & %s & %s \\\\", z$period,
+                       f3(z$gap_raw), f3(z$composition), f3(z$within),
+                       f1(100 * z$within / z$gap_raw)))
       c(sprintf("\\quad %s & %s & %s & %s & %s \\\\", z$period,
                 fmt_est(z$gap_raw, z$gap_se),
                 fmt_est(z$composition, z$composition_se),
@@ -151,14 +187,114 @@ write_tex(c(
          "within-cell component holds the college allocation fixed and varies only ",
          "the exit rates inside cells. Period figures are averages of the quarterly ",
          "components weighted by the quarter's share of the total survey weight. ",
-         "Brackets report 95\\% percentile intervals from ", B_DECOMP,
-         " bootstrap replications that draw exponential multipliers at the ",
-         "primary-sampling-unit-by-quarter level. Stars denote ",
+         "A cell is a combination of the listed variables that some worker ",
+         "occupies: formality is the two-way formal / informal split, sector the ",
+         "five broad activity groups, occupation the ten COD major groups and ",
+         "position the eight labour-market categories of ",
+         "Table~\\ref{tab:heterogeneity} (private employee, self-employed, ",
+         "employer and public sector, each formal or informal). The cell counts ",
+         "are the combinations actually observed; the remaining ",
+         sprintf("%s and %s", fmt_n(n_cross(CELL_MAIN) - main$ncell),
+                              fmt_n(n_cross(CELL_ALT)  - alt$ncell)),
+         " combinations the crossings allow are empty. ",
+         sprintf("Cells occupied by only one education group hold %.1f%% and %.1f%% ",
+                 100 * main$one_group, 100 * alt$one_group),
+         "of the survey weight under the two definitions; they have no ",
+         "counterfactual rate for the absent group, so their whole contribution ",
+         "falls on the within-cell component. Brackets report 95\\% percentile ",
+         "intervals from ", B_DECOMP, " replications of a two-way pigeonhole ",
+         "bootstrap that resamples primary sampling units and quarters ",
+         "independently. Stars denote ",
          "$^{*}p<0.10$, $^{**}p<0.05$, $^{***}p<0.01$ on the bootstrap standard ",
-         "error of the entry. ", PERIOD_NOTE),
+         "error of the entry. The onset is a single quarter, for which a ",
+         "bootstrap over quarters carries no information, so it is reported ",
+         "without an interval. ", PERIOD_NOTE),
   "\\end{tablenotes}",
   "\\end{threeparttable}",
   "\\end{table}"
 ), file.path(DIR_TABLES, "tab_decomposition.tex"))
+
+# -----------------------------------------------------------------------------
+# Reference choice, common support and reallocation
+# -----------------------------------------------------------------------------
+# The headline decomposition fixes one reference and keeps every cell. Three
+# questions follow, and the paper should answer them rather than leave them to a
+# referee: does the split survive the opposite convention, does it survive
+# dropping the cells only one group occupies, and -- the claim the decomposition
+# cannot make on its own -- which group actually reallocated.
+agg_main <- decomp_cells(d, CELL_MAIN, "exit")
+qw_main  <- agg_main[, .(sw = sum(sw)), by = qtr]
+
+VARIANTS <- list(
+  "Baseline (non-college rates, college shares)" =
+    list(ref = "noncollege", cs = FALSE),
+  "College rates as reference"                   =
+    list(ref = "college",    cs = FALSE),
+  "Symmetric (average rates and shares)"         =
+    list(ref = "symmetric",  cs = FALSE),
+  "Common support only"                          =
+    list(ref = "noncollege", cs = TRUE)
+)
+
+var_tab <- rbindlist(lapply(names(VARIANTS), function(nm) {
+  v  <- VARIANTS[[nm]]
+  dq <- decompose_variant(agg_main, ref = v$ref, common_support = v$cs)
+  dp <- decomp_periods(dq, qw_main, PERIODS)
+  dp[, variant := nm][]
+}))
+fwrite(var_tab, file.path(DIR_EST, "decomposition_variants.csv"))
+
+reloc <- reallocation_index(agg_main,
+                            q_pre = QUARTERS[QUARTERS <= 20194L],
+                            q_mid = Q_MID)
+fwrite(reloc, file.path(DIR_EST, "reallocation_index.csv"))
+msg("reallocation index  R_college = ", fmt_num(reloc[college == 1L, R], 5),
+    "   R_noncollege = ", fmt_num(reloc[college == 0L, R], 5))
+
+ROWS <- c("Pre-pandemic", "Mid-pandemic")
+write_tex(c(
+  "\\begin{table}[H]",
+  "\\centering",
+  "\\caption{Decomposition under alternative references and on common support}",
+  "\\label{tab:decomp_variants}",
+  "\\begin{threeparttable}",
+  "\\begin{tabular}{lcccc}",
+  "\\toprule",
+  "& \\multicolumn{2}{c}{Pre-pandemic} & \\multicolumn{2}{c}{Mid-pandemic} \\\\",
+  "\\cmidrule(lr){2-3}\\cmidrule(lr){4-5}",
+  "Convention & Composition & Within-cell & Composition & Within-cell \\\\",
+  "\\midrule",
+  unlist(lapply(names(VARIANTS), function(nm) {
+    z <- var_tab[variant == nm]
+    g <- function(p, col) f3(z[period == p][[col]])
+    sprintf("%s & %s & %s & %s & %s \\\\", nm,
+            g("Pre-pandemic", "composition"), g("Pre-pandemic", "within"),
+            g("Mid-pandemic", "composition"), g("Mid-pandemic", "within"))
+  })),
+  "\\midrule",
+  "\\multicolumn{5}{l}{\\textit{Reallocation index, pre-pandemic to mid-pandemic}} \\\\",
+  sprintf("\\quad Graduates ($R_C$) & \\multicolumn{4}{c}{%s} \\\\",
+          fmt_num(reloc[college == 1L, R], 5)),
+  sprintf("\\quad Non-graduates ($R_N$) & \\multicolumn{4}{c}{%s} \\\\",
+          fmt_num(reloc[college == 0L, R], 5)),
+  "\\bottomrule",
+  "\\end{tabular}",
+  "\\begin{tablenotes}[flushleft]\\footnotesize",
+  paste0("\\item Notes: Cells are formality $\\times$ sector $\\times$ ",
+         "occupation throughout. The baseline row is the convention of ",
+         "equation~\\eqref{eq:decomp}; the next two replace it with the opposite ",
+         "and the symmetric convention. The last row keeps only cells that both ",
+         "education groups occupy, renormalising each group's shares within the ",
+         "quarter, so its total gap differs from the others by the amount the ",
+         "dropped cells carried. The reallocation index is ",
+         "$R_g = \\sum_k (s_{gk,\\text{mid}} - s_{gk,\\text{pre}})\\bar m_{k,\\text{pre}}$, ",
+         "with $\\bar m_{k,\\text{pre}}$ the pre-pandemic exit rate of cell $k$ ",
+         "pooled across groups: it holds rates fixed and lets only allocation ",
+         "move, so $R_g > 0$ means group $g$ shifted towards cells that were ",
+         "riskier before the pandemic. ", PERIOD_NOTE),
+  "\\end{tablenotes}",
+  "\\end{threeparttable}",
+  "\\end{table}"
+), file.path(DIR_TABLES, "tab_decomp_variants.tex"))
 
 msg("06_decomposition.R done.")

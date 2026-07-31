@@ -1,0 +1,5 @@
+delta=none
+mar=0.040
+at=--
+floor=0.014
+deltamin=-8

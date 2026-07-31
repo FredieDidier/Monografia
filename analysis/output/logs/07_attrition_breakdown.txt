@@ -1,9 +1,8 @@
-Overall t -> t+1 match rate (rho): 0.8679
-Source: directly observed in analysis_origins.parquet (stage-3 build).
-Mid-pandemic adjusted gap among matched workers: +0.0177
-Unmatched-worker exit-rate differential needed to zero out the gap: -0.1160
+Mid-pandemic retention: college 0.8757, non-college 0.8405
+Mid-pandemic raw exit rate among matched: college 0.0307, non-college 0.0703
+Raw all-origin gap if unmatched behave like matched: -0.0396
 
-Interpretation: to overturn the mid-pandemic reversal, unmatched college
-workers would have to exit employment by the amount above relative to
-unmatched non-college workers -- opposite in sign to what is observed among
-matched workers, and several times larger.
+The zero-gap frontier is written to estimates/attrition_frontier.csv and
+plotted as fig_attrition_frontier. It replaces the single-rho breakdown
+value reported previously, which assumed a common retention rate across
+education groups and applied a raw-rate identity to an adjusted contrast.

@@ -1,0 +1,30 @@
+Mensagens de aviso:
+1: pacote 'ggplot2' foi compilado no R vers~ao 4.4.3 
+2: pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+[07:28:13] origins with a scheduled t+1: 9,207,925 (unmatched: 1,205,797)
+[07:28:14]   imputation model, college = 0
+[07:34:14]   imputation model, college = 1
+[07:35:27]   imputed 1,205,797 unmatched outcomes
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[07:44:09]   delta = 0.0000  ->  mid gap = 0.01878
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[07:54:11]   delta = -0.2500  ->  mid gap = 0.01782
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[08:03:59]   delta = -0.5000  ->  mid gap = 0.01705
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[08:13:19]   delta = -1.0000  ->  mid gap = 0.01592
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[08:22:43]   delta = -2.0000  ->  mid gap = 0.01474
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[08:31:24]   delta = -4.0000  ->  mid gap = 0.01412
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[08:40:23]   delta = -8.0000  ->  mid gap = 0.01402
+[08:40:23] no tipping point within delta > -8
+[08:40:23] tipping delta =    NA  (unmatched graduates' exit rate 0.0399 ->    NA)
+[08:40:23] wrote tab_tipping.tex
+[08:40:23] 12_tipping_point.R done.
+Mensagens de aviso:
+1: pacote 'ggplot2' foi compilado no R vers~ao 4.4.3 
+2: pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+[08:40:38] wrote numbers.tex
+[08:40:38] 09_paper_numbers.R done (147 macros).

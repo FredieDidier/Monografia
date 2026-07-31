@@ -14,9 +14,11 @@ SEED <- 20260615L
 set.seed(SEED)
 
 # Bootstrap replications
-B_WILD  <- 9999L   # wild cluster bootstrap p-values (Comment 3)
+B_WILD  <- 9999L   # wild cluster bootstrap p-values, clustered by year-quarter
 B_SUPT  <- 10000L  # multiplier bootstrap for sup-t simultaneous bands
-B_DECOMP <- 500L   # cluster bootstrap for the decomposition standard errors
+B_DECOMP <- 2000L  # two-way pigeonhole bootstrap for the decomposition. 500
+                   # was thin for 95% percentile intervals; the two-way draw
+                   # also loses the replications that miss a period's quarters.
 
 options(
   stringsAsFactors = FALSE,
@@ -76,6 +78,10 @@ ANALYSIS_PQ <- file.path(
 
 # Small, committed inputs (matching diagnostics).
 DIR_INPUT <- file.path(ROOT, "analysis", "input")
+
+# The analysis scripts themselves, so the master script can compare an output's
+# timestamp against the code that produced it, not only against its input.
+DIR_CODE  <- file.path(ROOT, "analysis", "code")
 
 # Outputs consumed by latex/paper.tex
 DIR_TABLES  <- file.path(ROOT, "analysis", "output", "tables")

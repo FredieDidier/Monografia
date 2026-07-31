@@ -1,6 +1,6 @@
 Maximum absolute discrepancy between the closed-form margins and marginaleffects::avg_predictions() over 52 quarters:
-  no college: 3.671e-15
-  college   : 3.636e-15
+  no college: 3.587e-15
+  college   : 3.678e-15
 
 The closed-form result used throughout the paper is
     m_gq = ybar_q + (g - p_q) * Delta_q,

@@ -24,7 +24,16 @@ rt <- fread(file.path(DIR_EST, "retention_by_period.csv"))
 ip <- fread(file.path(DIR_EST, "attrition_ipw_comparison.csv"))
 
 macros <- list()
-put <- function(name, value) macros[[name]] <<- value
+# A macro that resolves to nothing is the failure mode that matters here: a
+# missing upstream file makes grep return character(0), the macro silently
+# disappears, and the LaTeX error surfaces hundreds of lines later as an
+# undefined control sequence. Fail at the source instead.
+put <- function(name, value) {
+  if (length(value) != 1L || is.na(value) || !nzchar(value))
+    stop("macro '", name, "' resolved to nothing -- check the file it reads from",
+         call. = FALSE)
+  macros[[name]] <<- value
+}
 
 num  <- function(x, k = 3) fmt_num(x, k)
 pct  <- function(x, k = 1) fmt_num(100 * x, k)
@@ -59,7 +68,7 @@ put("NoriginsAll",   cnt(nrow(orig)))
 # interview is scheduled at all. Including the fifth interview would count a
 # scheduled panel exit as a failure to match and understate the rate (69.9% on
 # that definition), and it is the 1-4 rate that Table A.1 reports and that the
-# breakdown calculation in Section 6 uses.
+# zero-gap frontier in Section 6 uses.
 put("MatchRateAll",  pct(orig[interview < 5L, weighted.mean(matched_next, w)]))
 
 # ---- Adjusted gaps by period ------------------------------------------------
@@ -152,6 +161,10 @@ put("RetOverall",  num(rt[grepl("^Pre", period), retention_nocol]))
 put("RetDiffPre",  num(rt[grepl("^Pre", period), diff_educ]))
 put("RetDiffMid",  num(rt[grepl("^Mid", period), diff_educ]))
 put("RetDiffOnset", num(rt[grepl("^Onset", period), diff_educ]))
+# The two mid-pandemic retention rates are quoted separately in Section 6: the
+# breakdown calculation there is a frontier precisely because they differ.
+put("RetColMid",   num(rt[grepl("^Mid", period), retention_col]))
+put("RetNoColMid", num(rt[grepl("^Mid", period), retention_nocol]))
 put("IpwMidGap",   num(ip[grepl("^Mid", period), gap_ipw]))
 put("IpwMidGapSE", num(ip[grepl("^Mid", period), se_ipw]))
 put("BaseMidGap",  num(ip[grepl("^Mid", period), gap_base]))
@@ -160,9 +173,73 @@ put("BaseMidGap",  num(ip[grepl("^Mid", period), gap_base]))
 put("IpwMidGapFour",  num(ip[grepl("^Mid", period), gap_ipw],  4))
 put("BaseMidGapFour", num(ip[grepl("^Mid", period), gap_base], 4))
 
-bd <- readLines(file.path(DIR_LOGS, "07_attrition_breakdown.txt"))
-put("BreakdownMid",
-    sub(".*: ", "", grep("needed to zero out", bd, value = TRUE)[1]))
+# The single-value breakdown macro is gone: with retention differing by
+# education the all-origin gap is a frontier in the two unobserved exit rates,
+# not one number. 07_attrition.R writes the frontier itself.
+
+# ---- Placebo windows, overlap weights, tipping point ------------------------
+# Written by 10-12, which run before this script.
+pw  <- fread(file.path(DIR_EST, "placebo_windows.csv"))
+obs <- pw[is_observed == TRUE]
+pre <- pw[pre_pandemic == TRUE]
+put("PlaceboTau", num(obs$tau, 4))
+put("PlaceboSE",  num(obs$se, 4))
+put("PlaceboP",   num(obs$p, 3))
+put("PlaceboNPre", as.character(nrow(pre)))
+put("PlaceboNGE",  as.character(pre[tau >= obs$tau, .N]))
+put("PlaceboPPlacebo", num((1 + pre[tau >= obs$tau, .N]) / (1 + nrow(pre)), 3))
+
+# 11 now reports two segments, so every lookup has to name one.
+ov <- fread(file.path(DIR_EST, "overlap_margins.csv"))
+ovd <- fread(file.path(DIR_EST, "overlap_diagnostics.csv"))
+ovg <- function(seg, col) ov[segment == seg & grepl("^Mid", period)][[col]]
+put("OverlapMidGap",     num(ovg("all", "gap_ov")))
+put("BaseOverlapMidGap", num(ovg("all", "gap_base")))
+put("OverlapInfMidGap",  num(ovg("informal", "gap_ov")))
+put("BaseOverlapInfMidGap", num(ovg("informal", "gap_base")))
+put("OverlapOffSupport",
+    pct(ovd[segment == "all" & grepl("^Mid", period), off_support], 1))
+put("OverlapMidGapOff",
+    pct(ovd[segment == "all" & grepl("^Mid", period), off_support], 0))
+put("OverlapInfOffSupport",
+    pct(ovd[segment == "informal" & grepl("^Mid", period), off_support], 1))
+put("OverlapEssRatio",
+    pct(ovd[segment == "all" & grepl("^Mid", period), ess_ratio], 0))
+# Trimming keeps the survey-weighted estimand and drops only the unsupported
+# tails, so it is the reading the text leads with.
+trg <- function(seg, per, col) ov[segment == seg & grepl(per, period)][[col]]
+put("TrimPreGap",     num(trg("all", "^Pre", "gap_trim")))
+put("TrimMidGap",     num(trg("all", "^Mid", "gap_trim")))
+put("TrimMidSE",      num(trg("all", "^Mid", "se_trim")))
+put("TrimInfPreGap",  num(trg("informal", "^Pre", "gap_trim")))
+put("TrimInfMidGap",  num(trg("informal", "^Mid", "gap_trim")))
+put("TrimInfMidSE",   num(trg("informal", "^Mid", "se_trim")))
+put("TrimShare",      pct(trg("all", "^Mid", "trim_share"), 0))
+put("TrimInfShare",   pct(trg("informal", "^Mid", "trim_share"), 0))
+
+tp <- fread(file.path(DIR_EST, "tipping_point.csv"))
+tp_line <- readLines(file.path(DIR_LOGS, "12_tipping_point.txt"))
+put("TippingDelta",  sub(".*delta=", "", grep("^delta=", tp_line, value = TRUE)[1]))
+put("TippingRateMAR", sub(".*mar=",   "", grep("^mar=",   tp_line, value = TRUE)[1]))
+put("TippingRateAt",  sub(".*at=",    "", grep("^at=",    tp_line, value = TRUE)[1]))
+put("TippingFloor",   sub(".*floor=", "", grep("^floor=", tp_line, value = TRUE)[1]))
+put("TippingDeltaMin", sub(".*deltamin=", "", grep("^deltamin=", tp_line, value = TRUE)[1]))
+
+# ---- Reallocation index -----------------------------------------------------
+rl <- fread(file.path(DIR_EST, "reallocation_index.csv"))
+put("RealocCollege",    num(rl[college == 1L, R], 4))
+put("RealocNonCollege", num(rl[college == 0L, R], 4))
+# The text says the graduates' index is "about a fraction" of the gap it would
+# have to explain; that fraction is derived here rather than worked out by hand.
+put("RealocShare", as.character(round(
+  abs(dc[grepl("^Pre", period), gap_raw]) / rl[college == 1L, R])))
+
+# Spread of the mid-pandemic composition component across the four decomposition
+# conventions, so the text can state the range without either bound being typed.
+dv <- fread(file.path(DIR_EST, "decomposition_variants.csv"))
+dv_mid <- dv[grepl("^Mid", period), composition]
+put("DecVarCompLo", num(min(dv_mid)))
+put("DecVarCompHi", num(max(dv_mid)))
 
 # ---- Alternative outcome: informal employment in t+1 ------------------------
 rb <- fread(file.path(DIR_EST, "robustness_period_margins.csv"))

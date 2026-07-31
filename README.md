@@ -25,13 +25,16 @@ analysis/code/
   00_master_analysis.R         runs everything below, in order
   _config.R                    <-- THE ONLY FILE TO EDIT (paths per machine)
   _functions.R, _figures.R     estimation, margins, decomposition, plotting
-  01_prepare_analysis_data.R … 09_paper_numbers.R, 99_session_info.R
+  01_prepare_analysis_data.R … 09_paper_numbers.R
+  10_placebo_windows.R         realised window vs every placebo window
+  11_overlap_weights.R         common support, trimming, overlap weights
+  12_tipping_point.R           how far the unmatched would have to differ
+  99_session_info.R
   legacy/                      superseded R + Stata scripts, kept for provenance
 analysis/input/matching/     matching diagnostics (committed CSVs)
 analysis/output/             tables/, figures/, logs/ (committed); estimates/ (git-ignored cache)
 latex/                       paper.tex, refs.bib, highlights.txt
 dictionary/                  build_dictionary.R + variable_dictionary.xlsx
-status.sh                    progress of a full rebuild
 ```
 
 ## Data
@@ -97,7 +100,6 @@ git clone https://github.com/FredieDidier/Monografia.git
    Downloads ~12 GB from IBGE, runs the stage-3 panel identification and writes
    `main_data.parquet`. Every step is idempotent: completed quarters and
    rotation groups are skipped, so an interrupted run resumes where it stopped.
-   `./status.sh` reports progress.
 
 3. **Run the analysis** (writes every table and figure to `analysis/output/`):
 
@@ -176,15 +178,23 @@ Figs. 1–7; appendix A–B).
 | Table 4 — Heterogeneity by segment | `05_heterogeneity.R` | `tables/tab_heterogeneity.tex` |
 | Table 5 — Composition vs within-cell decomposition | `06_decomposition.R` | `tables/tab_decomposition.tex` |
 | Table 6 — Panel retention and balance | `07_attrition.R` | `tables/tab_attrition.tex` |
-| Table 7 — Inverse-retention weighting | `07_attrition.R` | `tables/tab_ipw.tex` |
+| Table 7 — Common support, trimming and overlap weights | `11_overlap_weights.R` | `tables/tab_overlap.tex` |
 | Table 8 — Robustness | `08_robustness.R` | `tables/tab_robustness.tex` |
+| Table A.1 — Stage-3 matching performance | `build/code/12_build_main_data.R` | `tables/tab_matching.tex` |
+| Table B.1 — Variance-estimator sensitivity | `03_main_estimation.R` | `tables/tab_vcov_sensitivity.tex` |
+| Table B.2 — Placebo windows | `10_placebo_windows.R` | `tables/tab_placebo.tex` |
+| Table B.3 — Decomposition variants and reallocation index | `06_decomposition.R` | `tables/tab_decomp_variants.tex` |
+| Table B.4 — Inverse-retention weighting | `07_attrition.R` | `tables/tab_ipw.tex` |
+| Table B.5 — Departure from missing-at-random | `12_tipping_point.R` | `tables/tab_tipping.tex` |
+| Table B.6 — Sample composition by quarter | `02_table_descriptive_statistics.R` | `tables/tab_sample_by_quarter.tex` |
 | Fig. 1 — Adjusted exit probability by education | `04_figures_main.R` | `figures/fig_levels.pdf` |
 | Fig. 2 — College minus non-college gap | `04_figures_main.R` | `figures/fig_gap.pdf` |
 | Fig. 3 — Formal and informal employment | `05_heterogeneity.R` | `figures/fig_formal_informal.pdf` |
-| Fig. 4 — By labour-market position | `05_heterogeneity.R` | `figures/fig_by_position.pdf` |
-| Fig. 5 — Decomposition | `06_decomposition.R` | `figures/fig_decomposition.pdf` |
-| Fig. 6 — Within demographic groups | `05_heterogeneity.R` | `figures/fig_by_demographics.pdf` |
-| Fig. 7 — Retention into the following quarter | `07_attrition.R` | `figures/fig_retention.pdf` |
+| Fig. 4 — Retention into the following quarter | `07_attrition.R` | `figures/fig_retention.pdf` |
+| Fig. B.1 — Decomposition, quarter by quarter | `06_decomposition.R` | `figures/fig_decomposition.pdf` |
+| Fig. B.2 — By labour-market position | `05_heterogeneity.R` | `figures/fig_by_position.pdf` |
+| Fig. B.3 — Within demographic groups | `05_heterogeneity.R` | `figures/fig_by_demographics.pdf` |
+| Fig. B.4 — Zero-gap frontier for unmatched workers | `07_attrition.R` | `figures/fig_attrition_frontier.pdf` |
 
 ### Appendix
 

@@ -98,21 +98,24 @@ pandemic. Linking \Nind{} workers across \Nquarters{} quarters
 (\QfirstLab--\QlastLab, \Nobs{} person-quarters), we estimate survey-weighted
 average predictive margins by education and quarter. Unconditionally the
 gradient never reverses: graduates leave employment at \RawExitCol\% per
-quarter, non-graduates at \RawExitNoCol\%. Compared within similar jobs, it
-does. For six consecutive quarters, from 2020Q2 to 2021Q3, graduates were
-\MidGapAbsPP{} percentage points more likely to leave employment than otherwise
-similar non-graduates; the pre-pandemic gradient then returned. A decomposition
-attributes the unconditional advantage about equally, in every period, to where
-graduates work and to how they fare inside comparable jobs. Both channels
-compress proportionally during the window, so that gap halves without changing
-sign: graduates did not move into riskier jobs. The reversal emerges only once
-workers are also matched on pay, hours, tenure and contract type. It is
-concentrated among informal private employees, runs entirely through exits out
-of the labour force rather than into measured unemployment, and survives
-weighting by the inverse probability of being matched forward. The design is
+quarter, non-graduates at \RawExitNoCol\%, and that ordering holds throughout the
+pandemic. The covariate-adjusted gradient does something else: for six
+consecutive quarters, from 2020Q2 to 2021Q3, it vanishes. Among workers with
+common support on the characteristics we condition on, the adjusted gap moves
+from \PreGap{} before the pandemic to \TrimMidGap, and inside informal
+employment to \TrimInfMidGap, indistinguishable from zero; the pre-pandemic
+gradient then returned. On the surveyed population as a whole the gap turns
+positive, \MidGap, but that reversal comes from parts of the covariate space
+where the two groups barely overlap. A decomposition attributes the
+unconditional advantage about equally to where graduates work and to how they
+fare inside comparable jobs; both compress proportionally, so that gap halves
+without changing sign, and a reallocation index rules out reallocation as the
+explanation. The disappearance is concentrated among informal private employees,
+runs entirely through exits out of the labour force rather than into measured
+unemployment, and survives re-weighting for attrition. The design is
 descriptive, but the episode shows that the education gradient in job security
-is not a structural constant: it moved in the segment of the labour market where
-a safety net segmented along the formal--informal margin was concentrated.
+is not a structural constant, and that it moved where a safety net segmented
+along the formal--informal margin was concentrated.
 \end{abstract}
 
 \begin{keyword}
@@ -182,7 +185,7 @@ than lower entry, and that most informal workers who lost their jobs left the
 labour force altogether. \citet{Bottan2020} document unequal exposure across
 seventeen developing countries, and work on \textit{Aux\'ilio Emergencial}
 establishes both its coverage and its behavioural effects \citep{Arruda2022,
-Lopez2023, Andrade2021}. What this literature has not established is whether
+Lopez2023, Andrade2025}. What this literature has not established is whether
 schooling itself continued to protect workers once the composition of jobs is
 held fixed. Nor, if it did not, whether that reflects a change in where graduates
 and non-graduates work or a change in the risk they face inside the same kind of
@@ -207,12 +210,18 @@ propensity.
 
 The unconditional gradient is large and never reverses: graduates leave
 employment at \RawExitCol\% per quarter, non-graduates at
-\RawExitNoCol\%. Conditional on observables, however, the gradient does reverse.
-The adjusted gap is \PreGap{} before the pandemic, widens to \GapOnsetQ{} in
-2020Q1 as non-graduates absorb the first shock, and turns positive from 2020Q2
-through 2021Q3, peaking at \GapMaxRev{} in \GapMaxRevQ, with graduates leaving
-employment more often than comparable non-graduates. It returns to
-\PostGap{} thereafter. Inference disciplines which of these movements we can
+\RawExitNoCol\%. Conditional on observables the picture is different: for six
+quarters the gradient disappears. The adjusted gap is \PreGap{} before the
+pandemic, widens to \GapOnsetQ{} in 2020Q1 as non-graduates absorb the first
+shock, and then closes, returning to \PostGap{} from 2021Q4. How far it closes
+depends on which workers are compared. On the whole surveyed population it
+overshoots and turns positive, averaging \MidGap{} over 2020Q2--2021Q3 and
+peaking at \GapMaxRev{} in \GapMaxRevQ. Restricted to the region where
+graduates and non-graduates genuinely overlap on the characteristics we
+condition on, it does not overshoot but it does reach zero: \TrimMidGap{}
+overall, and \TrimInfMidGap{} (s.e.\ \TrimInfMidSE) inside informal
+employment, against \TrimInfPreGap{} there before the pandemic. The robust
+statement is the disappearance, not the sign. Inference disciplines which of these movements we can
 lean on. The onset widening rests on a single quarter, and a wild cluster
 bootstrap on year-quarter cannot distinguish it from an idiosyncratic quarterly
 shock; the reversal rests on six quarters and survives the same test
@@ -228,7 +237,9 @@ barely move across periods. During
 2020Q2--2021Q3 both components compress at almost the same rate,
 composition by \DecCompShrink\% and within-cell risk by
 \DecWithinShrink\%, so the unconditional gap halves without
-changing sign. Graduates did not reallocate into riskier cells. The reversal
+changing sign. A reallocation index, which the decomposition alone cannot
+supply, shows the shift of graduates towards riskier cells to be an order of
+magnitude too small to explain that halving. The reversal
 appears only once workers are matched on job characteristics as well as on
 cells, and it is concentrated among informal private employees.
 
@@ -238,7 +249,8 @@ programmes, but we do not exploit variation in eligibility or exposure and
 therefore do not identify their effects. What the evidence does deliver is a
 fact that any account of the episode has to accommodate: for six quarters, in
 the segment of the Brazilian labour market that a broad cash transfer reached,
-schooling stopped predicting who kept working.
+schooling stopped predicting who kept working among observationally similar
+workers, even as it went on predicting it in the population at large.
 
 The remainder of the paper proceeds as follows. Section~\ref{sec:institutional}
 describes the two emergency programmes. Section~\ref{sec:data} describes the
@@ -322,7 +334,8 @@ and supply the $t+1$ state for workers whose origin quarter is \QlastLab. No
 quarter after \QlastLab{} contributes an origin. Because the whole panel is rebuilt from the published
 microdata, the sampling unit, the stratum and the survey's own interview counter
 are carried through as ordinary columns. That matters twice over: it is what
-makes the design-based clustering of Section~\ref{sec:inference} possible, and
+makes the survey-weighted, PSU-clustered inference of
+Section~\ref{sec:inference} possible, and
 it is what lets Section~\ref{sec:attrition} distinguish a scheduled panel exit
 from attrition without having to infer a household's position in its rotation.
 
@@ -407,11 +420,17 @@ agriculture, industry, construction, trade and services. In both
 classifications a missing value is kept as an explicit ``not reported''
 category rather than dropped, so that no observations are lost when they enter
 as fixed effects. The controls $X_{it}$
-are age, age squared, usual weekly hours, log labour income, formality,
-temporary-contract status and social security contribution. All estimates use
-\textit{PNAD Cont\'inua} person weights. The base quarter is 2019Q4, the last
-quarter whose $t+1$ outcome is measured before the shock, so every $\beta_q$ is
-a deviation from the immediate pre-pandemic gap.
+are age, age squared, usual weekly hours, log labour income and its two
+missingness indicators (\appref{app:data}), formality, temporary-contract
+status and social security contribution. All estimates use
+\textit{PNAD Cont\'inua} person weights. Quarter labels throughout the paper
+refer to the origin interview $t$, at which the worker is employed, not to the
+destination interview $t+1$ at which the outcome is measured. The reference
+category is 2019Q4, the last origin quarter completed before the pandemic; its
+outcome is observed during 2020Q1, whose fieldwork runs into the first weeks of
+the shock. Every $\beta_q$ is therefore a deviation from the last pre-pandemic
+origin quarter, not from a window whose destination interview is guaranteed to
+predate the shock.
 
 \subsection{Adjusted margins}
 
@@ -464,7 +483,10 @@ every quarter in the period; clustering on year-quarter instead addresses the
 aggregate shock common to everyone interviewed in a given quarter, which leaves
 the education gap correlated within quarters. Table~\ref{tab:vcov} shows the
 alternatives: by PSU, by household, by individual, by individual and
-year-quarter, and by year-quarter alone.
+year-quarter, and by year-quarter alone. The estimator uses the survey weights
+and the sampling units but not the strata, so it is survey-weighted and
+cluster-robust rather than a full design-based variance; stratification would,
+if anything, reduce the estimated standard errors.
 
 Because we report \Nquarters{} quarterly contrasts, the probability that at
 least one pointwise 95\% interval excludes zero by chance alone is far above
@@ -537,7 +559,9 @@ with each group's change relative to its own pre-pandemic level.
   \caption{College minus non-college difference in the adjusted probability of
   employment exit. The dark band is the pointwise 95\% interval; the light band
   is the sup-$t$ simultaneous band over all \Nquarters{} quarterly contrasts
-  (critical value \SuptCrit).}
+  (critical value \SuptCrit). Both quantify sampling uncertainty conditional on
+  the realised quarter. Inference over aggregate time shocks is reported only
+  for period averages, in Table~\ref{tab:spec_ladder}.}
   \label{fig:gap}
 \end{figure}
 
@@ -566,10 +590,34 @@ From 2020Q2 the gradient inverts. Over the six quarters to 2021Q3 the adjusted
 gap averages \MidGap{} (s.e.\ \MidGapSE, 95\% CI [\MidGapLo, \MidGapHi]),
 peaking at \GapMaxRev{} in \GapMaxRevQ. The estimated gap is positive in
 \NRevQuarters{} of the \Nquarters{} quarters: the six inside the window, plus an
-isolated \RevFirst. The simultaneous band excludes zero in \NRevSimQuarters{} of
-those \NRevQuarters, all of them inside the window, so the reversal is not an
-artefact of testing \Nquarters{} contrasts one at a time. Mechanically the
-inversion comes from both sides: the adjusted exit level of non-graduates falls \MidRelNoColAbs\%
+isolated \RevFirst.
+
+We are deliberate about what the quarterly path can carry. Each
+$\widehat\Delta_q$ is supported by a single year-quarter, so its interval
+measures sampling uncertainty conditional on the shocks that quarter realised;
+it cannot absorb an education-specific aggregate shock arriving in that same
+quarter. The sup-$t$ band corrects the multiplicity of reading \Nquarters{}
+contrasts at once, and on that basis it excludes zero in \NRevSimQuarters{}
+quarters, all of them inside the window. But a multiplicity correction
+conditional on $\widehat V$ does not create the temporal replication that a
+quarter-specific shock would require, which is the same objection we raise
+against the onset estimate below. Our confirmatory inference therefore concerns
+the six-quarter average, for which Table~\ref{tab:spec_ladder} reports a wild
+cluster bootstrap over year-quarters. The quarterly series describes the
+realised path; the window average is the object we test.
+
+Table~\ref{tab:placebo} carries that out at the level of the quarter. Treating
+the \Nquarters{} quarterly gaps as the observations and regressing them on a
+window indicator gives $\tau = \PlaceboTau{}$ (Newey--West with four lags,
+$p = \PlaceboP$). The window itself was read off the estimated series rather
+than fixed in advance, so we report two things a reader would otherwise have to
+take on trust. Moving its end point to 2021Q2 or 2021Q4 leaves the contrast
+essentially unchanged. And of the \PlaceboNPre{} contiguous six-quarter windows
+that lie entirely before 2020Q1, \PlaceboNGE{} reach a $\tau$ as large, giving
+a placebo $p$ of \PlaceboPPlacebo. A six-quarter run of this size is not
+something this series produces on its own.
+
+Mechanically the inversion comes from both sides: the adjusted exit level of non-graduates falls \MidRelNoColAbs\%
 below its pre-pandemic average while that of graduates falls only
 \MidRelColAbs\%. From 2021Q4 the pre-pandemic configuration returns, and by the end
 of the sample the adjusted gap is \PostGap.
@@ -614,42 +662,27 @@ self-employed (\InfSelfMidGap), among formal private employees
 (\FormPrivMidGap) and among formal public servants (\FormPubMidGap); only the
 formal self-employed show a smaller echo of it (\FormSelfMidGap).
 Figure~\ref{fig:position} shows the four groups separately, and
-Table~\ref{tab:heterogeneity} reports all segments.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\linewidth]{fig_by_position.pdf}
-  \caption{Adjusted probability of employment exit by education and labour
-  market position. Each panel is estimated on its own subsample; public-sector
-  employees are reported separately in Table~\ref{tab:heterogeneity}. Note the
-  different vertical scales.}
-  \label{fig:position}
-\end{figure}
+Table~\ref{tab:heterogeneity} reports all segments, and
+Figure~\ref{fig:position} plots the four largest of them.
 
 \input{../analysis/output/tables/tab_heterogeneity}
 
-That the movement is concentrated among informal employees rather than
-the informal self-employed is informative. Dismissal risk is the margin that
-moves, and it moves for the unprotected wage workers whose separations are
-employer decisions, not for own-account workers whose exits are largely their
-own. It also means the pattern cannot be read as a pure labour-supply response
-to the transfer, which would have been at least as visible among the
-self-employed.
+That the movement is concentrated among informal employees rather than the
+informal self-employed is informative, but only up to a point. It is consistent
+with a separation channel operating inside dependent employment relationships,
+which is where an employer decision can end a job. The data do not license more
+than that: our outcome records a transition out of employment and, as
+Section~\ref{sec:data} sets out, does not distinguish an employer-initiated
+dismissal from a voluntary exit, from discouragement, or from a labour-supply
+response to the transfer. We read the segment result as suggestive about
+mechanism and do not use it to rule out a labour-supply channel.
 
 \subsection{Composition or within-cell risk?}\label{sec:decomposition}
 
 The decomposition in equation~\eqref{eq:decomp} separates the two explanations.
 Figure~\ref{fig:decomp} plots the components quarter by quarter and
-Table~\ref{tab:decomposition} reports period averages.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\linewidth]{fig_decomposition.pdf}
-  \caption{Composition and within-cell components of the unconditional
-  education gap in employment exits. Cells are defined by formality $\times$ sector $\times$
-  occupation.}
-  \label{fig:decomp}
-\end{figure}
+Table~\ref{tab:decomposition} reports period averages and
+Figure~\ref{fig:decomp} the quarterly series behind them.
 
 \input{../analysis/output/tables/tab_decomposition}
 
@@ -666,7 +699,27 @@ compress together during 2020Q2--2021Q3, composition by \DecCompShrink\% and
 within-cell risk by \DecWithinShrink\%. The unconditional gap therefore halves,
 from \DecPreTotal{} to \DecMidTotal, without changing sign, and the split
 between the two components is the same before, during and after. The
-mid-pandemic narrowing is not a reallocation story: graduates did not move into riskier cells.
+mid-pandemic narrowing is not a reallocation story in the sense of the components: both compress, and
+neither takes over from the other.
+
+Whether it is a reallocation story in the stronger sense --- whether either
+group moved towards cells that carried more risk to begin with --- the
+decomposition cannot say, because the composition component mixes both groups'
+shares with rates that are themselves moving. Table~\ref{tab:decomp_variants}
+answers it directly with an index that holds the pre-pandemic cell rates fixed
+and lets only allocation move,
+$R_g = \sum_k (s_{gk,\text{mid}} - s_{gk,\text{pre}})\bar m_{k,\text{pre}}$,
+so that a positive value means group $g$ shifted towards cells that were riskier
+before the pandemic. Both indices are positive and the graduates' is the larger,
+$R_C = \RealocCollege$ against $R_N = \RealocNonCollege$. Graduates did move
+towards cells that had carried more risk, which the decomposition on its own
+could not have established either way. The magnitude settles the reading: $R_C$
+is smaller than the \DecPreTotal{} gap it would have to explain by a factor of
+\RealocShare, so reallocation is present but far too small to be the mechanism.
+The same table reports the decomposition under the opposite and the symmetric
+reference convention, and on common support only; the mid-pandemic composition
+component moves only between \DecVarCompLo{} and \DecVarCompHi{} across all
+four, so the split does not rest on the reference chosen.
 
 This pins down the reversal of Figure~\ref{fig:gap}. It is not visible
 at the level of formality, sector and occupation, where the education advantage
@@ -691,15 +744,7 @@ therefore not the product of a single demographic group. Its magnitude,
 however, tracks informality: it is largest among women and among non-white workers, the two
 groups whose employment is most concentrated in the informal segment, which is
 what the reading in Section~\ref{sec:where} implies.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\linewidth]{fig_by_demographics.pdf}
-  \caption{Adjusted probability of employment exit by education, within
-  demographic groups. Each panel is estimated on its own subsample, with 95\%
-  pointwise bands. Note the different vertical scales.}
-  \label{fig:demographics}
-\end{figure}
+Figure~\ref{fig:demographics} plots the four groups separately.
 
 %==============================================================================
 \section{Panel retention and selection}\label{sec:attrition}
@@ -760,24 +805,43 @@ Multiplying the survey weight by the inverse of that probability, trimmed at
 essentially unchanged: \IpwMidGapFour{} with the re-weighting, against
 \BaseMidGapFour{} without it on the same sample. The two agree to three decimals, which is why
 Table~\ref{tab:ipw} reports four: re-weighting shifts each period's gap by less
-than half a thousandth, and column (3) gives the shift directly.
-
-\input{../analysis/output/tables/tab_ipw}
+than half a thousandth, and its column (3) gives the shift directly.
 
 A breakdown calculation then bounds what unobserved attrition could do.
 The algorithm links \MatchRateAll\% of the employed workers for whom a
 further interview is scheduled into $t+1$ (Table~\ref{tab:matching}), leaving
 the rest unobserved. Writing $\rho$ for that match rate, the education
-gap among all such workers is
-$\rho\widehat\Delta^{\mathrm{mid}} + (1-\rho)(\tilde m_C - \tilde m_N)$, where
-$\widehat\Delta^{\mathrm{mid}}$ is the estimated mid-pandemic gap and $\tilde m_g$
-is the unobserved exit rate of unmatched workers in group $g$. Setting that
-expression to zero requires an unmatched-worker exit-rate differential of
-$\tilde m_C - \tilde m_N = \BreakdownMid$, opposite in sign to what is observed
-among matched workers and several times larger in magnitude. We regard that as
-implausible, though not impossible. The calculation applies a common $\rho$ to
-both education groups; Panel A of Table~\ref{tab:attrition} reports the modest
-differential in retention between them.
+retention rate is not common to the two groups, however: over the window it is
+\RetColMid{} for graduates against \RetNoColMid{} for non-graduates. The gap
+among all origins is therefore
+\begin{equation}\label{eq:breakdown}
+\Delta^{\text{all}} \;=\;
+  \rho_C m^{M}_{C} + (1-\rho_C)m^{U}_{C}
+  \;-\; \left[\rho_N m^{M}_{N} + (1-\rho_N)m^{U}_{N}\right],
+\end{equation}
+with $M$ and $U$ denoting matched and unmatched, and it cannot be collapsed onto
+a single unmatched-worker differential. Equation~\eqref{eq:breakdown} defines a
+zero-gap frontier in $(m^{U}_{C}, m^{U}_{N})$ rather than a single breakdown
+value, and Figure~\ref{fig:frontier} plots it. Two further limits are
+worth stating plainly. The identity is an accounting statement about raw exit
+rates, so it does not translate directly into a bound on the covariate-adjusted
+contrast; and it is silent about how the unmatched would have behaved. What we
+can say is that the re-weighting above prices in every observable that predicts
+retention and moves the estimate by less than half a thousandth.
+
+That frontier is an accounting statement about raw rates. The adjusted contrast
+needs its own sensitivity analysis, and Table~\ref{tab:tipping} supplies it. We
+impute an outcome for every unmatched origin from a model fitted on matched
+workers of the same education group, shift it for graduates by $\delta$ on the
+log-odds scale, and re-estimate equation~\eqref{eq:es} on the completed sample;
+$\delta = 0$ is missing-at-random within education group. There is no tipping
+point. Pushing $\delta$ down to \TippingDeltaMin, which drives the imputed exit
+probability of unmatched graduates to essentially zero from the \TippingRateMAR{}
+their observed characteristics imply, moves the mid-pandemic gap only from
+\BaseMidGapFour{} to \TippingFloor{} --- it does not approach zero, let alone
+change sign. Even the assumption that graduates we lose track of never left
+employment leaves the reversal standing. Table~\ref{tab:tipping} gives the
+search path, and Figure~\ref{fig:frontier} the raw-rate frontier it refines.
 
 %==============================================================================
 \section{Robustness}\label{sec:robustness}
@@ -795,6 +859,46 @@ their advantage in staying employed at all disappeared.
 Table~\ref{tab:vcov} shows that the two pandemic contrasts are robust to the
 choice of variance estimator, including clustering on year-quarter alone, which
 is the most conservative option available given \Nquarters{} clusters.
+
+One further check goes to the estimand rather than to its variance, and it is
+the one that qualifies the result most. Because the reversal appears only after
+conditioning on job characteristics, how far the two education groups overlap on
+those characteristics matters: a linear model extrapolates happily into regions
+where one group is hardly observed. Table~\ref{tab:overlap} estimates the
+propensity to hold a degree quarter by quarter, on the covariates and fixed
+effects of equation~\eqref{eq:es}, and re-estimates the model under overlap
+weights, which weight each worker by how evenly the two groups populate their
+part of the covariate space and vanish where a cell is effectively
+single-group.
+
+Overlap is limited. In 2020Q2--2021Q3, \OverlapMidGapOff\% of the sample
+carries a propensity outside $[0.02, 0.98]$ and overlap weighting retains only
+\OverlapEssRatio\% of the effective sample size. Table~\ref{tab:overlap}
+therefore reports two departures from the survey-weighted estimate, which answer
+different questions. Trimming to propensities inside $[0.10, 0.90]$ keeps the
+estimand and drops only the workers with no counterpart, at the cost of
+retaining \TrimShare\% of the sample. Overlap weighting keeps every worker but
+re-centres the estimand on the region where a degree is a coin flip.
+
+The two agree, and they place the reversal outside the region of common support.
+Trimmed, the mid-pandemic gap is \TrimMidGap{} rather than
+\BaseOverlapMidGap; under overlap weights it is \OverlapMidGap. Inside informal
+employment the same holds and overlap is worse, not better, with
+\OverlapInfOffSupport\% of the segment off support: the trimmed gap is
+\TrimInfMidGap{} (s.e.\ \TrimInfMidSE) against \BaseOverlapInfMidGap{} on the
+full segment. Graduates are uncommon in informal wage employment, so requiring
+the two groups to be comparable leaves few comparisons to make.
+
+We read this as a limit on the sign, not on the finding. What survives every
+weighting is that the gradient closes: from \TrimPreGap{} to \TrimMidGap{} on
+common support overall, and from \TrimInfPreGap{} --- precisely estimated and
+clearly negative --- to a mid-pandemic value indistinguishable from zero inside
+informal employment. That the point estimate on the full surveyed population
+goes further and turns positive is a property of a comparison drawn partly
+outside common support, and we do not build on it.
+Section~\ref{sec:discussion} returns to this.
+
+\input{../analysis/output/tables/tab_overlap}
 
 \input{../analysis/output/tables/tab_robustness}
 
@@ -835,11 +939,22 @@ what this evidence supports; what it supports is that the education gradient in
 job security is not a structural constant, and that it moved in the segment of
 the labour market where the segmented policy response was concentrated.
 
-A limitation remains. The design is descriptive. We observe that the
-gradient reversed in informal wage employment over the window in which
-the emergency transfer operated, but we do not observe anyone who was ineligible
-for it. Nothing here rules out a coincident shock with the same timing and the
-same incidence.
+Two limitations remain. The design is descriptive: we observe that the gradient
+reversed in informal wage employment over the window in which the emergency
+transfer operated, but we do not observe anyone who was ineligible for it, and
+nothing here rules out a coincident shock with the same timing and the same
+incidence.
+
+The second is about the comparison itself, and it bounds what we claim. The
+adjusted gap is a conditional contrast, and the two education groups overlap
+only partially on the characteristics we condition on: \TrimShare\% of the
+sample survives a trim to propensities inside $[0.10, 0.90]$. Restricted to
+those workers the gradient still closes during the window, but it stops at zero
+instead of crossing it (Table~\ref{tab:overlap}). The sign of the mid-pandemic
+gap in the full surveyed population is therefore not something we lean on; the
+disappearance of the gradient is. Readers who want a contrast between graduates
+and non-graduates alike in every measured respect should read the trimmed
+column, and it says the advantage went to zero.
 
 The transferable lesson is about the architecture of emergency support rather
 than about Brazil. When protection is delivered through
@@ -853,15 +968,18 @@ large informal sector and a bifurcated safety net has the same structure.
 %==============================================================================
 
 Using \Nobs{} matched person-quarters from \textit{PNAD Cont\'inua} over
-\QfirstLab--\QlastLab, we document that Brazil's education gradient in
-employment exits reversed for six quarters between 2020Q2 and 2021Q3 and then
-returned to its pre-pandemic configuration. The single-quarter widening at the
+\QfirstLab--\QlastLab, we document that the covariate-adjusted college /
+non-college difference in employment exits became positive for six quarters
+between 2020Q2 and 2021Q3 and then returned to its pre-pandemic configuration,
+even though the unconditional education gradient stayed negative throughout. The single-quarter widening at the
 onset, though large in point estimate, does not survive inference clustered on
 time and we do not build on it. The reversal is present in adjusted margins computed with
-design-based clustering and simultaneous bands, runs entirely through exits out
+survey weights and two-way clustering, runs entirely through exits out
 of the labour force rather than into measured unemployment, is concentrated in
 informal wage employment, and survives weighting by the inverse probability of
-being matched into the following quarter. A composition / within-cell
+being matched into the following quarter. Restricted to workers with common
+support the gradient closes to zero rather than crossing it, so the
+disappearance is the robust finding and the sign of the crossing is not. A composition / within-cell
 decomposition shows that the education advantage divides about evenly between
 where graduates work and how they fare inside those jobs, and that both halves
 compressed by a similar proportion, \DecCompShrink\% and \DecWithinShrink\%,
@@ -980,7 +1098,17 @@ they enter as fixed effects.
 
 \emph{Tenure} is the \textit{PNAD Cont\'inua} grouped time-in-current-job
 variable: under one month, one to eleven months, one to two years, two years or
-more.
+more. A missing value is retained as an explicit ``not reported'' category
+rather than assigned to the longest bracket.
+
+\emph{Labour income} is monthly earnings in the main job, entering as
+$\log(1+y)$. It is absent for two distinct groups, which the specification
+keeps apart. Unpaid family workers, who work in a family business without pay,
+have no earnings to report: for them zero is the true value and they carry an
+indicator of their own. The remainder are genuine non-response, are not read as
+zero earnings, and carry a separate indicator. Both indicators enter $X_{it}$
+alongside $\log(1+y)$, which is held at zero for both, so that neither group is
+placed at the bottom of the earnings distribution by construction.
 
 \subsection{Replication}
 
@@ -989,28 +1117,98 @@ The replication package lives in the project's
 contains the full \textit{R} pipeline: \texttt{build/code} downloads the
 microdata from \textit{IBGE} and rebuilds the panel, and
 \texttt{analysis/code} constructs the analysis sample, estimates every model
-and writes every table and figure in this paper. Random seeds, bootstrap replication counts, package versions and the
-\textit{R} version are recorded in the package. The closed-form margins of
-equation~\eqref{eq:margins} are checked there against a general
-average-predictions routine on a random subsample: the largest absolute
-discrepancy over the \Nquarters{} quarters is of the order of $10^{-15}$, and the
-check is written to
-\texttt{analysis/output/logs/08\_margins\_validation.txt}. The wild cluster bootstrap uses
-\BWild{} replications and seed \Seed; the simultaneous bands use \BSupt{}
-multiplier draws; the decomposition bootstrap uses \BDecomp{} replications. All
-computations were carried out in \textit{R} \citep{Rcore2024} with the
-\texttt{fixest} package for high-dimensional fixed effects \citep{Berge2018}.
+and writes every table and figure in this paper. Random seeds, bootstrap
+replication counts, package versions and the \textit{R} version are recorded in
+the package.
 
-\section{Additional tables}\label{app:additional}
+\section{Additional tables and figures}\label{app:additional}
 \setcounter{table}{0}\renewcommand{\thetable}{B.\arabic{table}}
 \setcounter{figure}{0}\renewcommand{\thefigure}{B.\arabic{figure}}
 
+This appendix collects the exhibits that support the main text without being
+needed to follow it, grouped by the section each one serves.
+
+\subsection{Inference and the choice of window}
+
 Table~\ref{tab:vcov} reports the two pandemic contrasts under each of the
 alternative clustering schemes discussed in Section~\ref{sec:inference}, and
-Table~\ref{tab:sample_by_quarter} gives the composition of the estimation sample
-quarter by quarter.
+Table~\ref{tab:placebo} sets the mid-pandemic window against every placebo
+window of the same length.
 
 \input{../analysis/output/tables/tab_vcov_sensitivity}
+
+\input{../analysis/output/tables/tab_placebo}
+
+\subsection{Decomposition}
+
+Figure~\ref{fig:decomp} plots the two components quarter by quarter, and
+Table~\ref{tab:decomp_variants} repeats the decomposition under alternative
+reference conventions and on common support, together with the reallocation
+index.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{fig_decomposition.pdf}
+  \caption{Composition and within-cell components of the unconditional
+  education gap in employment exits. Cells are defined by formality $\times$ sector $\times$
+  occupation.}
+  \label{fig:decomp}
+\end{figure}
+
+\input{../analysis/output/tables/tab_decomp_variants}
+
+\subsection{Heterogeneity}
+
+Figures~\ref{fig:position} and~\ref{fig:demographics} plot the segments that
+Table~\ref{tab:heterogeneity} reports numerically.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{fig_by_position.pdf}
+  \caption{Adjusted probability of employment exit by education and labour
+  market position. Each panel is estimated on its own subsample; public-sector
+  employees are reported separately in Table~\ref{tab:heterogeneity}. Note the
+  different vertical scales.}
+  \label{fig:position}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{fig_by_demographics.pdf}
+  \caption{Adjusted probability of employment exit by education, within
+  demographic groups. Each panel is estimated on its own subsample, with 95\%
+  pointwise bands. Note the different vertical scales.}
+  \label{fig:demographics}
+\end{figure}
+
+\subsection{Retention and selection}
+
+Table~\ref{tab:ipw} reports the inverse-retention-weighted estimates to four
+decimals, Figure~\ref{fig:frontier} the zero-gap frontier of
+equation~\eqref{eq:breakdown}, and Table~\ref{tab:tipping} the departure from
+missing-at-random that would be needed to overturn the adjusted result.
+
+\input{../analysis/output/tables/tab_ipw}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.72\linewidth]{fig_attrition_frontier.pdf}
+  \caption{Zero-gap frontier for unmatched workers, 2020Q2--2021Q3. The line is
+  the set of unobserved exit rates $(m^{U}_{C}, m^{U}_{N})$ at which
+  equation~\eqref{eq:breakdown} gives an all-origin education gap of zero, using
+  the observed retention rates and matched exit rates of the window. Points
+  above the line leave the raw gap negative, points below reverse it. The marker
+  is the benchmark at which unmatched workers behave like matched workers of
+  their own education group.}
+  \label{fig:frontier}
+\end{figure}
+
+\input{../analysis/output/tables/tab_tipping}
+
+\subsection{Sample composition}
+
+Table~\ref{tab:sample_by_quarter} gives the composition of the estimation
+sample quarter by quarter.
 
 \input{../analysis/output/tables/tab_sample_by_quarter}
 

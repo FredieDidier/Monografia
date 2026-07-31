@@ -25,8 +25,8 @@ Weighted college share        : 0.1970
 Weighted informal share       : 0.3972
 
 Missing values in the estimation sample:
-  none
+  income: 27,965
 
-wrote /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/output/analysis_sample.parquet (122.9 MB)
-wrote /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/output/analysis_origins.parquet (179 MB)
+wrote /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/output/analysis_sample.parquet (123.6 MB)
+wrote /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/output/analysis_origins.parquet (180 MB)
 both files read back successfully

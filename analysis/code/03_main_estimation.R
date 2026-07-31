@@ -5,9 +5,9 @@
 #
 #   (a) Event-study model: college x quarter interactions, 2019Q4 base.
 #   (b) Survey-weighted average predictive margins by education x quarter, and
-#       the college / non-college differences  (Comment 2).
+#       the college / non-college differences.
 #   (c) Two-way clustered inference, alternative variance matrices, and
-#       wild cluster bootstrap p-values by year-quarter  (Comment 3).
+#       wild cluster bootstrap p-values by year-quarter.
 #   (d) Table 1  period-level adjusted levels, gaps and relative magnitudes.
 #       Table 2  specification ladder for the two pandemic windows.
 #       Table A.3 sensitivity of the two windows to the variance estimator.

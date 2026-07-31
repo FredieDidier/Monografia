@@ -77,17 +77,39 @@ d[, age         := as.integer(V2009)]
 # Job characteristics
 # -----------------------------------------------------------------------------
 d[, hours           := as.numeric(V4039)]
-d[, income          := fifelse(is.na(VD4017), 0, as.numeric(VD4017))]
-d[, log_income      := log1p(income)]
 d[, temporary       := as.integer(!is.na(V4025) & V4025 == 1L)]
 d[, social_security := as.integer(!is.na(V4032) & V4032 == 1L)]
 d[, signed_card     := as.integer(!is.na(V4029) & V4029 == 1L)]
 
-# V4040: time in the current job, grouped.
+# Labour income. A missing VD4017 covers two states that must not be pooled.
+#
+# Unpaid family workers (VD4009 == 10, "trabalhador familiar auxiliar", or
+# V4012 == 7) have no VD4017 because they earn nothing: for them zero is the
+# true value, not an imputation. They are 92% of the missing and are folded into
+# "informal private employee" by add_position() in the build, so they are not
+# visible as their own category anywhere else. Their exit rate is roughly three
+# times the sample average, which is exactly why they cannot be left implicit.
+#
+# The remaining 8% are genuine non-response. Recoding those to zero, as an
+# earlier vintage did for both groups at once, placed a refusal at the bottom of
+# the income distribution. They now carry their own indicator, with log_income
+# held at zero so the indicator absorbs the whole effect.
+d[, unpaid_family := as.integer((!is.na(VD4009) & VD4009 == 10L) |
+                                (!is.na(V4012)  & V4012  == 7L))]
+d[, income_missing := as.integer(is.na(VD4017) & unpaid_family == 0L)]
+d[, income := fifelse(unpaid_family == 1L, 0, as.numeric(VD4017))]
+d[, log_income := fifelse(is.na(income), 0, log1p(pmax(income, 0)))]
+
+# V4040: time in the current job, grouped. Missing tenure is kept as its own
+# level rather than folded into "2+ years", for the same reason: the longest
+# tenure category is the lowest-exit-risk one, so the old default was an
+# assumption about risk, not a neutral fill.
 d[, tenure := factor(V4040, levels = 1:4,
                      labels = c("<1 month", "1-11 months", "1-2 years",
                                 "2+ years"))]
-d[is.na(tenure), tenure := "2+ years"]
+d[, tenure := factor(fifelse(is.na(tenure), "Not reported", as.character(tenure)),
+                     levels = c("<1 month", "1-11 months", "1-2 years",
+                                "2+ years", "Not reported"))]
 
 # VD4010: main activity grouping, collapsed to the five broad sectors used by
 # the previous vintage so the two are comparable.
@@ -149,7 +171,8 @@ KEEP <- c("pid", "psu", "household", "strata", "panel_grp", "interview", "qtr",
           "matched_next", "dest_state",
           "exit", "exit_to_unemployment", "exit_to_nonpart", "exit_to_informal",
           "college", "female", "white", "nonwhite", "black_brown", "race5",
-          "urban", "age", "hours", "income", "log_income",
+          "urban", "age", "hours", "income", "log_income", "income_missing",
+          "unpaid_family",
           "formal", "temporary", "social_security", "signed_card", "tenure",
           "sector", "occupation", "position_grp", "state", "w")
 d <- d[, ..KEEP]

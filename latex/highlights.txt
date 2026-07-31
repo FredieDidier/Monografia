@@ -1,5 +1,0 @@
-Education gradient in Brazilian employment exits reversed for six quarters in 2020-21
-The reversal sits in informal wage employment, not in self-employment
-It runs entirely through exits out of the labour force, not into unemployment
-Adjusted margins, PSU clustering and simultaneous bands over 52 quarterly contrasts
-Panel rebuilt with graph-based matching; unmatched workers used to model attrition

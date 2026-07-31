@@ -1,0 +1,26 @@
+\begin{table}[H]
+\centering
+\caption{Decomposition under alternative references and on common support}
+\label{tab:decomp_variants}
+\begin{threeparttable}
+\begin{tabular}{lcccc}
+\toprule
+& \multicolumn{2}{c}{Pre-pandemic} & \multicolumn{2}{c}{Mid-pandemic} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Convention & Composition & Within-cell & Composition & Within-cell \\
+\midrule
+Baseline (non-college rates, college shares) & -0.038 & -0.031 & -0.021 & -0.019 \\
+College rates as reference & -0.043 & -0.026 & -0.020 & -0.020 \\
+Symmetric (average rates and shares) & -0.041 & -0.029 & -0.021 & -0.019 \\
+Common support only & -0.038 & -0.031 & -0.021 & -0.019 \\
+\midrule
+\multicolumn{5}{l}{\textit{Reallocation index, pre-pandemic to mid-pandemic}} \\
+\quad Graduates ($R_C$) & \multicolumn{4}{c}{0.00349} \\
+\quad Non-graduates ($R_N$) & \multicolumn{4}{c}{0.00047} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item Notes: Cells are formality $\times$ sector $\times$ occupation throughout. The baseline row is the convention of equation~\eqref{eq:decomp}; the next two replace it with the opposite and the symmetric convention. The last row keeps only cells that both education groups occupy, renormalising each group's shares within the quarter, so its total gap differs from the others by the amount the dropped cells carried. The reallocation index is $R_g = \sum_k (s_{gk,\text{mid}} - s_{gk,\text{pre}})\bar m_{k,\text{pre}}$, with $\bar m_{k,\text{pre}}$ the pre-pandemic exit rate of cell $k$ pooled across groups: it holds rates fixed and lets only allocation move, so $R_g > 0$ means group $g$ shifted towards cells that were riskier before the pandemic. Periods are pre-pandemic 2012Q1--2019Q4, onset 2020Q1, mid-pandemic 2020Q2--2021Q3 and post-pandemic 2021Q4--2024Q4.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

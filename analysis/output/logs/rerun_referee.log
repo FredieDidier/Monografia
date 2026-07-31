@@ -1,0 +1,203 @@
+Mensagens de aviso:
+1: pacote 'ggplot2' foi compilado no R vers~ao 4.4.3 
+2: pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+[16:57:28] ROOT    = /Users/fredie/Documents/GitHub/Monografia
+[16:57:28] DROPBOX = /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19
+[16:57:28] analysis sample is older than main_data.parquet -- rebuilding
+[16:57:28] ======================================================================
+[16:57:28] RUN  01_prepare_analysis_data.R
+[16:57:28] ======================================================================
+[16:57:29] reading /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/output/main_data.parquet
+Source          : /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/output/main_data.parquet
+Origin rows     : 11,491,554
+
+Dropped, position undetermined: 0 (0.000%)
+Quarters        : 2012Q1 to 2024Q4  (52 quarters)
+Individuals     : 3,024,050
+Households      : 1,886,316
+PSUs            : 39,664
+Matched to t+1  : 0.6963
+
+Interview number distribution:
+  1: 2,290,380
+  2: 2,308,574
+  3: 2,307,370
+  4: 2,301,601
+  5: 2,283,629
+
+ESTIMATION SAMPLE: 8,002,128 matched origins
+Weighted exit rate            : 0.0938
+  no college                  : 0.1069
+  college                     : 0.0404
+Weighted E->U rate            : 0.0290
+Weighted E->N rate            : 0.0648
+Weighted college share        : 0.1970
+Weighted informal share       : 0.3972
+
+Missing values in the estimation sample:
+  income: 27,965
+
+wrote /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/output/analysis_sample.parquet (123.6 MB)
+wrote /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/output/analysis_origins.parquet (180 MB)
+both files read back successfully
+[16:58:29] 01_prepare_analysis_data.R done.
+[16:58:29] OK   01_prepare_analysis_data.R  (1 min)
+[16:58:29] ======================================================================
+[16:58:29] RUN  02_table_descriptive_statistics.R
+[16:58:29] ======================================================================
+[16:58:53] wrote tab_descriptives.tex
+[16:58:54] wrote tab_sample_by_quarter.tex
+[16:58:54] wrote tab_matching.tex
+[16:58:54] 02_table_descriptive_statistics.R done.
+[16:58:54] OK   02_table_descriptive_statistics.R  (0.4 min)
+[16:58:54] ======================================================================
+[16:58:54] RUN  03_main_estimation.R
+[16:58:54] ======================================================================
+[16:58:57] fitting event study for exit on 8,002,128 observations ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:06:57]   done in 8 min
+[17:07:14] fitting event study for exit_to_unemployment on 8,002,128 observations ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:15:20]   done in 8.1 min
+[17:15:35] fitting event study for exit_to_nonpart on 8,002,128 observations ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:23:30]   done in 7.9 min
+[17:23:49] sup-t critical value for the 52 quarterly contrasts: 2.725 (pointwise 1.960)
+[17:23:56] wrote tab_main_margins.tex
+[17:23:56] fitting spec (1) ...
+[17:24:02] fitting spec (2) ...
+[17:24:06] fitting spec (3) ...
+[17:24:14] fitting spec (4) ...
+[17:24:32] fitting spec (5) ...
+[17:25:18] fitting spec (6) ...
+[17:27:17] wild cluster bootstrap p-values (9,999 replications, clustered by year-quarter) for the preferred specification ...
+Too guarantee reproducibility, don't forget to set a global random seed **both** via `set.seed()` and
+`dqrng::dqset.seed()`.
+This message is displayed once every 8 hours.
+[17:34:22]   done in 7.1 min
+[17:34:23] wrote tab_spec_ladder.tex
+[17:34:37] wrote tab_vcov_sensitivity.tex
+[17:34:37] 03_main_estimation.R done.
+[17:34:37] OK   03_main_estimation.R  (35.7 min)
+[17:34:37] ======================================================================
+[17:34:37] RUN  04_figures_main.R
+[17:34:37] ======================================================================
+[17:34:39] wrote fig_levels.pdf/.png
+[17:34:40] wrote fig_gap.pdf/.png
+[17:34:40] 04_figures_main.R done.
+[17:34:40] OK   04_figures_main.R  (0 min)
+[17:34:40] ======================================================================
+[17:34:40] RUN  05_heterogeneity.R
+[17:34:40] ======================================================================
+[17:34:43]   fitting Formal (4,363,453 obs) ...
+The variable 'unpaid_family' has been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:38:28]     done in 3.8 min
+[17:38:29]   fitting Informal (3,638,675 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:41:29]     done in 3 min
+[17:41:30]   fitting Men (4,656,560 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:44:47]     done in 3.3 min
+[17:44:48]   fitting Women (3,345,568 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:47:21]     done in 2.6 min
+[17:47:22]   fitting White (3,419,874 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:50:09]     done in 2.8 min
+[17:50:10]   fitting Non-White (4,582,254 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:53:18]     done in 3.1 min
+[17:53:19]   fitting Formal private employee (2,679,329 obs) ...
+The variables 'income_missing', 'unpaid_family' and 'social_security' have been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:55:20]     done in 2 min
+[17:55:20]   fitting Informal private employee (1,674,121 obs) ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:56:51]     done in 1.5 min
+[17:56:51]   fitting Formal public sector (818,008 obs) ...
+The variables 'unpaid_family' and 'social_security' have been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:57:26]     done in 0.6 min
+[17:57:26]   fitting Formal self-employed (624,666 obs) ...
+The variables 'unpaid_family', 'temporary' and 'social_security' have been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[17:58:22]     done in 0.9 min
+[17:58:22]   fitting Informal self-employed (1,621,692 obs) ...
+The variables 'unpaid_family', 'temporary' and 'social_security' have been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[18:00:02]     done in 1.7 min
+[18:00:03] wrote fig_formal_informal.pdf/.png
+[18:00:04] wrote fig_by_demographics.pdf/.png
+[18:00:05] wrote fig_by_position.pdf/.png
+[18:00:05] wrote tab_heterogeneity.tex
+[18:00:05] 05_heterogeneity.R done.
+[18:00:05] OK   05_heterogeneity.R  (25.4 min)
+[18:00:05] ======================================================================
+[18:00:05] RUN  06_decomposition.R
+[18:00:05] ======================================================================
+[18:00:07] decomposition over cells: formal x sector x occupation
+[18:00:16]   5,496,521 PSU-quarter-education-cell totals; 100 distinct cells
+[18:00:17]   weight in cells observed for one education group only: 0.16%
+[18:00:17]   two-way bootstrap (2000 replications, PSU x quarter) ...
+[18:14:34]   done in 14.3 min
+[18:14:34] decomposition over cells: formal x position_grp x sector x occupation
+[18:14:47]   6,096,137 PSU-quarter-education-cell totals; 382 distinct cells
+[18:14:47]   weight in cells observed for one education group only: 0.64%
+[18:14:47]   two-way bootstrap (2000 replications, PSU x quarter) ...
+[18:31:45]   done in 17 min
+[18:31:45] wrote fig_decomposition.pdf/.png
+[18:31:45] wrote tab_decomposition.tex
+Error in decompose_variant(agg_main, ref = v$ref, common_support = v$cs) : 
+  n~ao foi poss'ivel encontrar a func~ao "decompose_variant"
+Calls: source ... withVisible -> eval -> eval -> rbindlist -> lapply -> FUN
+Al'em disso: Mensagens de aviso:
+1: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+2: Please note that the seeding behavior for random number generation for `boottest()` has changed with
+`fwildclusterboot` version 0.13.
+
+It will no longer be possible to exactly reproduce results produced by versions lower than 0.13.
+
+If your prior results were produced under sufficiently many bootstrap iterations, none of your conclusions
+will change. For more details about this change, please read the notes in
+[news.md](https://cran.r-project.org/web/packages/fwildclusterboot/news/news.html).
+This warning is displayed once per session. 
+3: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+Execuc~ao interrompida
+Mensagens de aviso:
+1: pacote 'ggplot2' foi compilado no R vers~ao 4.4.3 
+2: pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+[18:33:01] placebo windows: 52 quarters, window length 6
+[18:33:01]   observed tau = 0.0274 (HAC se 0.0018, p = 0.0000)
+[18:33:01]   placebo windows: 27; reaching that tau: 0  -> placebo p = 0.0357
+[18:33:01] wrote tab_placebo.tex
+[18:33:01] 10_placebo_windows.R done.
+Mensagens de aviso:
+1: pacote 'ggplot2' foi compilado no R vers~ao 4.4.3 
+2: pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+[18:33:08] overlap weights on 8,002,128 observations
+[18:34:09]   2014Q2
+[18:35:18]   2016Q4
+[18:36:20]   2019Q2
+[18:37:01]   2021Q4
+[18:37:52]   2024Q2
+[18:38:02]   no propensity score (separation or missing covariate): 9
+          period       n off_support ess_survey ess_overlap ess_ratio
+          <char>   <int>       <num>      <num>       <num>     <num>
+1:  Pre-pandemic 5436521   0.3628204 2801557.90    685152.8 0.2445613
+2:         Onset  126921   0.1766223   50918.33     15108.7 0.2967241
+3:  Mid-pandemic  570014   0.1737703  200188.03     62896.4 0.3141866
+4: Post-pandemic 1868663   0.1794841  961429.95    319947.0 0.3327825
+[18:38:06] re-estimating the event study under overlap weights ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+          period     gap_base     se_base       gap_ov        se_ov         shift
+          <char>        <num>       <num>        <num>        <num>         <num>
+1:  Pre-pandemic -0.007777528 0.001446394 -0.009481090 0.0009726175 -0.0017035624
+2:         Onset -0.034338902 0.001340849 -0.017493932 0.0011317497  0.0168449702
+3:  Mid-pandemic  0.018591250 0.001381456 -0.005147560 0.0008389396 -0.0237388097
+4: Post-pandemic -0.009363053 0.001321660 -0.009726314 0.0006416305 -0.0003632604
+[18:53:56] wrote tab_overlap.tex
+[18:53:56] 11_overlap_weights.R done.

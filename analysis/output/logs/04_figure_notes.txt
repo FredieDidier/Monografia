@@ -4,6 +4,6 @@ Quarters with a positive gap (college exits more), point estimate:
 Quarters where the gap is positive and the simultaneous band excludes zero:
    2020Q2, 2020Q3, 2020Q4, 2021Q1, 2021Q2, 2021Q3
 
-Pointwise-significant quarters: 48 of 52
-Simultaneously significant quarters: 47 of 52
-sup-t critical value: 2.707
+Pointwise-significant quarters: 47 of 52
+Simultaneously significant quarters: 43 of 52
+sup-t critical value: 2.725

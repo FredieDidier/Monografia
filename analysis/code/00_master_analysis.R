@@ -56,11 +56,22 @@ STEPS <- c(
   "07_attrition.R",
   # Robustness table and validation of the closed-form margins.
   "08_robustness.R",
-  # Every number quoted in the paper text, as LaTeX macros.
+  # Aggregate-time inference: the realised window against placebo windows.
+  "10_placebo_windows.R",
+  # Common support between the education groups, and overlap-weighted estimates.
+  "11_overlap_weights.R",
+  # How far the unmatched would have to depart from missing-at-random.
+  "12_tipping_point.R",
+  # Every number quoted in the paper text, as LaTeX macros. Runs after 10-12 so
+  # that their results are available as macros too.
   "09_paper_numbers.R",
   # Software environment for the replication package.
   "99_session_info.R"
 )
+
+# Source of the preparation step, so the skip test below can notice when the
+# script itself changes and not only when its input does.
+PREP_SRC <- file.path(DIR_CODE, "01_prepare_analysis_data.R")
 
 # 01 is expensive and idempotent: skip it when its output is already there.
 # Under the legacy vintage there is nothing to prepare -- the analysis file was
@@ -69,12 +80,17 @@ if (identical(DATA_VINTAGE, "legacy")) {
   msg("legacy vintage: reading ", basename(ANALYSIS_PQ), " directly")
   STEPS <- setdiff(STEPS, "01_prepare_analysis_data.R")
 } else if (file.exists(ANALYSIS_PQ) &&
-           file.mtime(ANALYSIS_PQ) > file.mtime(RAW_PARQUET)) {
-  # Skip only when the analysis sample is newer than the file it is derived
-  # from. Checking mere existence once meant a rebuilt main_data.parquet was
-  # silently ignored and the whole analysis ran on a stale sample.
-  msg("analysis sample is newer than ", basename(RAW_PARQUET),
-      ", skipping 01 (delete ", basename(ANALYSIS_PQ), " to force a rebuild)")
+           file.mtime(ANALYSIS_PQ) > file.mtime(RAW_PARQUET) &&
+           file.mtime(ANALYSIS_PQ) > file.mtime(PREP_SRC)) {
+  # Skip only when the analysis sample is newer than *both* the file it is
+  # derived from and the script that derives it. Comparing against the data
+  # alone was not enough: editing 01 (a new variable, a recoded control) left a
+  # sample that predated the change looking current, and the whole analysis
+  # then ran on it. Checking mere existence, the version before that, missed a
+  # rebuilt main_data.parquet the same way.
+  msg("analysis sample is newer than ", basename(RAW_PARQUET), " and ",
+      basename(PREP_SRC), ", skipping 01 (delete ", basename(ANALYSIS_PQ),
+      " to force a rebuild)")
   STEPS <- setdiff(STEPS, "01_prepare_analysis_data.R")
 } else if (file.exists(ANALYSIS_PQ)) {
   msg("analysis sample is older than ", basename(RAW_PARQUET), " -- rebuilding")

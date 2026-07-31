@@ -1,0 +1,25 @@
+\begin{table}[H]
+\centering
+\caption{The mid-pandemic window against placebo windows of the same length}
+\label{tab:placebo}
+\begin{threeparttable}
+\begin{tabular}{lcccc}
+\toprule
+Window & Quarters & $\tau$ & HAC s.e. & $p$ \\
+\midrule
+\multicolumn{5}{l}{\textit{Panel A. Alternative end points for the window}} \\
+\quad 2020Q2--2021Q2 & 5 & 0.0267 & 0.0016 & 0.0000 \\
+\quad 2020Q2--2021Q3 & 6 & 0.0274 & 0.0018 & 0.0000 \\
+\quad 2020Q2--2021Q4 & 7 & 0.0220 & 0.0045 & 0.0000 \\
+\addlinespace
+\multicolumn{5}{l}{\textit{Panel B. Placebo distribution}} \\
+\quad Observed window & 6 & 0.0274 & 0.0018 & 0.0000 \\
+\quad Pre-pandemic placebos & 27 & -0.0026 & 0.0043 & \\
+\quad Placebos reaching $\tau_{\text{obs}}$ & 0 of 27 & & & 0.0357 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item Notes: $\tau$ is the coefficient on a window indicator in $\Delta_q = a + \tau\mathbf{1}\{q \in W\} + u_q$, estimated on the 52 quarterly adjusted gaps of Figure~\ref{fig:gap} with the quarter as the unit of observation. Standard errors are Newey--West with four lags. Panel A varies the end point of the window, which was read off the estimated series rather than fixed in advance. Panel B compares the realised window with every contiguous window of the same length that lies entirely before 2020Q1; the reported $p$ is $(1+\#\{\tau_{\text{placebo}} \geq \tau_{\text{obs}}\})/(1+n)$. This exercise treats the quarter, not the worker, as the unit of observation, and so is the aggregate-time counterpart of the worker-level inference in Table~\ref{tab:main_margins}.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

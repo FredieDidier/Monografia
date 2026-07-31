@@ -27,6 +27,10 @@ latex/*.out
 latex/*.spl
 latex/*.synctex.gz
 latex/*.toc
+# The compiled manuscript is a build artefact; the figures under
+# analysis/output/figures are outputs the paper \includegraphics and stay
+# tracked, so this is scoped to latex/ rather than a blanket *.pdf.
+latex/*.pdf
 
 # ---- OS --------------------------------------------------------------------
 .DS_Store

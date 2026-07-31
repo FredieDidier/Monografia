@@ -54,7 +54,14 @@ VARS <- c(
   "income"                = "Monthly labour income (R\\$)"
 )
 
+# Labour income is the one variable with genuine missings: workers who did not
+# report earnings. (Unpaid family workers are not among them -- their income is
+# a true zero and is coded as such.) Those rows are dropped from this variable's
+# mean rather than being silently read as zero, which is what the earlier
+# vintage did; the note under the table gives the share they represent.
 wsum <- function(x, w, digits = 2) {
+  ok <- !is.na(x)
+  x <- x[ok]; w <- w[ok]
   mu <- stats::weighted.mean(x, w)
   sd <- sqrt(stats::weighted.mean((x - mu)^2, w))
   c(mean = mu, sd = sd)
@@ -118,7 +125,12 @@ tex <- c(
          "who is matched to quarter $t+1$. Employment exit equals one when the worker ",
          "is unemployed or out of the labour force in $t+1$. College degree indicates ",
          "completed tertiary education. All moments are survey ",
-         "weighted using \\textit{PNAD Cont\\'inua} person weights."),
+         "weighted using \\textit{PNAD Cont\\'inua} person weights. ",
+         sprintf(paste("Labour income is reported by %.1f%% of the sample and its",
+                       "moments are taken over those workers; unpaid family",
+                       "workers, %.1f%% of the sample, are included at a true zero."),
+                 100 * d[, weighted.mean(!is.na(income), w)],
+                 100 * d[, weighted.mean(unpaid_family == 1L, w)])),
   "\\end{tablenotes}",
   "\\end{threeparttable}",
   "\\end{table}"

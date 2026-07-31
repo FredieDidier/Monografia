@@ -1,7 +1,7 @@
 # =============================================================================
 # 07_attrition.R
 #
-# Comment 5: panel matching and attrition.
+# Panel matching and attrition.
 #
 # The stage-3 build keeps every worker employed in quarter t, whether or not
 # the matching algorithm finds them again in t+1. Retention is therefore
@@ -13,7 +13,7 @@
 #   (a) Retention by quarter, education and formality    -> Table A.4, figure
 #   (b) Standardised differences, matched vs unmatched origins
 #   (c) Inverse-retention-probability weights and re-estimation -> Table 5
-#   (d) Breakdown calculation: how differently would unmatched workers have to
+#   (d) Zero-gap frontier: how differently would unmatched workers have to
 #       behave to overturn the mid-pandemic reversal?
 # =============================================================================
 
@@ -195,27 +195,62 @@ cmp <- merge(pm_base[, .(period, gap_base = gap, se_base = gap_se)],
 fwrite(cmp, file.path(DIR_EST, "attrition_ipw_comparison.csv"))
 
 # -----------------------------------------------------------------------------
-# (d) Breakdown calculation
+# (d) Zero-gap frontier
 # -----------------------------------------------------------------------------
-# With rho the share of employed workers matched into t+1, and m_g, mtilde_g the
-# exit rates of matched and unmatched workers in education group g,
-#     Delta = rho * Delta_hat + (1 - rho) * (mtilde_C - mtilde_N).
-# Setting Delta = 0 gives the differential the unmatched would have to display.
-RHO <- ret[, weighted.mean(matched_next, w)]
-mid_gap <- pm_base[grepl("^Mid", period), gap]
-breakdown <- -RHO * mid_gap / (1 - RHO)
+# An earlier version wrote the all-origin gap as
+#     Delta = rho * Delta_hat + (1 - rho) * (mtilde_C - mtilde_N)
+# and solved for the single differential that sets it to zero. That collapses
+# two different retention rates onto one rho: over the window graduates are
+# matched at a materially higher rate than non-graduates, so the two groups
+# cannot share a rho. The identity also mixes raw retention rates with a
+# covariate-adjusted contrast, which does not obey it. Both are fixed here: the
+# object is the raw gap, each group keeps its own retention rate, and the result
+# is a frontier in the two unobserved exit rates rather than a point.
+#
+#     Delta_all = rho_C m_C^M + (1-rho_C) m_C^U
+#               - [rho_N m_N^M + (1-rho_N) m_N^U]
+#
+# Setting Delta_all = 0 traces a line in (m_C^U, m_N^U).
+mid_o <- ret[qtr %in% Q_MID]
+rho_g <- mid_o[, .(rho = weighted.mean(matched_next, w)), by = college]
+mM_g  <- mid_o[matched_next == 1L, .(m = weighted.mean(exit, w)), by = college]
+
+rho_C <- rho_g[college == 1L, rho]; rho_N <- rho_g[college == 0L, rho]
+mM_C  <- mM_g[college == 1L, m];    mM_N  <- mM_g[college == 0L, m]
+
+# Line: (1-rho_C) m_C^U - (1-rho_N) m_N^U = rho_N m_N^M - rho_C m_C^M
+rhs <- rho_N * mM_N - rho_C * mM_C
+frontier <- data.table(mU_C = seq(0, 1, by = 0.005))
+frontier[, mU_N := ((1 - rho_C) * mU_C - rhs) / (1 - rho_N)]
+frontier <- frontier[mU_N >= 0 & mU_N <= 1]
+fwrite(frontier, file.path(DIR_EST, "attrition_frontier.csv"))
+
+# Gap that obtains if the unmatched behave like matched workers of their group.
+gap_bench <- rho_C * mM_C + (1 - rho_C) * mM_C - (rho_N * mM_N + (1 - rho_N) * mM_N)
+
+p_front <- ggplot(frontier, aes(mU_C, mU_N)) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dotted",
+              colour = "grey60", linewidth = 0.4) +
+  geom_line(colour = COL_COLLEGE, linewidth = 0.9) +
+  annotate("point", x = mM_C, y = mM_N, size = 2.4, colour = COL_NOCOLLEGE) +
+  annotate("text", x = mM_C, y = mM_N, label = "  unmatched behave like matched",
+           hjust = 0, vjust = -0.8, size = 3.1, colour = COL_NOCOLLEGE) +
+  labs(x = "Unobserved exit rate of unmatched graduates",
+       y = "Unobserved exit rate of\nunmatched non-graduates") +
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, 1)) +
+  theme_paper()
+save_fig(p_front, "fig_attrition_frontier", w = 6.2, h = 5.0)
 
 writeLines(c(
-  sprintf("Overall t -> t+1 match rate (rho): %.4f", RHO),
-  "Source: directly observed in analysis_origins.parquet (stage-3 build).",
-  sprintf("Mid-pandemic adjusted gap among matched workers: %+.4f", mid_gap),
-  sprintf("Unmatched-worker exit-rate differential needed to zero out the gap: %+.4f",
-          breakdown),
+  sprintf("Mid-pandemic retention: college %.4f, non-college %.4f", rho_C, rho_N),
+  sprintf("Mid-pandemic raw exit rate among matched: college %.4f, non-college %.4f",
+          mM_C, mM_N),
+  sprintf("Raw all-origin gap if unmatched behave like matched: %+.4f", gap_bench),
   "",
-  "Interpretation: to overturn the mid-pandemic reversal, unmatched college",
-  "workers would have to exit employment by the amount above relative to",
-  "unmatched non-college workers -- opposite in sign to what is observed among",
-  "matched workers, and several times larger."
+  "The zero-gap frontier is written to estimates/attrition_frontier.csv and",
+  "plotted as fig_attrition_frontier. It replaces the single-rho breakdown",
+  "value reported previously, which assumed a common retention rate across",
+  "education groups and applied a raw-rate identity to an adjusted contrast."
 ), file.path(DIR_LOGS, "07_attrition_breakdown.txt"))
 
 # -----------------------------------------------------------------------------

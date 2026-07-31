@@ -1,0 +1,88 @@
+=== 08:40 RUN 11_overlap_weights
+Mensagens de aviso:
+1: pacote 'ggplot2' foi compilado no R vers~ao 4.4.3 
+2: pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+[08:40:34] === segment: all -- 8,002,128 observations
+[08:41:35]   2014Q2
+[08:42:41]   2016Q4
+[08:43:40]   2019Q2
+[08:44:20]   2021Q4
+[08:45:09]   2024Q2
+[08:45:19]   no propensity score (separation or missing covariate): 9
+          period       n off_support ess_survey ess_overlap ess_ratio
+          <char>   <int>       <num>      <num>       <num>     <num>
+1:  Pre-pandemic 5436521   0.3628204 2801557.90    685152.8 0.2445613
+2:         Onset  126921   0.1766223   50918.33     15108.7 0.2967241
+3:  Mid-pandemic  570014   0.1737703  200188.03     62896.4 0.3141866
+4: Post-pandemic 1868663   0.1794841  961429.95    319947.0 0.3327825
+[08:45:22] re-estimating the event study under overlap weights ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+          period     gap_base     se_base       gap_ov        se_ov         shift segment
+          <char>        <num>       <num>        <num>        <num>         <num>  <char>
+1:  Pre-pandemic -0.007777528 0.001446394 -0.009481090 0.0009726175 -0.0017035624     all
+2:         Onset -0.034338902 0.001340849 -0.017493932 0.0011317497  0.0168449702     all
+3:  Mid-pandemic  0.018591250 0.001381456 -0.005147560 0.0008389396 -0.0237388097     all
+4: Post-pandemic -0.009363053 0.001321660 -0.009726314 0.0006416305 -0.0003632604     all
+[08:59:47] === segment: informal -- 3,638,675 observations
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+[09:00:20]   2014Q2
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+[09:00:52]   2016Q4
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+[09:01:22]   2019Q2
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+[09:01:43]   2021Q4
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+[09:02:10]   2024Q2
+[09:02:15]   no propensity score (separation or missing covariate): 125
+          period       n off_support ess_survey ess_overlap ess_ratio
+          <char>   <int>       <num>      <num>       <num>     <num>
+1:  Pre-pandemic 2479603   0.5511459 1302651.94  181188.986 0.1390924
+2:         Onset   55165   0.3223931   21166.45    3145.747 0.1486195
+3:  Mid-pandemic  252902   0.3216697   87638.05   18473.881 0.2107975
+4: Post-pandemic  850880   0.3104632  432515.29   96393.315 0.2228668
+[09:02:16] re-estimating the event study under overlap weights ...
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+          period    gap_base     se_base       gap_ov       se_ov         shift  segment
+          <char>       <num>       <num>        <num>       <num>         <num>   <char>
+1:  Pre-pandemic -0.01170949 0.002757802 -0.012603850 0.002256379 -0.0008943595 informal
+2:         Onset -0.03726205 0.002658840 -0.011966631 0.002724617  0.0252954185 informal
+3:  Mid-pandemic  0.02056610 0.003167544 -0.007533239 0.002961698 -0.0280993395 informal
+4: Post-pandemic -0.01655442 0.002248017 -0.015035892 0.001564459  0.0015185310 informal
+[09:09:11] wrote tab_overlap.tex
+[09:09:11] 11_overlap_weights.R done.
+=== 09:09 OK 11_overlap_weights
+=== 09:09 RUN 09_paper_numbers
+Mensagens de aviso:
+1: pacote 'ggplot2' foi compilado no R vers~ao 4.4.3 
+2: pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+Error in sprintf("\\newcommand{\\%s}{%s}", names(macros), unlist(macros)) : 
+  argumentos n~ao podem ser reciclados para o mesmo tamanho
+Calls: source -> withVisible -> eval -> eval -> sprintf
+Execuc~ao interrompida
+=== FAILED 09_paper_numbers
+=== 09:09 done
