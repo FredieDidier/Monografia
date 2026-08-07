@@ -1,0 +1,19 @@
+%==============================================================================
+% Blind (anonymous) build of paper_anpec.tex.
+%
+% ANPEC requires two submission files: one with the authors identified, which
+% is published on the ANPEC site if the paper is accepted, and one without any
+% element that allows the authors to be identified, which is sent to the
+% scientific committee. This wrapper produces the second from the same source,
+% so the two can never drift apart.
+%
+%   identified:  latexmk -pdf paper_anpec.tex
+%   blind:       latexmk -pdf paper_anpec_blind.tex
+%
+% Defining \ANPECblind here rather than editing paper_anpec.tex works because
+% that file tests for it before setting its own \ifblind switch.
+%==============================================================================
+
+\def\ANPECblind{}
+
+\input{paper_anpec.tex}

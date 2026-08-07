@@ -126,9 +126,12 @@ tex <- c(
          "is unemployed or out of the labour force in $t+1$. College degree indicates ",
          "completed tertiary education. All moments are survey ",
          "weighted using \\textit{PNAD Cont\\'inua} person weights. ",
-         sprintf(paste("Labour income is reported by %.1f%% of the sample and its",
+         # sprintf turns %% into a bare %, which LaTeX reads as a comment and
+         # which therefore silently swallows the rest of the note. The escape
+         # has to survive sprintf, so it is written \\%% here to emit \%.
+         sprintf(paste("Labour income is reported by %.1f\\%% of the sample and its",
                        "moments are taken over those workers; unpaid family",
-                       "workers, %.1f%% of the sample, are included at a true zero."),
+                       "workers, %.1f\\%% of the sample, are included at a true zero."),
                  100 * d[, weighted.mean(!is.na(income), w)],
                  100 * d[, weighted.mean(unpaid_family == 1L, w)])),
   "\\end{tablenotes}",

@@ -197,7 +197,9 @@ write_tex(c(
          sprintf("%s and %s", fmt_n(n_cross(CELL_MAIN) - main$ncell),
                               fmt_n(n_cross(CELL_ALT)  - alt$ncell)),
          " combinations the crossings allow are empty. ",
-         sprintf("Cells occupied by only one education group hold %.1f%% and %.1f%% ",
+         # \\%% so that sprintf emits \%: a bare % is a LaTeX comment and would
+         # swallow the remainder of the note, which is written as one long line.
+         sprintf("Cells occupied by only one education group hold %.1f\\%% and %.1f\\%% ",
                  100 * main$one_group, 100 * alt$one_group),
          "of the survey weight under the two definitions; they have no ",
          "counterfactual rate for the absent group, so their whole contribution ",
