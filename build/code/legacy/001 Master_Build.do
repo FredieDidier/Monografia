@@ -13,6 +13,7 @@ else if "`c(username)'" == "DELL"   {
 	version 16.1
 	global ROOT "D:\OneDrive\Documentos\GitHub\Monografia-Fredie"
 	global ROOT_DATA "D:\Dropbox\DataZoom\BasesIBGE\datazoom_rar\PNAD_CONTINUA\pnadcontinua_trimestral_2022024"
+	global DROPBOX_PATH "D:\Dropbox\Research\Education_and_Job_Loss_During_COVID_19"
 }
 else if "`c(username)'" == "f.cavalcanti"   {
 	version 16.1
