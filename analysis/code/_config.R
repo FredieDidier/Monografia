@@ -39,6 +39,7 @@ ROOT <- switch(
   "Francisco"    = "C:/Users/Francisco/Dropbox/Research/Monografia-Fredie",
   "f.cavalcanti" = "C:/Users/f.cavalcanti/Documents/GitHub/Monografia",
   "DELL"         = "D:/OneDrive/Documentos/GitHub/Monografia-Fredie",
+  "FADE Concursos" = "C:/Users/FADE Concursos/Documents/GitHub/Monografia",
   # Fallback: assume the working directory is already the repository root
   normalizePath(getwd(), winslash = "/", mustWork = FALSE)
 )
@@ -49,6 +50,7 @@ DROPBOX <- switch(
   "Francisco"    = "C:/Users/Francisco/Dropbox/Education_and_Job_Loss_During_COVID_19",
   "f.cavalcanti" = "C:/Users/f.cavalcanti/Dropbox/Education_and_Job_Loss_During_COVID_19",
   "DELL"         = "D:/Dropbox/Education_and_Job_Loss_During_COVID_19",
+  "FADE Concursos" = "C:/Users/FADE Concursos/Dropbox/Research/Education_and_Job_Loss_During_COVID_19",
   file.path(ROOT, "build", "output")
 )
 
