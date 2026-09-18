@@ -498,3 +498,11 @@ succeeded with the wrong value.
   belongs in the body or the appendix depends on the informal-segment version of
   it; do not bury it in the appendix while it remains a sign flip.
 - Open: Zenodo deposit on acceptance (README promises it).
+- **Citations audited 2026-09-18** (existence, metadata and content of every
+  `\cite` site in `paper.tex`): record in `Literature/verificacao_citacoes.md`,
+  with the list of what passed so it is not re-done. The schooling–formality
+  sites now cite Haanwinckel–Soares (2021) and Gasparini–Tornarolli (2009);
+  three Gonzaga papers were added (2003 turnover; Gerard–Gonzaga 2021;
+  Engbom et al. 2022). `paper_anpec.tex` carries the same corrections (the
+  ANPEC submission itself is commit `576a794`) and now compiles to 21 pages
+  against its 20-page cap; the blind build stays at 20.
