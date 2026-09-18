@@ -228,13 +228,27 @@ fwrite(frontier, file.path(DIR_EST, "attrition_frontier.csv"))
 # Gap that obtains if the unmatched behave like matched workers of their group.
 gap_bench <- rho_C * mM_C + (1 - rho_C) * mM_C - (rho_N * mM_N + (1 - rho_N) * mM_N)
 
+# The benchmark sits close to the 45-degree line, so its label is lifted above
+# the diagonal and tied to the marker with a leader; the two regions the
+# frontier separates are named in the empty corners.
+lab_x <- mM_C + 0.03; lab_y <- mM_N + 0.22
 p_front <- ggplot(frontier, aes(mU_C, mU_N)) +
   geom_abline(slope = 1, intercept = 0, linetype = "dotted",
               colour = "grey60", linewidth = 0.4) +
   geom_line(colour = COL_COLLEGE, linewidth = 0.9) +
+  annotate("segment", x = mM_C, y = mM_N + 0.015, xend = lab_x, yend = lab_y - 0.02,
+           colour = COL_NOCOLLEGE, linewidth = 0.35) +
   annotate("point", x = mM_C, y = mM_N, size = 2.4, colour = COL_NOCOLLEGE) +
-  annotate("text", x = mM_C, y = mM_N, label = "  unmatched behave like matched",
-           hjust = 0, vjust = -0.8, size = 3.1, colour = COL_NOCOLLEGE) +
+  annotate("text", x = lab_x, y = lab_y, label = "unmatched behave\nlike matched",
+           hjust = 0, vjust = 0, size = 3.1, lineheight = 0.9,
+           colour = COL_NOCOLLEGE) +
+  annotate("text", x = 0.25, y = 0.85, label = "raw gap stays negative",
+           hjust = 0, size = 3.1, colour = "grey30") +
+  annotate("text", x = 0.97, y = 0.12, label = "raw gap reverses",
+           hjust = 1, size = 3.1, colour = "grey30") +
+  annotate("text", x = 0.97, y = frontier[which.min(abs(mU_C - 0.95)), mU_N] + 0.05,
+           label = "zero-gap frontier", hjust = 1, size = 3.1,
+           colour = COL_COLLEGE) +
   labs(x = "Unobserved exit rate of unmatched graduates",
        y = "Unobserved exit rate of\nunmatched non-graduates") +
   coord_cartesian(xlim = c(0, 1), ylim = c(0, 1)) +

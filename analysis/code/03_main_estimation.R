@@ -121,6 +121,13 @@ blocks <- unlist(lapply(seq_along(OUTCOMES), function(i) {
   if (i < length(OUTCOMES)) c(b, "\\addlinespace") else b
 }))
 
+# The three event-study objects are about 10 GB each in memory and nothing
+# below needs the two destination-specific ones (they are cached on disk for
+# 07_attrition.R). Holding all three through the variance-sensitivity block
+# below, which re-clusters the full model by household and by individual,
+# exceeded 16 GB and had the process killed; release them here.
+models <- models["exit"]; invisible(gc())
+
 # Kept for downstream scripts that expect the aggregate margins.
 pm <- fread(file.path(DIR_EST, "adjusted_margins_periods_exit.csv"))
 fwrite(pm, file.path(DIR_EST, "adjusted_margins_periods.csv"))

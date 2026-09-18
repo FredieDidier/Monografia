@@ -186,7 +186,7 @@ segmented along the formal--informal margin was concentrated.
 Brazil; rotating panel.
 
 \medskip
-\noindent\textbf{\'Area ANPEC:} \'Area 13 --- Economia do Trabalho.
+\noindent\textbf{\'Area ANPEC:} \'Area 13, Economia do Trabalho.
 
 \noindent\textbf{JEL classification:} J63, J24, J46, I38, O17.
 
@@ -274,9 +274,9 @@ wild cluster bootstrap on year-quarter cannot distinguish it from an
 idiosyncratic quarterly shock; the disappearance rests on six quarters and
 survives the same test comfortably. We report the first and build on the second.
 
-The decomposition then tells us what the episode is not. Composition ---
+The decomposition then tells us what the episode is not. Composition, meaning
 graduates and non-graduates working in different formality, sector and
-occupation cells --- takes roughly \DecPreCompShare\% of the unconditional gap
+occupation cells, takes roughly \DecPreCompShare\% of the unconditional gap
 and within-cell risk the remaining \DecPreWithinShare\%, and those shares barely
 move across periods. During 2020Q2--2021Q3 both components compress at almost
 the same rate, composition by \DecCompShrink\% and within-cell risk by
@@ -362,16 +362,18 @@ through open-access \textit{Stata} and \textit{R} packages; we use the
 respondents on household, sex and full date of birth; it then donates birth
 dates across interviews so that a respondent whose recorded date is missing or
 inconsistent in one interview is still matched; and it finally resolves
-fragmented interview sequences by treating candidate links as a graph and taking
-connected components. The third pass is what recovers respondents whose recorded
-birth date drifts between interviews. Applied to the \Nquarters{} quarterly
+fragmented interview sequences by a fuzzy match within the household that
+tolerates small differences in the date of birth, accepting the candidate links
+from the closest pair to the least close and rejecting any link that would
+place two interviews of the same quarter on one person. The third pass is what
+recovers respondents whose recorded birth date drifts between interviews. Applied to the \Nquarters{} quarterly
 surveys from \QfirstLab{} to \QlastLab, the algorithm links \Nind{} individuals
 in \Nhh{} households across \Npsu{} primary sampling units. Surveys published
 after \QlastLab{} enter the build too, but only as destinations: they supply the
 $t+1$ state for workers whose origin quarter is \QlastLab{} and contribute no
 origin of their own. Because the panel is rebuilt from the published microdata,
 the sampling unit, the stratum and the survey's own interview counter are
-carried through as ordinary columns --- which is what makes the survey-weighted,
+carried through as ordinary columns, which is what makes the survey-weighted,
 PSU-clustered inference of Section~\ref{sec:empirical} possible and what lets us
 distinguish a scheduled panel exit from attrition.
 
@@ -416,9 +418,9 @@ overall and by education group. The unconditional employment-exit rate is
 and \RawExitCol\% among graduates. It is also much higher in informal than in
 formal employment (\RawExitInformal\% versus \RawExitFormal\%), which is the
 first indication that formality, not schooling as such, is the operative
-margin. The two education groups differ on almost everything else as well ---
+margin. The two education groups differ on almost everything else as well:
 graduates are older, far more often formal, better paid and more concentrated
-in services and in public administration --- which is what makes the
+in services and in public administration, which is what makes the
 conditioning set of Section~\ref{sec:empirical} do so much work, and what
 Section~\ref{sec:robustness} returns to when it asks how far the two groups
 overlap at all.
@@ -609,7 +611,7 @@ this size is not something this series produces on its own.
 Mechanically the movement comes from both sides: the adjusted exit level of
 non-graduates falls \MidRelNoColAbs\% below its pre-pandemic average while that
 of graduates falls only \MidRelColAbs\%. Exit rates fall for everyone in the
-mid-pandemic --- hirings and separations both collapse --- and it is the
+mid-pandemic, since hirings and separations both collapse, and it is the
 gradient that closes. From 2021Q4 the pre-pandemic configuration returns, and by
 the end of the sample the adjusted gap is \PostGap.
 
@@ -647,8 +649,8 @@ workers it moves from \FormalPreGap{} to \FormalMidGap.
 \end{figure}
 
 Splitting each side into detailed labour-market positions narrows the locus
-further. The movement is driven by informal private employees --- workers in a
-dependent employment relationship without a signed work card --- whose adjusted
+further. The movement is driven by informal private employees, workers in a
+dependent employment relationship without a signed work card, whose adjusted
 gap moves from \InfPrivPreGap{} to \InfPrivMidGap. It is absent among the
 informal self-employed (\InfSelfMidGap), among formal private employees
 (\FormPrivMidGap) and among formal public servants (\FormPubMidGap); only the
@@ -664,9 +666,9 @@ voluntary exit, from discouragement, or from a labour-supply response to the
 transfer.
 
 The pattern is not the product of a single demographic group. The pre-pandemic
-gradient is not uniform --- it is markedly steeper for women (\WomenPreGap) than
+gradient is not uniform: it is markedly steeper for women (\WomenPreGap) than
 for men (\MenPreGap), and steeper for non-white workers (\NonWhitePreGap) than
-for white workers (\WhitePreGap) --- but the mid-pandemic movement appears in
+for white workers (\WhitePreGap). But the mid-pandemic movement appears in
 every group, at \MenMidGap{} for men and \WomenMidGap{} for women, and
 \WhiteMidGap{} for white and \NonWhiteMidGap{} for non-white workers. Its
 magnitude tracks informality: it is largest among women and among non-white
@@ -725,7 +727,7 @@ The outcome exists only for workers the matching algorithm finds again, so
 differential retention is a first-order concern. Here it is observed directly:
 the build keeps every worker employed in quarter $t$, whether or not the
 algorithm finds them again, so the indicator we model is the very object at
-issue rather than a stand-in for it. One restriction applies --- a worker
+issue rather than a stand-in for it. One restriction applies: a worker
 observed in the fifth interview has no $t+1$ inside the panel, which is a
 scheduled exit rather than attrition, and the survey's own interview counter
 identifies those rows exactly. Graduates are consistently easier to re-find, and
@@ -779,8 +781,8 @@ comparisons to make.
 
 We read this as a limit on the sign, not on the finding. What survives every
 weighting is that the gradient closes: from \TrimPreGap{} to \TrimMidGap{} on
-common support overall, and from \TrimInfPreGap{} --- precisely estimated and
-clearly negative --- to a mid-pandemic value indistinguishable from zero inside
+common support overall, and from \TrimInfPreGap, precisely estimated and
+clearly negative, to a mid-pandemic value indistinguishable from zero inside
 informal employment. That the point estimate on the full surveyed population
 goes further and turns positive is a property of a comparison drawn partly
 outside common support, and we do not build on it.
@@ -795,7 +797,7 @@ margin of adjustment: there the education gradient runs the usual way throughout
 and widens during the window, from \PreGapInf{} to \MidGapInf, so graduates who
 kept working became relatively less exposed to informal employment just as their
 advantage in staying employed at all disappeared. The two pandemic contrasts are
-also robust to the choice of variance estimator --- clustering by PSU, by
+also robust to the choice of variance estimator: clustering by PSU, by
 household, by individual, by individual and year-quarter, and by year-quarter
 alone, the most conservative option available given \Nquarters{} clusters.
 
@@ -822,7 +824,7 @@ Schooling protects Brazilian workers from employment exits through two channels
 of comparable size: placement into formal jobs in more protected occupations and
 sectors, and a residual advantage inside those cells. Neither dominates, their
 relative weights are stable over time, and during 2020Q2--2021Q3 both compressed
-by roughly the same proportion --- \DecCompShrink\% and \DecWithinShrink\% ---
+by roughly the same proportion, \DecCompShrink\% and \DecWithinShrink\%,
 halving the unconditional gap without reversing it. What happened is therefore a
 statement about workers matched on job characteristics, not about reallocation
 across sectors.

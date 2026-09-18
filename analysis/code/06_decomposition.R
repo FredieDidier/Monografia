@@ -81,10 +81,20 @@ run_decomp <- function(cell_vars, tag) {
   msg("  weight in cells observed for one education group only: ",
       formatC(100 * one_group, format = "f", digits = 2), "%")
 
-  msg("  two-way bootstrap (", B_DECOMP, " replications, PSU x quarter) ...")
-  t0 <- Sys.time()
-  bs <- decompose_boot(agg, qw, PERIODS, B = B_DECOMP, seed = SEED)
-  msg("  done in ", round(as.numeric(Sys.time() - t0, units = "mins"), 1), " min")
+  # The bootstrap is seeded, so its draws are a deterministic function of the
+  # cell totals; cache it like the fitted models so a re-run of the pipeline
+  # does not repeat twenty minutes of resampling per cell definition.
+  f_bs <- file.path(DIR_EST, sprintf("decomposition_boot_%s.rds", tag))
+  if (file.exists(f_bs)) {
+    msg("  loading cached two-way bootstrap")
+    bs <- readRDS(f_bs)
+  } else {
+    msg("  two-way bootstrap (", B_DECOMP, " replications, PSU x quarter) ...")
+    t0 <- Sys.time()
+    bs <- decompose_boot(agg, qw, PERIODS, B = B_DECOMP, seed = SEED)
+    msg("  done in ", round(as.numeric(Sys.time() - t0, units = "mins"), 1), " min")
+    saveRDS(bs, f_bs)
+  }
 
   out <- merge(dp, bs, by = "period", sort = FALSE)
   fwrite(dq, file.path(DIR_EST, sprintf("decomposition_quarterly_%s.csv", tag)))

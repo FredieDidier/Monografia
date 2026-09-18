@@ -1,6 +1,6 @@
-Mid-pandemic retention: college 0.8757, non-college 0.8405
-Mid-pandemic raw exit rate among matched: college 0.0307, non-college 0.0703
-Raw all-origin gap if unmatched behave like matched: -0.0396
+Mid-pandemic retention: college 0.8551, non-college 0.8075
+Mid-pandemic raw exit rate among matched: college 0.0307, non-college 0.0706
+Raw all-origin gap if unmatched behave like matched: -0.0400
 
 The zero-gap frontier is written to estimates/attrition_frontier.csv and
 plotted as fig_attrition_frontier. It replaces the single-rho breakdown

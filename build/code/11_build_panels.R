@@ -7,10 +7,14 @@
 #   build/input/pnadc_panels/Panel_{V1014}.parquet
 #
 # Stage 3 links the same respondent across interviews using donated birth dates,
-# household order and a graph-theory fuzzy match for fragmented interviews. It
-# supersedes the household+birth-date matching used by the earlier build and, in
-# particular, recovers respondents whose recorded birth date drifts between
-# interviews.
+# household order and a fuzzy match for fragmented interviews. Since
+# datazoom.social commit 3cf4aa6 (2026-09-04) the fuzzy links are resolved by a
+# capacity-constrained union-find rather than igraph connected components:
+# stage-2 links are merged first, fuzzy links follow from the closest pair to
+# the least close, and any merge that would put two rows of the same quarter
+# under one id is rejected. Stage 3 supersedes the household+birth-date matching
+# used by the earlier build and, in particular, recovers respondents whose
+# recorded birth date drifts between interviews.
 #
 # Two design choices matter.
 #
@@ -61,8 +65,12 @@ message(length(qfiles), " cached quarters available.")
 # define the windows rather than hard-coding the published rotation calendar.
 # Groups that are already in the field when the survey starts, or still running
 # when it ends, are simply truncated.
+# The map is only valid for the set of quarters it was scanned from: a map
+# older than the newest cached quarter would truncate the groups still in the
+# field, so it is rescanned rather than reused.
 f_map <- file.path(DIR_PANELS, "_group_windows.csv")
-if (file.exists(f_map)) {
+if (file.exists(f_map) && file.size(f_map) > 0 &&
+    file.mtime(f_map) > max(file.mtime(qfiles))) {
   windows <- fread(f_map)
 } else {
   message("Scanning cached quarters for rotation-group windows ...")
@@ -79,11 +87,21 @@ message("Rotation groups found: ", paste(groups, collapse = ", "))
 # -----------------------------------------------------------------------------
 # Build one group
 # -----------------------------------------------------------------------------
+# A cached panel counts only if it post-dates the installed datazoom.social:
+# a panel identified by an earlier version of the algorithm is stale, not
+# cached. This also defends against a cloud-synced folder quietly restoring
+# panels that were moved away to force a rebuild.
+PKG_TIME <- file.mtime(system.file("DESCRIPTION", package = "datazoom.social"))
+
 build_group <- function(p) {
   out <- file.path(DIR_PANELS, sprintf("Panel_%02d.parquet", p))
   if (file.exists(out)) {
-    message(sprintf("  group %2d  cached, skipping", p))
-    return(invisible(TRUE))
+    if (file.size(out) > 0 && file.mtime(out) > PKG_TIME) {
+      message(sprintf("  group %2d  cached, skipping", p))
+      return(invisible(TRUE))
+    }
+    message(sprintf("  group %2d  cached file predates the installed package; rebuilding", p))
+    unlink(out)
   }
 
   files_p <- sort(unique(windows[V1014 == p, file]))

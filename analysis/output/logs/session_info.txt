@@ -3,7 +3,7 @@ Software environment
 
 R version : R version 4.4.2 (2024-10-31)
 Platform  : aarch64-apple-darwin20
-Running   : macOS 26.5.2
+Running   : macOS 26.6.2
 BLAS      : /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib
 fixest threads: 1
 
@@ -26,6 +26,6 @@ Random number generation
   Global seed      : 20260615
   Wild bootstrap   : 9999 replications
   sup-t multiplier : 10000 draws
-  Decomposition    : 500 replications
+  Decomposition    : 2000 replications
 
-Generated: 2026-07-29 13:06:51 -03
+Generated: 2026-09-18 03:01:07 -03

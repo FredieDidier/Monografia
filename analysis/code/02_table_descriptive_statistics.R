@@ -254,7 +254,8 @@ write_tex(c(
          "in; the fifth interview is the last scheduled one and is excluded. ",
          "Stage 3 links respondents on household, sex and date of birth, donates ",
          "birth dates across interviews, and resolves fragmented sequences with a ",
-         "graph-theoretic fuzzy match."),
+         "fuzzy match on the date of birth that never assigns two interviews of ",
+         "the same quarter to one person."),
   "\\end{tablenotes}",
   "\\end{threeparttable}",
   "\\end{table}"

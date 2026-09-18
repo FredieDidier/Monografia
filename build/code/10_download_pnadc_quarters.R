@@ -107,11 +107,13 @@ download_quarter <- function(yr, q) {
   df <- NULL
   fatal <- FALSE
   for (attempt in 1:MAX_TRIES) {
+    errored <- FALSE
     df <- tryCatch(
       get_pnadc(year = yr, quarter = q, vars = NULL,
                 labels = FALSE, deflator = TRUE, design = FALSE),
       error = function(e) {
         m <- conditionMessage(e)
+        errored <<- TRUE
         # A quarter that IBGE has not published yet is not a transient failure;
         # retrying it just burns the backoff. Only connection errors are worth
         # repeating.
@@ -123,6 +125,13 @@ download_quarter <- function(yr, q) {
         NULL
       }
     )
+    # Current PNADcIBGE does not raise an error for an unpublished quarter: it
+    # prints "Data unavailable for selected quarter and year" and returns NULL.
+    # A NULL without an error is therefore the not-published case, not a
+    # connection failure, and must not be retried.
+    if (is.null(df) && !errored) {
+      message("    not published yet"); fatal <- TRUE
+    }
     if (!is.null(df) || fatal) break
     unlink(list.files(tempdir(), full.names = TRUE), recursive = TRUE, force = TRUE)
     if (attempt < MAX_TRIES) {

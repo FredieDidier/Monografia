@@ -1,0 +1,198 @@
+Mensagens de aviso:
+1: pacote 'ggplot2' foi compilado no R vers~ao 4.4.3 
+2: pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+[21:11:54] ======================================================================
+[21:11:54] RUN  10_download_pnadc_quarters.R
+[21:11:54] ======================================================================
+Caching PNADC quarters into /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/input/pnadc_quarters
+  2012Q1  cached, skipping
+  2012Q2  cached, skipping
+  2012Q3  cached, skipping
+  2012Q4  cached, skipping
+  2013Q1  cached, skipping
+  2013Q2  cached, skipping
+  2013Q3  cached, skipping
+  2013Q4  cached, skipping
+  2014Q1  cached, skipping
+  2014Q2  cached, skipping
+  2014Q3  cached, skipping
+  2014Q4  cached, skipping
+  2015Q1  cached, skipping
+  2015Q2  cached, skipping
+  2015Q3  cached, skipping
+  2015Q4  cached, skipping
+  2016Q1  cached, skipping
+  2016Q2  cached, skipping
+  2016Q3  cached, skipping
+  2016Q4  cached, skipping
+  2017Q1  cached, skipping
+  2017Q2  cached, skipping
+  2017Q3  cached, skipping
+  2017Q4  cached, skipping
+  2018Q1  cached, skipping
+  2018Q2  cached, skipping
+  2018Q3  cached, skipping
+  2018Q4  cached, skipping
+  2019Q1  cached, skipping
+  2019Q2  cached, skipping
+  2019Q3  cached, skipping
+  2019Q4  cached, skipping
+  2020Q1  cached, skipping
+  2020Q2  cached, skipping
+  2020Q3  cached, skipping
+  2020Q4  cached, skipping
+  2021Q1  cached, skipping
+  2021Q2  cached, skipping
+  2021Q3  cached, skipping
+  2021Q4  cached, skipping
+  2022Q1  cached, skipping
+  2022Q2  cached, skipping
+  2022Q3  cached, skipping
+  2022Q4  cached, skipping
+  2023Q1  cached, skipping
+  2023Q2  cached, skipping
+  2023Q3  cached, skipping
+  2023Q4  cached, skipping
+  2024Q1  cached, skipping
+  2024Q2  cached, skipping
+  2024Q3  cached, skipping
+  2024Q4  cached, skipping
+  2025Q1  cached, skipping
+  2025Q2  cached, skipping
+  2025Q3  cached, skipping
+  2025Q4  cached, skipping
+  2026Q1  cached, skipping
+  2026Q2  cached, skipping
+  2026Q3  downloading ...
+Data unavailable for selected quarter and year.
+
+    not published yet
+  2026Q4  downloading ...
+Data unavailable for selected quarter and year.
+
+    not published yet
+
+Done. 58 quarters cached (0.6 GB).
+[21:11:56] OK   10_download_pnadc_quarters.R  (0 min)
+[21:11:56] ======================================================================
+[21:11:56] RUN  11_build_panels.R
+[21:11:56] ======================================================================
+58 cached quarters available.
+Scanning cached quarters for rotation-group windows ...
+Rotation groups found: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
+  group  1  2012Q1-2012Q4, 4 quarters ...
+    1,128,820 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 97.8% of person-quarters
+    saved 1,128,820 rows, 34 MB, 3.2 min
+  group  2  2012Q1-2014Q1, 9 quarters ...
+    2,822,124 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 97.9% of person-quarters
+    saved 2,822,124 rows, 92 MB, 6.5 min
+  group  3  2013Q2-2015Q2, 9 quarters ...
+    2,866,552 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 97.0% of person-quarters
+    saved 2,866,552 rows, 94 MB, 6.0 min
+  group  4  2014Q3-2016Q3, 9 quarters ...
+    2,854,047 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 95.3% of person-quarters
+    saved 2,854,047 rows, 93 MB, 5.4 min
+  group  5  2015Q4-2017Q4, 9 quarters ...
+    2,846,903 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 90.7% of person-quarters
+    saved 2,846,903 rows, 91 MB, 6.9 min
+  group  6  2017Q1-2019Q1, 9 quarters ...
+    2,804,315 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 91.5% of person-quarters
+    saved 2,804,315 rows, 90 MB, 4.5 min
+  group  7  2018Q2-2020Q2, 9 quarters ...
+    2,719,103 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 93.9% of person-quarters
+    saved 2,719,103 rows, 89 MB, 4.5 min
+  group  8  2019Q3-2021Q3, 9 quarters ...
+    2,006,518 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 94.3% of person-quarters
+    saved 2,006,518 rows, 65 MB, 3.6 min
+  group  9  2020Q4-2022Q4, 9 quarters ...
+    2,134,882 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 89.6% of person-quarters
+    saved 2,134,882 rows, 70 MB, 3.7 min
+  group 10  2022Q1-2024Q1, 9 quarters ...
+    2,375,804 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 90.8% of person-quarters
+    saved 2,375,804 rows, 78 MB, 3.6 min
+  group 11  2023Q2-2025Q2, 9 quarters ...
+    2,390,743 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 94.5% of person-quarters
+    saved 2,390,743 rows, 80 MB, 3.9 min
+  group 12  2024Q3-2026Q2, 8 quarters ...
+    2,331,257 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 95.6% of person-quarters
+    saved 2,331,257 rows, 78 MB, 4.0 min
+  group 13  2025Q4-2026Q2, 3 quarters ...
+    645,578 rows loaded
+    identification added: id_dom, id_ind, num_appearances, birth_day, birth_month, birth_year, id_rs1, id_rs2, id_rs3
+    stage-3 match rate: 93.8% of person-quarters
+    saved 645,578 rows, 21 MB, 1.9 min
+
+Done. 13 rotation groups built (1.0 GB).
+[22:09:46] OK   11_build_panels.R  (57.8 min)
+[22:09:46] ======================================================================
+[22:09:46] RUN  12_build_main_data.R
+[22:09:46] ======================================================================
+[22:09:46] Building transitions from 13 rotation groups ...
+[22:09:46]   Panel_01.parquet
+[22:09:54]   Panel_02.parquet
+[22:10:10]   Panel_03.parquet
+[22:10:25]   Panel_04.parquet
+[22:10:40]   Panel_05.parquet
+[22:10:54]   Panel_06.parquet
+[22:11:09]   Panel_07.parquet
+[22:11:25]   Panel_08.parquet
+[22:11:37]   Panel_09.parquet
+[22:11:50]   Panel_10.parquet
+[22:12:02]   Panel_11.parquet
+[22:12:19]   Panel_12.parquet
+[22:12:34]   Panel_13.parquet
+[22:12:47] Origins: 11,491,554 | matched to t+1: 0.6757
+Rotation groups : 13
+Position undetermined: 0 (0.000% of origins)
+Origin rows     : 11,491,554
+Quarters        : 2012Q1 to 2024Q4
+Matched to t+1  : 0.6757
+
+Destination at t+1 among matched origins (weighted):
+  Unemployed: 0.0289
+  Out of labour force: 0.0647
+  Employed: 0.9063
+
+Weighted exit rate         : 0.0937
+  of which to unemployment : 0.0289
+  of which to non-part.    : 0.0647
+
+Match rate by education (weighted):
+  college = 0: 0.6744  (n = 9,595,343)
+  college = 1: 0.6935  (n = 1,896,211)
+
+Match rate into t+1 by interview number:
+  interview 1: 0.8319
+  interview 2: 0.8420
+  interview 3: 0.8462
+  interview 4: 0.8487
+  interview 5: 0.0000
+[22:13:05] wrote and verified /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19/build/output/main_data.parquet (229.4 MB, 11,491,554 rows)
+[22:13:05] 12_build_main_data.R done.
+[22:13:05] OK   12_build_main_data.R  (3.3 min)
+[22:13:05] Build finished in 1.02 hours.
+[22:13:05] Next: Rscript "analysis/code/00_master_analysis.R"

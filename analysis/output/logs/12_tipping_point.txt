@@ -1,5 +1,5 @@
 delta=none
 mar=0.040
 at=--
-floor=0.014
+floor=0.013
 deltamin=-8

@@ -1,0 +1,294 @@
+Mensagens de aviso:
+1: pacote 'ggplot2' foi compilado no R vers~ao 4.4.3 
+2: pacote 'data.table' foi compilado no R vers~ao 4.4.3 
+[00:47:09] ROOT    = /Users/fredie/Documents/GitHub/Monografia
+[00:47:09] DROPBOX = /Users/fredie/Library/CloudStorage/Dropbox/Education_and_Job_Loss_During_COVID_19
+[00:47:09] analysis sample is newer than main_data.parquet and 01_prepare_analysis_data.R, skipping 01 (delete analysis_sample.parquet to force a rebuild)
+[00:47:09] ======================================================================
+[00:47:09] RUN  02_table_descriptive_statistics.R
+[00:47:09] ======================================================================
+[00:47:33] wrote tab_descriptives.tex
+[00:47:33] wrote tab_sample_by_quarter.tex
+[00:47:33] wrote tab_matching.tex
+[00:47:33] 02_table_descriptive_statistics.R done.
+[00:47:33] OK   02_table_descriptive_statistics.R  (0.4 min)
+[00:47:34] ======================================================================
+[00:47:34] RUN  03_main_estimation.R
+[00:47:34] ======================================================================
+[00:47:36] loading cached event study: exit
+[00:47:50] loading cached event study: exit_to_unemployment
+[00:48:03] loading cached event study: exit_to_nonpart
+[00:48:20] sup-t critical value for the 52 quarterly contrasts: 2.729 (pointwise 1.960)
+[00:48:28] wrote tab_main_margins.tex
+[00:48:28] loading cached specification ladder
+[00:48:31] loading cached wild cluster bootstrap p-values
+[00:48:31] wrote tab_spec_ladder.tex
+[00:48:41] wrote tab_vcov_sensitivity.tex
+[00:48:41] 03_main_estimation.R done.
+[00:48:41] OK   03_main_estimation.R  (1.1 min)
+[00:48:43] ======================================================================
+[00:48:43] RUN  04_figures_main.R
+[00:48:43] ======================================================================
+[00:48:44] wrote fig_levels.pdf/.png
+[00:48:44] wrote fig_gap.pdf/.png
+[00:48:44] 04_figures_main.R done.
+[00:48:44] OK   04_figures_main.R  (0 min)
+[00:48:44] ======================================================================
+[00:48:44] RUN  05_heterogeneity.R
+[00:48:44] ======================================================================
+[00:48:46]   cached: Formal
+[00:48:46]   cached: Informal
+[00:48:46]   cached: Men
+[00:48:46]   cached: Women
+[00:48:46]   cached: White
+[00:48:46]   cached: Non-White
+[00:48:46]   cached: Formal private employee
+[00:48:46]   cached: Informal private employee
+[00:48:46]   cached: Formal public sector
+[00:48:46]   cached: Formal self-employed
+[00:48:46]   cached: Informal self-employed
+[00:48:46] wrote fig_formal_informal.pdf/.png
+[00:48:47] wrote fig_by_demographics.pdf/.png
+[00:48:48] wrote fig_by_position.pdf/.png
+[00:48:48] wrote tab_heterogeneity.tex
+[00:48:48] 05_heterogeneity.R done.
+[00:48:48] OK   05_heterogeneity.R  (0.1 min)
+[00:48:48] ======================================================================
+[00:48:48] RUN  06_decomposition.R
+[00:48:48] ======================================================================
+[00:48:50] decomposition over cells: formal x sector x occupation
+[00:48:58]   5,352,842 PSU-quarter-education-cell totals; 100 distinct cells
+[00:48:58]   weight in cells observed for one education group only: 0.19%
+[00:48:58]   two-way bootstrap (2000 replications, PSU x quarter) ...
+[00:58:51]   done in 9.9 min
+[00:58:51] decomposition over cells: formal x position_grp x sector x occupation
+[00:59:01]   5,932,102 PSU-quarter-education-cell totals; 382 distinct cells
+[00:59:02]   weight in cells observed for one education group only: 0.68%
+[00:59:02]   two-way bootstrap (2000 replications, PSU x quarter) ...
+[01:09:45]   done in 10.7 min
+[01:09:45] wrote fig_decomposition.pdf/.png
+[01:09:45] wrote tab_decomposition.tex
+[01:09:55] reallocation index  R_college = 0.00347   R_noncollege = 0.00035
+[01:09:55] wrote tab_decomp_variants.tex
+[01:09:55] 06_decomposition.R done.
+[01:09:55] OK   06_decomposition.R  (21.1 min)
+[01:09:55] ======================================================================
+[01:09:55] RUN  07_attrition.R
+[01:09:55] ======================================================================
+[01:09:59] origins by interview number:
+   interview       n matched
+       <int>   <int>   <num>
+1:         1 2290380  0.8331
+2:         2 2308574  0.8434
+3:         3 2307370  0.8477
+4:         4 2301601  0.8487
+5:         5 2283629  0.0000
+[01:10:17] retention sample: 9,207,925 origins in interviews 1-4
+[01:10:17] overall t -> t+1 match rate: 0.8421
+[01:10:38] loading cached retention propensities
+[01:10:38] retention propensity: min 0.288 median 0.853 max 0.989
+[01:11:02] wrote fig_attrition_frontier.pdf/.png
+[01:11:02] wrote tab_attrition.tex
+[01:11:02] wrote tab_ipw.tex
+[01:11:02] wrote fig_retention.pdf/.png
+[01:11:02] 07_attrition.R done.
+[01:11:02] OK   07_attrition.R  (1.1 min)
+[01:11:04] ======================================================================
+[01:11:04] RUN  08_robustness.R
+[01:11:04] ======================================================================
+[01:11:05]   cached: baseline
+[01:11:05]   cached: prime_age
+[01:11:05]   cached: to_informal
+[01:11:05] wrote tab_robustness.tex
+[01:11:05] validating margins against marginaleffects ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+Maximum absolute discrepancy between the closed-form margins and marginaleffects::avg_predictions() over 52 quarters:
+  no college: 3.345e-15
+  college   : 3.136e-15 
+[01:12:04] 08_robustness.R done.
+[01:12:04] OK   08_robustness.R  (1 min)
+[01:12:05] ======================================================================
+[01:12:05] RUN  10_placebo_windows.R
+[01:12:05] ======================================================================
+[01:12:05] placebo windows: 52 quarters, window length 6
+[01:12:05]   observed tau = 0.0271 (HAC se 0.0018, p = 0.0000)
+[01:12:05]   placebo windows: 27; reaching that tau: 0  -> placebo p = 0.0357
+[01:12:05] wrote tab_placebo.tex
+[01:12:05] 10_placebo_windows.R done.
+[01:12:05] OK   10_placebo_windows.R  (0 min)
+[01:12:05] ======================================================================
+[01:12:05] RUN  11_overlap_weights.R
+[01:12:05] ======================================================================
+[01:12:07] === segment: all -- 7,764,610 observations
+[01:13:09]   2014Q2
+[01:14:13]   2016Q4
+[01:15:11]   2019Q2
+[01:15:51]   2021Q4
+[01:16:38]   2024Q2
+[01:16:48]   no propensity score (separation or missing covariate): 13
+          period       n off_support ess_survey ess_overlap ess_ratio
+          <char>   <int>       <num>      <num>       <num>     <num>
+1:  Pre-pandemic 5293603   0.3603600 2726815.36   669811.90 0.2456389
+2:         Onset  124716   0.1763128   50183.16    14841.94 0.2957554
+3:  Mid-pandemic  550670   0.1700051  194013.66    61645.72 0.3177391
+4: Post-pandemic 1795608   0.1769822  927350.53   310387.69 0.3347037
+[01:16:51] re-estimating the event study under overlap weights ...
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[01:31:28]   trimmed to ps in [0.1, 0.9]: 2,139,093 of 7,764,597 observations
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+          period     gap_base     se_base       gap_ov        se_ov     gap_trim      se_trim trim_share
+          <char>        <num>       <num>        <num>        <num>        <num>        <num>      <num>
+1:  Pre-pandemic -0.007657873 0.001431287 -0.009412574 0.0009869712 -0.008152154 0.0012399462  0.2754931
+2:         Onset -0.034505374 0.001323340 -0.017469173 0.0011343008 -0.026348430 0.0015054796  0.2754931
+3:  Mid-pandemic  0.018411215 0.001369509 -0.004973449 0.0008596120 -0.002681776 0.0010992506  0.2754931
+4: Post-pandemic -0.008916392 0.001308557 -0.009540962 0.0006421115 -0.008389413 0.0009523827  0.2754931
+           shift segment
+           <num>  <char>
+1: -0.0017547011     all
+2:  0.0170362012     all
+3: -0.0233846647     all
+4: -0.0006245698     all
+[01:33:12] === segment: informal -- 3,532,212 observations
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+[01:33:43]   2014Q2
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+[01:34:14]   2016Q4
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+[01:34:43]   2019Q2
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+[01:35:04]   2021Q4
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+[01:35:29]   2024Q2
+[01:35:34]   no propensity score (separation or missing covariate): 121
+          period       n off_support ess_survey ess_overlap ess_ratio
+          <char>   <int>       <num>      <num>       <num>     <num>
+1:  Pre-pandemic 2416461   0.5488147 1269380.60  177726.338 0.1400103
+2:         Onset   54218   0.3243007   20860.65    3101.466 0.1486754
+3:  Mid-pandemic  243947   0.3163166   85161.89   18542.397 0.2177311
+4: Post-pandemic  817465   0.3071390  416685.96   93816.866 0.2251501
+[01:35:35] re-estimating the event study under overlap weights ...
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[01:42:17]   trimmed to ps in [0.1, 0.9]: 508,991 of 3,532,091 observations
+The variable 'formal' has been removed because of collinearity (see $collin.var).
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+          period    gap_base     se_base       gap_ov       se_ov      gap_trim     se_trim trim_share
+          <char>       <num>       <num>        <num>       <num>         <num>       <num>      <num>
+1:  Pre-pandemic -0.01167744 0.002747130 -0.012679245 0.002275739 -0.0158861136 0.002833697  0.1441047
+2:         Onset -0.03856551 0.002664585 -0.014469890 0.002728685 -0.0477050022 0.002676678  0.1441047
+3:  Mid-pandemic  0.01962228 0.003179730 -0.007457538 0.003036114  0.0007516184 0.003920378  0.1441047
+4: Post-pandemic -0.01588166 0.002229394 -0.014776320 0.001551400 -0.0182530188 0.002087701  0.1441047
+          shift  segment
+          <num>   <char>
+1: -0.001001805 informal
+2:  0.024095615 informal
+3: -0.027079822 informal
+4:  0.001105342 informal
+[01:42:46] wrote tab_overlap.tex
+[01:42:46] 11_overlap_weights.R done.
+[01:42:46] OK   11_overlap_weights.R  (30.7 min)
+[01:42:46] ======================================================================
+[01:42:46] RUN  12_tipping_point.R
+[01:42:46] ======================================================================
+[01:42:51] origins with a scheduled t+1: 9,207,925 (unmatched: 1,443,315)
+[01:42:51]   imputation model, college = 0
+[01:48:39]   imputation model, college = 1
+[01:49:49]   imputed 1,443,315 unmatched outcomes
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[02:00:04]   delta = 0.0000  ->  mid gap = 0.01864
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[02:10:15]   delta = -0.2500  ->  mid gap = 0.01753
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[02:20:18]   delta = -0.5000  ->  mid gap = 0.01663
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[02:30:12]   delta = -1.0000  ->  mid gap = 0.01532
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[02:40:17]   delta = -2.0000  ->  mid gap = 0.01396
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[02:50:34]   delta = -4.0000  ->  mid gap = 0.01323
+Variance contained negative values in the diagonal and was 'fixed' (a la Cameron, Gelbach & Miller 2011).
+[03:00:57]   delta = -8.0000  ->  mid gap = 0.01312
+[03:00:57] no tipping point within delta > -8
+[03:00:58] tipping delta =    NA  (unmatched graduates' exit rate 0.0397 ->    NA)
+[03:00:58] wrote tab_tipping.tex
+[03:00:58] 12_tipping_point.R done.
+[03:00:58] OK   12_tipping_point.R  (78.2 min)
+[03:00:59] ======================================================================
+[03:00:59] RUN  09_paper_numbers.R
+[03:00:59] ======================================================================
+[03:01:06] wrote numbers.tex
+[03:01:06] 09_paper_numbers.R done (162 macros).
+[03:01:06] OK   09_paper_numbers.R  (0.1 min)
+[03:01:07] ======================================================================
+[03:01:07] RUN  99_session_info.R
+[03:01:07] ======================================================================
+Software environment
+====================
+
+R version : R version 4.4.2 (2024-10-31)
+Platform  : aarch64-apple-darwin20
+Running   : macOS 26.6.2
+BLAS      : /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib
+fixest threads: 1
+
+Package versions
+----------------
+  data.table         1.18.2.1
+  arrow              21.0.0
+  readstata13        0.11.0
+  fixest             0.12.1
+  marginaleffects    0.24.0
+  fwildclusterboot   0.14.3
+  ggplot2            4.0.2
+  scales             1.4.0
+  haven              2.5.5
+  sandwich           3.1.1
+
+Random number generation
+------------------------
+  RNG kind         : Mersenne-Twister, Inversion, Rejection
+  Global seed      : 20260615
+  Wild bootstrap   : 9999 replications
+  sup-t multiplier : 10000 draws
+  Decomposition    : 2000 replications
+
+Generated: 2026-09-18 03:01:07 -03 
+[03:01:07] 99_session_info.R done.
+[03:01:07] OK   99_session_info.R  (0 min)
+Mensagens de aviso:
+1: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+2: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+3: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+4: In setFixest_nthreads(max(1L, parallel::detectCores(...:
+ OpenMP not detected: cannot use 6 threads, single-threaded mode instead. 
+[03:01:07] ======================================================================
+[03:01:07] Pipeline finished in 134 minutes.
+[03:01:07] Tables  -> /Users/fredie/Documents/GitHub/Monografia/analysis/output/tables
+[03:01:07] Figures -> /Users/fredie/Documents/GitHub/Monografia/analysis/output/figures
+[03:01:07] Next: cd latex && latexmk -pdf paper.tex
+[03:01:07] ======================================================================

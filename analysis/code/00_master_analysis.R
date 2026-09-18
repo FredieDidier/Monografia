@@ -98,6 +98,16 @@ if (identical(DATA_VINTAGE, "legacy")) {
 
 # The loop variable is deliberately verbose: each step is source()d into the
 # global environment, so a short name risks being clobbered by the step itself.
+#
+# Every step is self-contained -- it re-sources the helpers if needed and reads
+# its inputs from disk -- so nothing a step leaves behind is needed by the next
+# one. It is, however, large: the event-study objects of step 03 are about
+# 10 GB each and the retention and IPW models of step 07 another 10 GB. Left
+# in the global environment they accumulate until the session is killed on a
+# 16 GB machine (which is what happened during step 08's marginaleffects
+# check). Everything but the master's own state is therefore dropped after
+# each step.
+MASTER_STATE <- c(ls(), "MASTER_STATE", "step_file", "step_t0")
 for (step_file in STEPS) {
   msg("======================================================================")
   msg("RUN  ", step_file)
@@ -106,6 +116,8 @@ for (step_file in STEPS) {
   source(file.path(ROOT, "analysis", "code", step_file), echo = FALSE)
   msg("OK   ", step_file, "  (",
       round(as.numeric(Sys.time() - step_t0, units = "mins"), 1), " min)")
+  rm(list = setdiff(ls(envir = globalenv()), MASTER_STATE), envir = globalenv())
+  invisible(gc())
 }
 
 msg("======================================================================")

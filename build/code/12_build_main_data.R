@@ -125,13 +125,16 @@ process_panel <- function(f) {
   add_position(d)
 
   # --- ambiguous identifications ---------------------------------------------
-  # A stage-3 id must appear at most once per quarter. In a small number of
-  # cases the graph pass merges two different respondents into one cluster,
-  # which shows up as the same id twice in the same quarter (of the order of
-  # 0.01% of rows). Any transition built from such an id is unreliable, so the
-  # id is voided: those rows stay in the origin population -- they are real
-  # employed people -- but count as unlinkable, exactly like any other worker
-  # the algorithm fails to follow.
+  # A stage-3 id must appear at most once per quarter. Under the igraph version
+  # of datazoom.social (up to a031bea) the connected-components pass could merge
+  # two different respondents into one cluster, which showed up as the same id
+  # twice in the same quarter (933 ids, 5,525 person-quarters, 0.01% of rows).
+  # The capacity-constrained union-find that replaced it (3cf4aa6) rejects such
+  # merges, so this block now finds nothing and stands as a guard. Should it
+  # fire again, any transition built from such an id is unreliable and the id is
+  # voided: those rows stay in the origin population -- they are real employed
+  # people -- but count as unlinkable, exactly like any other worker the
+  # algorithm fails to follow.
   bad <- d[!is.na(id_rs3), .N, by = .(id_rs3, qtr)][N > 1L, unique(id_rs3)]
   if (length(bad)) {
     n_bad <- d[id_rs3 %chin% bad, .N]
@@ -216,6 +219,8 @@ if (und / nrow(out) > 0.005)
 if (nrow(amb)) {
   tee("Ambiguous ids voided: ", format(sum(amb$ids), big.mark = ","),
       " (", format(sum(amb$rows), big.mark = ","), " person-quarters)")
+} else {
+  tee("Ambiguous ids voided: 0 (no stage-3 id appears twice in one quarter)")
 }
 tee("Origin rows     : ", format(nrow(out), big.mark = ","))
 tee("Quarters        : ", qlab(min(out$qtr)), " to ", qlab(max(out$qtr)))

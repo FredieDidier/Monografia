@@ -105,9 +105,9 @@ disappears for six consecutive quarters, from 2020Q2 to 2021Q3, before the
 pre-pandemic advantage returns. Among workers with common support on the
 characteristics we condition on, the adjusted gap moves from \PreGap{} before
 the pandemic to \TrimMidGap, and inside informal employment to \TrimInfMidGap,
-indistinguishable from zero. Averaged over the full sample instead, the same gap
-becomes slightly positive, \MidGap{} -- because of workers with little overlap
-between the two education groups, not the number we rely on. A decomposition
+indistinguishable from zero. Averaged over the full sample, however, the same
+gap becomes slightly positive, \MidGap{}, due to workers with little overlap
+between the two education groups, which is not the estimate we rely on. A decomposition
 splits the unadjusted pre-pandemic advantage about equally between where
 graduates work and how much safer they are inside comparable jobs; during the
 pandemic both halves decrease by a similar proportion, so the gap falls by about
@@ -328,11 +328,16 @@ through open-access \textit{Stata} and \textit{R} packages; we use the
 respondents on household, sex and full date of birth; it then copies birth
 dates across interviews so that a respondent whose recorded date is missing or
 inconsistent in one interview is still matched on household position; and it
-finally resolves fragmented interview sequences by treating candidate links as a
-graph and taking connected components. The third pass is what recovers
-respondents whose recorded birth date changes between interviews, and it is the
-reason the panel used here is longer and less selected than the household plus
-birth-date matching of the previous version of this paper.
+finally resolves fragmented interview sequences by a fuzzy match within the
+household, which accepts a candidate link when the two records agree on sex and
+their dates of birth differ by no more than a few days, months and years. The
+candidate links are merged one at a time, from the closest pair to the least
+close, and a link is discarded whenever it would assign two records from the
+same quarter to one person, so that no linked sequence ever contains more than
+one interview per quarter. The third pass is what recovers respondents whose
+recorded birth date changes between interviews, and it is the reason the panel
+used here is longer and less selected than the household plus birth-date
+matching of the previous version of this paper.
 
 Applied to the \Nquarters{} quarterly surveys from \QfirstLab{} to \QlastLab,
 the algorithm links \Nind{} individuals in \Nhh{} households across \Npsu{}
@@ -719,9 +724,9 @@ division between the two components is the same before, during and after. The
 mid-pandemic narrowing is not a reallocation story in terms of the components:
 both decrease, and neither replaces the other.
 
-Whether it is a reallocation story in the stronger sense --- whether either
-group moved towards job groups that initially carried more risk --- the
-decomposition cannot say, because the composition component combines the shares
+Whether it is a reallocation story in the stronger sense, in which either
+group moved towards job groups that initially carried more risk, is something
+the decomposition cannot say, because the composition component combines the shares
 of both groups with rates that are themselves changing. Table~\ref{tab:decomp_variants}
 answers it directly with an index that holds the pre-pandemic rate of each job
 group fixed and lets only the allocation change,
@@ -799,7 +804,7 @@ Graduates are consistently easier to find again, and the pandemic widened the ga
 The college / non-college difference in the match rate is \RetDiffPre{} before
 the pandemic, increases to \RetDiffOnset{} in 2020Q1 when data collection changed
 to telephone interviews, and is still \RetDiffMid{} through 2020Q2--2021Q3
-before returning to its previous level. This is the pattern that should concern a
+before returning close to its previous level. This is the pattern that should concern a
 reader: the workers that we no longer observe are disproportionately
 non-graduates, and we lose more of them exactly in the quarters in which the
 advantage moves. Panel B
@@ -862,7 +867,7 @@ $\delta = 0$ is missing-at-random within education group. There is no tipping
 point. Reducing $\delta$ to \TippingDeltaMin, which lowers the imputed exit
 probability of unmatched graduates from the \TippingRateMAR{} implied by their
 observed characteristics to almost zero, moves the mid-pandemic gap only from
-\BaseMidGapFour{} to \TippingFloor{} --- it does not come close to zero, and much
+\BaseMidGapFour{} to \TippingFloor. It does not come close to zero, and much
 less does it change sign. Even the assumption that the graduates we no longer
 observe never left employment leaves the reversal in place. Table~\ref{tab:tipping}
 gives the search path, and Figure~\ref{fig:frontier} the frontier in raw rates
@@ -917,8 +922,8 @@ the two groups to be comparable leaves few comparisons to make.
 
 We interpret this as a limit on the sign, not on the finding. What survives every
 weighting is that the advantage closes: from \TrimPreGap{} to \TrimMidGap{} on
-common support overall, and from \TrimInfPreGap{} --- precisely estimated and
-clearly negative --- to a mid-pandemic value that cannot be distinguished from
+common support overall, and from \TrimInfPreGap, precisely estimated and
+clearly negative, to a mid-pandemic value that cannot be distinguished from
 zero inside informal employment. That the point estimate on the full surveyed
 population goes further and turns positive is a property of a comparison made
 partly outside common support, and we do not rely on it.
@@ -1082,7 +1087,11 @@ of \citet{Ribas2008}, developed for the \textit{IBGE} monthly employment survey
 date of birth while allowing for a limited amount of recording error. The two
 further passes
 described in Section~\ref{sec:data} copy birth dates across the interviews of the
-same respondent and resolve fragmented sequences with a graph-theoretic match.
+same respondent and resolve fragmented sequences with a fuzzy match that
+tolerates small recording errors in the date of birth. The fuzzy links are
+accepted in order of closeness, and a link that would place two interviews of
+the same quarter on one person is rejected, so the sequences it forms are
+internally consistent.
 Table~\ref{tab:matching} reports the performance of the procedure as a whole.
 
 \input{../analysis/output/tables/tab_matching}
@@ -1226,7 +1235,8 @@ missing-at-random that would be needed to overturn the adjusted result.
   the set of unobserved exit rates $(m^{U}_{C}, m^{U}_{N})$ at which
   equation~\eqref{eq:breakdown} gives an all-origin education gap of zero, using
   the observed retention rates and matched exit rates of the window. Points
-  above the line keep the raw gap negative; points below the line reverse it. The marker
+  above the line keep the raw gap negative; points below the line reverse it. The
+  dotted diagonal marks equal unobserved exit rates in the two groups. The marker
   is the benchmark at which unmatched workers behave like matched workers of
   their own education group.}
   \label{fig:frontier}

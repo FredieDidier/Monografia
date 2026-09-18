@@ -47,11 +47,10 @@ folder:
 <DROPBOX>/build/output/main_data.parquet                  person-quarter transitions (step 12)
 <DROPBOX>/build/output/analysis_sample.parquet            matched origins: estimation sample
 <DROPBOX>/build/output/analysis_origins.parquet           all origins, for the attrition model
-<DROPBOX>/build/output/main_data.dta                      previous vintage source (kept)
 ```
 
 The estimation sample spans **2012Q1–2024Q4** (52 quarters, 13 rotation groups,
-≈8.0 million person-quarter origins). Step 10 also writes a per-quarter download cache under
+≈7.8 million person-quarter origins). Step 10 also writes a per-quarter download cache under
 `<DROPBOX>/build/input/pnadc_quarters/`; it exists only to feed step 11, is safe
 to delete once the thirteen panels are in place, and is not currently kept.
 
@@ -61,7 +60,17 @@ The underlying microdata are public and free from IBGE, *Pesquisa Nacional por
 Amostra de Domicílios Contínua*:
 <https://www.ibge.gov.br/estatisticas/sociais/trabalho/9171-pesquisa-nacional-por-amostra-de-domicilios-continua-mensal.html>.
 Nothing used here is restricted. Respondents are linked across interviews with
-**datazoom.social** (PUC-Rio), `build_pnadc_panel(panel = "advanced_3")`.
+**datazoom.social** (PUC-Rio), `build_pnadc_panel(panel = "advanced_3")`, at
+commit `3cf4aa6` (2026-09-04) or later:
+
+```bash
+Rscript -e 'remotes::install_github("datazoompuc/datazoom.social", ref = "3cf4aa6")'
+```
+
+Earlier commits resolve the stage-3 fuzzy links with `igraph` connected
+components, which can assign two interviews of the same quarter to one person;
+the panel here is built with the capacity-constrained union-find that replaced
+it, and match rates differ slightly between the two.
 
 ### Getting the data — two options
 
@@ -140,7 +149,7 @@ install.packages(c("data.table", "arrow", "readstata13", "fixest", "marginaleffe
 
 - **Runtime** on a 16 GB laptop: the build takes several hours (dominated by the
   downloads and the stage-3 fuzzy matching), the analysis two to three
-  (fixed-effect regressions on ≈8.0 million person-quarters). Both cache
+  (fixed-effect regressions on ≈7.8 million person-quarters). Both cache
   aggressively — the build skips completed quarters and groups, the analysis
   caches every fitted model under `analysis/output/estimates` — so a second run
   rebuilds only tables and figures in minutes. Delete the cache directory to

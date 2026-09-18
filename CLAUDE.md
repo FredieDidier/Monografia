@@ -22,9 +22,9 @@ face inside the same kind of job).
 | Period | Non-college | College | Gap (college − non-college) |
 |---|---|---|---|
 | Pre-pandemic (…–2019Q4) | 9.9% | 9.2% | −0.8 pp |
-| Onset (2020Q1) | 13.5% | 10.1% | −3.4 pp |
-| Mid-pandemic (2020Q2–2021Q3) | 5.6% | 7.5% | **+1.9 pp** |
-| Post-pandemic (2021Q4–) | 9.7% | 8.8% | −0.9 pp |
+| Onset (2020Q1) | 13.6% | 10.1% | −3.5 pp |
+| Mid-pandemic (2020Q2–2021Q3) | 5.6% | 7.5% | **+1.8 pp** |
+| Post-pandemic (2021Q4–) | 9.6% | 8.7% | −0.9 pp |
 
 The story is the **mid-pandemic disappearance of the gradient**: an advantage
 that held for eight years goes to zero for six quarters, then returns. Exit
@@ -32,7 +32,7 @@ rates fall for everyone in the mid-pandemic (hiring and separations both
 collapse); the gradient is what closes.
 
 On the full surveyed population the adjusted gap overshoots zero and turns
-positive (+1.9 pp above; positive in 7 of the 52 quarters, the six in the window
+positive (+1.8 pp above; positive in 7 of the 52 quarters, the six in the window
 plus an isolated 2013Q3). **That crossing is not the finding** — it comes from
 regions of poor common support and disappears under trimming (see **Common
 support** below). The disappearance survives every weighting; the sign of the
@@ -40,8 +40,8 @@ crossing does not. Note also that the 7 quarters are point estimates above zero,
 not significant quarters, and the confirmatory statement is about the
 six-quarter average, not any single quarter (see **Inference**).
 
-Sample: ≈8.0 million person-quarter origins, 3.0 million individuals, 1.67
-million households, 39,270 PSUs, 52 quarters (2012Q1–2024Q4). Raw exit rate
+Sample: ≈7.8 million person-quarter origins, 2.9 million individuals, 1.62
+million households, 39,251 PSUs, 52 quarters (2012Q1–2024Q4). Raw exit rate
 9.4% overall (10.7% non-college, 4.0% college); 20% college, 40% informal;
 E→U 2.9 pp and E→N 6.5 pp of the 9.4.
 
@@ -68,17 +68,25 @@ committed; `.gitignore` blocks `*.parquet`, `*.dta`, `*.rds`, `*.RData`.
 <DROPBOX>/build/output/main_data.parquet                  person-quarter transitions (step 12)
 <DROPBOX>/build/output/analysis_sample.parquet            matched origins: estimation sample
 <DROPBOX>/build/output/analysis_origins.parquet           all origins, matched or not
-<DROPBOX>/build/output/main_data.dta                      legacy vintage source (3.5 GB, kept)
 ```
 
 - `<DROPBOX>/build/input/pnadc_quarters/` is a transient download cache (~0.6 GB)
   that only feeds step 11. It has been deleted; re-running step 10 recreates it
   if the panels ever need rebuilding. Because step 12 reads the **panels**, not
   the quarter cache, the pipeline runs end to end without it.
-- **Legacy vintage.** `DATA_VINTAGE`/`MONOGRAFIA_VINTAGE=legacy` makes `_config.R`
-  point at `analysis_sample_legacy.parquet` and skip step 01. That file is
-  **not currently in the Dropbox folder** — only its source `main_data.dta` is —
-  so the legacy path needs the file regenerated before it will run.
+- **Legacy vintage is gone.** `main_data.dta` (the Stata-era source) and the
+  igraph-vintage archive were deleted on 2026-09-18 after the before/after
+  comparison below was recorded. `MONOGRAFIA_VINTAGE=legacy` still exists in
+  `_config.R` but has no file to point at; nothing in the pipeline or the paper
+  depends on it.
+- **Dropbox restores moved folders.** Renaming `pnadc_panels/` to force a rebuild
+  did not work: the sync client re-downloaded the old folder ~15 minutes later,
+  step 11 saw 13 "cached" groups and skipped them, and step 12 read a panel that
+  was still being rehydrated (0 bytes). Step 11 now rebuilds any panel older
+  than the installed `datazoom.social` and rescans `_group_windows.csv` when it
+  predates the newest cached quarter; to force a rebuild, **delete** the panels
+  rather than moving them, and check the folder is still empty a few minutes
+  later before launching.
 - If Dropbox is online-only, materialise a file before reading:
   `cat main_data.parquet > /dev/null`.
 - `analysis/input/` holds **only** the committed matching CSVs. No parquet
@@ -94,13 +102,46 @@ identification, runs three passes:
    Soares 2008);
 2. **donate birth dates** across a respondent's interviews, so a missing or
    mistyped date in one quarter no longer breaks the chain;
-3. resolve fragmented sequences with a **graph-theoretic fuzzy match**, taking
-   connected components over candidate links.
+3. resolve fragmented sequences with a **fuzzy match** within the household
+   (same sex; birth day within 4 days, month within 2, year within an
+   age-dependent tolerance), whose candidate links are merged by a
+   **capacity-constrained union-find**: stage-2 links first, then fuzzy links
+   from the closest pair (lowest `match_score`) to the least close, rejecting
+   any merge that would put two rows of the same quarter under one id.
 
 Pass 3 is what recovers respondents whose recorded birth date drifts between
 interviews. Matched rows carry `id_rs3`; unmatched rows carry `NA` and the build
-**keeps them** — that is what makes retention directly observable. Overall match
-rate 86.8% over 11.5 million origins.
+**keeps them** — that is what makes retention directly observable.
+
+**Package version matters.** Until datazoom.social commit `a031bea` (June 2026)
+pass 3 took `igraph` connected components over the candidate links, which never
+checked that a cluster held at most one row per quarter. PR #99 (`3cf4aa6`,
+2026-09-04) replaced it with the union-find above, and the maintainers say the
+"logic was kept" but the implementation changed; the vignette's identification
+rates moved by about a percentage point. The panels and every result in the
+paper are built on `3cf4aa6`; the igraph-vintage panels and `main_data.parquet`
+were compared against the new ones before being deleted; the comparison is in
+`analysis/output/logs/vintage_comparison_igraph_vs_unionfind.md`. Two facts from
+it worth keeping in mind:
+
+- The coverage loss (id_rs3 on 97–99% of person-quarters per group → 90–98%;
+  *t*→*t+1* match rate 86.8% → 84.2%) comes almost entirely from the fix of
+  `V2008 == NA` (always `NA`) in the **basic** identification, in the same PR.
+  Rows with a missing birth date used to keep an `id_ind` with the missing date
+  as a group value — same-sex members of a household with blank dates became one
+  "person" — and now get an id only if birth-date donation finds a donor. The
+  share of blank dates in PNADC rises from 5% (2015) to 11% (2017+), which is
+  why the loss grows across rotation groups. The union-find itself is nearly
+  neutral on coverage: it removes the same-quarter collisions (179 ids in group
+  3 alone → 0) and merges slightly more stage-2 fragments (1.9% vs 1.7% of ids).
+- The headline did not move: the mid-pandemic adjusted gap went +0.019 → +0.018,
+  every other period stayed within 0.001, the trimmed and overlap-weighted gaps
+  are unchanged to three decimals, and the raw exit rate among matched origins is
+  0.0937 against 0.0938. Retention fell more for non-graduates (0.841 → 0.807)
+  than graduates (0.876 → 0.855), so the attrition section's numbers moved most.
+
+A pending upstream change — making `id_dom` unique — does not affect this build,
+because `01_prepare_analysis_data.R` already prefixes `id_dom` with `V1014`.
 
 ### What the stage-3 rebuild recovered
 
@@ -213,7 +254,7 @@ yet is recognised and not retried.
   the memory.
 
 The earlier Stata + R build is kept under `build/code/legacy/` for provenance
-only; it is the source of the `main_data.dta` vintage and should not be run.
+only; its output (`main_data.dta`) has been deleted and it should not be run.
 
 ## Method notes
 
@@ -244,12 +285,12 @@ is a deviation from the immediate pre-pandemic gap. Periods: onset `Q_ONSET =
 `tab_vcov_sensitivity` reports clustering by PSU, household, individual,
 individual × year-quarter, and year-quarter alone. Because 52 quarterly
 contrasts are reported, **sup-*t* simultaneous bands** are computed by
-multiplier bootstrap (10,000 draws, critical value ≈2.71) alongside the
+multiplier bootstrap (10,000 draws, critical value ≈2.73) alongside the
 pointwise intervals. **Wild cluster bootstrap** *p*-values clustered by
 year-quarter are reported for the two pandemic contrasts under the preferred
-specification; at 9,999 replications on ~8 million rows the two together take
-about 13 minutes (7.6 for the onset, 5.2 for the mid-pandemic contrast, per
-`logs/wcb.log`), and they are cached in `estimates/wcb_pvalues.rds`.
+specification; at 9,999 replications on ~7.8 million rows the two together take
+about 8–13 minutes, and they are cached in `estimates/wcb_pvalues.rds`. Onset
+*p* = 0.149, mid-pandemic *p* < 0.0001.
 
 **What is confirmatory and what is descriptive.** Each quarterly contrast rests
 on a *single* year-quarter, so its interval cannot absorb an education-specific
@@ -291,7 +332,7 @@ multiplicities.
   reference choice is not doing any work.
 - The **reallocation index** `R_g = Σ_k (s_gk,mid − s_gk,pre) m̄_k,pre` answers
   what the decomposition cannot: which group moved, and towards what. Both are
-  positive and graduates' is larger (0.0035 vs 0.0005), so graduates *did* shift
+  positive and graduates' is larger (0.0035 vs 0.0004), so graduates *did* shift
   towards previously riskier cells — about a twentieth of the −0.069 gap.
   **The paper used to claim they did not.** That claim was never identified by the
   decomposition; do not reintroduce it.
@@ -302,19 +343,19 @@ pipeline cannot:
 | Step | Question | Result |
 |---|---|---|
 | `10_placebo_windows.R` | Is a six-quarter run of this size unusual? | τ = +0.027; of 27 pre-pandemic six-quarter windows, **none** reaches it (max +0.003). Placebo *p* = 0.036, which is the floor 1/28 — quote that, not the 5e-20 HAC *p*. |
-| `11_overlap_weights.R` | Is the reversal extrapolation between groups without common support? | **Under overlap weights the mid-pandemic gap is −0.005, against +0.019 under survey weights.** See below. |
+| `11_overlap_weights.R` | Is the reversal extrapolation between groups without common support? | **Under overlap weights the mid-pandemic gap is −0.005, against +0.018 under survey weights.** See below. |
 | `12_tipping_point.R` | How far from missing-at-random would the unmatched have to be? | Delta imputation with bisection over the log-odds shift. |
 
 **Common support is the binding constraint, and it repositioned the paper.**
 Two hypotheses were tested and both **rejected** — do not reinstate either:
 
 1. *"Overlap weighting only re-centres away from the informal segment."* Inside
-   informal employment the gap is −0.008 under overlap weights against +0.021,
+   informal employment the gap is −0.007 under overlap weights against +0.020,
    and overlap is **worse** there (32% off support) than overall (17%).
 2. *"Overlap weights change the estimand, so trimming will show the reversal is
    fine."* Trimming to propensity in [0.10, 0.90] **keeps** the survey-weighted
    estimand and still removes the reversal: −0.003 overall and +0.001
-   (s.e. 0.004) inside informal employment. Only 27% of the sample survives the
+   (s.e. 0.004) inside informal employment. Only 28% of the sample survives the
    trim, 14% in the informal segment.
 
 **What the paper now claims.** The confirmatory finding is that the gradient
@@ -322,7 +363,7 @@ Two hypotheses were tested and both **rejected** — do not reinstate either:
 
 | | Pre-pandemic | Mid-pandemic |
 |---|---|---|
-| Full sample, adjusted | −0.008 | **+0.019** |
+| Full sample, adjusted | −0.008 | **+0.018** |
 | Common support (trimmed) | −0.008 | −0.003 |
 | Informal, common support | −0.016 (t = −5.5) | **+0.001 (t = 0.2)** |
 
@@ -345,7 +386,7 @@ non-graduates would leave no education gap at all. Interview 5 is a **scheduled
 panel exit**, not attrition, and is identified exactly by `V1016`.
 
 - The frontier replaced a single **breakdown value** (−0.116) that assumed one
-  retention rate common to both groups. Over the window they are 0.876 and 0.841,
+  retention rate common to both groups. Over the window they are 0.855 and 0.807,
   so no common ρ exists; the identity is also about raw rates and cannot be
   applied to the covariate-adjusted contrast. Do not reinstate the point value.
 - The direction of the attrition bias is **unfavourable**, and the paper says so:
@@ -416,6 +457,26 @@ succeeded with the wrong value.
    stale `analysis_sample.parquet` looking current. It now compares against the
    script as well (`PREP_SRC` in `00_master_analysis.R`).
 
+## Lessons from the September 2026 rebuild
+
+1. **The analysis master accumulates every step's objects.** Steps are
+   `source()`d into one global environment and never cleaned up, so the three
+   10 GB event-study objects of step 03 and the 10 GB of retention/IPW models
+   of step 07 were all still alive when step 08 ran its `marginaleffects`
+   check, and the session was killed (exit 137) on a 16 GB machine — twice.
+   The master now drops everything but its own state after each step, and 03
+   releases the two destination-specific models before the variance block.
+   Keep new steps self-contained (re-source the helpers, read inputs from disk).
+2. **`06_decomposition.R` caches its bootstrap** (`decomposition_boot_*.rds`);
+   before that every re-run of the master repeated 21 minutes of resampling.
+3. **A `NULL` from `PNADcIBGE::get_pnadc()` is "not published", not a
+   connection failure.** Current PNADcIBGE prints "Data unavailable" and
+   returns `NULL` rather than raising an error, so the retry guard in step 10
+   never fired and each unpublished quarter cost five backoff attempts.
+4. **Test a `data.table` lookup on a floating grid with `which.min(abs())`**,
+   not `==`: `frontier[mU_C == 0.95]` on `seq(0, 1, by = 0.005)` returned
+   nothing and a figure label silently vanished.
+
 ## Status
 
 - Build, analysis and manuscript all run end to end on the stage-3 vintage; the
@@ -426,10 +487,11 @@ succeeded with the wrong value.
   "survey-weighted, PSU-clustered" rather than "design-based" as a result. A
   `survey::svyglm` row was attempted and does not fit in memory at this sample
   size with these fixed effects.
-- The reversal **survives** the corrected income and tenure coding (+0.018 →
-  +0.019), the placebo windows and the attrition re-weighting.
+- The reversal **survives** the corrected income and tenure coding, the
+  placebo windows, the attrition re-weighting and the September 2026 rebuild
+  on the union-find version of datazoom.social (+0.019 → +0.018).
 - **Open decision:** under overlap weights the mid-pandemic gap is −0.005, not
-  +0.019. Overlap weights change the estimand rather than correcting bias — they
+  +0.018. Overlap weights change the estimand rather than correcting bias — they
   re-centre away from informal wage employment, where the reversal lives and
   where graduates are rare — so this is a statement about which population the
   result describes, not evidence that it is spurious. Whether the overlap table

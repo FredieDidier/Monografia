@@ -61,9 +61,9 @@ DIR_DATA <- file.path(DROPBOX, "build", "output")
 # the datazoom.social stage-3 ("advanced_3") panel identification.
 RAW_PARQUET <- file.path(DIR_DATA, "main_data.parquet")
 
-# Legacy person-quarter file from the earlier Stata/Data Zoom build. Retained
-# for provenance and for the vintage comparison in 08_robustness.R; it is the
-# source of the results circulated before the stage-3 rebuild.
+# Legacy person-quarter file from the earlier Stata/Data Zoom build. The file
+# itself was deleted in September 2026 (nothing in the pipeline reads it); the
+# path is kept only so the legacy vintage switch below still resolves.
 RAW_DTA <- file.path(DIR_DATA, "main_data.dta")
 
 # Which vintage the analysis reads. Set to "legacy" to reproduce the earlier
